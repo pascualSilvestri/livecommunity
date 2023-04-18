@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-r@_8j0dwk$2pvk2k)uo5na4htig-uy)sdvic3p&3i*2gj-(alh'
 
-
+AUTH_USER_MODEL = 'usuarios.Usuario'
 
 # Application definition
 
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.usuarios',
 ]
 
 MIDDLEWARE = [
@@ -107,6 +108,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS=( os.path.join(os.path.dirname(BASE_DIR),"static"), )
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

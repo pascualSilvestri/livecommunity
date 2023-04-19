@@ -5,11 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Home{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% block title %}Home{% endblock %}</title>
 </head>
 <body>
-    {% block content %}
-       
-    {% endblock content %}  
+    {% include 'hero.html' %}
+
+    <main>
+        <div class="main-contain">
+            {% block content %}{% endblock content %}
+        </div>
+    </main> 
+
+
+    <script src="{% static 'js/app.js' %}"></script>
+    {% block scripts %}{% endblock scripts %}
 </body>
 </html>

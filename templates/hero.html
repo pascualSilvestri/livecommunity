@@ -1,5 +1,8 @@
-{% load static %}
+{% extends 'base.html' %}
+{% load static %} 
 
+{% block title %} Cliente{% endblock %} 
+{% block content %}
 <div class="hero-contain">
     <div class="hero">
     
@@ -7,17 +10,17 @@
             <h1>Live Community</h1>
             <p>Mejora tus habilidades de trading con nuestras clases en vivo y conviértete en un trader profesional.</p>
             <div class="button-contain">
-                <button class="button-17" role="button">Comienza Ahora</button>
+                
+                <button class="button-17" role="button"><a href="{{cliente.url}}">Comienza Ahora</a></button>
             </div>
+
         </div>
         <div class="hero-der">
             <div class='img'>
                 <img src="{% static 'img/mobile.png' %}">
             </div>
         </div>
-        
-    
+
     </div>
-    
-    
 </div>
+{% endblock content %}

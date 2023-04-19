@@ -14,14 +14,18 @@ html{
     font-family: sans-serif;
     overflow-x: inherit;   
 }
+body{
+  width: 100%;
+}
 p { font-size: 100%; } /* 16px */
 h4 { font-size: 1.125em; } /* 18px */
 h3 { font-size: 1.3125em; } /* 21px */
 h2 { font-size: 1.5em; } /* 24px */
 /* MAIN */
-main{
-    min-height: 70vh;
-    background-color: var(--color-gb);
+header{
+    min-height: 80vh;
+    width: 100vw;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(43,9,121,1) 35%, rgba(109,28,202,1) 75%, rgba(175,44,255,1) 100%);
 }
 
 .main-contain{
@@ -129,11 +133,10 @@ main{
   flex-direction: row;
   justify-content: space-between;
   max-width: 80vw;
-    margin: 0 auto;
+  margin: 0 auto;
 }
 .hero-contain{
-  background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(43,9,121,1) 35%, rgba(109,28,202,1) 75%, rgba(175,44,255,1) 100%);
+  width: 100%;
 }
 .hero-izq{
   height: 95vh;

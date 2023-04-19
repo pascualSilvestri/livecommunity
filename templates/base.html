@@ -9,13 +9,12 @@
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 <body>
-    {% include 'hero.html' %}
 
-    <main>
+    <header>
         <div class="main-contain">
             {% block content %}{% endblock content %}
         </div>
-    </main> 
+    </header> 
 
 
     <script src="{% static 'js/app.js' %}"></script>

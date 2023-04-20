@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %} 
 
-{% block title %} Home{% endblock %} 
-
+{% block title %} Cliente{% endblock %} 
 {% block content %}
 <header>
     <div class="main-contain">
@@ -12,11 +11,12 @@
                 <div class="hero-izq">
                     <h1>Live Community</h1>
                     <p>SOMOS Live Community, te brindamos la vacante para que puedas
-                        acceder GRATIS a todos los servicios.
-                        </p>
+                    acceder GRATIS a todos los servicios.
+                    </p>
                     <div class="button-contain">
                         
-                        <button class="button-17" role="button"><a href="">Comienza Ya</a></button>
+                        <button class="button-17" role="button"><a href="{{afiliado.url}}">Comienza Ahora</a></button>
+                        <input type="hidden" name="idAfiliado" value={{afiliado.idAfiliado}}>
                     </div>
 
                 </div>
@@ -27,8 +27,18 @@
                 </div>
 
             </div>
-
         </div>
     </div>
 </header> 
+
+{% comment "" %}
+ aca incluir las instruncciones
+ Descargas 
+ Pasos a seguir 
+{% endcomment %}
+
+
+<div class="form-container">
+    {% include "form.html" %}
+</div>
 {% endblock content %}

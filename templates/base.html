@@ -9,19 +9,9 @@
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 <body>
-
-    <header>
-        <div class="main-contain">
-            {% block content %}{% endblock content %}
-
-        </div>
-    </header> 
-
-    <div class="form-container">
-        {% include "form.html" %}
-
-    </div>
-
+    {% block content %}
+    
+    {% endblock content %}
     <script src="{% static 'js/app.js' %}"></script>
     {% block scripts %}{% endblock scripts %}
 </body>

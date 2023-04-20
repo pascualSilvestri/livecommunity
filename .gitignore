@@ -2,3 +2,5 @@
 
 *_pycache_
 *__pycache__
+livecommunity/db.sqlite3
+*.sqlite3

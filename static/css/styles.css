@@ -36,6 +36,7 @@ header{
 .text-center{
   text-align: center;
 }
+
 /* TITTLE */
 .hero-izq h1 {
   font-size: 95px;
@@ -153,4 +154,9 @@ header{
 }
 .hero-der img{
   width: 380px;
+}
+
+/* FORM */
+.form-container{
+  margin: 40px;
 }

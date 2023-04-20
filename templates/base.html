@@ -13,9 +13,14 @@
     <header>
         <div class="main-contain">
             {% block content %}{% endblock content %}
+
         </div>
     </header> 
 
+    <div class="form-container">
+        {% include "form.html" %}
+
+    </div>
 
     <script src="{% static 'js/app.js' %}"></script>
     {% block scripts %}{% endblock scripts %}

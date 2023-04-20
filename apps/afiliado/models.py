@@ -18,6 +18,7 @@ class Cliente(models.Model):
     telefono = models.IntegerField()
     comprobante = models.ImageField(upload_to='comprobante')
     idAfiliado = models.CharField(max_length=50)
+    userTelegram = models.CharField(max_length=200)
 
 
     def __str__(self):

@@ -1,0 +1,74 @@
+.pasos-contain{
+    max-width: 70vw;
+    margin: 0 auto;
+}
+@media (max-width:768px) {
+    .pasos-contain{
+        max-width: 90vw;
+    }
+}
+.pasos-section{
+    padding: 60px 0;
+}
+.pasos{
+    display: flex;
+    flex-flow: column;
+    margin: 0 35px;
+    padding: 0 12px;
+    text-align: left;
+}
+.paso{
+    width: 100%;
+    border-style: dotted;
+    border-color: #29b672;
+    border-width: 0 0 0 1px;
+    padding-bottom: 30px;
+}
+.paso:last-child{
+    border: none;
+}
+.block {
+    padding-left: 40px;
+    padding-right: 15px;
+    padding-bottom: 25px;
+    position: relative;
+}
+.block:before {
+    content: '';
+    display: block;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: -11px;
+    width: 22px;
+    height: 22px;
+    border-radius: 22px;
+    background-color: #ced;
+}
+
+.block:after {
+    content: '';
+    display: block;
+    z-index: 3;
+    position: absolute;
+    top: 6px;
+    left: -5px;
+    background-color: #29b672;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+}
+
+.title-paso{
+        font: 600 18px  Montserrat, Helvetica, Arial, sans-serif;;
+        margin-bottom: 7px;
+        line-height: 1.3;
+        color: #141415;
+}
+
+.text-paso{
+    color: #4f566b;
+    font-size: 16px;
+    line-height: 1.6;
+    
+}

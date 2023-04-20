@@ -1,6 +1,6 @@
 function send_handle(){
 
-  let nombre=document.getElementById("nombre").value;
+  let name=document.getElementById("name").value;
 
   let apellido= document.getElementById("apellido").value;
 

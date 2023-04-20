@@ -39,7 +39,36 @@
 
 
 <div class="form-container">
-    {% include "form.html" %}
+    <form method="post" enctype="multipart/form-data" action="clienteForm/">
+        {% csrf_token %}
+        <label for="id_nombre">Nombre:</label>
+        <input type="text" name="nombre" id="id_nombre">
+        <br>
+        <label for="id_apellido">Apellido:</label>
+        <input type="text" name="apellido" id="id_apellido">
+        <br>
+        <label for="id_correo">Correo:</label>
+        <input type="email" name="correo" id="id_correo">
+        <br>
+        <label for="id_telefono">Teléfono:</label>
+        <input type="tel" name="telefono" id="id_telefono">
+        <br>
+        <label for="id_comprobante">Comprobante:</label>
+        <input type="file" name="comprobante" id="id_comprobante">
+        <br>
+        <label for="id_idAfiliado">ID Afiliado:</label>
+        <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{idAfiliado.idAfiliado}}">
+        <br>
+        <label for="id_userTelegram">Usuario Telegram:</label>
+        <input type="text" name="userTelegram" id="id_userTelegram">
+        <br>
+        <button onclick="send_handle()">send</button>
+      </form>
+    {% comment %} <form action="clienteForm/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form> {% endcomment %}
 </div>
 
 

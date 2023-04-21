@@ -25,16 +25,6 @@ def idAfi(request, idAfiliado):
 
 def clienteform(request):
     if request.method == 'POST':
-        # Obtener el archivo del formulario
-        comprobante = request.FILES.get('comprobante')
-        
-        # Obtener la ruta de destino para guardar el archivo
-        file_path = os.path.join(settings.MEDIA_ROOT, comprobante.name)
-        
-        # Guardar el archivo en la ruta de destino
-        with open(file_path, 'wb') as file:
-            for chunk in comprobante.chunks():
-                file.write(chunk)
         
         # Obtener los demás datos del formulario
         nombre = request.POST.get('nombre')
@@ -50,7 +40,6 @@ def clienteform(request):
             apellido=apellido,
             correo=correo,
             telefono=telefono,
-            comprobante=file_path.replace(settings.MEDIA_ROOT, ''),
             idAfiliado=idAfiliado,
             userTelegram=userTelegram
         )

@@ -10,7 +10,6 @@ class ClienteForm(forms.ModelForm):
             "apellido",
             'correo',
             'telefono',
-            'comprobante',
             'idAfiliado',
             'userTelegram'
             )

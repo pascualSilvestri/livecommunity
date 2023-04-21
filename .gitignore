@@ -4,3 +4,17 @@
 *__pycache__
 livecommunity/db.sqlite3
 *.sqlite3
+apps/usuarios/__pycache__/__init__.cpython-311.pyc
+*.pyc
+*.pyc
+*.pyc
+*.pyc
+apps/usuarios/__pycache__/__init__.cpython-311.pyc
+apps/usuarios/__pycache__/admin.cpython-311.pyc
+apps/usuarios/__pycache__/apps.cpython-311.pyc
+apps/usuarios/__pycache__/models.cpython-311.pyc
+apps/usuarios/migrations/__pycache__/0001_initial.cpython-311.pyc
+apps/usuarios/migrations/__pycache__/__init__.cpython-311.pyc
+livecommunity/__pycache__/views.cpython-311.pyc
+livecommunity/settings/__pycache__/base.cpython-311.pyc
+livecommunity/settings/__pycache__/local.cpython-311.pyc

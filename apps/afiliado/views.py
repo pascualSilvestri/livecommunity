@@ -17,7 +17,6 @@ def afiliado(request, idAfiliado):
     except ObjectDoesNotExist:
         afiliado = False
         return render(request, 'error.html')
-        raise Exception('Error en la variable de afiliado')
 
    
 
@@ -43,7 +42,6 @@ def clienteform(request):
         idAfiliado = request.POST.get('idAfiliado')
         userTelegram = request.POST.get('userTelegram')
         
-        success_url = reverse_lazy('afiliado')
         # Crear un objeto de modelo con los datos del formulario, incluyendo la ruta del archivo
         cliente = Cliente(
             nombre=nombre,
@@ -56,31 +54,3 @@ def clienteform(request):
         cliente.save()  # Guardar el objeto en la base de datos
         
     return render(request, 'linkGrupos.html')
-
-
-
-# def clienteform(request):
-
-#     if request.method == 'POST':
-#         nombre = request.POST.get('nombre')
-#         apellido = request.POST.get('apellido')
-#         correo = request.POST.get('correo')
-#         telefono = request.POST.get('telefono')
-#         comprobante = request.POST.get('comprobante')
-#         idAfiliado = request.POST.get('idAfiliado')
-#         userTelegram = request.POST.get('userTelegram')
-        
-        
-        
-#         cliente = Cliente(
-#             nombre=nombre,
-#             apellido=apellido,
-#             correo=correo,
-#             telefono=telefono,
-#             comprobante=comprobante,
-#             idAfiliado=idAfiliado,
-#             userTelegram=userTelegram,
-#             )
-#         cliente.save()
-        
-#     return render(request,'afiliado.html')

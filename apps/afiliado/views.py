@@ -1,17 +1,26 @@
 from django.shortcuts import render
 from .models import Afiliado,Cliente
 from .forms import ClienteForm
+from django.core.exceptions import ObjectDoesNotExist
 import os
 from django.conf import settings
+from django.urls import reverse_lazy
+
 
 def afiliado(request, idAfiliado):
-    
-    afiliado = Afiliado.objects.get(idAfiliado = idAfiliado)
-    form = ClienteForm()
-    
-    context = {'afiliado':afiliado,'idAfiliado':idAfiliado,'form':form}
-    
-    return render(request, 'afiliado.html', context)
+    afiliado = False
+    try:
+        afiliado = Afiliado.objects.get(idAfiliado=idAfiliado)
+        form = ClienteForm()
+        context = {'afiliado': afiliado, 'idAfiliado': idAfiliado, 'form': form}
+        return render(request, 'afiliado.html', context)
+    except ObjectDoesNotExist:
+        afiliado = False
+        return render(request, 'error.html')
+        raise Exception('Error en la variable de afiliado')
+
+   
+
 
 def idAfi(request, idAfiliado):
     
@@ -34,6 +43,7 @@ def clienteform(request):
         idAfiliado = request.POST.get('idAfiliado')
         userTelegram = request.POST.get('userTelegram')
         
+        success_url = reverse_lazy('afiliado')
         # Crear un objeto de modelo con los datos del formulario, incluyendo la ruta del archivo
         cliente = Cliente(
             nombre=nombre,
@@ -45,7 +55,7 @@ def clienteform(request):
         )
         cliente.save()  # Guardar el objeto en la base de datos
         
-    return render(request, 'afiliado.html')
+    return render(request, 'linkGrupos.html')
 
 
 

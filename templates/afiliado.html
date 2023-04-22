@@ -103,7 +103,7 @@
 </section>
 
 <section class="pasos-section text-center">
-    <div class="pasos-contain " >
+    <div class="pasos-contain" >
         <h2 class="section-tittle text-center">Pasos para cargar tu cuenta</h2>
 
         <div class="pasos">
@@ -149,35 +149,64 @@
  Pasos a seguir 
 {% endcomment %}
 
+<section class="form-section text-center">
+    <h2 class="title-form text-center">INGRESA TUS DATOS PARA ACCEDER A LOS SERVICIOS
+    </h2>
+    <div class="section-form-container">
 
-<div class="form-container">
-    <form method="post" enctype="multipart/form-data" action="clienteForm/">
-        {% csrf_token %}
-        <label for="id_nombre">Nombre:</label>
-        <input type="text" name="nombre" id="id_nombre">
-        <br>
-        <label for="id_apellido">Apellido:</label>
-        <input type="text" name="apellido" id="id_apellido">
-        <br>
-        <label for="id_correo">Correo:</label>
-        <input type="email" name="correo" id="id_correo">
-        <br>
-        <label for="id_telefono">Teléfono:</label>
-        <input type="tel" name="telefono" id="id_telefono">
-        <br>
-        <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.idAfiliado}}">
-        <input type="hidden" name="idAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
-        <label for="id_userTelegram">Usuario Telegram:</label>
-        <input type="text" name="userTelegram" id="id_userTelegram">
-        <br>
-        <button onclick="send_handle()">send</button>
-      </form>
-    {% comment %} <form action="clienteForm/" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form> {% endcomment %}
-</div>
+        
+        <div class="logo-gif-container">
+            <img class="logo-gif"  src="{% static 'img/logogif.gif' %}" alt="logo gif">
+        </div>
+        <div class="form-container">
+            <form method="post" enctype="multipart/form-data" action="clienteForm/">
+                {% csrf_token %}
+
+                <div class="inputbox">
+                    <input type="text" name="nombre" id="id_nombre" required="required">
+                    <span>Nombre</span>
+                </div>
+
+                <div class="inputbox">
+                    <input type="text" name="apellido" id="id_apellido" required="required">
+                    <span>Apellido</span>
+                </div>
+
+                <div class="inputbox">
+                    <input type="email" name="correo" id="id_correo" required="required">
+                    <span>Correo</span>                
+                </div>
+
+                <div class="inputbox">
+                    <input type="tel" name="telefono" id="id_telefono" required="required">
+                    <span>Teléfono</span>
+                </div>
+                
+
+                <div class="inputbox">
+                    <input type="text" name="userTelegram" id="id_userTelegram" required="required">
+                    <span>Usuario Telegram</span>
+                </div>
+                
+                
+                
+
+
+
+                <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.idAfiliado}}">
+                <input type="hidden" name="idAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
+
+                <div class="inputbox">
+                    <input onclick="send_handle()" type="button" value="send">
+                  </div>
+                {% comment %} <button onclick="send_handle()">send</button> {% endcomment %}
+              </form>
+
+        </div>
+    </div>
+    
+</section>
+
 
 
 <a href="https://api.whatsapp.com/send?phone=54{{afiliado.telefono}}&text=Hola, quiero comunicarme con el soporte de Live Community." id="wsp"class="btn-wsp" target="_blank">

@@ -16,19 +16,9 @@ def afiliado(request, idAfiliado):
         return render(request, 'afiliado.html', context)
     except ObjectDoesNotExist:
         afiliado = False
-        return render(request, 'error.html')
+        context = {'errorIdNoExiste':'El Socio Existe, por favor comuniquese con liveCommunity para mas informacion'}
+        return render(request, 'error.html',context)
 
-   
-
-
-def idAfi(request, idAfiliado):
-    
-    afiliado = Afiliado.objects.get(idAfiliado = idAfiliado)
-    
-    context = {'afiliado':afiliado,'idAfiliado':idAfiliado}
-    
-    
-    return render(request,'form.html', context)
 
 
 def clienteform(request):
@@ -54,3 +44,21 @@ def clienteform(request):
         cliente.save()  # Guardar el objeto en la base de datos
         
     return render(request, 'linkGrupos.html')
+
+
+
+
+
+
+
+
+
+
+#def idAfi(request, idAfiliado):
+    
+#     afiliado = Afiliado.objects.get(idAfiliado = idAfiliado)
+    
+#     context = {'afiliado':afiliado,'idAfiliado':idAfiliado}
+    
+    
+#     return render(request,'form.html', context)

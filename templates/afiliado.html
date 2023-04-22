@@ -159,45 +159,41 @@
             <img class="logo-gif"  src="{% static 'img/logogif.gif' %}" alt="logo gif">
         </div>
         <div class="form-container">
-            <form method="post" enctype="multipart/form-data" action="clienteForm/">
+            <form method="post" enctype="multipart/form-data" action="clienteForm/" class="form-send">
                 {% csrf_token %}
 
                 <div class="inputbox">
-                    <input type="text" name="nombre" id="id_nombre" required="required">
+                    <input type="text" name="nombre" id="id_nombre" required="required" data-nombre class="input-default">
                     <span>Nombre</span>
                 </div>
 
                 <div class="inputbox">
-                    <input type="text" name="apellido" id="id_apellido" required="required">
+                    <input type="text" name="apellido" id="id_apellido" required="required" data-apellido class="input-default">
                     <span>Apellido</span>
                 </div>
 
                 <div class="inputbox">
-                    <input type="email" name="correo" id="id_correo" required="required">
+                    <input type="email" name="correo" id="id_correo" required="required" data-correo class="input-default">
                     <span>Correo</span>                
                 </div>
 
                 <div class="inputbox">
-                    <input type="tel" name="telefono" id="id_telefono" required="required">
+                    <input type="tel" name="telefono" id="id_telefono" required="required" data-telefono class="input-default">
                     <span>Teléfono</span>
                 </div>
-                
 
                 <div class="inputbox">
-                    <input type="text" name="userTelegram" id="id_userTelegram" required="required">
+                    <input type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
                     <span>Usuario Telegram</span>
                 </div>
                 
-                
-                
-
 
 
                 <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.idAfiliado}}">
-                <input type="hidden" name="idAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
+                <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
 
                 <div class="inputbox">
-                    <input onclick="send_handle()" type="button" value="send">
+                    <input type="submit" value="send" id='btn-send' data-btnSend class="input-default">
                   </div>
                 {% comment %} <button onclick="send_handle()">send</button> {% endcomment %}
               </form>

@@ -28,7 +28,7 @@ const redex = {
     'nombre': /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/,
     'correo': /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
     'usuario': /^@[a-zA-Z0-9_]+$/,
-    'telefono': /^[0-9]+$/
+    'telefono': /^[0-9]*$/
 };
 
 const errorMensaje = {
@@ -128,13 +128,9 @@ function validar(input) {
 
                 if (input.value != "" && redex["telefono"].test(input.value)) {
                     valido(input)
-                    errorT = true
-                    if (input.value == "") {
-                        errorT = false
-                    }
-                    
+                    errorT = true                    
                 } else {
-                    if (input.value == "") {
+                    if (input.value == "" || !redex["telefono"].test(input.value)) {
                         errorT = false
                     }
                     if (!errorT) {
@@ -174,10 +170,14 @@ function validar(input) {
 
 
 btn.addEventListener('click', e => {
-    const confirmar = confirm("Confirma que los datos estan ingresados correctamente")
-    if(enviarDatos()&& confirmar){
-        form.submit()
-        send_handle()
+    
+    if(enviarDatos()){
+        const confirmar = confirm("Confirma que los datos estan ingresados correctamente")
+        if(confirmar){
+            form.submit()
+            send_handle()
+        }
+       
     }
 })
 

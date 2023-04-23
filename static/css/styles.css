@@ -34,6 +34,7 @@ h2 { font-size: 1.5em; } /* 24px */
 .main-afiliado{
   width: 100%;
   height: auto;
+  /* display: block; */
 }
 .main-contain{
     max-width: 90vw;

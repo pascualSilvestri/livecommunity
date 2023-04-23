@@ -20,7 +20,7 @@ let errorE = false
 let errorU = false
 let errorT = false
 
-form.addEventListener('click', e => {
+form.addEventListener('submit', e => {
     e.preventDefault();
 })
 

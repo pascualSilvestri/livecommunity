@@ -10,6 +10,14 @@ document.addEventListener("scroll", function() {
   	else	 
 		element.style.display = "block"; 
 }); 
+const divs = document.getElementsByClassName('.mensaje');
+
+let i=0;
+let interval = setInterval( () => {
+	divs[i++].style.display = 'none';
+	if(i==divs.length)
+		clearInterval(interval);
+}, 2500 );
 
 function send_handle(){
 	const nombre = document.getElementById('id_nombre').value.trim()

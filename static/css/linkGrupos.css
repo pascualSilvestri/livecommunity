@@ -1,0 +1,79 @@
+.grupos-section{
+    background: linear-gradient(90deg, #1d6e97, #44f0cb);
+    min-height: 100vh;
+
+}
+.grupos-card{
+    margin:0 auto;
+    max-width: 600px;
+}
+.contain-section{
+    max-width: 70vw;
+    margin: 0 auto;
+}
+
+.grupos-card{
+    background: #f6fafc;
+    border-radius: 30px;
+    padding: 20px 40px 40px 40px; 
+    margin-top: 40px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-bottom: 30px;
+}
+.grupos-tittle-contain{
+    border-radius: 20px;
+    padding: 15px;
+    background-color: #243949;
+    text-align: center;
+    color:#f6fafc ;
+}
+
+.grupo{
+    margin-top: 30px;
+    padding:20px;
+    text-align: center;
+    background: #e6ecec;
+    border-radius:15px;
+}
+
+.grupo:hover{
+    background: #b2b8b8;
+}
+
+.title-grupo{
+    font-size: 35px;
+    color: #243949;
+    font-weight: 900;
+}
+.text-grupo{
+    font-size: 15px;
+    color: #2b2e2e;
+    font-style: italic;
+}
+
+.bienvenido{
+    max-width: 600px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, #062b49, #365879);
+    color: #e6ecec;
+    border-radius: 50%;
+padding: 30px;
+text-align: center;
+box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin-bottom: 20px;
+}
+
+.text-bienvenido{
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    padding-bottom: 40px;
+}
+
+.mensaje {
+    padding: 20px;
+    background-color: rgb(56, 184, 56);
+    margin: 0 auto;
+  }

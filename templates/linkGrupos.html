@@ -3,11 +3,67 @@
 
 {% block title %} Grupos de Live Community{% endblock %} 
 {% block content %}
-<h1>Datos Enviados</h1>
 
-<ul>
-    <li>grupo de telegram</li>
-    <li>grupo de whatsapp</li>
-    <li>grupo de discord</li>
-</ul>
+<section class="grupos-section">
+    <div class="contain-section">
+        <div class="header">
+            <div class="img-container">
+                <img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
+            </div>
+        </div>
+
+        <p class="mensaje" id="mensaje">Datos enviados correctamente</p>
+    
+        <div class="grupos-card">
+            <div class="grupos-tittle-contain">
+                <h4>TOCANDO LOS SIGUIENTES LINK ENVIARAS TU
+                    SOLICITUD PARA SER AGREGADO A LOS
+                    CANALES</h4>
+            </div>
+            <a href="https://t.me/+LAPs72HmRhJiMTAx" target='_blank'>
+                <div class="grupo">
+                    <h1 class="title-grupo">LIVE COMMUNITY</h1>
+                    <p class="text-grupo">(Canal Interactivo para miembros activos)
+                    </p>
+    
+                </div>
+            </a>
+    
+            <a href="https://t.me/+x2OwKacUbkdlZGMx" target='_blank'>
+                <div class="grupo">
+                    <h1 class="title-grupo">LIVE SEÑALES</h1>
+                    <p class="text-grupo">(Canal Operativo)
+                    </p>
+    
+                </div>
+            </a>
+    
+            <a href="https://t.me/+zpOUfgk6GZdjYjZh" target='_blank'>
+                <div class="grupo">
+                    <h1 class="title-grupo">LIVE ACCESOS</h1>
+                    <p class="text-grupo">(Links de Sesiones y Capacitaciones)
+                    </p>
+    
+                </div>
+            </a>
+    
+    
+        </div>
+    
+        <div class="bienvenido">
+            <h3>BIENVENIDO A LIVE COMMUNITY</h3>
+        </div>
+    
+        <p class="text-bienvenido">ESTATE ATENTO QUE EN BREVE SERÁS AGREGADO,<br> ESTO PUEDE
+            DEMORAR 24HS COMO MÁXIMO.</p>
+    
+    </div>
+    
+
+</section>
+
+
+
+
+
 {% endblock content %}

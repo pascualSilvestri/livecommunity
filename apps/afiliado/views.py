@@ -25,12 +25,12 @@ def clienteform(request):
     if request.method == 'POST':
         
         # Obtener los demás datos del formulario
-        nombre = request.POST.get('nombre')
-        apellido = request.POST.get('apellido')
-        correo = request.POST.get('correo')
-        telefono = request.POST.get('telefono')
-        idAfiliado = request.POST.get('idAfiliado')
-        userTelegram = request.POST.get('userTelegram')
+        nombre = request.POST.get('nombre').strip()
+        apellido = request.POST.get('apellido').strip()
+        correo = request.POST.get('correo').strip()
+        telefono = request.POST.get('telefono').strip()
+        idAfiliado = request.POST.get('idAfiliado').strip()
+        userTelegram = request.POST.get('userTelegram').strip()
         
         # Crear un objeto de modelo con los datos del formulario, incluyendo la ruta del archivo
         cliente = Cliente(

@@ -1,6 +1,6 @@
 
 header{
-    min-height: 70vh;
+    min-height: 80vh;
     width: 100%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/banner.png");
   
@@ -144,7 +144,7 @@ header{
     width: 100%;
   }
   .hero{
-    height: 75vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

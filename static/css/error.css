@@ -1,0 +1,18 @@
+.error-container{
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:antiquewhite;
+    height: 100vh;
+}
+
+
+.error_usuario{
+    font-size: 3rem;
+    text-align: center;
+}
+
+.error_usuario>a{
+    color:aqua;
+}

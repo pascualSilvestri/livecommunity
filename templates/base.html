@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/descargar.css' %}">
     <link rel="stylesheet" href="{% static 'css/pasos.css' %}">
     <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/error.css' %}">
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
 
     <title>{% block title %}Home{% endblock %}</title>
@@ -25,7 +26,7 @@
 
     <script src="{% static 'js/app.js' %}" type="module"></script>
     <script src="{% static 'js/validacion_form.js' %}" type="module"></script>
-    {% block scripts %}{% endblock scripts %}
+    <script src="{% static 'js/validarBtn.js' %}" type="module"></script>
     
 </body>
 </html>

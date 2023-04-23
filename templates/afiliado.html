@@ -34,7 +34,7 @@
                     <p>Una vez REGISTRADO, podés aceptar los <a class="link" href="#">Terminos y condiciones</a>, y continuar con el fondeo de tu cuenta.</p>
                 </div>
                 <div class="button-continuar">
-                    <a href="#" class="cta">
+                    <a href="#continuar" class="cta" hidden>
                         <span>Continuar</span>
                         <svg width="13px" height="10px" viewBox="0 0 13 10">
                           <path d="M1,5 L11,5"></path>
@@ -48,160 +48,157 @@
         </div>
     </div>
 </header> 
-
-<section class="descargar-section ">
-    <div class="main-contain text-center">
-        <h2 class="section-tittle text-center">Descarga las siguentes Aplicaciones</h2>
-        <div class="responsive-three-column-grid">
-            <div class="card">
-                <h3 class="card-tittle">Libertex</h3>
-                <a href="#">
-                    <img src="{% static 'img/libertex.png' %}" alt="libertex">
-    
-                </a>
-                <p class="card-text">Descarga la app de
-                    LIBERTEX, una ves que
-                    habras la app tocar iniciar
-                    sesion e ingresa el mail y la
-                    clave que creaste.</p>
-                    <p class="important"><span>IMPORTANTE !!! 
-                        No te
-                        vuelvas a registrar desde la
-                        app</span></p>
-            </div>
-            <div class="card">
-                <h3 class="card-tittle">Telegram</h3>
-                <a href="#">
-                    <img src="{% static 'img/telegram.png' %}" alt="telegram">
-    
-                </a>
-                <p class="card-text">Descarga la app de Telegram,
-                    Aca tendras acceso a todos los
-                    servicios de Live Community.
-                    </p>
-                    <p class="card-text">CANALES:
-                        Comunidad Live, Accesos y
-                        Señales.</p>
-            </div>
-            <div class="card">
-                <h3 class="card-tittle">Binance</h3>
-                <a href="#">
-                    <img src="{% static 'img/binance.png' %}" alt="telegram">
-    
-                </a>
-                <p class="card-text">Descarga la app de Binance
-                    donde podras tener tu Billetera
-                    Virtual, la necesitaras para
-                    cargar tu cuenta y retirar tus
-                    ganancias.</p>
-            </div>
-        </div>
-    
-        <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
-    </div>
-    
-</section>
-
-<section class="pasos-section text-center">
-    <div class="pasos-contain" >
-        <h2 class="section-tittle text-center">Pasos para cargar tu cuenta</h2>
-
-        <div class="pasos">
-            <div class="paso">
-                <div class="block">
-                    <div class="title-paso">Paso 1 : VIDEO DE COMO CONFIGURAR BINANCE
-                    </div> 
-                    <div class="text-paso">Video explicativo de como configurar tu cuenta de binance</div>
-                </div>
-            </div>
-            <div class="paso">
-                <div class="block">
-                    <div class="title-paso">Paso 2 : COMPRAR USDT</div> 
-                    <div class="text-paso">Video tutorial de como comprar USDT</div>
-                </div>
-            </div>
-            <div class="paso">
-                <div class="block">
-                    <div class="title-paso">Paso 3 : ENVIAR USDT A TU CUENTA DE
-                        LIBERTEX</div> 
-                    <div class="text-paso">Explicación de como enviar USDT a tu cuenta en Libertex</div>
-                </div>
-            </div>
-            <div class="paso">
-                <div class="block">
-                    <div class="title-paso">YA TENES TU CUENTA CARGADA, ESTAS UN
-                        PASO DE ACCEDER A TODOS LOS SERVICIOS
-                        DE LIVE COMMUNITY</div> 
-                    <div class="text-paso">Empezar a aprender</div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
-
-</section>
-
-{% comment "" %}
- aca incluir las instruncciones
- Descargas 
- Pasos a seguir 
-{% endcomment %}
-
-<section class="form-section text-center">
-    <h2 class="title-form text-center">INGRESA TUS DATOS PARA ACCEDER A LOS SERVICIOS
-    </h2>
-    <div class="section-form-container">
-
+<main class="main-afiliado" hidden>
+    <section class="descargar-section">
+        <div class="main-contain text-center" id="continuar">
+            <h2 class="section-tittle text-center">Descarga las siguentes Aplicaciones</h2>
+            <div class="responsive-three-column-grid">
+                <div class="card">
+                    <h3 class="card-tittle">Libertex</h3>
+                    <a href="#">
+                        <img src="{% static 'img/libertex.png' %}" alt="libertex">
         
-        <div class="logo-gif-container">
-            <img class="logo-gif"  src="{% static 'img/logogif.gif' %}" alt="logo gif">
+                    </a>
+                    <p class="card-text">Descarga la app de
+                        LIBERTEX, una ves que
+                        habras la app tocar iniciar
+                        sesion e ingresa el mail y la
+                        clave que creaste.</p>
+                        <p class="important"><span>IMPORTANTE !!! 
+                            No te
+                            vuelvas a registrar desde la
+                            app</span></p>
+                </div>
+                <div class="card">
+                    <h3 class="card-tittle">Telegram</h3>
+                    <a href="#">
+                        <img src="{% static 'img/telegram.png' %}" alt="telegram">
+        
+                    </a>
+                    <p class="card-text">Descarga la app de Telegram,
+                        Aca tendras acceso a todos los
+                        servicios de Live Community.
+                        </p>
+                        <p class="card-text">CANALES:
+                            Comunidad Live, Accesos y
+                            Señales.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-tittle">Binance</h3>
+                    <a href="#">
+                        <img src="{% static 'img/binance.png' %}" alt="telegram">
+        
+                    </a>
+                    <p class="card-text">Descarga la app de Binance
+                        donde podras tener tu Billetera
+                        Virtual, la necesitaras para
+                        cargar tu cuenta y retirar tus
+                        ganancias.</p>
+                </div>
+            </div>
+        
+            <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
         </div>
-        <div class="form-container">
-            <form method="post" enctype="multipart/form-data" action="clienteForm/" class="form-send">
-                {% csrf_token %}
-
-                <div class="inputbox">
-                    <input type="text" name="nombre" id="id_nombre" required="required" data-nombre class="input-default">
-                    <span>Nombre</span>
-                </div>
-
-                <div class="inputbox">
-                    <input type="text" name="apellido" id="id_apellido" required="required" data-apellido class="input-default">
-                    <span>Apellido</span>
-                </div>
-
-                <div class="inputbox">
-                    <input type="email" name="correo" id="id_correo" required="required" data-correo class="input-default">
-                    <span>Correo</span>                
-                </div>
-
-                <div class="inputbox">
-                    <input type="tel" name="telefono" id="id_telefono" required="required" data-telefono class="input-default">
-                    <span>Teléfono</span>
-                </div>
-
-                <div class="inputbox">
-                    <input type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
-                    <span>Usuario Telegram</span>
-                </div>
-                
-
-
-                <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.idAfiliado}}">
-                <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
-
-                <div class="inputbox">
-                    <input type="submit" value="send" id='btn-send' data-btnSend class="input-default">
-                  </div>
-                {% comment %} <button onclick="send_handle()">send</button> {% endcomment %}
-              </form>
-
-        </div>
-    </div>
+        
+    </section>
     
-</section>
+    <section class="pasos-section text-center">
+        <div class="pasos-contain" >
+            <h2 class="section-tittle text-center">Pasos para cargar tu cuenta</h2>
+    
+            <div class="pasos">
+                <div class="paso">
+                    <div class="block">
+                        <div class="title-paso">Paso 1 : VIDEO DE COMO CONFIGURAR BINANCE
+                        </div> 
+                        <div class="text-paso">Video explicativo de como configurar tu cuenta de binance</div>
+                    </div>
+                </div>
+                <div class="paso">
+                    <div class="block">
+                        <div class="title-paso">Paso 2 : COMPRAR USDT</div> 
+                        <div class="text-paso">Video tutorial de como comprar USDT</div>
+                    </div>
+                </div>
+                <div class="paso">
+                    <div class="block">
+                        <div class="title-paso">Paso 3 : ENVIAR USDT A TU CUENTA DE
+                            LIBERTEX</div> 
+                        <div class="text-paso">Explicación de como enviar USDT a tu cuenta en Libertex</div>
+                    </div>
+                </div>
+                <div class="paso">
+                    <div class="block">
+                        <div class="title-paso">YA TENES TU CUENTA CARGADA, ESTAS UN
+                            PASO DE ACCEDER A TODOS LOS SERVICIOS
+                            DE LIVE COMMUNITY</div> 
+                        <div class="text-paso">Empezar a aprender</div>
+                    </div>
+                </div>
+            </div>
+    
+    
+        </div>
+        <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
+    
+    </section>
+    
+    <section class="form-section text-center">
+        <h2 class="title-form text-center">INGRESA TUS DATOS PARA ACCEDER A LOS SERVICIOS
+        </h2>
+        <div class="section-form-container">
+    
+            
+            <div class="logo-gif-container">
+                <img class="logo-gif"  src="{% static 'img/logogif.gif' %}" alt="logo gif">
+            </div>
+            <div class="form-container">
+                <form method="post" enctype="multipart/form-data" action="clienteForm/" class="form-send">
+                    {% csrf_token %}
+    
+                    <div class="inputbox">
+                        <input type="text" name="nombre" id="id_nombre" required="required" data-nombre class="input-default">
+                        <span>Nombre</span>
+                    </div>
+    
+                    <div class="inputbox">
+                        <input type="text" name="apellido" id="id_apellido" required="required" data-apellido class="input-default">
+                        <span>Apellido</span>
+                    </div>
+    
+                    <div class="inputbox">
+                        <input type="email" name="correo" id="id_correo" required="required" data-correo class="input-default">
+                        <span>Correo</span>                
+                    </div>
+    
+                    <div class="inputbox">
+                        <input type="tel" name="telefono" id="id_telefono" required="required" data-telefono class="input-default">
+                        <span>Teléfono</span>
+                    </div>
+    
+                    <div class="inputbox">
+                        <input type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
+                        <span>Usuario Telegram</span>
+                    </div>
+                    
+    
+    
+                    <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.idAfiliado}}">
+                    <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
+    
+                    <div class="inputbox">
+                        <input type="submit" value="send" id='btn-send' data-btnSend class="input-default">
+                      </div>
+                    {% comment %} <button onclick="send_handle()">send</button> {% endcomment %}
+                  </form>
+    
+            </div>
+        </div>
+        
+    </section>
+    
+</main>
+
 
 
 

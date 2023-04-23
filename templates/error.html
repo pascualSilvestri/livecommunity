@@ -3,6 +3,20 @@
 
 {% block title %} Error_usuario{% endblock %} 
 {% block content %}
-<div class="error-container"><h2 class="error_usuario">Error Por favor presione<br><a href="{% url 'home' %}"> Aqui</a></h2></div>
+
+
+<div class="contenedor ">
+    <div class="section-404 text-center">
+        <img src="{% static 'img/404.png' %}" alt="404 imagen">
+        <h3 class="tittle-error">Página no encontrada</h3>
+        <p class="text-error">El siguiente botón te redirecciona a la página principal</p>
+        <a class="button-error" href="{% url 'home' %}">Home</a>
+    </div>
+</div>
+{% comment %} <div class="error-container">
+    <h2 class="error_usuario">Error Por favor presione<br><a href="{% url 'home' %}"> Aqui</a></h2>
+</div> {% endcomment %}
     
+
+
 {% endblock content %}

@@ -2,14 +2,9 @@
 .responsive-three-column-grid {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 40px;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 25px;
 
-}
-
-/* columns */
-.responsive-three-column-grid > * {
-    padding:1rem;
 }
 
 /* tablet breakpoint */
@@ -17,8 +12,8 @@
     .responsive-three-column-grid {
         display: grid;
         grid-template-rows: 1fr;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 60px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
     }
 }
 
@@ -62,5 +57,8 @@
 
 .flecha-abajo{
     width: 100px;
-    margin-top: 40px ;
+    margin-top: 20px ;
 }
+
+
+

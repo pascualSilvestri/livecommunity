@@ -95,15 +95,28 @@
                         cargar tu cuenta y retirar tus
                         ganancias.</p>
                 </div>
-            </div>
+                <div class="card">
+                    <h3 class="card-tittle">Binance</h3>
+                    <a href="#">
+                        <img src="{% static 'img/binance.png' %}" alt="telegram">
         
-            <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
+                    </a>
+                    <p class="card-text">Descarga la app de Binance
+                        donde podras tener tu Billetera
+                        Virtual, la necesitaras para
+                        cargar tu cuenta y retirar tus
+                        ganancias.</p>
+                </div>
+            </div>
+            <a href="#pasos">            
+                <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
+            </a>
         </div>
         
     </section>
     
     <section class="pasos-section text-center">
-        <div class="pasos-contain" >
+        <div class="pasos-contain" id="pasos" >
             <h2 class="section-tittle text-center">Pasos para cargar tu cuenta</h2>
     
             <div class="pasos">
@@ -139,11 +152,13 @@
     
     
         </div>
+        <a href="#formulario">            
+
         <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
-    
+        </a>
     </section>
     
-    <section class="form-section text-center">
+    <section class="form-section text-center" id="formulario">
         <h2 class="title-form text-center">INGRESA TUS DATOS PARA ACCEDER A LOS SERVICIOS
         </h2>
         <div class="section-form-container">
@@ -176,18 +191,20 @@
                         <span>Teléfono</span>
                     </div>
     
-                    <div class="inputbox">
+                    <div class="inputbox telegram-form">
                         <input type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
                         <span>Usuario Telegram</span>
+
                     </div>
+                    <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo <a class="link-video-telegram" href="#">Click Aqui</a></p>
                     
     
     
                     <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.idAfiliado}}">
                     <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
     
-                    <div class="inputbox">
-                        <input type="submit" value="send" id='btn-send' data-btnSend class="input-default">
+                    <div class="input-button">
+                        <input type="submit" value="send" id='btn-send' data-btnSend class="button-32 input-default">
                       </div>
                     {% comment %} <button onclick="send_handle()">send</button> {% endcomment %}
                   </form>

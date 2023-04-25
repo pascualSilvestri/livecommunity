@@ -11,6 +11,8 @@ const form = document.querySelector('.form-send')
 
 const btn = document.querySelector('#btn-send')
 
+var miParrafo = document.getElementById("mensaje");
+
 import { send_handle } from './app.js'
 
 
@@ -176,9 +178,11 @@ btn.addEventListener('click', e => {
         if(confirmar){
             form.submit()
             send_handle()
-        }
-       
-    }
+
+                    
+                }
+            
+            }
 })
 
 

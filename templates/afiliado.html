@@ -124,12 +124,14 @@
                         <div class="title-paso">Paso 1 : VIDEO DE COMO CONFIGURAR BINANCE
                         </div> 
                         <div class="text-paso">Video explicativo de como configurar tu cuenta de binance</div>
+                        <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
                     </div>
                 </div>
                 <div class="paso">
                     <div class="block">
                         <div class="title-paso">Paso 2 : COMPRAR USDT</div> 
                         <div class="text-paso">Video tutorial de como comprar USDT</div>
+                        <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
                     </div>
                 </div>
                 <div class="paso">
@@ -137,6 +139,7 @@
                         <div class="title-paso">Paso 3 : ENVIAR USDT A TU CUENTA DE
                             LIBERTEX</div> 
                         <div class="text-paso">Explicación de como enviar USDT a tu cuenta en Libertex</div>
+                        <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
                     </div>
                 </div>
                 <div class="paso">
@@ -195,7 +198,7 @@
                         <span>Usuario Telegram</span>
 
                     </div>
-                    <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo <a class="link-video-telegram" href="#">Click Aqui</a></p>
+                    <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo <a class="link-video-telegram">Click Aqui</a></p>
                     
     
     
@@ -212,11 +215,14 @@
         </div>
         
     </section>
-    
+
 </main>
 
-
-
+    {% comment %} Modal para video de usuario de telegram {% endcomment %}
+<div class="modal-telegram">
+        <span class="btn-salir">X</span>
+        <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' autoplay></video>
+</div>
 
 <a href="https://api.whatsapp.com/send?phone=54{{afiliado.telefono}}&text=Hola, quiero comunicarme con el soporte de Live Community." id="wsp"class="btn-wsp" target="_blank">
     <i class="fa fa-whatsapp icono"></i>

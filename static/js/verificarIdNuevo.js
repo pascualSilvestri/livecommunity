@@ -22,7 +22,8 @@ const datos = fetch('verificarNuevoCliente/')
 
 console.log(idClientes)
 
-
+//Verifica si esta el elemento en la base datos 
+//retorna un boolean
 const verificarNuevoCliente = (input,array)=>{
     for(const element of array){
         if(input.value==element){
@@ -31,12 +32,20 @@ const verificarNuevoCliente = (input,array)=>{
     }
 }
 
+
+//compruebo que el input no sea null
 if(input != null){
+    //le asocio un evento tipo blur validar cuando desenfoca 
     input.addEventListener('blur', e => {
+        //una exprecion regular para validar que sean solo numeros y minimo 10 caracter
         const redex = /^[0-9]{10,}$/
+        //verifico con la funcion verificarNuevo si exite en base de datos
+        //con la exprecion regular verifico que sea numero y mini 10 caracter
         if(!verificarNuevoCliente(input,idClientes)&&redex.test(input.value)){
+            //si cumple con los requerimientos se habilitas las siguientes secciones
             section_A_Validar.style.display = 'block'
         }else{
+            //si no cumple no se muestran las siguientes secciones
             section_A_Validar.style.display = 'none'
         }
         

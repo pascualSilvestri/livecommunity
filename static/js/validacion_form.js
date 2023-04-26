@@ -1,3 +1,4 @@
+
 //Importamos la funcion send:handle de app.js
 import { send_handle } from './app.js'
 
@@ -56,10 +57,10 @@ function valido(cont) {
 }
 
 
-/*
-Verifica que no hay error en los datos ingresado
-return un Boolean
-*/
+
+//Verifica que no hay error en los datos ingresado
+//return un Boolean
+
 const enviarDatos = () => {
     if (errorN && errorA && errorE && errorT && errorU) {
         return true 
@@ -69,10 +70,10 @@ const enviarDatos = () => {
 
 
 
-/*
-Logica para validar los inputs 
-toma un valor input 
-*/
+
+//Logica para validar los inputs 
+//toma un valor input 
+
 function validar(input) {
     //verificamos que no es null
     if (input != null) {
@@ -190,11 +191,11 @@ function validar(input) {
 }
 
 
-/* 
-validamos que los datos esten correcto
-si lo estan se envia en form
-si no lo estan, prevenimos que no se envien
- */
+
+//validamos que los datos esten correcto
+//i lo estan se envia en form
+//si no lo estan, prevenimos que no se envien
+
 
 // verificamos que no es null el form
 if(form != null){
@@ -222,19 +223,19 @@ if(form != null){
 }
 
 
-/*
-btn.addEventListener('click', e => {
 
-    if (enviarDatos()) {
-        const confirmar = confirm("Confirma que los datos estan ingresados correctamente")
-        if (confirmar) {
-            form.submit()
-            send_handle()
-        }
+// btn.addEventListener('click', e => {
 
-    }
-})
-*/
+//     if (enviarDatos()) {
+//         const confirmar = confirm("Confirma que los datos estan ingresados correctamente")
+//         if (confirmar) {
+//             form.submit()
+//             send_handle()
+//         }
+
+//     }
+// })
+
 
 
 

@@ -2,17 +2,18 @@ from django.shortcuts import render
 from .models import Afiliado,Cliente
 from .forms import ClienteForm
 from django.core.exceptions import ObjectDoesNotExist
-import os
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.http import JsonResponse,HttpResponse
-import telegram
 from django.views.decorators.csrf import csrf_exempt
+from livecommunity.settings.base import TELEGRAM_BOT_TOKEN,CHAT_ID_BOT
+import telegram
+import os
 import logging
 import asyncio
 
-chat_id='@pruebapas'
-token='6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
+chat_id = CHAT_ID_BOT
+token = TELEGRAM_BOT_TOKEN
 
 def afiliado(request, idAfiliado):
     afiliado = False

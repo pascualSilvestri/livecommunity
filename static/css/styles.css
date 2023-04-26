@@ -34,8 +34,15 @@ h2 { font-size: 1.5em; } /* 24px */
 .main-afiliado{
   width: 100%;
   height: auto;
-  /* display: block; */
+  display: block;
 }
+
+.validacion-2{
+  width: 100%;
+  height: auto;
+  /* display: block;  */
+}
+
 .main-contain{
     max-width: 90vw;
     margin: 0 auto;

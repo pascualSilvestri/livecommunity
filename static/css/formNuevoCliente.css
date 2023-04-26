@@ -1,0 +1,7 @@
+.verificar-nuevo-cliente{
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -3,6 +3,8 @@
 
 {% block title %} Live Community{% endblock %} 
 {% block content %}
+
+
 <header>
     <div class="main-contain">
         <div class="hero-contain">
@@ -48,8 +50,12 @@
         </div>
     </div>
 </header> 
+
+
 <main class="main-afiliado" hidden>
-    <section class="descargar-section">
+
+
+    <section class="descargar-section" >
         <div class="main-contain text-center" id="continuar">
             <h2 class="section-tittle text-center">Descarga las siguentes Aplicaciones</h2>
             <div class="responsive-three-column-grid">
@@ -113,116 +119,125 @@
         </div>
         
     </section>
-    
-    <section class="pasos-section text-center">
-        <div class="pasos-contain" id="pasos" >
-            <h2 class="section-tittle text-center">Pasos para cargar tu cuenta</h2>
-    
-            <div class="pasos">
-                <div class="paso">
-                    <div class="block">
-                        <div class="title-paso">Paso 1 : VIDEO DE COMO CONFIGURAR BINANCE
-                        </div> 
-                        <div class="text-paso">Video explicativo de como configurar tu cuenta de binance</div>
-                        <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
-                    </div>
-                </div>
-                <div class="paso">
-                    <div class="block">
-                        <div class="title-paso">Paso 2 : COMPRAR USDT</div> 
-                        <div class="text-paso">Video tutorial de como comprar USDT</div>
-                        <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
-                    </div>
-                </div>
-                <div class="paso">
-                    <div class="block">
-                        <div class="title-paso">Paso 3 : ENVIAR USDT A TU CUENTA DE
-                            LIBERTEX</div> 
-                        <div class="text-paso">Explicación de como enviar USDT a tu cuenta en Libertex</div>
-                        <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
-                    </div>
-                </div>
-                <div class="paso">
-                    <div class="block">
-                        <div class="title-paso">YA TENES TU CUENTA CARGADA, ESTAS UN
-                            PASO DE ACCEDER A TODOS LOS SERVICIOS
-                            DE LIVE COMMUNITY</div> 
-                        <div class="text-paso">Empezar a aprender</div>
-                    </div>
-                </div>
-            </div>
-    
-    
-        </div>
-        <a href="#formulario">            
 
-        <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
-        </a>
+
+{% comment %} Input para verificar al cliente {% endcomment %}
+    <section class="verificar-nuevo-cliente">
+            <input type="text" value="" name="idNuevoCliente" id="id_nuevo_cliente">
     </section>
-    
-    <section class="form-section text-center" id="formulario">
-        <h2 class="title-form text-center">INGRESA TUS DATOS PARA ACCEDER A LOS SERVICIOS
-        </h2>
-        <div class="section-form-container">
-    
-            
-            <div class="logo-gif-container">
-                <img class="logo-gif"  src="{% static 'img/logogif.gif' %}" alt="logo gif">
-            </div>
-            <div class="form-container">
-                <form method="post" enctype="multipart/form-data" action="clienteForm/" class="form-send">
-                    {% csrf_token %}
-    
-                    <div class="inputbox">
-                        <input type="text" name="nombre" id="id_nombre" required="required" data-nombre class="input-default">
-                        <span>Nombre</span>
-                    </div>
-    
-                    <div class="inputbox">
-                        <input type="text" name="apellido" id="id_apellido" required="required" data-apellido class="input-default">
-                        <span>Apellido</span>
-                    </div>
-    
-                    <div class="inputbox">
-                        <input type="email" name="correo" id="id_correo" required="required" data-correo class="input-default">
-                        <span>Correo</span>                
-                    </div>
-    
-                    <div class="inputbox">
-                        <input type="tel" name="telefono" id="id_telefono" required="required" data-telefono class="input-default">
-                        <span>Teléfono</span>
-                    </div>
 
-                    <div class="inputbox">
-                        <input type="text" name="idcliente" id="id_cliente" required="required" data-telefono class="input-default">
-                        <span>idCliente</span>
-                    </div>
-    
-                    <div class="inputbox telegram-form">
-                        <input type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
-                        <span>Usuario Telegram</span>
-
-                    </div>
-                    <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo <a class="link-video-telegram">Click Aqui</a></p>
-            
-    
-                    <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.idAfiliado}}">
-                    <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
-    
-                    <div class="input-button">
-                        <input type="submit" value="send" id='btn-send' data-btnSend class="button-32 input-default">
-                      </div>
-                    {% comment %} <button onclick="send_handle()">send</button> {% endcomment %}
-                  </form>
-    
-            </div>
-        </div>
+{% comment %} Dentro de esta section estan las otra dos que van abajo  {% endcomment %}
+    <section class="validacion-2" hidden>
+        <section class="pasos-section text-center">
+            <div class="pasos-contain" id="pasos" >
+                <h2 class="section-tittle text-center">Pasos para cargar tu cuenta</h2>
         
+                <div class="pasos">
+                    <div class="paso">
+                        <div class="block">
+                            <div class="title-paso">Paso 1 : VIDEO DE COMO CONFIGURAR BINANCE
+                            </div> 
+                            <div class="text-paso">Video explicativo de como configurar tu cuenta de binance</div>
+                            <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
+                        </div>
+                    </div>
+                    <div class="paso">
+                        <div class="block">
+                            <div class="title-paso">Paso 2 : COMPRAR USDT</div> 
+                            <div class="text-paso">Video tutorial de como comprar USDT</div>
+                            <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
+                        </div>
+                    </div>
+                    <div class="paso">
+                        <div class="block">
+                            <div class="title-paso">Paso 3 : ENVIAR USDT A TU CUENTA DE
+                                LIBERTEX</div> 
+                            <div class="text-paso">Explicación de como enviar USDT a tu cuenta en Libertex</div>
+                            <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
+                        </div>
+                    </div>
+                    <div class="paso">
+                        <div class="block">
+                            <div class="title-paso">YA TENES TU CUENTA CARGADA, ESTAS UN
+                                PASO DE ACCEDER A TODOS LOS SERVICIOS
+                                DE LIVE COMMUNITY</div> 
+                            <div class="text-paso">Empezar a aprender</div>
+                        </div>
+                    </div>
+                </div>
+        
+        
+            </div>
+            <a href="#formulario">            
+    
+            <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
+            </a>
+        </section>
+        
+        <section class="form-section text-center" id="formulario">
+            <h2 class="title-form text-center">INGRESA TUS DATOS PARA ACCEDER A LOS SERVICIOS
+            </h2>
+            <div class="section-form-container">
+        
+                
+                <div class="logo-gif-container">
+                    <img class="logo-gif"  src="{% static 'img/logogif.gif' %}" alt="logo gif">
+                </div>
+                <div class="form-container">
+                    <form method="post" enctype="multipart/form-data" action="clienteForm/" class="form-send">
+                        {% csrf_token %}
+        
+                        <div class="inputbox">
+                            <input type="text" name="nombre" id="id_nombre" required="required" data-nombre class="input-default">
+                            <span>Nombre</span>
+                        </div>
+        
+                        <div class="inputbox">
+                            <input type="text" name="apellido" id="id_apellido" required="required" data-apellido class="input-default">
+                            <span>Apellido</span>
+                        </div>
+        
+                        <div class="inputbox">
+                            <input type="email" name="correo" id="id_correo" required="required" data-correo class="input-default">
+                            <span>Correo</span>                
+                        </div>
+        
+                        <div class="inputbox">
+                            <input type="tel" name="telefono" id="id_telefono" required="required" data-telefono class="input-default">
+                            <span>Teléfono</span>
+                        </div>
+    
+                        <div class="inputbox">
+                            <input type="text" name="idcliente" id="id_cliente" required="required" data-telefono class="input-default">
+                            <span>idCliente</span>
+                        </div>
+        
+                        <div class="inputbox telegram-form">
+                            <input type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
+                            <span>Usuario Telegram</span>
+    
+                        </div>
+                        <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo <a class="link-video-telegram">Click Aqui</a></p>
+                
+        
+                        <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.idAfiliado}}">
+                        <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
+        
+                        <div class="input-button">
+                            <input type="submit" value="send" id='btn-send' data-btnSend class="button-32 input-default">
+                          </div>
+                        {% comment %} <button onclick="send_handle()">send</button> {% endcomment %}
+                      </form>
+        
+                </div>
+            </div>
+            
+        </section>
     </section>
 
 </main>
 
-    {% comment %} Modal para video de usuario de telegram {% endcomment %}
+{% comment %} Modal para video de usuario de telegram {% endcomment %}
 <div class="modal-telegram">
         <span class="btn-salir">X</span>
         <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' autoplay></video>

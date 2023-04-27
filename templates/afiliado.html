@@ -101,31 +101,42 @@
                         cargar tu cuenta y retirar tus
                         ganancias.</p>
                 </div>
-                <div class="card">
-                    <h3 class="card-tittle">Lemon</h3>
-                    <a href="#">
-                        <img src="{% static 'img/lemon.png' %}" alt="telegram">
-        
-                    </a>
-                    <p class="card-text">Si estas en Argentina podes 
-                        descargarte Lemon, 
-                        fondear tu cuenta y retirar tus ganancias desde la 
-                        app.</p>
-                </div>
             </div>
-            <a href="#pasos">            
-                <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
-            </a>
+            
         </div>
         
     </section>
 
 
 {% comment %} Input para verificar al cliente {% endcomment %}
-    <section class="verificar-nuevo-cliente">
-            <input type="text" value="" name="idNuevoCliente" id="id_nuevo_cliente">
-    </section>
+    <section class="text-center verificar-nuevo-cliente">
+            <h4 class="text-verificar-cliente">
+                EL REGISTRO PUEDE TARDAR 12 HS UNA VES
+                QUE ESTE VEREFICADA PODRA CONTINUAR
+                COLOCANDO SU NUMERO DE CUENTA<br> <a class="link-video-telegram">(Ver Video)</a>
 
+            </h4>
+
+            <div class="form-verificar-cliente">
+                <input type="text" value="" name="idNuevoCliente" id="id_nuevo_cliente">
+                
+                <button class="button-verificar-cliente" role="button">Verificar</button>
+            </div>
+
+
+            <p class="mensaje-verificar-cliente" id="mensaje-verificar-cliente">✔️ Su cuenta fue verificada correctamente</p> 
+            <p class="error-verificar-cliente" id="error-verificar-cliente">❌ Su cuenta aun no fue verificada</p> 
+
+
+
+            
+    </section>
+    <div class="main-contain text-center">
+        <a class="text-center" href="#pasos">            
+            <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
+        </a>
+    </div>
+    
 {% comment %} Dentro de esta section estan las otra dos que van abajo  {% endcomment %}
     <section class="validacion-2" hidden>
         <section class="pasos-section text-center">
@@ -214,7 +225,7 @@
         
                         <div class="inputbox telegram-form">
                             <input type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
-                            <span>Usuario Telegram</span>
+                            <span>@UsuarioTelegram</span>
     
                         </div>
                         <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo <a class="link-video-telegram">Click Aqui</a></p>

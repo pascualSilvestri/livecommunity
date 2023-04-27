@@ -47,6 +47,7 @@
     font-size: 1em;
     transition: 0.6s;
     font-family: sans-serif;
+    color:#818181;
   }
   .form-container .inputbox input:focus ~ span,
   .form-container .inputbox input:valid ~ span {

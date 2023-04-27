@@ -1,7 +1,108 @@
 .verificar-nuevo-cliente{
-    width: 100%;
-    height: 20vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    padding: 20px 0;
+}
+
+.text-verificar-cliente{
+    max-width: 800px;
+    margin: 20px 0;
+    color:rgb(56, 56, 56);
+    line-height: 1.5;
+}
+
+.mensaje-verificar-cliente {
+    padding: 15px 20px;
+    background-image: linear-gradient(to left,rgb(37, 165, 37),rgb(102, 204, 102));
+    margin: 10px auto;
+    font-weight: 600;
+    color: azure;
+    border-radius: 5px;
+
+  }
+
+  .error-verificar-cliente{
+    padding: 15px 20px;
+    background-color: rgb(197, 47, 47);
+    background-image: linear-gradient(to left,rgb(192, 29, 29),rgb(221, 89, 89));
+    margin: 10px auto;
+    font-weight: 600;
+    color: azure;
+    border-radius: 5px;
+  }
+
+
+.form-verificar-cliente{
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 20px;
+}
+
+
+
+/* CSS */
+.button-verificar-cliente {
+  align-items: center;
+  appearance: none;
+  background-color: #3EB2FD;
+  background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd,sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 6px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .2s,background-position .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.button-verificar-cliente:active,
+.button-verificar-cliente:focus {
+  outline: none;
+}
+
+.button-verificar-cliente:hover {
+  background-position: -20px -20px;
+}
+
+.button-verificar-cliente:focus:not(:active) {
+  box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
+}
+
+#id_nuevo_cliente{
+    
+    display: block;
+	 margin: 30px auto;
+	 border: none;
+	 padding: 0;
+	 width: 15ch;
+	 background: repeating-linear-gradient(90deg, dimgrey 0, dimgrey 1ch, transparent 0, transparent 1.5ch) 0 100%/ 14.5ch 2px no-repeat;
+	 font: 3ch droid sans mono, consolas, monospace;
+	 letter-spacing: 0.5ch;
+    
+}
+
+#id_nuevo_cliente:focus {
+    outline: none;
+    color: dodgerblue;
 }

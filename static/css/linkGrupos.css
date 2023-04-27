@@ -73,9 +73,11 @@ box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .mensaje {
-    padding: 20px;
+    padding: 15px 20px;
     background-color: rgb(56, 184, 56);
-    margin: 0 auto;
-
+    margin: 10px auto;
+    font-weight: 600;
+    color: azure;
+    border-radius: 5px;
   }
 

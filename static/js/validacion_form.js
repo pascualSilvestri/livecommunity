@@ -1,6 +1,6 @@
 
-//Importamos la funcion send:handle de app.js
-import { send_handle } from './app.js'
+//Importamos la funcion send:handle de whatsappCOntroller.js
+
 
 //Referencias a objetos del DOM
 const nombre = document.getElementById('id_nombre')
@@ -208,8 +208,6 @@ if(form != null){
             if (confirmar) {
                 //enviamos el formulario
                 form.submit()
-                //enviamos los datos al whatsapp
-                send_handle()
             }else{
                 //prevenimos el envio de datos si el usuario cancela el modal
                 e.preventDefault();

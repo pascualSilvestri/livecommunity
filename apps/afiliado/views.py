@@ -41,12 +41,17 @@ async def enviar_mensaje(msj,id,token):
 # print(MessageString)
 # asyncio.run(enviar_mensaje(MessageString, chat_id, token))
     
-    
+#Verifica si el id ingresado no se encuentra en base de datos
+def existe(clientes,idCliente):
+    for client in clientes:
+        if client.idCliente == idCliente:
+            return True
     
 #Obtiene los datos del form del front y los guarda en base de datos
 #Tambien lo envia a telegram
 #
 def clienteform(request):
+    clientes = Cliente.objects.all()
     if request.method == 'POST':
         
         # Obtener los demás datos del formulario
@@ -68,7 +73,9 @@ def clienteform(request):
             userTelegram=userTelegram,
             idCliente=idCliente
         )
-        cliente.save()  # Guardar el objeto en la base de datos
+        
+        if not existe(clientes,idCliente):# si no existe el cliente ne base de datos, se guarda 
+            cliente.save()  # Guardar el objeto en la base de datos
         
         #Mensaje formateado apra telegram
         mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Afiliado: {idAfiliado}\nID Cliente: {idCliente}"

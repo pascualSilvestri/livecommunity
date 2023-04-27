@@ -124,8 +124,7 @@
             </div>
 
 
-            <p class="mensaje-verificar-cliente" id="mensaje-verificar-cliente">✔️ Su cuenta fue verificada correctamente</p> 
-            <p class="error-verificar-cliente" id="error-verificar-cliente">❌ Su cuenta aun no fue verificada</p> 
+            <p class="error-verificar-cliente" id="error-verificar-cliente" hidden>❌ Usted ya es Cliente de Live Community</p> 
 
 
 
@@ -218,7 +217,7 @@
                             <span>Teléfono</span>
                         </div>
     
-                        <div class="inputbox">
+                        <div class="inputbox" hidden>
                             <input type="text" name="idcliente" id="id_cliente" required="required" data-telefono class="input-default">
                             <span>idCliente</span>
                         </div>
@@ -248,10 +247,14 @@
 
 </main>
 
+{% comment %} mensaje que aparece 3 segundos cuando se verifica la cuenta {% endcomment %}
+<p class="mensaje-verificar-cliente" id="mensaje-verificar-cliente" hidden>✔️ Su cuenta fue verificada correctamente</p> 
+
+
 {% comment %} Modal para video de usuario de telegram {% endcomment %}
-<div class="modal-telegram">
+<div class="modal-telegram" hidden>
         <span class="btn-salir">X</span>
-        <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' autoplay></video>
+        <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true'></video>
 </div>
 
 <a href="https://api.whatsapp.com/send?phone=54{{afiliado.telefono}}&text=Hola, quiero comunicarme con el soporte de Live Community." id="wsp"class="btn-wsp" target="_blank">

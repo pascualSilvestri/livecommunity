@@ -8,7 +8,7 @@
     justify-content: center;
 }
 
-.btn-salir{
+.salir-cliente{
     background-color: #fff5;
     position: absolute;
     right:2rem;
@@ -23,6 +23,30 @@
     cursor: pointer;
 }
 
-.modal-video{
 
+
+/* idCliente */
+.modal-id-cliente{
+    width: 100%;
+    height: 100vh;
+    background-color: #000a;
+    position: fixed;
+    top:0;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-salir{
+    background-color: #fff5;
+    position: absolute;
+    right:2rem;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    top:3rem;
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.link-video-telegram{
+    cursor: pointer;
 }

@@ -22,7 +22,7 @@
                     </p>
                     <div class="button-contain">
                         
-                    <button class="button-17" role="button">Empieza Ya</button>
+                    <a href='{{afiliado.url}}' class="button-17" role="button" target='_blank'>Empieza Ya</a>
                     </div>
             </div>
 
@@ -113,7 +113,7 @@
             <h4 class="text-verificar-cliente">
                 EL REGISTRO PUEDE TARDAR 12 HS UNA VES
                 QUE ESTE VEREFICADA PODRA CONTINUAR
-                COLOCANDO SU NUMERO DE CUENTA<br> <a class="link-video-telegram">(Ver Video)</a>
+                COLOCANDO SU NUMERO DE CUENTA<br> <a id='link-id-cliente' class="link-video-telegram">(Ver Video)</a>
 
             </h4>
 
@@ -227,7 +227,7 @@
                             <span>@UsuarioTelegram</span>
     
                         </div>
-                        <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo <a class="link-video-telegram">Click Aqui</a></p>
+                        <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo <a id='link-telegram' class="link-video-telegram">Click Aqui</a></p>
                 
         
                         <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.idAfiliado}}">
@@ -255,6 +255,11 @@
 <div class="modal-telegram" hidden>
         <span class="btn-salir">X</span>
         <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true'></video>
+</div>
+
+<div class="modal-id-cliente" hidden>
+    <span class="salir-cliente">X</span>
+    <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true'></video>
 </div>
 
 <a href="https://api.whatsapp.com/send?phone=54{{afiliado.telefono}}&text=Hola, quiero comunicarme con el soporte de Live Community." id="wsp"class="btn-wsp" target="_blank">

@@ -1,8 +1,30 @@
+const modal_cliente = document.querySelector(".modal-id-cliente");
+const link = document.querySelector(".link-video-telegram");
+const salir = document.querySelector(".salir-cliente");
 
+
+
+if(link != null){
+    link.addEventListener('click',e=>{
+        modal_cliente.style.display = "flex"
+    })
+}
+
+//Oculatar modual
+if(salir!= null){
+    salir.addEventListener('click',e=>{
+        modal_cliente.style.display = "none"
+    })
+}
+
+
+
+
+
+/*modal telegram*/
 //Referncias a los objetos en el DOM
 const modal = document.querySelector(".modal-telegram");
 const btn_salir = document.querySelector('.btn-salir');
-const btn_video = document.querySelector('.link-video-telegram');
 const p = document.querySelector('.text-video-telegram')
 
 //Mostrar modal

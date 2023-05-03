@@ -33,7 +33,7 @@
                         <label for="example-1"></label>
                     </div>
                       
-                    <p>Una vez REGISTRADO, podés aceptar los <a class="link" href="#">Terminos y condiciones</a>, y continuar con el fondeo de tu cuenta.</p>
+                    <p>Una vez REGISTRADO, podés aceptar los <a target="_blank" class="link" href="{% static 'pdf/terminos-y-condiciones.pdf' %}">Terminos y condiciones</a> y las <a target="_blank" class="link" href="{% static 'pdf/politica-y-privacidad.pdf' %}">Politicas de privacidad</a> para continuar con el fondeo de tu cuenta.</p>
                 </div>
                 <div class="button-continuar">
                     <a href="#continuar" class="cta" hidden>
@@ -113,7 +113,7 @@
             <h4 class="text-verificar-cliente">
                 EL REGISTRO PUEDE TARDAR 12 HS UNA VES
                 QUE ESTE VEREFICADA PODRA CONTINUAR
-                COLOCANDO SU NUMERO DE CUENTA<br> <a id='link-id-cliente' class="link-video-telegram">(Ver Video)</a>
+                COLOCANDO SU NUMERO DE CUENTA<br> <a href="{% static 'video/verificar_cuenta_id.mp4' %}" id='link-id-cliente' class="link-video-telegram">(Ver Video)</a>
 
             </h4>
 
@@ -148,14 +148,14 @@
                             <div class="title-paso">Paso 1 : VIDEO DE COMO CONFIGURAR BINANCE
                             </div> 
                             <div class="text-paso">Video explicativo de como configurar tu cuenta de binance</div>
-                            <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
+                            <video class='modal-video' src="{% static 'video/como_configurar_binance.mp4' %}" controls='true' width='400px'></video>
                         </div>
                     </div>
                     <div class="paso">
                         <div class="block">
                             <div class="title-paso">Paso 2 : COMPRAR USDT</div> 
                             <div class="text-paso">Video tutorial de como comprar USDT</div>
-                            <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
+                            <video class='modal-video' src="{% static 'video/comprar_usdt_binance.mp4' %}" controls='true' width='400px'></video>
                         </div>
                     </div>
                     <div class="paso">
@@ -163,7 +163,7 @@
                             <div class="title-paso">Paso 3 : ENVIAR USDT A TU CUENTA DE
                                 LIBERTEX</div> 
                             <div class="text-paso">Explicación de como enviar USDT a tu cuenta en Libertex</div>
-                            <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true' width='400px'></video>
+                            <video class='modal-video' src="{% static 'video/como_depositar_libertex.mp4' %}" controls='true' width='400px'></video>
                         </div>
                     </div>
                     <div class="paso">
@@ -254,12 +254,12 @@
 {% comment %} Modal para video de usuario de telegram {% endcomment %}
 <div class="modal-telegram" hidden>
         <span class="btn-salir">X</span>
-        <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true'></video>
+        <video class='modal-video' src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video>
 </div>
 
 <div class="modal-id-cliente" hidden>
     <span class="salir-cliente">X</span>
-    <video class='modal-video' src="{% static 'img/modalVideo.mp4' %}" controls='true'></video>
+    <video class='modal-video' src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video>
 </div>
 
 <a href="https://api.whatsapp.com/send?phone=54{{afiliado.telefono}}&text=Hola, quiero comunicarme con el soporte de Live Community." id="wsp"class="btn-wsp" target="_blank">

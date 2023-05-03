@@ -50,3 +50,8 @@
 .link-video-telegram{
     cursor: pointer;
 }
+
+
+.modal-video{
+    width: 350px;
+}

@@ -208,7 +208,7 @@
                         </div>
         
                         <div class="inputbox">
-                            <input type="email" name="correo" id="id_correo" required="required" data-correo class="input-default">
+                            <input placeholder="usuario@correo.com" type="email" name="correo" id="id_correo" required="required" data-correo class="input-default">
                             <span>Correo</span>                
                         </div>
         
@@ -223,8 +223,8 @@
                         </div>
         
                         <div class="inputbox telegram-form">
-                            <input type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
-                            <span>@UsuarioTelegram</span>
+                            <input placeholder="@usuario"  type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
+                            <span>Usuario Telegram</span>
     
                         </div>
                         <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo <a id='link-telegram' class="link-video-telegram">Click Aqui</a></p>
@@ -254,12 +254,12 @@
 {% comment %} Modal para video de usuario de telegram {% endcomment %}
 <div class="modal-telegram" hidden>
         <span class="btn-salir">X</span>
-        <video class='modal-video' src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video>
+        <video width="400" class='modal-video' src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video>
 </div>
 
 <div class="modal-id-cliente" hidden>
     <span class="salir-cliente">X</span>
-    <video class='modal-video' src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video>
+    <video width="400" class='modal-video' src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video>
 </div>
 
 <a href="https://api.whatsapp.com/send?phone=54{{afiliado.telefono}}&text=Hola, quiero comunicarme con el soporte de Live Community." id="wsp"class="btn-wsp" target="_blank">

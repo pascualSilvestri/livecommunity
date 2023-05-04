@@ -37,6 +37,10 @@
     border-radius: 10px;
     font-size: 1.2em;
   }
+  .form-container .inputbox input::placeholder {
+    font-size: .8em;
+    text-align: right
+}
   .form-container .inputbox:last-child {
     margin-bottom: 0;
   }
@@ -47,7 +51,7 @@
     font-size: 1em;
     transition: 0.6s;
     font-family: sans-serif;
-    color:#818181;
+    color:#3f3f3f;
   }
   .form-container .inputbox input:focus ~ span,
   .form-container .inputbox input:valid ~ span {

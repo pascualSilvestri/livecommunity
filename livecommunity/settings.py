@@ -55,7 +55,7 @@ ROOT_URLCONF = 'livecommunity.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(os.path.dirname(BASE_DIR),'templates')],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -98,7 +98,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-ar'
 
-TIME_ZONE = 'America/Argentina'
+TIME_ZONE = 'America/Buenos_Aires'
 
 USE_I18N = True
 
@@ -109,11 +109,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS=( os.path.join(os.path.dirname(BASE_DIR),"static"), )
+STATICFILES_DIRS=(os.path.join(BASE_DIR,"static"), )
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -126,3 +126,36 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
 
 CHAT_ID_BOT = '@pruebapas'
+
+
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = []
+
+
+# Database
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+
+# ALLOWED_HOSTS = ['livecommunity.com','localhost']
+# CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com']
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'livecommunity',
+#         'USER': 'root',
+#         'PASSWORD': 'livecommunity01',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#     }
+# }

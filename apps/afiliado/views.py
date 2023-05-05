@@ -6,7 +6,7 @@ from django.conf import settings
 from django.urls import reverse_lazy
 from django.http import JsonResponse,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from livecommunity.settings.base import TELEGRAM_BOT_TOKEN,CHAT_ID_BOT
+from livecommunity.settings import TELEGRAM_BOT_TOKEN,CHAT_ID_BOT
 import telegram
 import os
 import logging

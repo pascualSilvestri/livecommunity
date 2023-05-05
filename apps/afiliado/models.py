@@ -18,7 +18,7 @@ class Cliente(models.Model):
     nombre = models.CharField(max_length=200)
     apellido = models.CharField(max_length=200)
     correo = models.EmailField()
-    telefono = models.IntegerField()
+    telefono = models.BigIntegerField()
     idAfiliado = models.CharField(max_length=50)
     userTelegram = models.CharField(max_length=200)
     idCliente = models.CharField(max_length=50) #Recibir parametro por input

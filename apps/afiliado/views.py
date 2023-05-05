@@ -30,14 +30,12 @@ def afiliado(request, idAfiliado):
         return render(request, 'error.html',context)
 
 #Envio de mensaje a hacia telegram
-def enviar_mensaje(msj,id,token):
+async def enviar_mensaje(msj,id,token):
 
-    #bot = telegram.Bot(token=token) # Reemplaza 'TU_TOKEN_DE_TELEGRAM' con tu token de Telegram
-    #await bot.send_message(chat_id=id, text=msj)
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    bot = telegram.Bot(token=token)
-    loop.run_in_executor(None, bot.send_message, chat_id=id, text=msj)
+    bot = telegram.Bot(token=token) # Reemplaza 'TU_TOKEN_DE_TELEGRAM' con tu token de Telegram
+   
+    await bot.send_message(chat_id=id, text=msj)
+
 
 # MessageString = 'hola'
 # print(MessageString)
@@ -83,13 +81,7 @@ def clienteform(request):
         mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Afiliado: {idAfiliado}\nID Cliente: {idCliente}"
 
         #Envio de mensaje a Telegram
-        
-        enviar_mensaje(mensaje,chat_id,token)
-        #loop = asyncio.get_event_loop()
-        #loop.run_until_complete(enviar_mensaje(mensaje,chat_id,token))
-        
-        #funciona con python3.7 en adelante
-        #asyncio.run(enviar_mensaje(mensaje,chat_id,token))
+        asyncio.run(enviar_mensaje(mensaje,chat_id,token))
         
     return render(request, 'linkGrupos.html')
 

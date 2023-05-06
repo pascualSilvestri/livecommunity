@@ -80,8 +80,10 @@ def clienteform(request):
         #Mensaje formateado apra telegram
         mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Afiliado: {idAfiliado}\nID Cliente: {idCliente}"
 
+        loop = asyncio.get_event_loop()
+        loop.run_until_complete(enviar_mensaje(mensaje,chat_id,token))
         #Envio de mensaje a Telegram
-        asyncio.run(enviar_mensaje(mensaje,chat_id,token))
+        #asyncio.run(enviar_mensaje(mensaje,chat_id,token))
         
     return render(request, 'linkGrupos.html')
 

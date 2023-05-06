@@ -152,7 +152,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'livecommunity',
         'USER': 'root',
-        'PASSWORD': 'livecommunity01',
+        'PASSWORD': 'live2023community01',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

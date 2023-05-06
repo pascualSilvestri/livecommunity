@@ -29,12 +29,6 @@ def afiliado(request, idAfiliado):
         context = {'errorIdNoExiste':'El Socio Existe, por favor comuniquese con liveCommunity para mas informacion'}
         return render(request, 'error.html',context)
 
-#Envio de mensaje a hacia telegram
-async def enviar_mensaje(msj,id,token):
-
-    bot = telegram.Bot(token=token) # Reemplaza 'TU_TOKEN_DE_TELEGRAM' con tu token de Telegram
-   
-    await bot.send_message(chat_id=id, text=msj)
 
 
 # MessageString = 'hola'
@@ -46,7 +40,14 @@ def existe(clientes,idCliente):
     for client in clientes:
         if client.idCliente == idCliente:
             return True
-    
+        
+#Envio de mensaje a hacia telegram
+async def enviar_mensaje(msj,id,token):
+
+    bot = telegram.Bot(token=token) # Reemplaza 'TU_TOKEN_DE_TELEGRAM' con tu token de Telegram
+   
+    await bot.send_message(chat_id=id, text=msj)
+
 #Obtiene los datos del form del front y los guarda en base de datos
 #Tambien lo envia a telegram
 #
@@ -81,7 +82,10 @@ def clienteform(request):
         mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Afiliado: {idAfiliado}\nID Cliente: {idCliente}"
 
         loop = asyncio.get_event_loop()
-        loop.run_until_complete(enviar_mensaje(mensaje,chat_id,token))
+        try:
+            loop.run_until_complete(enviar_mensaje(mensaje,chat_id,token))
+        except TypeError as e:
+            return render(request, 'linkGrupos.html')
         #Envio de mensaje a Telegram
         #asyncio.run(enviar_mensaje(mensaje,chat_id,token))
         

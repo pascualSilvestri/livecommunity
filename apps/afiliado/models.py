@@ -11,7 +11,7 @@ class Afiliado(models.Model):
     referenciaAfiliado = models.ForeignKey('self', null=True, blank=True, on_delete= models.SET_NULL)
     
     def __str__(self):
-        return self.nombre
+        return self.idAfiliado
     
     
 class Cliente(models.Model):

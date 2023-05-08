@@ -39,7 +39,8 @@
   }
   .form-container .inputbox input::placeholder {
     font-size: .8em;
-    text-align: right
+    text-align: right;
+
 }
   .form-container .inputbox:last-child {
     margin-bottom: 0;
@@ -105,7 +106,7 @@
   color:#0454ab;
 }
 .text-video-telegram{
-  width: 400px;
+  width: 90%;
   margin-bottom: 20px;
   font-size: 15px;
   text-align: start;

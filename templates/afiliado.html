@@ -148,14 +148,14 @@
                             <div class="title-paso">Paso 1 : VIDEO DE COMO CONFIGURAR BINANCE
                             </div> 
                             <div class="text-paso">Video explicativo de como configurar tu cuenta de binance</div>
-                            <video class='modal-video' src="{% static 'video/como_configurar_binance.mp4' %}" controls='true' width='400px'></video>
+                            <video preload="none" class='modal-video' src="{% static 'video/como_configurar_binance.mp4' %}" controls='true' width='400px'></video>
                         </div>
                     </div>
                     <div class="paso">
                         <div class="block">
                             <div class="title-paso">Paso 2 : COMPRAR USDT</div> 
                             <div class="text-paso">Video tutorial de como comprar USDT</div>
-                            <video class='modal-video' src="{% static 'video/comprar_usdt_binance.mp4' %}" controls='true' width='400px'></video>
+                            <video preload="none" class='modal-video' src="{% static 'video/comprar_usdt_binance.mp4' %}" controls='true' width='400px'></video>
                         </div>
                     </div>
                     <div class="paso">
@@ -163,7 +163,7 @@
                             <div class="title-paso">Paso 3 : ENVIAR USDT A TU CUENTA DE
                                 LIBERTEX</div> 
                             <div class="text-paso">Explicación de como enviar USDT a tu cuenta en Libertex</div>
-                            <video class='modal-video' src="{% static 'video/como_depositar_libertex.mp4' %}" controls='true' width='400px'></video>
+                            <video preload="none" class='modal-video' src="{% static 'video/como_depositar_libertex.mp4' %}" controls='true' width='400px'></video>
                         </div>
                     </div>
                     <div class="paso">
@@ -254,12 +254,12 @@
 {% comment %} Modal para video de usuario de telegram {% endcomment %}
 <div class="modal-telegram" hidden>
         <span class="btn-salir">X</span>
-        <video width="400" class='modal-video' src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video>
+        <video preload="none" width="400" class='modal-video' src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video>
 </div>
 
 <div class="modal-id-cliente" hidden>
     <span class="salir-cliente">X</span>
-    <video width="400" class='modal-video' src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video>
+    <video preload="none" width="400" class='modal-video' src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video>
 </div>
 
 <a href="https://api.whatsapp.com/send?phone=54{{afiliado.telefono}}&text=Hola, quiero comunicarme con el soporte de Live Community." id="wsp"class="btn-wsp" target="_blank">

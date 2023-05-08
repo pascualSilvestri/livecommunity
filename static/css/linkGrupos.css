@@ -12,6 +12,15 @@
     margin: 0 auto;
 }
 
+@media (max-width:768px) {
+    .contain-section{
+        max-width: 90vw;
+        margin: 0 auto;
+    }
+    
+}
+
+
 .grupos-card{
     background: #f6fafc;
     border-radius: 30px;

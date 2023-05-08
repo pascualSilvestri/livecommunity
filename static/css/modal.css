@@ -53,5 +53,12 @@
 
 
 .modal-video{
-    width: 350px;
+    width: 400px;
+    margin: 20px auto 10px 30px;
+}
+
+@media (max-width:768px) {
+    .modal-video{
+        width: 100%;
+    }
 }

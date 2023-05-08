@@ -109,7 +109,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-#STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
+# STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
@@ -127,10 +127,11 @@ TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
 
 CHAT_ID_BOT = '@pruebapas'
 
-DEBUG = False
+
+# DEBUG = True
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# # SECURITY WARNING: don't run with debug turned on in production!
 
 # ALLOWED_HOSTS = []
 # #Database
@@ -142,6 +143,8 @@ DEBUG = False
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['31.220.21.60','localhost']

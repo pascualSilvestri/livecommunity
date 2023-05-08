@@ -147,7 +147,7 @@ CHAT_ID_BOT = '@pruebapas'
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['31.220.21.60','localhost']
+ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost']
 CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com']
 
 DATABASES = {

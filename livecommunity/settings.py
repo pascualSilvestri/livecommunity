@@ -128,35 +128,43 @@ TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
 CHAT_ID_BOT = '@pruebapas'
 
 
-DEBUG = True
+
+#LOCAL
+
+# DEBUG = True
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = []
-#Database
-#https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# DEBUG = False
-
-
-# ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost']
-# CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com']
+# ALLOWED_HOSTS = []
+# #Database
+# #https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'livecommunity',
-#         'USER': 'root',
-#         'PASSWORD': 'live2023community01',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+
+
+
+#PRODUCCION
+
+DEBUG = False
+
+
+ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost']
+CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'livecommunity',
+        'USER': 'root',
+        'PASSWORD': 'live2023community01',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}

@@ -9,14 +9,16 @@
 }
 
 .salir-cliente{
-    background-color: #fff5;
+    background-color: #ebebeb94;
     position: absolute;
-    right:2rem;
-    font-size: 1.5rem;
+    right: 2rem;
+    font-size: 1rem;
     border-radius: 50%;
-    top:3rem;
-    padding: .5rem;
+    top: 1rem;
+    padding: 0.3rem 0.5rem;
     cursor: pointer;
+    font-weight: 700;
+    text-align: center;
 }
 
 .link-video-telegram{
@@ -54,7 +56,7 @@
 
 .modal-video{
     width: 400px;
-    margin: 20px auto 10px 30px;
+    margin: 20px auto;
 }
 
 @media (max-width:768px) {

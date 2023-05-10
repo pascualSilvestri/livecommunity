@@ -13,7 +13,7 @@ const datos = fetch('verificarNuevoCliente/')
         if (response.ok) {
             return response.json();
         } else {
-            throw new Error('Error en la respuesta del servidor'+ response.headers);
+            throw new Error('Error en la respuesta del servidor'+ response.headers.get);
         }
     })
     .then(data => {

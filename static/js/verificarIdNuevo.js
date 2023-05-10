@@ -8,25 +8,43 @@ const mensaje_no_verificado = document.querySelector('.error-verificar-cliente')
 const btn_validar = document.querySelector('.button-verificar-cliente')
 const section_de_validacion = document.querySelector('.verificar-nuevo-cliente')
 //obtener datos de la api de django
-const datos = fetch('verificarNuevoCliente/')
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Error en la respuesta del servidor'+ response.statusText);
-        }
-    })
-    .then(data => {
-        data['data'].forEach(element => {
-            idClientes.push(element)
-        });
-    })
-    .catch(error => {
-        // Maneja errores
-        console.error(error);
-    });
+// const datos = fetch('verificarNuevoCliente/')
+//     .then(response => {
+//         if (response.ok) {
+//             return response.json();
+//         } else {
+//             throw new Error('Error en la respuesta del servidor');
+//         }
+//     })
+//     .then(data => {
+//         data['data'].forEach(element => {
+//             idClientes.push(element)
+//         });
+//     })
+//     .catch(error => {
+//         // Maneja errores
+//         console.error(error);
+//     });
+
+async function obtenerDatos() {
+    try {
+      const response = await fetch('verificarNuevoCliente/');
+      if (!response.ok) {
+        throw new Error('Error en la respuesta del servidor');
+      }
+      const data = await response.json();
+      data['data'].forEach(element => {
+        idClientes.push(element);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  obtenerDatos()
 
 
+  
 //Verifica si esta el elemento en la base datos 
 //retorna un boolean
 const verificarNuevoCliente = (input,array)=>{
@@ -36,6 +54,7 @@ const verificarNuevoCliente = (input,array)=>{
         }
     }
 }
+
 
 
 //compruebo que el input no sea null

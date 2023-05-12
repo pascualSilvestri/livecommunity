@@ -1,6 +1,6 @@
 
 //Importamos la funcion send:handle de whatsappCOntroller.js
-
+import { modalError } from "./modal.js"
 
 //Referencias a objetos del DOM
 const nombre = document.getElementById('id_nombre')
@@ -12,7 +12,13 @@ const idAfiliado = document.getElementById("id_idAfiliado")
 const contenedores = document.querySelectorAll('.inputbox')
 const form = document.querySelector('.form-send')
 const btn = document.querySelector('#btn-send')
+const section_de_validacion = document.getElementById('nuevo_id_cliente')
+
+const input_validar = document.querySelector('#id_nuevo_cliente')
+const input_idCliente = document.querySelector('#id_cliente')
+
 var miParrafo = document.getElementById("mensaje");
+
 
 
 //verificadores de que los inputs estan correctamente ingresados
@@ -21,6 +27,7 @@ let errorA = false
 let errorE = false
 let errorU = false
 let errorT = false
+let errorC = false
 
 //Expreciones regulares para validar cada tipo de input
 const redex = {
@@ -32,11 +39,12 @@ const redex = {
 
 //Mensaje de error para cada tipo de input 
 const errorMensaje = {
-    'nombre': `No puede estar vacio, min-2 letras.`,
-    'apellido': `No puede estar vacio, min-2 letras.`,
+    'nombre': `No puede estar vacio, min-2 letras no se aceptan numeros.`,
     'email': `El formato correcto es ejemplo@correo.com`,
-    'usuario': `Debe comenzar con un @`,
-    'btnError': "Por favor complete los campo correctamente."
+    'usuario': `Debe comenzar con un @ ejemplo @usuarioTelegram`,
+    'btnError': "Por favor complete los campo correctamente.",
+    'idCliente':'El Id Ingresado no coincide, por favor corregir el id en la seccion de verificacion',
+    'telefono':'Acepta solo numeros'
 };
 
 
@@ -62,12 +70,10 @@ function valido(cont) {
 //return un Boolean
 
 const enviarDatos = () => {
-    if (errorN && errorA && errorE && errorT && errorU) {
+    if (errorN && errorA && errorE && errorT && errorU && errorC) {
         return true 
     }
 }
-
-
 
 
 
@@ -78,7 +84,8 @@ function validar(input) {
     //verificamos que no es null
     if (input != null) {
         //asociamos un event del tipo keyup para verificar cada ves que se suelta una tecla
-        input.addEventListener("keyup", e => {
+        input.addEventListener("blur", e => {
+            console.log(e.target.id)
             //verificamos el input que estamos presionado o enfocando
             if (e.target.id == "id_nombre") {
                 //verificamos que el input no este vacio y cumpla con la validacion de la exprecion regular
@@ -90,6 +97,7 @@ function validar(input) {
                     //si no 
                 } else {
                     //verificamos que el input este vacio
+                    modalError(errorMensaje.nombre)
                     if (input.value == "") {
                         //errorN la igualamos a false para avisar de que hay un error
                         errorN = false
@@ -113,6 +121,7 @@ function validar(input) {
                     }
 
                 } else {
+                    modalError(errorMensaje.nombre)
                     if (input.value == "") {
                         errorA = false
                     }
@@ -135,6 +144,7 @@ function validar(input) {
                     }
 
                 } else {
+                    modalError(errorMensaje.email)
                     if (input.value == "") {
                         errorE = false
                     }
@@ -152,6 +162,7 @@ function validar(input) {
                     valido(input)
                     errorT = true
                 } else {
+                    modalError(errorMensaje.telefono)
                     if (input.value == "" || !redex["telefono"].test(input.value)) {
                         errorT = false
                     }
@@ -174,6 +185,7 @@ function validar(input) {
                     }
 
                 } else {
+                    modalError(errorMensaje.usuario)
                     if (input.value == "") {
                         errorU = false
                     }
@@ -190,6 +202,40 @@ function validar(input) {
     }
 }
 
+function validarId(){
+    if (input_idCliente.value == input_validar.value){
+        return true;
+    }
+    return false;
+}
+
+input_idCliente.addEventListener('blur',e=>{
+    if (input_idCliente.value != "" && redex["telefono"].test(input_idCliente.value)&& validarId()) {
+        valido(input_idCliente)
+        section_de_validacion.style.display = 'none'
+        errorC = true
+        if (input_idCliente.value == "") {
+            errorC = false
+        }
+    } else {
+        modalError(errorMensaje.idCliente)
+        section_de_validacion.style.display = 'flex'
+        // section_de_validacion.scrollIntoView()
+        window.scrollTo({
+            top: 1200,
+            behavior: "smooth"
+          });
+        if (input_idCliente.value == ""||!validar()) {
+            errorC = false
+        }
+        if (!errorC) {
+            error(input_idCliente)
+            errorC = false
+
+        }
+
+    }
+})
 
 
 //validamos que los datos esten correcto
@@ -215,6 +261,7 @@ if(form != null){
 
         }else{
             //prevenimos el envio de datos si los datos no estan correctametne ingresados
+            modalError(errorMensaje.btnError)
             e.preventDefault();
         }
     })

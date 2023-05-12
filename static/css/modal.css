@@ -66,3 +66,20 @@
 
     }
 }
+
+
+.modaleError{
+    width: 400px;
+    height: 100px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#000;
+    background-color: #f77;
+    border-radius: 20px;
+    position: fixed;
+    bottom: 100px;
+    left: 500px;
+    z-index: 1000;
+}

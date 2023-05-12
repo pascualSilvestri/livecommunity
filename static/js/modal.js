@@ -3,6 +3,33 @@ const link = document.querySelector(".link-video-telegram");
 const salir = document.querySelector(".salir-cliente");
 
 
+//Crear modal error
+function abrirModal(mensaje){
+    const body = document.body
+    const modal = document.createElement('div')
+    modal.classList.add('modaleError')
+    const msj = document.createElement('p')
+    msj.innerHTML=mensaje;
+    modal.appendChild(msj)
+    body.appendChild(modal)
+    
+} 
+//cerrar modal error
+function cerrarModal(){
+    const modal = document.querySelector('.modaleError')
+    if(modal != null){
+        modal.style.display = 'none'
+        modal.remove();
+    }
+    
+}
+
+
+//modal error
+export function modalError(mensaje){
+    abrirModal(mensaje)
+    setTimeout(cerrarModal,3000)
+}
 
 if(link != null){
     link.addEventListener('click',e=>{

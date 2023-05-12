@@ -1,7 +1,7 @@
 const bandera = false
 const idClientes = []
 const input = document.querySelector('#id_nuevo_cliente')
-const input_idCliente = document.querySelector('#id_cliente')
+// const input_idCliente = document.querySelector('#id_cliente')
 const section_A_Validar = document.querySelector('.validacion-2')
 const mensaje_verificado = document.querySelector('.mensaje-verificar-cliente')
 const mensaje_no_verificado = document.querySelector('.error-verificar-cliente')
@@ -55,7 +55,7 @@ const verificarNuevoCliente = (input,array)=>{
     }
 }
 
-
+// input_idCliente.value = input.value
 
 //compruebo que el input no sea null
 if(btn_validar != null){
@@ -69,8 +69,8 @@ if(btn_validar != null){
             //si cumple con los requerimientos se habilitas las siguientes secciones
             section_A_Validar.style.display = 'block'
             mensaje_verificado.style.display= 'block'
-            input_idCliente.value = input.value
             section_de_validacion.style.display = 'none'
+
             //Muestra mensaje de verificacion valida 3 segundos
             setTimeout(()=> {
 
@@ -85,7 +85,7 @@ if(btn_validar != null){
             section_A_Validar.style.display = 'none'
             mensaje_verificado.style.display= 'none'
             mensaje_no_verificado.style.display = 'block'
-            input_idCliente.value = ''
+            // input_idCliente.value = ''
         }
         
 

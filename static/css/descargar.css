@@ -34,6 +34,9 @@
     text-align: center;
     padding: 40px;
     background-color: #f1efef ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .card-tittle{
     margin-bottom: 20px;
@@ -60,5 +63,27 @@
     margin-top: 20px ;
 }
 
+.descargar-app{
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
 
-
+.dispositivos{
+    margin-top:10px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+.ios{
+    padding: 10px 20px;
+    background-color: rgb(187, 201, 206);
+    border: 2px solid rgb(53, 53, 53);
+    border-radius: 20px;
+}
+.android{
+    padding: 10px 20px;
+    background-color: rgb(187, 201, 206);
+    border: 2px solid rgb(53, 53, 53);
+    border-radius: 20px;
+}

@@ -22,7 +22,7 @@
                     </p>
                     <div class="button-contain">
                         
-                    <a href='{{afiliado.url}}' class="button-17" role="button" target='_blank'>Empieza Ya</a>
+                    <a href='{{afiliado.url}}' class="button-17" role="button" target='_blank'>REGISTRATE</a>
                     </div>
             </div>
 
@@ -60,7 +60,8 @@
             <h2 class="section-tittle text-center">Descarga las siguentes Aplicaciones</h2>
             <div class="responsive-three-column-grid">
                 <div class="card">
-                    <h3 class="card-tittle">Libertex</h3>
+                    <div class="card-top">
+                        <h3 class="card-tittle">Libertex</h3>
                     <a href="#">
                         <img src="{% static 'img/libertex.png' %}" alt="libertex">
         
@@ -74,9 +75,27 @@
                             No te
                             vuelvas a registrar desde la
                             app</span></p>
+                    </div>
+
+
+                    <div class="card-bottom">
+                        <div class="descargar text-center">
+                            <p class="descargar-app">Descargar App</p>
+                            <div class="dispositivos">
+                            <a class="ios" href="https://apps.apple.com/ar/app/libertex-opera-forex-y-crypto/id1056658272?ppid=94feeaa7-7f41-4441-b2b6-1a75bba9d90f">
+                            iOS
+                            </a>
+                            <a class="android" href="https://play.google.com/store/apps/details?id=org.fxclub.libertex">
+                            Android
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="card">
-                    <h3 class="card-tittle">Telegram</h3>
+                    <div class="card-top">
+                        <h3 class="card-tittle">Telegram</h3>
                     <a href="#">
                         <img src="{% static 'img/telegram.png' %}" alt="telegram">
         
@@ -88,18 +107,49 @@
                         <p class="card-text">CANALES:
                             Comunidad Live, Accesos y
                             Señales.</p>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="descargar text-center">
+                            <p class="descargar-app">Descargar App</p>
+                            <div class="dispositivos">
+                            <a class="ios" href="https://apps.apple.com/ar/app/telegram-messenger/id686449807">
+                            iOS
+                            </a>
+                            <a class="android" href="https://play.google.com/store/apps/details?id=org.telegram.messenger">
+                            Android
+                            </a>
+                            </div>
+                        </div>
+                    </div>      
                 </div>
                 <div class="card">
-                    <h3 class="card-tittle">Binance</h3>
-                    <a href="#">
-                        <img src="{% static 'img/binance.png' %}" alt="telegram">
-        
-                    </a>
-                    <p class="card-text">Descarga la app de Binance
-                        donde podras tener tu Billetera
-                        Virtual, la necesitaras para
-                        cargar tu cuenta y retirar tus
-                        ganancias.</p>
+                    <div class="card-top">
+                        <h3 class="card-tittle">Binance</h3>
+                        <a href="#">
+                            <img src="{% static 'img/binance.png' %}" alt="telegram">
+            
+                        </a>
+                        <p class="card-text">Descarga la app de Binance
+                            donde podras tener tu Billetera
+                            Virtual, la necesitaras para
+                            cargar tu cuenta y retirar tus
+                            ganancias.</p>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="descargar text-center">
+                            <p class="descargar-app">Descargar App</p>
+                            <div class="dispositivos">
+                            <a class="ios" href="https://apps.apple.com/ar/app/binance-buy-bitcoin-crypto/id1436799971">
+                            iOS
+                            </a>
+                            <a class="android" href="https://play.google.com/store/apps/details?id=com.binance.dev">
+                            Android
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+
+                        
                 </div>
             </div>
             
@@ -233,7 +283,7 @@
                         <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
         
                         <div class="input-button">
-                            <input type="submit" value="send" id='btn-send' data-btnSend class="button-32 input-default">
+                            <input type="submit" value="Enviar" id='btn-send' data-btnSend class="button-32 input-default">
                           </div>
                         {% comment %} <button onclick="send_handle()">send</button> {% endcomment %}
                       </form>

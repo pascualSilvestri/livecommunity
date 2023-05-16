@@ -13,6 +13,7 @@ const contenedores = document.querySelectorAll('.inputbox')
 const form = document.querySelector('.form-send')
 const btn = document.querySelector('#btn-send')
 const section_de_validacion = document.getElementById('nuevo_id_cliente')
+const mensaje_verificado = document.querySelector('.mensaje-verificar-cliente')
 
 const input_validar = document.querySelector('#id_nuevo_cliente')
 const input_idCliente = document.querySelector('#id_cliente')
@@ -212,6 +213,15 @@ function validarId(){
 input_idCliente.addEventListener('blur',e=>{
     if (input_idCliente.value != "" && redex["telefono"].test(input_idCliente.value)&& validarId()) {
         valido(input_idCliente)
+
+        mensaje_verificado.style.display= 'block'
+        setTimeout(()=> {
+
+            if(mensaje_verificado!=null){
+                mensaje_verificado.style.display = 'none'
+            }
+        
+        }, 3000); 
         section_de_validacion.style.display = 'none'
         errorC = true
         if (input_idCliente.value == "") {

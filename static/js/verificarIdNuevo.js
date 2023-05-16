@@ -68,17 +68,11 @@ if(btn_validar != null){
         if(!verificarNuevoCliente(input,idClientes)&&redex.test(input.value)){
             //si cumple con los requerimientos se habilitas las siguientes secciones
             section_A_Validar.style.display = 'block'
-            mensaje_verificado.style.display= 'block'
+
             section_de_validacion.style.display = 'none'
 
             //Muestra mensaje de verificacion valida 3 segundos
-            setTimeout(()=> {
 
-                if(mensaje_verificado!=null){
-                    mensaje_verificado.style.display = 'none'
-                }
-            
-            }, 3000); 
 
         }else{
             //si no cumple no se muestran las siguientes secciones

@@ -44,7 +44,7 @@ const errorMensaje = {
     'email': `El formato correcto es ejemplo@correo.com`,
     'usuario': `Debe comenzar con un @ ejemplo @usuarioTelegram`,
     'btnError': "Por favor complete los campo correctamente.",
-    'idCliente':'El Id Ingresado no coincide, por favor corregir el id en la seccion de verificacion',
+    'idCliente':'Su cuenta no esta verificada correctamente, por favor verifique el ID ingresado',
     'telefono':'Acepta solo numeros'
 };
 

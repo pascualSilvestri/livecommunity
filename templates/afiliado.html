@@ -161,8 +161,8 @@
 {% comment %} Input para verificar al cliente {% endcomment %}
     <section class="text-center verificar-nuevo-cliente" id='nuevo_id_cliente'>
             <h4 class="text-verificar-cliente">
-                EL REGISTRO PUEDE TARDAR 12 HS UNA VES
-                QUE ESTE VEREFICADA PODRA CONTINUAR
+                EL REGISTRO EN LIBERTEX PUEDE TARDAR 12 HS, UNA VES
+                QUE ESTE VERIFICADA PODRA CONTINUAR
                 COLOCANDO SU NUMERO DE CUENTA<br> <a id='link-id-cliente' class="link-video-telegram">(Ver Video)</a>
 
             </h4>
@@ -205,7 +205,8 @@
                         <div class="block">
                             <div class="title-paso">Paso 2 : COMPRAR USDT</div> 
                             <div class="text-paso">Video tutorial de como comprar USDT</div>
-                            <video preload="none" class='modal-video' src="{% static 'video/comprar_usdt_binance.mp4' %}" controls='true' width='400px'></video>
+                            {% comment %} <video preload="none" class='modal-video' src="{% static 'video/comprar_usdt_binance.mp4' %}" controls='true' width='400px'></video> {% endcomment %}
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/I-WOPontfYk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class='modal-video'></iframe>
                         </div>
                     </div>
                     <div class="paso">

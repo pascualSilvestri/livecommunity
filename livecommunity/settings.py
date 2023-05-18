@@ -143,9 +143,6 @@ CHAT_ID_BOT = '@pruebapas'
 
 # DEBUG = True
 
-
-# #SECURITY WARNING: don't run with debug turned on in production!
-
 # ALLOWED_HOSTS = []
 # #Database
 # #https://docs.djangoproject.com/en/4.2/ref/settings/#databases

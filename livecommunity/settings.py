@@ -112,12 +112,12 @@ STATIC_URL = 'static/'
 
 #LOCAL
 
-# STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 
 
 #PRODUCCION
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 
 
@@ -133,10 +133,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #Tokken de telegram
-TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
+# TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
+# CHAT_ID_BOT = '@pruebapas'
 
-CHAT_ID_BOT = '@pruebapas'
 
+TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
+CHAT_ID_BOT = '@liveingresos'
+# CHAT_ID_BOT = '@+csPs8XoRyX4yMjBh'
 
 
 #LOCAL

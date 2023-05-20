@@ -53,6 +53,8 @@ async def enviar_mensaje(msj,id,token):
 #
 def clienteform(request):
     clientes = Cliente.objects.all()
+    
+    
     if request.method == 'POST':
         
         # Obtener los demás datos del formulario
@@ -60,17 +62,19 @@ def clienteform(request):
         apellido = request.POST.get('apellido').strip()
         correo = request.POST.get('correo').strip()
         telefono = request.POST.get('telefono').strip()
-        idAfiliado = request.POST.get('idAfiliado').strip()
+        idAfiliado2 = request.POST.get('idAfiliado').strip()
         userTelegram = request.POST.get('userTelegram').strip()
         idCliente = request.POST.get('idcliente').strip()
         
+        afiliado2 = Afiliado.objects.get(idAfiliado = idAfiliado2).referenciaAfiliado.__str__()
+    
         # Crear un objeto de modelo con los datos del formulario, incluyendo la ruta del archivo
         cliente = Cliente(
             nombre=nombre,
             apellido=apellido,
             correo=correo,
             telefono=telefono,
-            idAfiliado=idAfiliado,
+            idAfiliado=idAfiliado2,
             userTelegram=userTelegram,
             idCliente=idCliente
         )
@@ -79,16 +83,24 @@ def clienteform(request):
             cliente.save()  # Guardar el objeto en la base de datos
         
         #Mensaje formateado apra telegram
-        mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Afiliado: {idAfiliado}\nID Cliente: {idCliente}"
+        mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Afiliado1: {afiliado2}\nID Afiliado2: {idAfiliado2}\nID Cliente: {idCliente}"
+       
+        #Envio de mensaje a Telegram
 
+        #
+        # Local
+        #        
+        # asyncio.run(enviar_mensaje(mensaje,chat_id,token))
+        
+        #
+        # Produccion
+        #
         loop = asyncio.get_event_loop()
         try:
             loop.run_until_complete(enviar_mensaje(mensaje,chat_id,token))
         except TypeError as e:
             return render(request, 'linkGrupos.html')
-        #Envio de mensaje a Telegram
-        #asyncio.run(enviar_mensaje(mensaje,chat_id,token))
-        
+
     return render(request, 'linkGrupos.html')
 
 #Enviar todos los idClientes en formato Json a una url y tomarla en JS 

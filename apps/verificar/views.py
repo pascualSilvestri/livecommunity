@@ -43,7 +43,7 @@ class ArchivoAdmin(admin.ModelAdmin):
         archivo = form.cleaned_data['archivo']
         
         # Procesar el archivo Excel y obtener la columna deseada
-        contenido = pd.read_excel(archivo)
+        contenido = pd.read_excel(archivo,engine='openpyxl')
         ids = obtenerLosId(contenido)
         idEnVerificar = Verificar.objects.all()
         # Guardar los ids en la base de datos

@@ -151,7 +151,7 @@ CHAT_ID_BOT = '@pruebapas'
 # STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 
 
-# DEBUG = True
+DEBUG = True
 
 # ALLOWED_HOSTS = []
 # #Database
@@ -174,7 +174,7 @@ CHAT_ID_BOT = '@pruebapas'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-DEBUG = False
+# DEBUG = False
 
 
 ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost']

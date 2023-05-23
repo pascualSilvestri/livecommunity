@@ -12,5 +12,3 @@ class Verificar(models.Model):
 class Archivo(models.Model):
     archivo = models.FileField(upload_to='media')
     
-    def __str__(self):
-        return self.archivo

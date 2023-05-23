@@ -28,7 +28,7 @@ const section_de_validacion = document.querySelector('.verificar-nuevo-cliente')
 
 async function obtenerDatos() {
     try {
-      const response = await fetch('verificarNuevoCliente/');
+      const response = await fetch('http://localHost/verificar/');
       if (!response.ok) {
         throw new Error('Error en la respuesta del servidor');
       }
@@ -65,7 +65,7 @@ if(btn_validar != null){
         const redex = /^[0-9]{10,}$/
         //verifico con la funcion verificarNuevo si exite en base de datos
         //con la exprecion regular verifico que sea numero y mini 10 caracter
-        if(!verificarNuevoCliente(input,idClientes)&&redex.test(input.value)){
+        if(verificarNuevoCliente(input,idClientes)&&redex.test(input.value)){
             //si cumple con los requerimientos se habilitas las siguientes secciones
             section_A_Validar.style.display = 'block'
 

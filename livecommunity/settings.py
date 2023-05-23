@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.usuarios',
     'apps.afiliado',
+    'apps.verificar'
 ]
 
 MIDDLEWARE = [
@@ -134,12 +135,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CHAT_ID_BOT = '@+csPs8XoRyX4yMjBh'
 
+
+####################################################################################################################
+#                                                                                                                  #
+########################################## ZONA DE CAMBIOS #########################################################
+#                                                                                                                  #         
+####################################################################################################################
+
+
 #LOCAL
 
-
-
-# TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
-# CHAT_ID_BOT = '@pruebapas'
+TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
+CHAT_ID_BOT = '@pruebapas'
 
 # STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 
@@ -162,8 +169,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #PRODUCCION
 
-TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
-CHAT_ID_BOT = '@liveingresos'
+# TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
+# CHAT_ID_BOT = '@liveingresos'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 

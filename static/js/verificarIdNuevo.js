@@ -28,7 +28,7 @@ const section_de_validacion = document.querySelector('.verificar-nuevo-cliente')
 
 async function obtenerDatos() {
     try {
-      const response = await fetch('http://localHost/verificar/');
+      const response = await fetch('https://livecommunity.info/verificar/');
       if (!response.ok) {
         throw new Error('Error en la respuesta del servidor');
       }

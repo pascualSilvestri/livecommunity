@@ -146,8 +146,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #LOCAL
 
-TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
-CHAT_ID_BOT = '@pruebapas'
+# TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
+# CHAT_ID_BOT = '@pruebapas'
 
 # STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 
@@ -170,8 +170,8 @@ DEBUG = True
 
 #PRODUCCION
 
-# TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
-# CHAT_ID_BOT = '@liveingresos'
+TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
+CHAT_ID_BOT = '@liveingresos'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 

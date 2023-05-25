@@ -1,8 +1,11 @@
+import os
+import tempfile
 from django.shortcuts import render
 from django.http import JsonResponse,HttpResponse
 from .models import Archivo,Verificar
 from django.contrib import admin
 import pandas as pd
+from django.conf import settings
 
 
 def obtenerLosId(data):
@@ -46,12 +49,28 @@ class ArchivoAdmin(admin.ModelAdmin):
         contenido = pd.read_excel(archivo,engine='openpyxl')
         ids = obtenerLosId(contenido)
         idEnVerificar = Verificar.objects.all()
+    
+    
         # Guardar los ids en la base de datos
         for valor in ids:
             if not existe(valor,idEnVerificar):
                 objeto = Verificar(id=valor)
                 objeto.save()
+      
+        
         
         super().save_model(request, obj, form, change)
+        
+        #Elimina archivo de la carpeta media
+        media_path = os.path.join(settings.MEDIA_ROOT, 'media', archivo.name)
+        os.remove(media_path)
 
 
+##################### En prototipo#######################
+
+    # def delete_model(self, request, obj):
+    #     # Eliminar el archivo del sistema de archivos
+    #     media_path = obj.archivo.path
+    #     os.remove(media_path)
+        
+    #     super().delete_model(request, obj)

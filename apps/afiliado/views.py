@@ -85,7 +85,7 @@ def clienteform(request):
             cliente.save()  # Guardar el objeto en la base de datos
         
         #Mensaje formateado apra telegram
-        mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Afiliado1: {afiliado2}\nID Afiliado2: {idAfiliado2}\nID Cliente: {idCliente}"
+        mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Afiliado1: {idAfiliado2}\nID Afiliado2: {afiliado2}\nID Cliente: {idCliente}"
        
         #Envio de mensaje a Telegram
 

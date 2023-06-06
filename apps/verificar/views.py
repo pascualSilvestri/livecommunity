@@ -45,7 +45,8 @@ def existe(valor,ids):
         if client.id == valor[0]:
             return True
         
-             
+        
+@csrf_exempt        
 def verificar(request):
     idCli = Verificar.objects.all()
     
@@ -54,8 +55,10 @@ def verificar(request):
     for i in idCli:
         data.append([i.id,i.deposito])
     
+    response = JsonResponse({'data': data})
+    response['Access-Control-Allow-Origin'] = '*'  # Permitir acceso desde cualquier origen
     
-    return JsonResponse({'data': data})
+    return response
 
 
 class ArchivoAdmin(admin.ModelAdmin):

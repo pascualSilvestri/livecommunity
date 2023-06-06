@@ -44,7 +44,6 @@ async function obtenerDatos() {
 
   obtenerDatos()
 
-  console.log(idClientes)
   
 //Verifica si esta el elemento en la base datos 
 //retorna un boolean

@@ -34,6 +34,7 @@ async function obtenerDatos() {
       }
       const data = await response.json();
       data['data'].forEach(element => {
+        
         idClientes.push(element);
       });
     } catch (error) {
@@ -43,13 +44,13 @@ async function obtenerDatos() {
 
   obtenerDatos()
 
-
+  console.log(idClientes)
   
 //Verifica si esta el elemento en la base datos 
 //retorna un boolean
 const verificarNuevoCliente = (input,array)=>{
     for(const element of array){
-        if(input.value==element){
+        if(input.value==element[0]){
             return true
         }
     }

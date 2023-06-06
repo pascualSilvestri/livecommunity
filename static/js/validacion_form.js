@@ -20,7 +20,7 @@ const input_idCliente = document.querySelector('#id_cliente')
 
 var miParrafo = document.getElementById("mensaje");
 
-
+const idClientes = []
 
 //verificadores de que los inputs estan correctamente ingresados
 let errorN = false
@@ -45,14 +45,15 @@ const errorMensaje = {
     'usuario': `Debe comenzar con un @ ejemplo @usuarioTelegram`,
     'btnError': "Por favor complete los campo correctamente.",
     'idCliente':'Su cuenta no esta verificada correctamente, por favor verifique el ID ingresado',
-    'telefono':'Acepta solo numeros'
+    'telefono':'Acepta solo numeros',
+    'noDeposito':'Para terminar el proceso de registro debe fondear la cuenta de libertex.'
 };
 
 
 //ingreso un input y una expresion regular para saber si esta bien Parametros (input, string)
-const validarCampo = (nombre, redexNombre) => {
-    return redex[redexNombre].test(nombre.value)
-}
+// const validarCampo = (nombre, redexNombre) => {
+//     return redex[redexNombre].test(nombre.value)
+// }
 
 //Cambia el border del input para avisar que hay un error en los datos introducidos
 function error(cont) {
@@ -76,7 +77,30 @@ const enviarDatos = () => {
     }
 }
 
+async function obtenerDatos() {
+    try {
+      const response = await fetch('https://livecommunity.info/verificar/'); // cambiar a localhost para local
+      if (!response.ok) {
+        throw new Error('Error en la respuesta del servidor');
+      }
+      const data = await response.json();
+      data['data'].forEach(element => {  
+        idClientes.push(element);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
+  obtenerDatos()
+
+const deposito = (array)=>{
+    for(const element of array){
+        if(input_idCliente.value==element[0]&&element[1]==1){
+            return true
+        }
+    }
+}
 
 //Logica para validar los inputs 
 //toma un valor input 
@@ -211,7 +235,7 @@ function validarId(){
 }
 
 input_idCliente.addEventListener('blur',e=>{
-    if (input_idCliente.value != "" && redex["telefono"].test(input_idCliente.value)&& validarId()) {
+    if (input_idCliente.value != "" && redex["telefono"].test(input_idCliente.value)&& validarId()&&deposito(idClientes)) {
         valido(input_idCliente)
 
         mensaje_verificado.style.display= 'block'
@@ -227,7 +251,17 @@ input_idCliente.addEventListener('blur',e=>{
         if (input_idCliente.value == "") {
             errorC = false
         }
-    } else {
+    } else if (!deposito(idClientes)){
+        modalError(errorMensaje.noDeposito)
+        if (input_idCliente.value == ""||!validar()) {
+            errorC = false
+        }
+        if (!errorC) {
+            error(input_idCliente)
+            errorC = false
+
+        }
+    }else {
         modalError(errorMensaje.idCliente)
         section_de_validacion.style.display = 'flex'
         // section_de_validacion.scrollIntoView()

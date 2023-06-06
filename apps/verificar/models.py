@@ -5,6 +5,7 @@ from django.conf import settings
 
 class Verificar(models.Model):
     id = models.CharField(max_length=50,primary_key=True)
+    deposito = models.CharField(max_length=50)
     
     def __str__(self):
         return self.id

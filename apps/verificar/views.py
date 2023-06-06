@@ -6,6 +6,8 @@ from .models import Archivo,Verificar
 from django.contrib import admin
 import pandas as pd
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+
 
 #######Metodo anterior
 # def obtenerLosId(data):
@@ -44,16 +46,19 @@ def existe(valor,ids):
             return True
         
         
-        
+@csrf_exempt        
 def verificar(request):
     idCli = Verificar.objects.all()
     
     data = []
     
     for i in idCli:
-        data.append(i.id)
+        data.append([i.id,i.deposito])
     
-    return JsonResponse({'data':data})
+    response = JsonResponse({'data': data})
+    response['Access-Control-Allow-Origin'] = '*'  # Permitir acceso desde cualquier origen
+    
+    return response
 
 
 class ArchivoAdmin(admin.ModelAdmin):
@@ -62,14 +67,17 @@ class ArchivoAdmin(admin.ModelAdmin):
         
         # Procesar el archivo Excel y obtener la columna deseada
         contenido = pd.read_excel(archivo,engine='openpyxl')
-        ids = filtrarPorSegundoValorNoCero(obtenerDosColumnas(contenido))
+        ids = obtenerDosColumnas(contenido)
         idEnVerificar = Verificar.objects.all()
     
     
         # Guardar los ids en la base de datos
         for valor in ids:
             if not existe(valor,idEnVerificar):
-                objeto = Verificar(id=valor[0])
+                depo = 0
+                if valor[1]!=0:
+                    depo = 1
+                objeto = Verificar(id=valor[0],deposito=depo)
                 objeto.save()
       
         

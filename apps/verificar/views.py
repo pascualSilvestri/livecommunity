@@ -7,25 +7,40 @@ from django.contrib import admin
 import pandas as pd
 from django.conf import settings
 
-
-def obtenerLosId(data):
-    ids = data['generic1']
-    dataFrame = ids.to_list()
-    dataFrame = [str(element) for element in dataFrame]
-    newList = []
-    for i in dataFrame:
-        if i and i != 'nan':
-            if ',' in i:
-                primerId = i.split(',')[0]
-                newList.append(primerId)
-            else:
-                newList.append(i)
+#######Metodo anterior
+# def obtenerLosId(data):
+#     ids = data['generic1']
+#     dataFrame = ids.to_list()
+#     dataFrame = [str(element) for element in dataFrame]
+#     newList = []
+#     for i in dataFrame:
+#         if i and i != 'nan':
+#             if ',' in i:
+#                 primerId = i.split(',')[0]
+#                 newList.append(primerId)
+#             else:
+#                 newList.append(i)
     
-    return list(set(newList))
+#     return list(set(newList))
+
+def obtenerDosColumnas(data):
+    columnas = data[['generic1', 'Net Deposits']]
+    dataFrame = columnas.dropna(subset=['generic1', 'Net Deposits']).values.tolist()
+    for i in range(len(dataFrame)):
+        dataFrame[i][0] = dataFrame[i][0].split(',')[0]
+    return dataFrame
+
+def filtrarPorSegundoValorNoCero(arr):
+    resultado = []
+    for elemento in arr:
+        if elemento[1] != 0:
+            resultado.append(elemento)
+    print(resultado)
+    return resultado
 
 def existe(valor,ids):
     for client in ids:
-        if client.id == valor:
+        if client.id == valor[0]:
             return True
         
         
@@ -47,14 +62,14 @@ class ArchivoAdmin(admin.ModelAdmin):
         
         # Procesar el archivo Excel y obtener la columna deseada
         contenido = pd.read_excel(archivo,engine='openpyxl')
-        ids = obtenerLosId(contenido)
+        ids = filtrarPorSegundoValorNoCero(obtenerDosColumnas(contenido))
         idEnVerificar = Verificar.objects.all()
     
     
         # Guardar los ids en la base de datos
         for valor in ids:
             if not existe(valor,idEnVerificar):
-                objeto = Verificar(id=valor)
+                objeto = Verificar(id=valor[0])
                 objeto.save()
       
         

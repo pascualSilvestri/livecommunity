@@ -30,6 +30,11 @@ def obtenerDosColumnas(data):
     dataFrame = columnas.dropna(subset=['generic1', 'Net Deposits']).values.tolist()
     for i in range(len(dataFrame)):
         dataFrame[i][0] = dataFrame[i][0].split(',')[0]
+        if dataFrame[i][1] != 0:
+            dataFrame[i][1] = 1
+        for j in range(len(dataFrame)):
+            if dataFrame[i][1] == 1 and dataFrame[i][0] == dataFrame[j][0]:
+                dataFrame[j][1] = dataFrame[i][1]
     return dataFrame
 
 def filtrarPorSegundoValorNoCero(arr):
@@ -63,30 +68,40 @@ def verificar(request):
 
 class ArchivoAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
+        ban = True
         archivo = form.cleaned_data['archivo']
-        
+        print(archivo)
         # Procesar el archivo Excel y obtener la columna deseada
         contenido = pd.read_excel(archivo,engine='openpyxl')
         ids = obtenerDosColumnas(contenido)
         idEnVerificar = Verificar.objects.all()
     
-    
+        print(ids)
         # Guardar los ids en la base de datos
+        #
+        #
+        ############Aca esta el error ################
         for valor in ids:
             if not existe(valor,idEnVerificar):
-                depo = 0
-                if valor[1]!=0:
-                    depo = 1
-                objeto = Verificar(id=valor[0],deposito=depo)
+                objeto = Verificar(id=valor[0],deposito=valor[1])
                 objeto.save()
+            else:
+                ban = False
+                obj = Verificar.objects.get(id = valor[0])
+                obj.deposito = valor[1]
+                obj.save()
+
+                
+              
       
         
         
         super().save_model(request, obj, form, change)
         
         #Elimina archivo de la carpeta media
-        media_path = os.path.join(settings.MEDIA_ROOT, 'media', archivo.name)
-        os.remove(media_path)
+        if ban:
+            media_path = os.path.join(settings.MEDIA_ROOT, 'media', archivo.name)
+            os.remove(media_path)
 
 
 ##################### En prototipo#######################

@@ -28,7 +28,10 @@ const section_de_validacion = document.querySelector('.verificar-nuevo-cliente')
 
 async function obtenerDatos() {
     try {
-      const response = await fetch('https://livecommunity.info/verificar/'); // cambiar a localhost para local
+      
+        //Local http://127.0.0.1:8000/verificar/
+        //produc https://livecommunity.info/verificar/
+      const response = await fetch('http://127.0.0.1:8000/verificar/'); // cambiar a localhost para local
       if (!response.ok) {
         throw new Error('Error en la respuesta del servidor');
       }

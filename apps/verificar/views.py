@@ -25,9 +25,34 @@ from django.views.decorators.csrf import csrf_exempt
     
 #     return list(set(newList))
 
+# def obtenerDosColumnas(data):
+#     columnas = data[['generic1', 'Net Deposits']]
+#     dataFrame = columnas.dropna(subset=['generic1', 'Net Deposits']).values.tolist()
+#     for i in range(len(dataFrame)):
+#         dataFrame[i][0] = dataFrame[i][0].split(',')[0]
+#         if dataFrame[i][1] != 0:
+#             dataFrame[i][1] = 1
+#         for j in range(len(dataFrame)):
+#             if dataFrame[i][1] == 1 and dataFrame[i][0] == dataFrame[j][0]:
+#                 dataFrame[j][1] = dataFrame[i][1]
+#     return dataFrame
+
+####################### Nuevo codigo para testear #####################
+def retornarCorrecto(data):
+    
+    for i in range(len(data)):
+        data[i][0] = data[i][0].split(',')
+        for j in range(len(data[i][0])):
+            if int(data[i][0][j]) >=1800000000:
+                data[i][0] = data[i][0][j]
+    return data
+
 def obtenerDosColumnas(data):
     columnas = data[['generic1', 'Net Deposits']]
     dataFrame = columnas.dropna(subset=['generic1', 'Net Deposits']).values.tolist()
+    
+    dataFrame = retornarCorrecto(dataFrame)
+    
     for i in range(len(dataFrame)):
         dataFrame[i][0] = dataFrame[i][0].split(',')[0]
         if dataFrame[i][1] != 0:
@@ -35,6 +60,9 @@ def obtenerDosColumnas(data):
         for j in range(len(dataFrame)):
             if dataFrame[i][1] == 1 and dataFrame[i][0] == dataFrame[j][0]:
                 dataFrame[j][1] = dataFrame[i][1]
+                
+                
+    print(dataFrame)
     return dataFrame
 
 def filtrarPorSegundoValorNoCero(arr):

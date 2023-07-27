@@ -145,8 +145,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEBUG = True
 
-
-
 # STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 
 

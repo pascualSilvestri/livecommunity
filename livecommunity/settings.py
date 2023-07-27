@@ -142,7 +142,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
 # CHAT_ID_BOT = '@pruebapas'
-# DEBUG = True
+
+DEBUG = True
 
 
 
@@ -167,24 +168,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #
 
 
-# TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
-# CHAT_ID_BOT = '@liveingresos'
+TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
+CHAT_ID_BOT = '@liveingresos'
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # DEBUG = False
 
 
-# ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost']
-# CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com']
+ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost']
+CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com']
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'livecommunity',
-#         'USER': 'root',
-#         'PASSWORD': 'live2023community01',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'livecommunity',
+        'USER': 'root',
+        'PASSWORD': 'live2023community01',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}

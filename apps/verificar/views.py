@@ -54,7 +54,7 @@ def obtenerDosColumnas(data):
     dataFrame = retornarCorrecto(dataFrame)
     
     for i in range(len(dataFrame)):
-        dataFrame[i][0] = dataFrame[i][0].split(',')[0]
+        dataFrame[i][0] = str(dataFrame[i][0]).split(',')[0]
         if dataFrame[i][1] != 0:
             dataFrame[i][1] = 1
         for j in range(len(dataFrame)):

@@ -53,7 +53,7 @@ async def enviar_mensaje(msj,id,token):
 #Obtiene los datos del form del front y los guarda en base de datos
 #Tambien lo envia a telegram
 #
-def clienteform(request):
+async def clienteform(request):
     clientes = Cliente.objects.all()
     
     
@@ -99,7 +99,7 @@ def clienteform(request):
         #
         loop = asyncio.get_event_loop()
         try:
-            loop.run_until_complete(enviar_mensaje(mensaje,chat_id,token))
+            await loop.run_until_complete(enviar_mensaje(mensaje,chat_id,token))
         except TypeError as e:
             return render(request, 'linkGrupos.html')
 

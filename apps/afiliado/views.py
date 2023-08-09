@@ -11,6 +11,7 @@ import telegram
 import os
 import logging
 import asyncio
+from asgiref.sync import sync_to_async
 
 from ..verificar.models import Verificar
 
@@ -44,12 +45,12 @@ def existe(clientes,idCliente):
             return True
         
 #Envio de mensaje a hacia telegram
-async def enviar_mensaje(msj,id,token):
+def enviar_mensaje(msj,id,token):
 
     bot = telegram.Bot(token=token) # Reemplaza 'TU_TOKEN_DE_TELEGRAM' con tu token de Telegram
-   
-    await bot.send_message(chat_id=id, text=msj)
+    bot.send_message(chat_id=id, text=msj)
 
+enviar_mensaje_sync = sync_to_async(enviar_mensaje)
 #Obtiene los datos del form del front y los guarda en base de datos
 #Tambien lo envia a telegram
 #
@@ -86,7 +87,6 @@ async def clienteform(request):
         
         #Mensaje formateado apra telegram
         mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Socio1: {idAfiliado2}\nID Socio2: {afiliado2}\nID Cliente: {idCliente}"
-       
         #Envio de mensaje a Telegram
 
         #
@@ -97,9 +97,9 @@ async def clienteform(request):
         #
         # Produccion
         #
-        loop = asyncio.get_event_loop()
+        # loop = asyncio.get_event_loop()
         try:
-            await loop.run_until_complete(enviar_mensaje(mensaje,chat_id,token))
+            await enviar_mensaje(mensaje,chat_id,token)
         except TypeError as e:
             return render(request, 'linkGrupos.html')
 

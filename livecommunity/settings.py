@@ -143,7 +143,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
 # CHAT_ID_BOT = '@pruebapas'
 
-DEBUG = True
+# DEBUG = True
 
 # STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 
@@ -171,7 +171,7 @@ CHAT_ID_BOT = '@liveingresos'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-# DEBUG = False
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost']

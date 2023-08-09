@@ -99,7 +99,7 @@ async def clienteform(request):
         #
         # loop = asyncio.get_event_loop()
         try:
-            await enviar_mensaje(mensaje,chat_id,token)
+            await enviar_mensaje_sync(mensaje,chat_id,token)
         except TypeError as e:
             return render(request, 'linkGrupos.html')
 

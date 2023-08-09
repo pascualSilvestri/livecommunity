@@ -49,11 +49,10 @@ def enviar_mensaje_sync(msj, id, token):
     bot = telegram.Bot(token=token)
     bot.send_message(chat_id=id, text=msj)
 
-enviar_mensaje_async = sync_to_async(enviar_mensaje_sync)
 #Obtiene los datos del form del front y los guarda en base de datos
 #Tambien lo envia a telegram
 #
-async def clienteform(request):
+def clienteform(request):
     clientes = Cliente.objects.all()
     
     
@@ -98,7 +97,7 @@ async def clienteform(request):
         #
         # loop = asyncio.get_event_loop()
         try:
-            await enviar_mensaje_async(mensaje, chat_id, token)
+            enviar_mensaje_sync(mensaje, chat_id, token)
         except Exception as e:
             return render(request, 'linkGrupos.html')
 

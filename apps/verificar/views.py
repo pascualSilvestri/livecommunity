@@ -118,11 +118,7 @@ class ArchivoAdmin(admin.ModelAdmin):
                 obj = Verificar.objects.get(id = valor[0])
                 obj.deposito = valor[1]
                 obj.save()
-
                 
-              
-      
-        
         
         super().save_model(request, obj, form, change)
         

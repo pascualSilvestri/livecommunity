@@ -31,7 +31,7 @@ async function obtenerDatos() {
       
         //Local http://127.0.0.1:8000/verificar/
         //produc https://livecommunity.info/verificar/
-      const response = await fetch('https://livecommunity.info/verificar/'); // cambiar a localhost para local
+      const response = await fetch('http://127.0.0.1:8000/api/verificar/'); // cambiar a localhost para local
       if (!response.ok) {
         throw new Error('Error en la respuesta del servidor');
       }
@@ -65,7 +65,7 @@ if(btn_validar != null){
     //le asocio un evento tipo blur validar cuando desenfoca 
     btn_validar.addEventListener('click', e => {
         //una exprecion regular para validar que sean solo numeros y minimo 10 caracter
-        const redex = /^[0-9]{10,}$/
+        const redex = /^[0-9]{5,}$/
         //verifico con la funcion verificarNuevo si exite en base de datos
         //con la exprecion regular verifico que sea numero y mini 10 caracter
         if(verificarNuevoCliente(input,idClientes)&&redex.test(input.value)){

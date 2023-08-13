@@ -13,7 +13,6 @@ import logging
 import asyncio
 from asgiref.sync import sync_to_async
 
-from ..verificar.models import Verificar
 
 chat_id = CHAT_ID_BOT
 token = TELEGRAM_BOT_TOKEN
@@ -103,33 +102,16 @@ def clienteform(request):
 
     return render(request, 'linkGrupos.html')
 
-#Enviar todos los idClientes en formato Json a una url y tomarla en JS 
+
+#################################################
 # def verificarNuevoCliente(request):
-#     idCliente = Cliente.objects.all()
+#     idCliente = Verificar.objects.all()
     
 #     data = []
     
 #     for i in idCliente:
-#         data.append(i.idCliente)
+#         data.append(i.id)
     
 #     return JsonResponse({'data':data})
-
-def verificarNuevoCliente(request):
-    idCliente = Verificar.objects.all()
-    
-    data = []
-    
-    for i in idCliente:
-        data.append(i.id)
-    
-    return JsonResponse({'data':data})
-
-######################################
+##################################################
  
-# def verificarNuevoCliente(request):
-#     if request.method == "POST":
-#         idCliente=request.POST.get('idNuevoCliente')
-
-#         print(idCliente)
-
-#         return HttpResponse("Respuesta de la vista")

@@ -1,0 +1,339 @@
+from django.http import JsonResponse
+from django.shortcuts import render
+from ...usuarios.models import Usuario
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.hashers import make_password
+import json 
+
+
+@csrf_exempt
+def postNewUser(request):
+    if request.method == 'POST':
+        if 'application/json' in request.content_type:
+            try:
+                # Decodificar el cuerpo de la solicitud como JSON
+                data = json.loads(request.body)
+                
+                # try:
+                #     afiliados = Afiliado.objects.get(idAfiliado=data.get('afiliadoid'))
+                #     telefono = afiliados.telefono
+                #     uplink = afiliados.referenciaAfiliado
+                #     link=afiliados.url 
+                # except Exception:
+                telefono = ''
+                uplink = ''
+                link = ''
+                #     print(Exception.__str__())
+                # Crear un nuevo usuario y guardar los datos en la base de datos
+                new_user = Usuario(
+                    username = (data.get('afiliadoid') + "_" + data.get('first_name')).replace(' ', '_'),
+                    afiliadoid=data.get('afiliadoid'),
+                    email=data.get('email'),
+                    first_name=data.get('first_name'),
+                    last_name=data.get('last_name'),
+                    password=data.get('password'),
+                    telephone=telefono or '',
+                    wallet=data.get('wallet'),
+                    uplink=uplink or '',
+                    link=link or ''
+                )
+                new_user.save()
+
+                return JsonResponse({'message': 'Datos recibidos y guardados con éxito','status':200},status=200)
+            except json.JSONDecodeError:
+                return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
+        else:
+            return JsonResponse({'error': 'Tipo de contenido no válido'}, status=400)
+    else:
+        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
+
+@csrf_exempt
+def getUser(request,email):
+    if request.method == 'GET':
+        # Asegúrate de que la solicitud tenga el tipo de contenido adecuado (application/json)
+            try:
+                usuarios = Usuario.objects.all()
+                data = []
+                for u in usuarios:
+                    
+                    if u.email == email:
+                
+                        data.append({
+                            'afiliadoid':u.afiliadoid,
+                            'email':     u.email,
+                            'first_name':u.first_name,
+                            'password':  u.password,
+                            'telephone': u.telephone,
+                            'wallet':    u.wallet,
+                            'uplink':    u.uplink,
+                            'link':      u.link,
+                            'roles':     u.roles,
+                            'status':    u.aceptado
+                        })
+
+                return JsonResponse({'data': data})
+            except json.JSONDecodeError:
+                return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
+    else:
+        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
+    
+@csrf_exempt
+def getUserById(request, pk):
+    
+    if request.method == 'GET':
+        try:
+            usuario = Usuario.objects.get(afiliadoid=pk)  # Corrige el nombre del campo afiliadoid
+            data = {
+                'afiliadoid': usuario.afiliadoid,
+                'email': usuario.email,
+                'first_name': usuario.first_name,
+                'password': usuario.password,
+                'telephone': usuario.telephone,
+                'wallet': usuario.wallet,
+                'uplink': usuario.uplink,
+                'link': usuario.link,
+                'roles': usuario.roles,
+                'status': usuario.aceptado,
+            }
+            return JsonResponse({'data': data})
+        except Usuario.DoesNotExist:
+            return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
+    else:
+        return JsonResponse({'Error':'Metodo invalido'})
+
+@csrf_exempt
+def updateUserById(request, pk):
+    try:
+        if request.method == 'POST' or request.method == 'PUT':
+            
+            try:
+                body_data = json.loads(request.body)  # Decodifica el cuerpo como JSON
+            except json.JSONDecodeError:
+                # Si hay un error al decodificar JSON, devuelve una respuesta de error
+                return JsonResponse({'error': 'Datos inválidos en el cuerpo (body)'}, status=400)
+            
+            # Aquí puedes acceder a los datos enviados en el cuerpo (body)
+            name = body_data.get('name')
+            email = body_data.get('email')
+            roles = body_data.get('roles')
+            status = body_data.get('status')
+
+            print(status)
+            # Luego, puedes usar los datos para actualizar el objeto Usuario
+            usuario = Usuario.objects.get(afiliadoid=pk)
+            usuario.first_name = name
+            usuario.email = email
+            usuario.roles = roles
+            usuario.aceptado= status
+            usuario.save()
+
+        # Si todo salió bien, devuelve los datos actualizados como respuesta
+        data = {
+            'afiliadoid': usuario.afiliadoid,
+            'email': usuario.email,
+            'first_name': usuario.first_name,
+            'password': usuario.password,
+            'telephone': usuario.telephone,
+            'wallet': usuario.wallet,
+            'uplink': usuario.uplink,
+            'link': usuario.link,
+            'roles': usuario.roles,
+            'status': usuario.aceptado,
+        }
+        
+        return JsonResponse({'data': data})
+    except Usuario.DoesNotExist:
+        return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
+
+@csrf_exempt
+def updatePerfilUser(request, pk):
+    
+    if request.method == 'POST' or request.method == 'PUT':
+        try:
+            try:
+                body_data = json.loads(request.body)  # Decodifica el cuerpo como JSON
+            except json.JSONDecodeError:
+                return JsonResponse({'error': 'Datos inválidos en el cuerpo (body)'}, status=400)
+            
+            users = Usuario.objects.get(afiliadoid=pk)
+            users.telephone=body_data.get('telephone')
+            users.wallet=body_data.get('wallet')
+            users.email=body_data.get('email')
+            users.link=body_data.get('link')
+            
+            users.save()
+            
+            data = {
+            'afiliadoid': users.afiliadoid,
+            'email': users.email,
+            'first_name': users.first_name,
+            'password': users.password,
+            'telephone': users.telephone,
+            'wallet': users.wallet,
+            'uplink': users.uplink,
+            'link': users.link,
+            'roles': users.roles,
+            'status': users.aceptado,
+        }
+            
+            return JsonResponse({'data':data})
+        except Exception as e:
+            return JsonResponse({'Error':e})
+    else:
+        return JsonResponse({'Error':'Metodo Invalido'})
+
+@csrf_exempt   
+def users(request):
+    
+    if request.method == 'GET':
+        try:
+            usuarios = Usuario.objects.all()
+            data = []
+            for u in usuarios:
+                if u.eliminado is False:
+                    data.append({
+                        'afiliadoid':u.afiliadoid,
+                        'email':     u.email,
+                        'first_name':u.first_name,
+                        'password':  u.password,
+                        'telephone': u.telephone,
+                        'wallet':    u.wallet,
+                        'uplink':    u.uplink,
+                        'link':      u.link,
+                        'roles':     u.roles,
+                        'status':    u.aceptado,
+                    })
+            response =  JsonResponse({'data': data})
+            return response
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
+    else:
+        return JsonResponse({'Error':'metodo invalido'})
+
+@csrf_exempt  
+def usuarioValido(request,email,password):
+    
+    users = Usuario.objects.all()
+    data= False
+    for user in users:
+        if user.email == email and user.password == password:
+            data= True
+        
+    
+    response = JsonResponse({'data': data})
+    # response['Access-Control-Allow-Origin'] = '*' 
+    
+    return response
+
+@csrf_exempt  
+def eliminarUser(request,pk):
+    
+    user = Usuario.objects.get(afiliadoid=pk)
+    user.eliminado = True
+    user.save()
+        
+    response = JsonResponse({'data': 'User eliminado'})
+
+    return response
+
+
+@csrf_exempt   
+def usersPendientes(request):
+    try:
+        usuarios = Usuario.objects.all()
+        data = []
+        for u in usuarios:
+            if u.aceptado is False and u.eliminado is False:
+                data.append({
+                    'afiliadoid':u.afiliadoid,
+                    'email':     u.email,
+                    'first_name':u.first_name,
+                    'password':  u.password,
+                    'telephone': u.telephone,
+                    'wallet':    u.wallet,
+                    'uplink':    u.uplink,
+                    'link':      u.link,
+                    'roles':     u.roles,
+                    'status':    u.aceptado,
+                })
+        response =  JsonResponse({'data': data})
+        return response
+
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
+    
+
+@csrf_exempt   
+def usersEliminados(request):
+    try:
+        usuarios = Usuario.objects.all()
+        data = []
+        for u in usuarios:
+            if u.eliminado is True:
+                data.append({
+                    'afiliadoid':u.afiliadoid,
+                    'email':     u.email,
+                    'first_name':u.first_name,
+                    'password':  u.password,
+                    'telephone': u.telephone,
+                    'wallet':    u.wallet,
+                    'uplink':    u.uplink,
+                    'link':      u.link,
+                    'roles':     u.roles,
+                    'status':    u.aceptado,
+                })
+        response =  JsonResponse({'data': data})
+        return response
+
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
+
+@csrf_exempt  
+def updatePassword(request,pk):
+    if request.method == 'PUT':
+        try:
+            body = json.loads(request.body)
+            usuario = Usuario.objects.get(afiliadoid=pk)
+            
+            usuario.password= body.get('password')
+            
+            usuario.save()
+            
+            return JsonResponse({'data':'password modificado con exito'})
+            
+        except Exception as e:
+            return JsonResponse({'Error':e})
+    
+    else:
+        return JsonResponse({'Error':'Metodo incorrecto'})
+
+@csrf_exempt  
+def montosGet(request,pk):
+
+    if request.method == 'GET':
+        try:
+            
+            usuario = Usuario.objects.get(afiliadoid=pk)
+            
+            data = [{
+                "monto_total":usuario.monto_total,
+                "monto_a_pagar":usuario.monto_a_pagar,
+                "monto_cpa":usuario.monto_cpa,
+                "monto_directo":usuario.monto_directo,
+                "monto_indirecto":usuario.monto_indirecto,
+                "monto_bono_directo":usuario.monto_bono_directo,
+                "monto_bono_indirecto":usuario.monto_bono_indirecto,
+                "cpa_directos":usuario.cpa,
+                "cpa_indirecto":usuario.cpaIndirecto,
+                "level_bono_directo": usuario.level_bono_directo,
+                "level_bono_indirecto": usuario.level_bono_indirecto,
+            }]
+            
+            return JsonResponse({"data":data})
+            
+        except Exception as e:
+            return JsonResponse({'Error':e})
+    else:
+        return JsonResponse({'Error':'Metodo Incorrecto'})
+

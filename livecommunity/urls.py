@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.Home, name = 'home'),
     path('Afiliado/',include('apps.afiliado.urls')),
+    path('api/',include('apps.api.urls')),
 ]

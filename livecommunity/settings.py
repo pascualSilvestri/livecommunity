@@ -148,7 +148,7 @@ DEBUG = True
 STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 #Database
 #https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -174,7 +174,7 @@ DATABASES = {
 # DEBUG = False
 
 
-# ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost']
+ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']
 # CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com']
 
 # DATABASES = {

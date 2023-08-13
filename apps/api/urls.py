@@ -72,9 +72,9 @@ urlpatterns = [
       #############################################################################################
       ########################             Archivos                 ###############################
       #############################################################################################
-      path('archivofpa',upload_fpa,name = 'archivoFpa'),
-      path('archivoregistros',upload_registros,name = 'archivoRegistros'),
-      path('archivocpa',upload_cpa,name='archivoCpa'),
-      path('archivoganancias',limpiar_ganacias,name='archivoGanancias'),
+      path('archivofpa/',upload_fpa,name = 'archivoFpa'),
+      path('archivoregistros/',upload_registros,name = 'archivoRegistros'),
+      path('archivocpa/',upload_cpa,name='archivoCpa'),
+      path('archivoganancias/',limpiar_ganacias,name='archivoGanancias'),
       
 ]     

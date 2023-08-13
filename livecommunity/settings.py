@@ -132,6 +132,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -205,7 +206,7 @@ DEBUG = False
 
 
 ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']
-CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com']
+CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']
 
 DATABASES = {
     'default': {

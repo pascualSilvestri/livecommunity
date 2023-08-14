@@ -99,7 +99,7 @@ def upload_registros(request):
 
 
             if file_extension == ".xlsx":
-                file_data = pd.read_excel(excel_file)  # obtengo los datos de larchivo
+                file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
                 new_data=limpiar_registros(file_data)
                 
                 for data in new_data:
@@ -182,7 +182,7 @@ def upload_cpa(request):
 
 
             if file_extension == ".xlsx":
-                file_data = pd.read_excel(excel_file)  # obtengo los datos de larchivo
+                file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
                 new_data= limpiar_cpa(file_data)
                 print(new_data)
             else:

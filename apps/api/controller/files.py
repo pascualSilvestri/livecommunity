@@ -154,10 +154,10 @@ def upload_registros(request):
                 
             else:
                 print("ErrorMessege Document is not format")
-                return JsonResponse({"ErrorMessege": "Document is not format"})
+                return JsonResponse({"ErrorMessege": "Document is not format"},status=400)
         except Exception as e:
             print(e)
-            return JsonResponse({"Error": "Salto la exception"})
+            return JsonResponse({"Error": "Salto la exception"},status=400)
         print("message Archivo CSV recibido y procesado exitosamente.")
         return JsonResponse(
             {"message": "Archivo CSV recibido y procesado exitosamente."}

@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from ...utils.limpiarTablas import limpiar_datos_fpa, limpiar_registros,limpiar_cpa,limpiar_ganacias
-from ...utils.funciones import existe
-from ..models import Relation_fpa_client,Registro_archivo
+from ...utils.funciones import existe,existe_cpa,existe_ganancia
+from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias
 from datetime import datetime
 import pandas as pd
 import os
@@ -172,19 +172,45 @@ def upload_registros(request):
 def upload_cpa(request):
     if request.method == "POST" and request.FILES.get("csvFileCpa"):
         try:
-            # fpas = Relation_fpa_client.objects.all()
-            # registros=Registro_archivo.objects.all()
+            fpas = Relation_fpa_client.objects.all()
+            cpas = Registros_cpa.objects.all()
             excel_file = request.FILES["csvFileCpa"]
             file_name = excel_file.name  # Obtengon el nombre del archivo
             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
 
-            print(file_extension)
-
-
             if file_extension == ".xlsx":
                 file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
                 new_data= limpiar_cpa(file_data)
-                print(new_data)
+                
+                    
+                for cpa in new_data:
+                    fpa_id = fpas.filter(client=cpa['client'])
+                    if fpa_id.exists():
+                        fpa = fpa_id[0].fpa
+                    else:
+                        fpa = None
+                    fecha_creacion_string = str(cpa["fecha_creacion"])
+                    if fecha_creacion_string == "none":
+                        fecha_creacion = None
+                    else:
+                        fecha_creacion = datetime.strptime(
+                            fecha_creacion_string, "%Y-%m-%d"
+                        ).date()
+                        
+                        
+                    print(cpa)
+                    new_cpa = Registros_cpa(
+                        fecha_creacion= fecha_creacion,
+                        monto= cpa['monto'],
+                        cpa= cpa['cpa'],
+                        client= cpa['client'],
+                        fpa= fpa
+                    )
+                    
+                    
+                    if not existe_cpa(fecha_creacion,cpa['monto'],cpa['client'],cpa['fpa'],cpas):
+                        new_cpa.save()
+                    
             else:
                 print("ErrorMessege Document is not format")
                 return JsonResponse({"ErrorMessege": "Document is not format"})
@@ -205,19 +231,65 @@ def upload_cpa(request):
 def upload_ganancias(request):
     if request.method == "POST" and request.FILES.get("csvFileGanancias"):
         try:
-            # fpas = Relation_fpa_client.objects.all()
-            # registros=Registro_archivo.objects.all()
+            fpas = Relation_fpa_client.objects.all()
+            ganancias = Registros_ganancias.objects.all()
             excel_file = request.FILES["csvFileGanancias"]
             file_name = excel_file.name  # Obtengon el nombre del archivo
             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
 
-            print(file_extension)
-
-
             if file_extension == ".csv":
                 file_data = pd.read_csv(excel_file)  # obtengo los datos de larchivo
                 new_data= limpiar_ganacias(file_data)
-                print(new_data)
+                
+                for g in new_data:
+                    fpa_id = fpas.filter(client=int(g['client']))
+                    if fpa_id.exists():
+                        fpa = fpa_id[0].fpa
+                    else:
+                        fpa = None
+                    
+                    fecha_first_trade_string = str(g["fecha_first_trade"])
+                    if fecha_first_trade_string == "nan":
+                        fecha_first_trade = None
+                    else:
+                        fecha_first_trade = datetime.strptime(
+                            fecha_first_trade_string, "%Y-%m-%d"
+                        ).date()
+                    
+                    fecha_last_trade_string = str(g["fecha_last_trade"])
+                    if fecha_last_trade_string == "nan":
+                        fecha_last_trade = None
+                    else:
+                        fecha_last_trade = datetime.strptime(
+                            fecha_last_trade_string, "%Y-%m-%d"
+                        ).date()
+                    
+                    
+                    ganancia = Registros_ganancias(
+                        client = str(int(g['client'])),
+                        fpa = fpa,
+                        full_name = g['full_name'],
+                        country = g['country'],
+                        equity = g['equity'],
+                        balance = g['balance'],
+                        partner_earning = g['partner_earning'],
+                        skilling_earning = g['skilling_earning'],
+                        skilling_markup = g['skilling_markup'],
+                        skilling_commission = g['skilling_commission'],
+                        volumen = g['volumen'],
+                        fecha_last_trade = fecha_last_trade,
+                        fecha_first_trade = fecha_first_trade,
+                        closed_trade_count = g['closed_trade_count'],
+                        customer_pnl = g['customer_pnl'],
+                        deposito_neto = g['deposito_neto'],
+                        deposito = g['deposito'],
+                        withdrawals = g['withdrawals'],
+                    )
+                    
+                    if not existe_ganancia(g['client'],fpa, g['full_name'],g['country'],g['equity'],g['balance'],g['partner_earning'],g['skilling_earning'],g['skilling_markup'],g['skilling_commission'],g['volumen'],fecha_last_trade,fecha_first_trade,g['closed_trade_count'],g['customer_pnl'],g['deposito_neto'],g['deposito'], g['withdrawals'],ganancias):
+                        ganancia.save()
+                
+                
             else:
                 print("ErrorMessege Document is not format")
                 return JsonResponse({"ErrorMessege": "Document is not format"})

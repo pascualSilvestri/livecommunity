@@ -3,7 +3,7 @@ from . import views
 from .controller.users import postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,usersEliminados,usersPendientes,updatePassword,montosGet
 from .controller.registros import verificar
 from .controller.ganancias import gananciaGetAll,gananciasTotales,gananciasTotalUser,getRGananciasById,filtarGananciasCpa,filtradoGananciasRevshare,filtradoGananciasRevshareById,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id
-from .controller.files import upload_fpa,upload_registros,upload_cpa,limpiar_ganacias
+from .controller.files import upload_fpa,upload_registros,upload_cpa,upload_ganancias
 
 
 app_name = 'api'
@@ -75,6 +75,6 @@ urlpatterns = [
       path('archivofpa/',upload_fpa,name = 'archivoFpa'),
       path('archivoregistros/',upload_registros,name = 'archivoRegistros'),
       path('archivocpa/',upload_cpa,name='archivoCpa'),
-      path('archivoganancias/',limpiar_ganacias,name='archivoGanancias'),
+      path('archivoganancias/',upload_ganancias,name='archivoGanancias'),
       
 ]     

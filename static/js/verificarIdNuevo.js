@@ -75,8 +75,7 @@ if(btn_validar != null){
 
             section_de_validacion.style.display = 'none'
 
-            //Muestra mensaje de verificacion valida 3 segundos
-
+            //Muestra mensaje de verificacion valida 3 segundos 
 
         }else{
             //si no cumple no se muestran las siguientes secciones

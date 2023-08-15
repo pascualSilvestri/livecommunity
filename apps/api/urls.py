@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from .controller.users import postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,usersEliminados,usersPendientes,updatePassword,montosGet
-from .controller.registros import verificar
+from .controller.registros import verificar,registrosGetAll,getRegistroById
 from .controller.ganancias import gananciaGetAll,gananciasTotales,gananciasTotalUser,getRGananciasById,filtarGananciasCpa,filtradoGananciasRevshare,filtradoGananciasRevshareById,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id
 from .controller.files import upload_fpa,upload_registros,upload_cpa,upload_ganancias
 
@@ -11,8 +11,13 @@ app_name = 'api'
 
 urlpatterns = [
       #Todos los registros de todos para Admin
+      #############################################################################################
+      ########################             Registros                ###############################
+      #############################################################################################
       #return array de Registros
       path('verificar/',verificar,name='verificar'),
+      path('registros/',registrosGetAll,name='registros'),
+      path('registrosbyid/<pk>/',getRegistroById,name='registrosById'),
       #############################################################################################
       ########################             Ganancias                ###############################
       #############################################################################################

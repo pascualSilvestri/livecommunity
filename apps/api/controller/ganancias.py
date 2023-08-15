@@ -1,23 +1,21 @@
 from django.http import JsonResponse
-
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...usuarios.models import Spread
+from ...api.models import Registros_ganancias
 
 @csrf_exempt  
 def gananciaGetAll(request):
     
     if request.method == 'GET':
         try:
-            ganancias = Ganancia.objects.all()
-            
+            ganancias = Registros_ganancias.objects.all()
             data=[]
-            
             for r in ganancias:
                 data.append( 
                     {
-                        'creacion':r.creacion,
+                        'creacion':r.fecha_first_trade,
                         'monto':r.monto,
                         'monto_spread':r.monto_spread,
                         'tipo_comision':r.tipo_comision,
@@ -30,8 +28,8 @@ def gananciaGetAll(request):
             response = JsonResponse({'data': data})
             
             return response
-        except Exception:
-            return JsonResponse({'Error':str(Exception)})
+        except Exception as e:
+            return JsonResponse({'Error':e.__str__()})
     else:
         return JsonResponse({'Error':'Metodo invalidos'})
 

@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import make_password
 import json 
 from datetime import datetime
 from django.db.models import Q
-from ...api.models import Registro_archivo
+from ...api.models import Registro_archivo,Registros_ganancias
 
 @csrf_exempt 
 def verificar(request):
@@ -29,72 +29,75 @@ def verificar(request):
         return JsonResponse({'error':'metodo invalido'})
 
 
-
-
-
-
-
-
  
-# def registrosGetAll(request):
+def registrosGetAll(request):
     
-#     if request.method == 'GET':
-#         try:
-#             registros = Registros.objects.all()
-#             data=[]
-#             for r in registros:
-#                 data.append(
-#                     {'id_usuario':r.id_usuario,
-#                     'fecha_registro':r.fecha_registro,
-#                     'codigo':r.codigo,
-#                     'pais':r.pais,
-#                     'primer_deposito':r.primer_deposito,
-#                     'retiro':r.retiro,
-#                     'deposito_neto':r.deposito_neto,
-#                     'cantidad_deposito':r.cantidad_deposito,
-#                     'id_broker':r.id_broker,
-#                     'nombre':r.nombre
-#                     }
-#                 )
+    if request.method == 'GET':
+        try:
+            registros = Registro_archivo.objects.all()
+            data=[]
+            for r in registros:
+                nombres = Registros_ganancias.objects.filter(client=r.client)
+                if nombres.exists():
+                    nombre = nombres[0].full_name
+                else:
+                    nombre = 'None'
+                data.append(
+                    {'id_usuario':r.client,
+                    'fecha_registro':r.fecha_registro,
+                    'codigo':r.fpa,
+                    'pais':r.country,
+                    'primer_deposito':r.primer_deposito,
+                    'deposito_neto':r.neto_deposito,
+                    'cantidad_deposito':r.numeros_depositos,
+                    'id_broker':r.client,
+                    'nombre':nombre
+                    }
+                )
             
-#             response = JsonResponse({'data': data})
+            response = JsonResponse({'data': data})
             
-#             return response
-#         except Exception:
-#             return JsonResponse({'Error':str(Exception)})
-#     else:
-#             return JsonResponse({'Error':'Metodo invalido'})
+            return response
+        except Exception as e:
+            return JsonResponse({'Error':e.__str__()})
+    else:
+            return JsonResponse({'Error':'Metodo invalido'})
 
-# @csrf_exempt 
-# def getRegistroById(request,pk):
+@csrf_exempt 
+def getRegistroById(request,pk):
     
-#     if request.method == 'GET':
+    if request.method == 'GET':
         
-#         try:
-#             registros = Registros.objects.filter(codigo=pk)
-#             data=[]
-#             for r in registros:
-#                 data.append(
-#                     {'id_usuario':r.id_usuario,
-#                     'fecha_registro':r.fecha_registro,
-#                     'codigo':r.codigo,
-#                     'pais':r.pais,
-#                     'primer_deposito':r.primer_deposito,
-#                     'retiro':r.retiro,
-#                     'deposito_neto':r.deposito_neto,
-#                     'cantidad_deposito':r.cantidad_deposito,
-#                     'id_broker':r.id_broker,
-#                     'nombre':r.nombre
-#                     }
-#                 )
-#             response = JsonResponse({'data': data})
+        try:
+            registros = Registro_archivo.objects.filter(fpa=pk)
+            data=[]
+            for r in registros:
+                nombres = Registros_ganancias.objects.filter(client=r.client)
+                if nombres.exists():
+                    nombre = nombres[0].full_name
+                else:
+                    nombre = 'None'
+                data.append(
+                    {'id_usuario':r.client,
+                    'fecha_registro':r.fecha_registro,
+                    'codigo':r.fpa,
+                    'pais':r.country,
+                    'primer_deposito':r.primer_deposito,
+                    'deposito_neto':r.neto_deposito,
+                    'cantidad_deposito':r.numeros_depositos,
+                    'id_broker':r.client,
+                    'nombre':nombre
+                    }
+                )
             
-#             return response
+            response = JsonResponse({'data': data})
+            
+            return response
         
-#         except Exception:
-#             return JsonResponse({'Error':str(Exception)})
-#     else:
-#         return JsonResponse({'Error':'Metodo invalido'})
+        except Exception:
+            return JsonResponse({'Error':str(Exception)})
+    else:
+        return JsonResponse({'Error':'Metodo invalido'})
 
 # @csrf_exempt 
 # def filterRegistrosFecha(request,desde,hasta):

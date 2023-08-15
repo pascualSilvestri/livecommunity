@@ -44,6 +44,7 @@ class Usuario(AbstractUser):
     monto_bono_indirecto= models.FloatField(default=0.0)
     retiros= models.FloatField(default=0.0)
     roles= models.CharField(max_length=50,default="user")
+    registrado = models.BooleanField(default=False)
     aceptado= models.BooleanField(default=False)
     eliminado= models.BooleanField(default=False)
     haveBono= models.BooleanField(default=False)

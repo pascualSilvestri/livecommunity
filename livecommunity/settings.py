@@ -179,9 +179,9 @@ DEBUG = True
 STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 
 
-ALLOWED_HOSTS = []
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# ALLOWED_HOSTS = []
+#Database
+#https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {

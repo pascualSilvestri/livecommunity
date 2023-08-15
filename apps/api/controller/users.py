@@ -68,6 +68,7 @@ def getUser(request,email):
                             'uplink':    u.uplink,
                             'link':      u.link,
                             'roles':     u.roles,
+                            'registrado':u.registrado,
                             'status':    u.aceptado
                         })
 
@@ -93,6 +94,7 @@ def getUserById(request, pk):
                 'uplink': usuario.uplink,
                 'link': usuario.link,
                 'roles': usuario.roles,
+                'registrado':usuario.registrado,
                 'status': usuario.aceptado,
             }
             return JsonResponse({'data': data})
@@ -129,17 +131,18 @@ def updateUserById(request, pk):
 
         # Si todo salió bien, devuelve los datos actualizados como respuesta
         data = {
-            'afiliadoid': usuario.afiliadoid,
-            'email': usuario.email,
-            'first_name': usuario.first_name,
-            'password': usuario.password,
-            'telephone': usuario.telephone,
-            'wallet': usuario.wallet,
-            'uplink': usuario.uplink,
-            'link': usuario.link,
-            'roles': usuario.roles,
-            'status': usuario.aceptado,
-        }
+                'afiliadoid': usuario.afiliadoid,
+                'email': usuario.email,
+                'first_name': usuario.first_name,
+                'password': usuario.password,
+                'telephone': usuario.telephone,
+                'wallet': usuario.wallet,
+                'uplink': usuario.uplink,
+                'link': usuario.link,
+                'roles': usuario.roles,
+                'registrado':usuario.registrado,
+                'status': usuario.aceptado,
+            }
         
         return JsonResponse({'data': data})
     except Usuario.DoesNotExist:
@@ -164,17 +167,18 @@ def updatePerfilUser(request, pk):
             users.save()
             
             data = {
-            'afiliadoid': users.afiliadoid,
-            'email': users.email,
-            'first_name': users.first_name,
-            'password': users.password,
-            'telephone': users.telephone,
-            'wallet': users.wallet,
-            'uplink': users.uplink,
-            'link': users.link,
-            'roles': users.roles,
-            'status': users.aceptado,
-        }
+                'afiliadoid': users.afiliadoid,
+                'email': users.email,
+                'first_name': users.first_name,
+                'password': users.password,
+                'telephone': users.telephone,
+                'wallet': users.wallet,
+                'uplink': users.uplink,
+                'link': users.link,
+                'roles': users.roles,
+                'registrado':users.registrado,
+                'status': users.aceptado,
+            }
             
             return JsonResponse({'data':data})
         except Exception as e:
@@ -201,6 +205,7 @@ def users(request):
                         'uplink':    u.uplink,
                         'link':      u.link,
                         'roles':     u.roles,
+                        'registrado':u.registrado,
                         'status':    u.aceptado,
                     })
             response =  JsonResponse({'data': data})
@@ -255,6 +260,7 @@ def usersPendientes(request):
                     'uplink':    u.uplink,
                     'link':      u.link,
                     'roles':     u.roles,
+                    'registrado':u.registrado,
                     'status':    u.aceptado,
                 })
         response =  JsonResponse({'data': data})
@@ -281,6 +287,7 @@ def usersEliminados(request):
                     'uplink':    u.uplink,
                     'link':      u.link,
                     'roles':     u.roles,
+                    'registrado':u.registrado,
                     'status':    u.aceptado,
                 })
         response =  JsonResponse({'data': data})

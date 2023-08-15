@@ -103,6 +103,9 @@ def limpiar_ganacias(dataframe):
     
     dataframe.loc["fecha_last_trade"] = pd.to_datetime(dataframe["fecha_last_trade"]).dt.date
     dataframe.loc["fecha_first_trade"] = pd.to_datetime(dataframe["fecha_first_trade"]).dt.date
-    
+    dataframe['volumen'] = dataframe['volumen'].str.replace(',', '', regex=False).astype(float).astype(str)
+    dataframe['customer_pnl'] = dataframe['customer_pnl'].str.replace(',', '', regex=False).astype(float).astype(str)
 
+    
+    
     return dataframe.to_dict(orient='records')

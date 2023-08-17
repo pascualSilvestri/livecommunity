@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
-from .controller.users import postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,usersEliminados,usersPendientes,updatePassword,montosGet
+from .controller.users import postNewAfiliado,postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,usersEliminados,usersPendientes,updatePassword,montosGet
 from .controller.registros import verificar,registrosGetAll,getRegistroById
-from .controller.ganancias import gananciaGetAll,gananciasTotales,gananciasTotalUser,getRGananciasById,filtarGananciasCpa,filtradoGananciasRevshare,filtradoGananciasRevshareById,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id
+from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa
 from .controller.files import upload_fpa,upload_registros,upload_cpa,upload_ganancias
 
 
@@ -23,13 +23,15 @@ urlpatterns = [
       #############################################################################################
       #Todos los ganancias de todos para Admin
       #return array de Ganancias
-      path('ganancias/', gananciaGetAll, name = 'ganancias'),
+      path('ganancias/', ganancia_get_all, name = 'ganancias'),
       #ganancias por usuario
-      path('ganancias/<pk>/', getRGananciasById, name = 'gananciasById'),
+      path('ganancias/<pk>/', ganancia_by_id, name = 'gananciasById'),
       #total de ganancias Admin
-      path('gananciastotal/', gananciasTotales, name = 'gananciasById'),
+      path('gananciatotal/', ganancias_total, name = 'ganaciaTotal'),
+      path('gananciatotalconporcentaje/', ganancias_total_con_porcentaje, name = 'ganaciaTotal'),
+      path('retiros/', retiros_totales, name = 'retiros'),
       #Suma de ganancias por usuario
-      path('gananciatotaluser/<pk>/', gananciasTotalUser, name = 'ganaciaTotalUser'),
+      path('gananciatotaluser/<pk>/', ganancias_total_user, name = 'ganaciaTotalUser'),
       #Filtrado por fecha ganancias
       path('filtrargananciasfecha/<desde>/<hasta>/', filterGananciasFecha, name = 'gananciasFiltradoFecha'),
       #Filtrado por CPA
@@ -39,11 +41,13 @@ urlpatterns = [
       #Filtrado por Revshare
       path('filtrarganaciasrevshare/', filtradoGananciasRevshare, name = 'filtradoRevshare'),
       #Filtrado por Revshare y Id de usuario
-      path('filtrarganaciasrevshare/<pk>/', filtradoGananciasRevshareById, name = 'filtradoRevshareById'),
+      path('filtrarganaciasrevshare/<pk>/', filtrar_ganancias_by_revshare_By_Id, name = 'filtradoRevshareById'),
+      path('cpas/',ganancias_cpa,name='cpa'),
       #############################################################################################
       ########################             Users                   ###############################
       #############################################################################################
       #registrar nuevo usuario en el backend
+      path('newafiliado/', postNewAfiliado, name = 'NewAfiliado'),
       path('newuser/', postNewUser, name = 'NewUser'),
       #Si el correo y la contraseña existen en base de datos
       #return True o False

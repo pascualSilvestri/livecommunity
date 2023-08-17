@@ -24,13 +24,13 @@ class Spread(models.Model):
     
     def __str__(self):
         return self.spread
-    
-    
+
+
 class Usuario(AbstractUser):
     # Agrega campos adicionales personalizados para tu modelo de usuario, por ejemplo:
-    afiliadoid = models.CharField(max_length=50)
-    telephone = models.CharField(max_length=15)
-    wallet = models.CharField(max_length=100)
+    fpa = models.CharField(max_length=50)
+    telephone = models.CharField(max_length=15,null=True)
+    wallet = models.CharField(max_length=100,null=True)
     uplink = models.CharField(max_length=50,null=True)
     link = models.CharField(max_length=100)
     cpa = models.IntegerField(default=0)
@@ -62,7 +62,7 @@ class Usuario(AbstractUser):
     # ...
 
     def __str__(self):
-        return self.afiliadoid
+        return self.fpa
 
     
 class PagoRealizado(models.Model):

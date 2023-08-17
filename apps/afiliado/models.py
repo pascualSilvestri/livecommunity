@@ -4,14 +4,12 @@ from django.conf import settings
 
 
 class Afiliado(models.Model):
-    idAfiliado = models.CharField(max_length=50)
-    nombre = models.CharField(max_length=200)
+    fpa = models.CharField(max_length=50)
     url = models.URLField()
-    telefono = models.BigIntegerField()
-    referenciaAfiliado = models.ForeignKey('self', null=True, blank=True, on_delete= models.SET_NULL)
+    upline = models.CharField(max_length=50)
     
     def __str__(self):
-        return self.idAfiliado
+        return self.fpa
     
     
 class Cliente(models.Model):

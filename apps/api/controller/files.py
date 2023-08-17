@@ -2,7 +2,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from ...utils.limpiarTablas import limpiar_datos_fpa, limpiar_registros,limpiar_cpa,limpiar_ganacias
 from ...utils.funciones import existe,existe_cpa,existe_ganancia
+from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias
+from ...usuarios.models import Cuenta,Usuario
 from datetime import datetime
 import pandas as pd
 import os
@@ -62,10 +64,15 @@ def upload_fpa(request):
                         fecha_verificacion=fecha_verificacion,
                         status=data["status"],
                     )
+                    montos= Cuenta(fpa=data["fpa"])
                     try:
+                        f = Cuenta.objects.filter(fpa=data["fpa"])
+                        if not f.exists():
+                            montos.save()
                         fpa = fpas.filter(fpa=data["fpa"], client=data["id_client"])
                         if not fpa.exists():
                             newData.save()
+                            
                     except Exception as e:
                         print(e)
 
@@ -148,6 +155,7 @@ def upload_registros(request):
                         numeros_depositos= data['numeros_depositos'],
                         comision= data['comision'],
                     )
+                    
                     if not existe(data['client'],fecha_registro,fpa,data['status'],fecha_calif,data['country'],data['posicion_cuenta'],fecha_primer_deposito,data['neto_deposito'],data['numeros_depositos'],registros):
                         registro.save()
 
@@ -184,11 +192,12 @@ def upload_cpa(request):
                 
                     
                 for cpa in new_data:
-                    fpa_id = fpas.filter(client=cpa['client'])
-                    if fpa_id.exists():
-                        fpa = fpa_id[0].fpa
+                    fpa_id = fpas.filter(client=cpa['client']).first()
+                    if fpa_id:
+                        fpa = fpa_id.fpa
                     else:
                         fpa = None
+
                     fecha_creacion_string = str(cpa["fecha_creacion"])
                     if fecha_creacion_string == "none":
                         fecha_creacion = None
@@ -197,8 +206,6 @@ def upload_cpa(request):
                             fecha_creacion_string, "%Y-%m-%d"
                         ).date()
                         
-                        
-                    print(cpa)
                     new_cpa = Registros_cpa(
                         fecha_creacion= fecha_creacion,
                         monto= cpa['monto'],
@@ -206,11 +213,14 @@ def upload_cpa(request):
                         client= cpa['client'],
                         fpa= fpa
                     )
-                    
+                    montos = Cuenta.objects.filter(fpa=fpa)[0]
+                    montos.monto_cpa += cpa['monto']
+                    montos.cpa += 1
                     
                     if not existe_cpa(fecha_creacion,cpa['monto'],cpa['client'],cpa['fpa'],cpas):
                         new_cpa.save()
-                    
+                        montos.save()
+                
             else:
                 print("ErrorMessege Document is not format")
                 return JsonResponse({"ErrorMessege": "Document is not format"})
@@ -286,8 +296,14 @@ def upload_ganancias(request):
                         withdrawals = g['withdrawals'],
                     )
                     
+                    
                     if not existe_ganancia(g['client'],fpa, g['full_name'],g['country'],g['equity'],g['balance'],g['partner_earning'],g['skilling_earning'],g['skilling_markup'],g['skilling_commission'],g['volumen'],fecha_last_trade,fecha_first_trade,g['closed_trade_count'],g['customer_pnl'],g['deposito_neto'],g['deposito'], g['withdrawals'],ganancias):
                         ganancia.save()
+                        cuenta = Cuenta.objects.filter(fpa=fpa).first()
+                        if g['partner_earning'] != 'NaN':
+                            cuenta.monto_total += g['partner_earning']
+                            cuenta.monto_a_pagar += round(calcula_porcentaje_directo(float(g['partner_earning']),20,10),2)
+                            cuenta.save()
                 
                 
             else:

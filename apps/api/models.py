@@ -67,6 +67,7 @@ class Registros_ganancias(models.Model):
     deposito_neto = models.DecimalField(max_digits=10, decimal_places=2)
     deposito = models.CharField(max_length=50)
     withdrawals = models.CharField(max_length=50)
+    pagado = models.BooleanField(default=False)
 
     def __str__(self):
         return self.client

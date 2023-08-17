@@ -2,28 +2,48 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
+from ...utils.funciones import formatera_retiro
 from ...usuarios.models import Spread
-from ...api.models import Registros_ganancias
+from ...api.models import Registros_ganancias,Registros_cpa
+import re
 
 @csrf_exempt  
-def gananciaGetAll(request):
+def ganancia_get_all(request):
     
     if request.method == 'GET':
         try:
             ganancias = Registros_ganancias.objects.all()
+            cpas = Registros_cpa.objects.all()
             data=[]
             for r in ganancias:
+                if r.pagado == False:
+                    if r.partner_earning != 0:
+                        monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),20,10),2)
+                    else:
+                        monto_spread = r.partner_earning
+                    data.append( 
+                        {
+                            'creacion':r.fecha_first_trade,
+                            'monto':r.partner_earning,
+                            'monto_spread':monto_spread,
+                            'tipo_comision':'Reverashe',
+                            'client':r.client,
+                            'retiro':r.withdrawals,
+                            'isPago':r.pagado
+                        }
+                    )
+            for c in cpas:
                 data.append( 
-                    {
-                        'creacion':r.fecha_first_trade,
-                        'monto':r.monto,
-                        'monto_spread':r.monto_spread,
-                        'tipo_comision':r.tipo_comision,
-                        'id_usuario':r.id_usuario,
-                        'codigo':r.codigo,
-                        'isPago':r.pagado
-                    }
-                )
+                        {
+                            'creacion':c.fecha_creacion,
+                            'monto':c.monto,
+                            'monto_spread':c.monto,
+                            'tipo_comision':'CPA',
+                            'client':c.client,
+                            'retiro':0,
+                            'isPago':c.pagado
+                        }
+                    )
             
             response = JsonResponse({'data': data})
             
@@ -33,71 +53,130 @@ def gananciaGetAll(request):
     else:
         return JsonResponse({'Error':'Metodo invalidos'})
 
-@csrf_exempt
-def getRGananciasById(request,pk):
+
+@csrf_exempt  
+def ganancia_only_more_cero(request):
     
     if request.method == 'GET':
-        
         try:
-                
-            ganancias = Ganancia.objects.filter(codigo=pk)
-            
+            ganancias = Registros_ganancias.objects.all()
+            cpas = Registros_cpa.objects.all()
             data=[]
-            
             for r in ganancias:
-                data.append( 
-                    {
-                        'creacion':r.creacion,
-                        'monto':r.monto,
-                        'monto_spread':r.monto_spread,
-                        'tipo_comision':r.tipo_comision,
-                        'id_usuario':r.id_usuario,
-                        'codigo':r.codigo,
-                        'isPago':r.pagado
-                    }
-                )
+                if r.pagado == False and r.partner_earning != 0:
+                    if r.partner_earning != 0:
+                        monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),20,10),2)
+                    else:
+                        monto_spread = r.partner_earning
+                    data.append( 
+                        {
+                            'creacion':r.fecha_first_trade,
+                            'monto':r.partner_earning,
+                            'monto_spread':monto_spread,
+                            'tipo_comision':'Reverashe',
+                            'client':r.client,
+                            'retiro':r.withdrawals,
+                            'isPago':r.pagado
+                        }
+                    )
             
             response = JsonResponse({'data': data})
-
-            return response
-        except Exception:
-            return JsonResponse({'Error':str(Exception)})
-    else:
-        return JsonResponse({'Error':'Metodo invalidos'})
-
-@csrf_exempt  
-def gananciasTotales(request):
-    
-    if request.method == 'GET':
-        try:
-            ganancias = Ganancia.objects.all()
-            
-            total = 0
-            
-            for m in ganancias:
-                total += m.monto
-            
-            response = JsonResponse({'monto':total})
             
             return response
-        except Exception:
-            return JsonResponse({'Error':str(Exception)})
+        except Exception as e:
+            return JsonResponse({'Error':e.__str__()})
     else:
         return JsonResponse({'Error':'Metodo invalidos'})
 
 
 @csrf_exempt  
-def gananciasTotalUser(request,pk):
+def ganancia_by_id(request,pk):
+    
+    if request.method == 'GET':
+        try:
+            ganancias = Registros_ganancias.objects.filter(fpa=pk)
+            cpas = Registros_cpa.objects.filter(fpa=pk)
+            data=[]
+            for r in ganancias:
+                if r.pagado == False and r.fecha_first_trade != None:
+                    if r.partner_earning != 0:
+                        monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),20,10),2)
+                    else:
+                        monto_spread = r.partner_earning
+                    data.append( 
+                        {
+                            'creacion':r.fecha_first_trade,
+                            'monto':r.partner_earning,
+                            'monto_spread':monto_spread,
+                            'tipo_comision':'Reverashe',
+                            'client':r.client,
+                            'retiro':r.withdrawals,
+                            'isPago':r.pagado
+                        }
+                    )
+            
+            for c in cpas:
+                data.append( 
+                        {
+                            'creacion':c.fecha_creacion,
+                            'monto':c.monto,
+                            'monto_spread':c.monto,
+                            'tipo_comision':'CPA',
+                            'client':c.client,
+                            'retiro':0,
+                            'isPago':c.pagado
+                        }
+                    )
+                
+            response = JsonResponse({'data': data})
+            
+            return response
+        except Exception as e:
+            return JsonResponse({'Error':e.__str__()})
+    else:
+        return JsonResponse({'Error':'Metodo invalidos'})
+
+
+
+@csrf_exempt  
+def retiros_totales(request):
+    
+    if request.method == 'GET':
+        try:
+            ganancias = Registros_ganancias.objects.all()
+            
+            total = 0
+            data=[]
+            for m in ganancias:
+                retiro = formatera_retiro(m.withdrawals)
+                # retiro = m.withdrawals.replace(')','').strip()
+                data.append({
+                    'fpa':m.fpa,
+                    'fecha':m.fecha_first_trade,
+                    'retiro':retiro
+                })
+            
+            response = JsonResponse({'data':data})
+            
+            return response
+        except Exception as e:
+            return JsonResponse({'Error':e.__str__()})
+    else:
+        return JsonResponse({'Error':'Metodo invalidos'})
+
+@csrf_exempt  
+def ganancias_total(request):
     
     if request.method == 'GET':
         try:
             
-            ganancias = Ganancia.objects.filter(codigo=pk)
+            ganancias = Registros_ganancias.objects.all()
             
             total = 0
             
             for m in ganancias:
-                total += m.monto
+                if m.pagado == False:
+                    total += m.partner_earning
             
             response = JsonResponse({'monto':total})
             
@@ -109,11 +188,103 @@ def gananciasTotalUser(request,pk):
 
 
 @csrf_exempt  
+def ganancias_total_user(request,pk):
+    
+    if request.method == 'GET':
+        try:
+            
+            ganancias = Registros_ganancias.objects.filter(fpa=pk)
+            
+            total = 0
+            
+            for m in ganancias:
+                if m.pagado == False:
+                    total += m.partner_earning
+            
+            response = JsonResponse({'monto':total})
+            
+            return response
+        except Exception:
+            return JsonResponse({'Error':str(Exception)})
+    else:
+        return JsonResponse({'data':'El metodo es invalido'})
+@csrf_exempt  
+def ganancias_total_con_porcentaje(request):
+    
+    if request.method == 'GET':
+        try:
+            
+            ganancias = Registros_ganancias.objects.all()
+            
+            total = 0
+            
+            for m in ganancias:
+                if m.pagado == False:
+                    total += calcula_porcentaje_directo(float(m.partner_earning),20,10)
+            
+            response = JsonResponse({'monto':total})
+            
+            return response
+        except Exception:
+            return JsonResponse({'Error':str(Exception)})
+    else:
+        return JsonResponse({'data':'El metodo es invalido'})
+
+def ganancias_cpa(request):
+    if request.method == 'GET':
+        try:
+            
+            cpas = Registros_cpa.objects.filter()
+            
+            data = []
+            
+            for r in cpas:
+                data.append( 
+                    {
+                        'client':r.client,
+                        'fpa':r.fpa
+                        
+                    }
+                )
+            
+            return JsonResponse({'data':data})
+        
+        except Exception:
+            return JsonResponse({'Error':Exception})
+    else:
+        return JsonResponse({'Error':'Metodo invalido'})
+
+def ganancias_cpa_by_id(request,pk):
+    if request.method == 'GET':
+        try:
+            
+            cpas = Registros_cpa.objects.filter(fpa=pk)
+            
+            data = []
+            
+            for r in cpas:
+                data.append( 
+                    {
+                        'client':r.client,
+                        'fpa':r.fpa,
+                        'monto':r.monto
+                        
+                    }
+                )
+            
+            return JsonResponse({'data':data})
+        
+        except Exception:
+            return JsonResponse({'Error':Exception})
+    else:
+        return JsonResponse({'Error':'Metodo invalido'})
+
+@csrf_exempt  
 def filtarGananciasCpa(request):
     
     if request.method == "GET":    
         try:
-            ganancias = Ganancia.objects.filter(tipo_comision='CPA')
+            ganancias = Registros_cpa.objects.all()
             data=[]
             for r in ganancias:
                 data.append( 
@@ -139,17 +310,18 @@ def filtarGananciasCpa(request):
 def filtarGananciasCpaById(request,pk):
     if request.method == "GET":    
         try:
-            ganancias = Ganancia.objects.filter(tipo_comision='CPA',codigo=pk)
+            ganancias = Registros_cpa.objects.filter(fpa=pk)
             data=[]
             for r in ganancias:
+                
                 data.append( 
                     {
-                        'creacion':r.creacion,
+                        'creacion':r.fecha_creacion,
                         'monto':r.monto,
-                        'monto_spread':r.monto_spread,
-                        'tipo_comision':r.tipo_comision,
-                        'id_usuario':r.id_usuario,
-                        'codigo':r.codigo,
+                        'monto_spread':r.monto,
+                        'tipo_comision':'CPA',
+                        'id_usuario':r.client,
+                        'codigo':r.fpa,
                         'isPago':r.pagado
                     }
                 )
@@ -167,49 +339,51 @@ def filtradoGananciasRevshare(request):
     if request.method == 'GET':
         try:
             
-            ganancias = Ganancia.objects.filter(tipo_comision='Revshare')
+            ganancias = Registros_ganancias.objects.all()
             
             data = []
             
             for r in ganancias:
+                monto_spread= round(calcula_porcentaje_directo(float(r.partner_earning,20,10)),2)
                 data.append( 
                     {
-                        'creacion':r.creacion,
-                        'monto':r.monto,
-                        'monto_spread':r.monto_spread,
-                        'tipo_comision':r.tipo_comision,
-                        'id_usuario':r.id_usuario,
-                        'codigo':r.codigo,
+                        'creacion':r.fecha_first_trade,
+                        'monto':r.partner_earning,
+                        'monto_spread':monto_spread,
+                        'tipo_comision':'Reverash',
+                        'id_usuario':r.client,
+                        'codigo':r.fpa,
                         'isPago':r.pagado
                     }
                 )
             
             return JsonResponse({'data':data})
         
-        except Exception:
-            return JsonResponse({'Error':Exception})
+        except Exception as e:
+            return JsonResponse({'Error':e.__str__()})
     else:
         return JsonResponse({'Error':'Metodo invalido'})
 
 
-def filtradoGananciasRevshareById(request,pk):
+def filtrar_ganancias_by_revshare_By_Id(request,pk):
     
     if request.method == 'GET':
         try:
             
-            ganancias = Ganancia.objects.filter(tipo_comision='Revshare',codigo=pk)
+            ganancias = Registros_ganancias.objects.filter(fpa=pk)
             
             data = []
             
             for r in ganancias:
+                monto_spread= round(calcula_porcentaje_directo(float(r.partner_earning,20,10)),2)
                 data.append( 
                     {
-                        'creacion':r.creacion,
-                        'monto':r.monto,
-                        'monto_spread':r.monto_spread,
-                        'tipo_comision':r.tipo_comision,
-                        'id_usuario':r.id_usuario,
-                        'codigo':r.codigo,
+                        'creacion':r.fecha_first_trade,
+                        'monto':r.partner_earning,
+                        'monto_spread':monto_spread,
+                        'tipo_comision':'Reverashare',
+                        'id_usuario':r.client,
+                        'codigo':r.fpa,
                         'isPago':r.pagado
                     }
                 )
@@ -220,6 +394,7 @@ def filtradoGananciasRevshareById(request,pk):
             return JsonResponse({'Error':Exception})
     else:
         return JsonResponse({'Error':'Metodo invalido'})
+
 
 
 def filterGananciasFecha(request,desde,hasta):

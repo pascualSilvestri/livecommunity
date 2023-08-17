@@ -24,32 +24,20 @@ class Spread(models.Model):
     
     def __str__(self):
         return self.spread
-    
-    
+
+
 class Usuario(AbstractUser):
     # Agrega campos adicionales personalizados para tu modelo de usuario, por ejemplo:
-    afiliadoid = models.CharField(max_length=50)
-    telephone = models.CharField(max_length=15)
-    wallet = models.CharField(max_length=100)
+    fpa = models.CharField(max_length=50)
+    telephone = models.CharField(max_length=15,null=True)
+    wallet = models.CharField(max_length=100,null=True)
     uplink = models.CharField(max_length=50,null=True)
     link = models.CharField(max_length=100)
-    cpa = models.IntegerField(default=0)
-    cpaIndirecto = models.IntegerField(default=0)
-    monto_total= models.FloatField(default=0.0)
-    monto_a_pagar= models.FloatField(default=0.0)
-    monto_directo= models.FloatField(default=0.0) 
-    monto_indirecto= models.FloatField(default=0.0)
-    monto_cpa= models.FloatField(default=0.0)
-    monto_bono_directo= models.FloatField(default=0.0)
-    monto_bono_indirecto= models.FloatField(default=0.0)
-    retiros= models.FloatField(default=0.0)
     roles= models.CharField(max_length=50,default="user")
     registrado = models.BooleanField(default=False)
     aceptado= models.BooleanField(default=False)
     eliminado= models.BooleanField(default=False)
     haveBono= models.BooleanField(default=False)
-    level_bono_directo=models.IntegerField(default=0)
-    level_bono_indirecto=models.IntegerField(default=0)
     # bonoIndirecto_2=models.BooleanField(default=False)
     # bonoIndirecto_3=models.BooleanField(default=False)
     # bonoIndirecto_4=models.BooleanField(default=False)
@@ -62,12 +50,32 @@ class Usuario(AbstractUser):
     # ...
 
     def __str__(self):
-        return self.afiliadoid
+        return self.fpa
 
+
+class Cuenta(models.Model):
+    id_monto= models.AutoField('id', primary_key=True)
+    fpa = models.CharField(max_length=50)
+    monto_total= models.FloatField(default=0.0)
+    monto_a_pagar= models.FloatField(default=0.0)
+    monto_directo= models.FloatField(default=0.0) 
+    monto_indirecto= models.FloatField(default=0.0)
+    monto_cpa= models.FloatField(default=0.0)
+    monto_bono_directo= models.FloatField(default=0.0)
+    monto_bono_indirecto= models.FloatField(default=0.0)
+    cpa = models.IntegerField(default=0)
+    cpaIndirecto = models.IntegerField(default=0)
+    level_bono_directo=models.IntegerField(default=0)
+    level_bono_indirecto=models.IntegerField(default=0)
+    retiros= models.FloatField(default=0.0)
     
+    def __str__(self):
+        return self.fpa
+
+
 class PagoRealizado(models.Model):
     id_pagos= models.AutoField('id', primary_key=True)
-    afiliadoid = models.CharField(max_length=50)
+    fpa = models.CharField(max_length=50)
     date = models.DateField(auto_now_add=True)
     monto_total=models.FloatField(default=0.0)
     monto_pagado= models.FloatField(default=0.0)

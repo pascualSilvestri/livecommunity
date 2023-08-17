@@ -1,9 +1,42 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from ...usuarios.models import Usuario
+from ...afiliado.models import Afiliado
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
 import json 
+
+
+@csrf_exempt
+def postNewAfiliado(request):
+    if request.method == 'POST':
+        # if 'application/json' in request.content_type:
+            try:
+                afiliados = Afiliado.objects.all()
+                # Decodificar el cuerpo de la solicitud como JSON
+                fpa = request.POST.get('fpa').upper()
+                url = request.POST.get('url')
+                upline = request.POST.get('up_line').upper()
+                # Crear un nuevo usuario y guardar los datos en la base de datos
+                new_afiliado = Afiliado(
+                    fpa = fpa,
+                    url=url,
+                    upline=upline,
+                )
+                print(new_afiliado.fpa)
+                if afiliados.exists():
+                    for a in afiliados:
+                        if not (a.fpa==fpa and a.url==url and a.upline == upline):
+                            new_afiliado.save()
+                else:
+                    new_afiliado.save()
+                return JsonResponse({'message': 'Datos recibidos y guardados con éxito'},status=200)
+            except json.JSONDecodeError:
+                return JsonResponse({'error': 'Error al decodificar el JSON'}, status=402)
+        # else:
+        #     return JsonResponse({'error': 'Tipo de contenido no válido'}, status=406)
+    else:
+        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
 
 
 @csrf_exempt
@@ -13,39 +46,46 @@ def postNewUser(request):
             try:
                 # Decodificar el cuerpo de la solicitud como JSON
                 data = json.loads(request.body)
+                usuario = Usuario.objects.all()
+            
+                afiliados = Afiliado.objects.filter(fpa=data.get('fpa'))
                 
-                # try:
-                #     afiliados = Afiliado.objects.get(idAfiliado=data.get('afiliadoid'))
-                #     telefono = afiliados.telefono
-                #     uplink = afiliados.referenciaAfiliado
-                #     link=afiliados.url 
-                # except Exception:
-                telefono = ''
-                uplink = ''
-                link = ''
-                #     print(Exception.__str__())
+                if afiliados.exists():
+                    print(afiliados[0].fpa)
+                    uplink = afiliados[0].upline
+                    link=afiliados[0].url 
                 # Crear un nuevo usuario y guardar los datos en la base de datos
-                new_user = Usuario(
-                    username = (data.get('afiliadoid') + "_" + data.get('first_name')).replace(' ', '_'),
-                    afiliadoid=data.get('afiliadoid'),
-                    email=data.get('email'),
-                    first_name=data.get('first_name'),
-                    last_name=data.get('last_name'),
-                    password=data.get('password'),
-                    telephone=telefono or '',
-                    wallet=data.get('wallet'),
-                    uplink=uplink or '',
-                    link=link or ''
-                )
-                new_user.save()
-
-                return JsonResponse({'message': 'Datos recibidos y guardados con éxito','status':200},status=200)
+                
+                    new_user = Usuario(
+                        username = (data.get('fpa') + "_" + data.get('first_name')).replace(' ', '_'),
+                        fpa=data.get('fpa'),
+                        email=data.get('email'),
+                        first_name=data.get('first_name'),
+                        last_name=data.get('last_name'),
+                        password=data.get('password'),
+                        telephone=data.get('telephone'),
+                        wallet=data.get('wallet'),
+                        uplink=uplink or '',
+                        link=link or ''
+                    )
+                    new_user.registrado = True
+                    if not usuario.filter(fpa=data.get('fpa')).exists():
+                        new_user.save()
+                    else:
+                        return JsonResponse({'message':'Usuario ya registrado'},status=401)
+                else:
+                    return JsonResponse({'message':'Usuario no Habilidato para registrarse'},status=402)
+                
+                return JsonResponse({'message': 'Datos recibidos y guardados con éxito'},status=200)
+            
             except json.JSONDecodeError:
-                return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
+                return JsonResponse({'message': 'Error al decodificar el JSON'}, status=403)
+            
         else:
-            return JsonResponse({'error': 'Tipo de contenido no válido'}, status=400)
+            return JsonResponse({'message': 'Tipo de contenido no válido'}, status=404)
+        
     else:
-        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
+        return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
 
 @csrf_exempt
 def getUser(request,email):
@@ -59,7 +99,7 @@ def getUser(request,email):
                     if u.email == email:
                 
                         data.append({
-                            'afiliadoid':u.afiliadoid,
+                            'fpa':u.fpa,
                             'email':     u.email,
                             'first_name':u.first_name,
                             'password':  u.password,
@@ -74,18 +114,18 @@ def getUser(request,email):
 
                 return JsonResponse({'data': data})
             except json.JSONDecodeError:
-                return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
+                return JsonResponse({'message': 'Error al decodificar el JSON'}, status=400)
     else:
-        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
+        return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
     
 @csrf_exempt
 def getUserById(request, pk):
     
     if request.method == 'GET':
         try:
-            usuario = Usuario.objects.get(afiliadoid=pk)  # Corrige el nombre del campo afiliadoid
+            usuario = Usuario.objects.get(fpa=pk)  # Corrige el nombre del campo fpa
             data = {
-                'afiliadoid': usuario.afiliadoid,
+                'fpa': usuario.fpa,
                 'email': usuario.email,
                 'first_name': usuario.first_name,
                 'password': usuario.password,
@@ -99,9 +139,9 @@ def getUserById(request, pk):
             }
             return JsonResponse({'data': data})
         except Usuario.DoesNotExist:
-            return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
+            return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
     else:
-        return JsonResponse({'Error':'Metodo invalido'})
+        return JsonResponse({'message':'Metodo invalido'})
 
 @csrf_exempt
 def updateUserById(request, pk):
@@ -112,7 +152,7 @@ def updateUserById(request, pk):
                 body_data = json.loads(request.body)  # Decodifica el cuerpo como JSON
             except json.JSONDecodeError:
                 # Si hay un error al decodificar JSON, devuelve una respuesta de error
-                return JsonResponse({'error': 'Datos inválidos en el cuerpo (body)'}, status=400)
+                return JsonResponse({'message': 'Datos inválidos en el cuerpo (body)'}, status=400)
             
             # Aquí puedes acceder a los datos enviados en el cuerpo (body)
             name = body_data.get('name')
@@ -122,7 +162,7 @@ def updateUserById(request, pk):
 
             print(status)
             # Luego, puedes usar los datos para actualizar el objeto Usuario
-            usuario = Usuario.objects.get(afiliadoid=pk)
+            usuario = Usuario.objects.get(fpa=pk)
             usuario.first_name = name
             usuario.email = email
             usuario.roles = roles
@@ -131,7 +171,7 @@ def updateUserById(request, pk):
 
         # Si todo salió bien, devuelve los datos actualizados como respuesta
         data = {
-                'afiliadoid': usuario.afiliadoid,
+                'fpa': usuario.fpa,
                 'email': usuario.email,
                 'first_name': usuario.first_name,
                 'password': usuario.password,
@@ -146,7 +186,7 @@ def updateUserById(request, pk):
         
         return JsonResponse({'data': data})
     except Usuario.DoesNotExist:
-        return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
+        return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
 
 @csrf_exempt
 def updatePerfilUser(request, pk):
@@ -158,7 +198,7 @@ def updatePerfilUser(request, pk):
             except json.JSONDecodeError:
                 return JsonResponse({'error': 'Datos inválidos en el cuerpo (body)'}, status=400)
             
-            users = Usuario.objects.get(afiliadoid=pk)
+            users = Usuario.objects.get(fpa=pk)
             users.telephone=body_data.get('telephone')
             users.wallet=body_data.get('wallet')
             users.email=body_data.get('email')
@@ -167,7 +207,7 @@ def updatePerfilUser(request, pk):
             users.save()
             
             data = {
-                'afiliadoid': users.afiliadoid,
+                'fpa': users.fpa,
                 'email': users.email,
                 'first_name': users.first_name,
                 'password': users.password,
@@ -196,7 +236,7 @@ def users(request):
             for u in usuarios:
                 if u.eliminado is False:
                     data.append({
-                        'afiliadoid':u.afiliadoid,
+                        'fpa':u.fpa,
                         'email':     u.email,
                         'first_name':u.first_name,
                         'password':  u.password,
@@ -234,7 +274,7 @@ def usuarioValido(request,email,password):
 @csrf_exempt  
 def eliminarUser(request,pk):
     
-    user = Usuario.objects.get(afiliadoid=pk)
+    user = Usuario.objects.get(fpa=pk)
     user.eliminado = True
     user.save()
         
@@ -244,14 +284,14 @@ def eliminarUser(request,pk):
 
 
 @csrf_exempt   
-def usersPendientes(request):
+def users_pendientes(request):
     try:
         usuarios = Usuario.objects.all()
         data = []
         for u in usuarios:
             if u.aceptado is False and u.eliminado is False:
                 data.append({
-                    'afiliadoid':u.afiliadoid,
+                    'fpa':u.fpa,
                     'email':     u.email,
                     'first_name':u.first_name,
                     'password':  u.password,
@@ -271,14 +311,14 @@ def usersPendientes(request):
     
 
 @csrf_exempt   
-def usersEliminados(request):
+def users_eliminados(request):
     try:
         usuarios = Usuario.objects.all()
         data = []
         for u in usuarios:
             if u.eliminado is True:
                 data.append({
-                    'afiliadoid':u.afiliadoid,
+                    'fpa':u.fpa,
                     'email':     u.email,
                     'first_name':u.first_name,
                     'password':  u.password,
@@ -301,7 +341,7 @@ def updatePassword(request,pk):
     if request.method == 'PUT':
         try:
             body = json.loads(request.body)
-            usuario = Usuario.objects.get(afiliadoid=pk)
+            usuario = Usuario.objects.get(fpa=pk)
             
             usuario.password= body.get('password')
             
@@ -321,7 +361,7 @@ def montosGet(request,pk):
     if request.method == 'GET':
         try:
             
-            usuario = Usuario.objects.get(afiliadoid=pk)
+            usuario = Usuario.objects.get(fpa=pk)
             
             data = [{
                 "monto_total":usuario.monto_total,

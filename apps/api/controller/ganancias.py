@@ -230,6 +230,55 @@ def ganancias_total_con_porcentaje(request):
     else:
         return JsonResponse({'data':'El metodo es invalido'})
 
+def ganancias_cpa(request):
+    if request.method == 'GET':
+        try:
+            
+            cpas = Registros_cpa.objects.filter()
+            
+            data = []
+            
+            for r in cpas:
+                data.append( 
+                    {
+                        'client':r.client,
+                        'fpa':r.fpa
+                        
+                    }
+                )
+            
+            return JsonResponse({'data':data})
+        
+        except Exception:
+            return JsonResponse({'Error':Exception})
+    else:
+        return JsonResponse({'Error':'Metodo invalido'})
+
+def ganancias_cpa_by_id(request,pk):
+    if request.method == 'GET':
+        try:
+            
+            cpas = Registros_cpa.objects.filter(fpa=pk)
+            
+            data = []
+            
+            for r in cpas:
+                data.append( 
+                    {
+                        'client':r.client,
+                        'fpa':r.fpa,
+                        'monto':r.monto
+                        
+                    }
+                )
+            
+            return JsonResponse({'data':data})
+        
+        except Exception:
+            return JsonResponse({'Error':Exception})
+    else:
+        return JsonResponse({'Error':'Metodo invalido'})
+
 @csrf_exempt  
 def filtarGananciasCpa(request):
     
@@ -346,29 +395,7 @@ def filtrar_ganancias_by_revshare_By_Id(request,pk):
     else:
         return JsonResponse({'Error':'Metodo invalido'})
 
-def ganancias_cpa(request):
-    if request.method == 'GET':
-        try:
-            
-            cpas = Registros_cpa.objects.filter()
-            
-            data = []
-            
-            for r in cpas:
-                data.append( 
-                    {
-                        'client':r.client,
-                        'fpa':r.fpa
-                        
-                    }
-                )
-            
-            return JsonResponse({'data':data})
-        
-        except Exception:
-            return JsonResponse({'Error':Exception})
-    else:
-        return JsonResponse({'Error':'Metodo invalido'})
+
 
 def filterGananciasFecha(request,desde,hasta):
     

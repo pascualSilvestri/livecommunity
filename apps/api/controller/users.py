@@ -14,9 +14,9 @@ def postNewAfiliado(request):
             try:
                 afiliados = Afiliado.objects.all()
                 # Decodificar el cuerpo de la solicitud como JSON
-                fpa = request.POST.get('fpa')
+                fpa = request.POST.get('fpa').upper()
                 url = request.POST.get('url')
-                upline = request.POST.get('up_line')
+                upline = request.POST.get('up_line').upper()
                 # Crear un nuevo usuario y guardar los datos en la base de datos
                 new_afiliado = Afiliado(
                     fpa = fpa,
@@ -284,7 +284,7 @@ def eliminarUser(request,pk):
 
 
 @csrf_exempt   
-def usersPendientes(request):
+def users_pendientes(request):
     try:
         usuarios = Usuario.objects.all()
         data = []
@@ -311,7 +311,7 @@ def usersPendientes(request):
     
 
 @csrf_exempt   
-def usersEliminados(request):
+def users_eliminados(request):
     try:
         usuarios = Usuario.objects.all()
         data = []

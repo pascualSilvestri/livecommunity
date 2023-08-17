@@ -8,7 +8,7 @@ def existe(client,fecha_registro,fpa,status,fecha_calif,country,posicion_cuenta,
 
 def existe_cpa(fecha,monto,client,fpa,cpas):
     for c in cpas:
-        if (fecha==c['fecha_creacion'] and monto == c['monto'] and client == c['client'] and fpa == c['fpa']):
+        if (fecha==c.fecha_creacion and monto == c.monto and client == c.client and fpa == c.fpa):
             return True
     return False
 

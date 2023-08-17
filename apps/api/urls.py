@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
-from .controller.users import postNewAfiliado,postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,usersEliminados,usersPendientes,updatePassword,montosGet
+from .controller.users import postNewAfiliado,postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,users_eliminados,users_pendientes,updatePassword,montosGet
 from .controller.registros import verificar,registrosGetAll,getRegistroById
-from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa
+from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa,ganancias_cpa_by_id
 from .controller.files import upload_fpa,upload_registros,upload_cpa,upload_ganancias
 
 
@@ -43,6 +43,7 @@ urlpatterns = [
       #Filtrado por Revshare y Id de usuario
       path('filtrarganaciasrevshare/<pk>/', filtrar_ganancias_by_revshare_By_Id, name = 'filtradoRevshareById'),
       path('cpas/',ganancias_cpa,name='cpa'),
+      path('cpas/<pk>/',ganancias_cpa_by_id,name='cpa'),
       #############################################################################################
       ########################             Users                   ###############################
       #############################################################################################
@@ -67,9 +68,9 @@ urlpatterns = [
       #modifica en perfil de usuario
       path('updateperfiluser/<pk>/', updatePerfilUser, name = 'updatePerfilUser'),
       #retorna los usuario eliminados
-      path('usereliminados/', usersEliminados, name = 'userEliminados'),
+      path('usereliminados/', users_eliminados, name = 'userEliminados'),
       #retorna los usuario pendientes
-      path('userpendientes/', usersPendientes, name = 'userPendientes'),
+      path('userpendientes/', users_pendientes, name = 'userPendientes'),
       #cambio de password
       path('updatepassword/<pk>/', updatePassword, name = 'updatePassword'),
       #############################################################################################

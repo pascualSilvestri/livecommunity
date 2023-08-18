@@ -131,6 +131,7 @@ header{
   .hero-contain{
     width: 100%;
   }
+  
   .hero{
     height: 80vh;
     display: flex;

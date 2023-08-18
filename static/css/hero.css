@@ -31,14 +31,14 @@ header{
   /* TITTLE */
   .hero h1 {
     font-family: Provicali;
-    font-size: 95px;
+    font-size: 87px;
     font-weight: 400;
     background-image: linear-gradient(to left,#44A3ED,#44F281);
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
   }
-  
+
   /* SUBTITTLE */
   .hero p{
     margin-top: 20px;
@@ -51,19 +51,7 @@ header{
     color: #61a3eb;
     text-decoration: underline;
   }
-  @media only screen and (max-width: 720px) {
-    .hero{
-      height: 75vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      max-width: 100%;
-    }
-    .hero h1 {
-      font-size: 13vw;
-    }
-  }
-  
+
   
   /* BUTTON */
   .button-contain{
@@ -147,9 +135,32 @@ header{
     height: 80vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    max-width: 100%;
+    align-items: center;
+  }  
+  .hero-left{
     max-width: 600px;
   }
+  .hero-right{
+    width: 700px;
+    height: 400px;
+    background: black;
+  }
+
+  @media only screen and (max-width: 720px) {
+    .hero{
+      height: 75vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      max-width: 100%;
+    }
+    .hero h1 {
+      font-size: 13vw;
+    }
+  }
+  
   
   
   

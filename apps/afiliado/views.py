@@ -22,7 +22,7 @@ token = TELEGRAM_BOT_TOKEN
 def afiliado(request, idAfiliado):
     afiliado = False
     try:
-        afiliado = Afiliado.objects.get(idAfiliado=idAfiliado)
+        afiliado = Afiliado.objects.get(fpa=idAfiliado)
         form = ClienteForm()
         context = {'afiliado': afiliado, 'idAfiliado': idAfiliado, 'form': form}
         return render(request, 'afiliado.html', context)

@@ -53,7 +53,11 @@
 .important span{
     color: rgb(253, 24, 24);
 }
-.card img{
+.card .telegram{
+    height: 60px;
+    width: 60px;
+}
+.card .binance{
     height: 60px;
     width: 60px;
 }

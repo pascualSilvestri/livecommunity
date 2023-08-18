@@ -134,7 +134,7 @@ header{
   .hero{
     height: 80vh;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: space-between;
     max-width: 100%;
     align-items: center;

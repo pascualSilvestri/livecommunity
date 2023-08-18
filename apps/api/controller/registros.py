@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import make_password
 import json 
 from datetime import datetime
 from django.db.models import Q
-from ...api.models import Registro_archivo,Registros_ganancias
+from ...api.models import Registro_archivo,Registros_ganancias,Relation_fpa_client
 
 @csrf_exempt 
 def verificar(request):
@@ -13,13 +13,17 @@ def verificar(request):
         try:
             registros = Registro_archivo.objects.all()
             
+            
             data = []
             
             for r in registros:
+                fpa = Relation_fpa_client.objects.filter(client=r.client)
                 dep = 0
                 if r.primer_deposito>0:
                     dep = 1
-                data.append([r.client,str(dep)])
+                    if fpa.exists():
+                        # data.append([r.client,str(dep),fpa.first().full_name.strip().lower(),fpa.first().fpa])
+                        data.append({'client':r.client,'deposit':str(dep),'full_name':fpa.first().full_name.strip().lower(),'fpa':fpa.first().fpa})
             
             return JsonResponse({'data':data})
             
@@ -29,7 +33,7 @@ def verificar(request):
         return JsonResponse({'error':'metodo invalido'})
 
 
- 
+
 def registrosGetAll(request):
     
     if request.method == 'GET':

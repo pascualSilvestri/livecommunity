@@ -49,6 +49,7 @@ class Registros_cpa(models.Model):
 
 
 class Registros_ganancias(models.Model):
+    id= models.AutoField(primary_key=True)
     client = models.CharField(max_length=100)
     fpa=    models.CharField(max_length=200,null=True)
     full_name = models.CharField(max_length=200)
@@ -56,6 +57,7 @@ class Registros_ganancias(models.Model):
     equity = models.DecimalField(max_digits=10, decimal_places=2)
     balance = models.DecimalField(max_digits=10, decimal_places=2)
     partner_earning = models.DecimalField(max_digits=10, decimal_places=2)
+    monto_a_pagar= models.DecimalField(max_digits=10, decimal_places=2)
     skilling_earning = models.DecimalField(max_digits=10, decimal_places=2)
     skilling_markup = models.DecimalField(max_digits=10, decimal_places=2)
     skilling_commission = models.DecimalField(max_digits=10, decimal_places=2)
@@ -67,6 +69,9 @@ class Registros_ganancias(models.Model):
     deposito_neto = models.DecimalField(max_digits=10, decimal_places=2)
     deposito = models.CharField(max_length=50)
     withdrawals = models.CharField(max_length=50)
+    spreak_direct = models.FloatField(default=0)
+    spreak_indirecto = models.FloatField(default=0)
+    spreak_socio = models.FloatField(default=0)
     pagado = models.BooleanField(default=False)
 
     def __str__(self):

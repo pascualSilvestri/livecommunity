@@ -72,7 +72,7 @@ function valido(cont) {
 //return un Boolean
 
 const enviarDatos = () => {
-    if (errorN && errorA && errorE && errorT && errorU && errorC) {
+    if (errorN && errorA && errorE && errorT && errorU) {
         return true 
     }
 }
@@ -231,59 +231,59 @@ function validar(input) {
     }
 }
 
-function validarId(){
-    if (input_idCliente.value == input_validar.value){
-        return true;
-    }
-    return false;
-}
+// function validarId(){
+//     if (input_idCliente.value == input_validar.value){
+//         return true;
+//     }
+//     return false;
+// }
 
-input_idCliente.addEventListener('blur',e=>{
-    if (input_idCliente.value != "" && redex["telefono"].test(input_idCliente.value)&& validarId()&&deposito(idClientes)) {
-        valido(input_idCliente)
+// input_idCliente.addEventListener('blur',e=>{
+//     if (input_idCliente.value != "" && redex["telefono"].test(input_idCliente.value)&& validarId()&&deposito(idClientes)) {
+//         valido(input_idCliente)
 
-        mensaje_verificado.style.display= 'block'
-        setTimeout(()=> {
+//         mensaje_verificado.style.display= 'block'
+//         setTimeout(()=> {
 
-            if(mensaje_verificado!=null){
-                mensaje_verificado.style.display = 'none'
-            }
+//             if(mensaje_verificado!=null){
+//                 mensaje_verificado.style.display = 'none'
+//             }
         
-        }, 3000); 
-        section_de_validacion.style.display = 'none'
-        errorC = true
-        if (input_idCliente.value == "") {
-            errorC = false
-        }
-    } else if (!deposito(idClientes)){
-        modalError(errorMensaje.noDeposito)
-        if (input_idCliente.value == ""||!validar()) {
-            errorC = false
-        }
-        if (!errorC) {
-            error(input_idCliente)
-            errorC = false
+//         }, 3000); 
+//         section_de_validacion.style.display = 'none'
+//         errorC = true
+//         if (input_idCliente.value == "") {
+//             errorC = false
+//         }
+//     } else if (!deposito(idClientes)){
+//         modalError(errorMensaje.noDeposito)
+//         if (input_idCliente.value == ""||!validar()) {
+//             errorC = false
+//         }
+//         if (!errorC) {
+//             error(input_idCliente)
+//             errorC = false
 
-        }
-    }else {
-        modalError(errorMensaje.idCliente)
-        section_de_validacion.style.display = 'flex'
-        // section_de_validacion.scrollIntoView()
-        window.scrollTo({
-            top: 1200,
-            behavior: "smooth"
-          });
-        if (input_idCliente.value == ""||!validar()) {
-            errorC = false
-        }
-        if (!errorC) {
-            error(input_idCliente)
-            errorC = false
+//         }
+//     }else {
+//         modalError(errorMensaje.idCliente)
+//         section_de_validacion.style.display = 'flex'
+//         // section_de_validacion.scrollIntoView()
+//         window.scrollTo({
+//             top: 1200,
+//             behavior: "smooth"
+//           });
+//         if (input_idCliente.value == ""||!validar()) {
+//             errorC = false
+//         }
+//         if (!errorC) {
+//             error(input_idCliente)
+//             errorC = false
 
-        }
+//         }
 
-    }
-})
+//     }
+// })
 
 
 //validamos que los datos esten correcto

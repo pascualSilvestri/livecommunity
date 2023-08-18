@@ -4,7 +4,7 @@ from ...utils.limpiarTablas import limpiar_datos_fpa, limpiar_registros,limpiar_
 from ...utils.funciones import existe,existe_cpa,existe_ganancia
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias
-from ...usuarios.models import Cuenta,Usuario
+from ...usuarios.models import Cuenta,Usuario,Spread
 from datetime import datetime
 import pandas as pd
 import os
@@ -243,6 +243,7 @@ def upload_ganancias(request):
         try:
             fpas = Relation_fpa_client.objects.all()
             ganancias = Registros_ganancias.objects.all()
+            spred = Spread.objects.all()
             excel_file = request.FILES["csvFileGanancias"]
             file_name = excel_file.name  # Obtengon el nombre del archivo
             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
@@ -274,6 +275,10 @@ def upload_ganancias(request):
                             fecha_last_trade_string, "%Y-%m-%d"
                         ).date()
                     
+                    if g['partner_earning'] != 'NaN':
+                        monto_a_pagar=  round(calcula_porcentaje_directo(float(g['partner_earning']),spred[0].porcentaje,spred[1].porcentaje),2)
+                    else:
+                        monto_a_pagar=0
                     
                     ganancia = Registros_ganancias(
                         client = str(int(g['client'])),
@@ -283,6 +288,7 @@ def upload_ganancias(request):
                         equity = g['equity'],
                         balance = g['balance'],
                         partner_earning = g['partner_earning'],
+                        monto_a_pagar=monto_a_pagar,
                         skilling_earning = g['skilling_earning'],
                         skilling_markup = g['skilling_markup'],
                         skilling_commission = g['skilling_commission'],
@@ -294,6 +300,9 @@ def upload_ganancias(request):
                         deposito_neto = g['deposito_neto'],
                         deposito = g['deposito'],
                         withdrawals = g['withdrawals'],
+                        spreak_direct = spred[1].porcentaje,
+                        spreak_indirecto = spred[2].porcentaje,
+                        spreak_socio = spred[0].porcentaje
                     )
                     
                     
@@ -302,7 +311,7 @@ def upload_ganancias(request):
                         cuenta = Cuenta.objects.filter(fpa=fpa).first()
                         if g['partner_earning'] != 'NaN':
                             cuenta.monto_total += g['partner_earning']
-                            cuenta.monto_a_pagar += round(calcula_porcentaje_directo(float(g['partner_earning']),20,10),2)
+                            cuenta.monto_a_pagar += round(calcula_porcentaje_directo(float(g['partner_earning']),spred[0].porcentaje,spred[1].porcentaje),2)
                             cuenta.save()
                 
                 

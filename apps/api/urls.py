@@ -1,8 +1,9 @@
 from django.urls import path
 from . import views
-from .controller.users import postNewAfiliado,postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,users_eliminados,users_pendientes,updatePassword,montosGet
-from .controller.registros import verificar,registrosGetAll,getRegistroById
+from .controller.users import postNewAfiliado,postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,users_eliminados,users_pendientes,updatePassword
+from .controller.registros import verificar,registrosGetAll,getRegistroById,filter_registros_fecha_by_id
 from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa,ganancias_cpa_by_id
+from .controller.cuenta import montosGet
 from .controller.files import upload_fpa,upload_registros,upload_cpa,upload_ganancias
 
 
@@ -18,6 +19,7 @@ urlpatterns = [
       path('verificar/',verificar,name='verificar'),
       path('registros/',registrosGetAll,name='registros'),
       path('registrosbyid/<pk>/',getRegistroById,name='registrosById'),
+        path('filtrarregistrosfecha/<pk>/<desde>/<hasta>/', filter_registros_fecha_by_id, name = 'registrosFiltradoFecha'),
       #############################################################################################
       ########################             Ganancias                ###############################
       #############################################################################################

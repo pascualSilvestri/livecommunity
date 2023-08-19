@@ -355,32 +355,3 @@ def updatePassword(request,pk):
     else:
         return JsonResponse({'Error':'Metodo incorrecto'})
 
-@csrf_exempt  
-def montosGet(request,pk):
-
-    if request.method == 'GET':
-        try:
-            
-            usuario = Usuario.objects.get(fpa=pk)
-            
-            data = [{
-                "monto_total":usuario.monto_total,
-                "monto_a_pagar":usuario.monto_a_pagar,
-                "monto_cpa":usuario.monto_cpa,
-                "monto_directo":usuario.monto_directo,
-                "monto_indirecto":usuario.monto_indirecto,
-                "monto_bono_directo":usuario.monto_bono_directo,
-                "monto_bono_indirecto":usuario.monto_bono_indirecto,
-                "cpa_directos":usuario.cpa,
-                "cpa_indirecto":usuario.cpaIndirecto,
-                "level_bono_directo": usuario.level_bono_directo,
-                "level_bono_indirecto": usuario.level_bono_indirecto,
-            }]
-            
-            return JsonResponse({"data":data})
-            
-        except Exception as e:
-            return JsonResponse({'Error':e})
-    else:
-        return JsonResponse({'Error':'Metodo Incorrecto'})
-

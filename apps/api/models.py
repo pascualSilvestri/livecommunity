@@ -76,4 +76,14 @@ class Registros_ganancias(models.Model):
 
     def __str__(self):
         return self.client
+
+
+class Cpa_a_pagar(models.Model):
+    monto= models.FloatField()
+    client= models.CharField(max_length=50)
+    fpa= models.CharField(max_length=50)
+    fecha_creacion= models.DateField(auto_created=True)
+    pagado = models.BooleanField(default=False)
     
+    def __str__(self):
+        return self.client

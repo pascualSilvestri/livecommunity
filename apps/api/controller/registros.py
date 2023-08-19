@@ -21,9 +21,15 @@ def verificar(request):
                 dep = 0
                 if r.primer_deposito>0:
                     dep = 1
-                    if fpa.exists():
-                        # data.append([r.client,str(dep),fpa.first().full_name.strip().lower(),fpa.first().fpa])
-                        data.append({'client':r.client,'deposit':str(dep),'full_name':fpa.first().full_name.strip().lower(),'fpa':fpa.first().fpa})
+                if fpa.exists():
+                    data.append(
+                        {
+                            'client':r.client,
+                            'deposit':str(dep),
+                            'full_name':fpa.first().full_name.strip().lower(),
+                            'fpa':fpa.first().fpa
+                            }
+                        )
             
             return JsonResponse({'data':data})
             

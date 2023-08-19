@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="hero-right">
-                    <img src="" alt="">
+                    <iframe width="560" height="405" src="https://www.youtube.com/embed/D8Qvm21h-Kw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                     
             </div>
@@ -36,7 +36,7 @@
                         <input id="example-1" class="substituted" type="checkbox" aria-hidden="true" />
                         <label for="example-1"></label>
                     </div>
-                      
+
                     <p>Una vez REGISTRADO, podés aceptar los <a target="_blank" class="link" href="{% static 'pdf/terminos-y-condiciones.pdf' %}">Terminos y condiciones</a> y las <a target="_blank" class="link" href="{% static 'pdf/politica-y-privacidad.pdf' %}">Politicas de privacidad</a> para continuar con el fondeo de tu cuenta.</p>
                 </div>
                 <div class="button-continuar">
@@ -167,12 +167,15 @@
             <h4 class="text-verificar-cliente">
                 EL REGISTRO PUEDE TARDAR 12 HS, UNA VES
                 QUE ESTE VERIFICADA, PODRA CONTINUAR
-                COLOCANDO SU SUS DATOS TAL CUAL SE REGISTRO EN SKILLING<br> <a id='link-id-cliente' class="link-video-telegram">(Ver Video)</a>
+                COLOCANDO SUS DATOS TAL CUAL SE REGISTRO EN SKILLING
+                {% comment %} <br> <a id='link-id-cliente' class="link-video-telegram">(Ver Video)</a> {% endcomment %}
 
             </h4>
 
             <div class="form-verificar-cliente">
+                <label for="id_socio">Ingrese el código de ID proporcionado por el socio</label>
                 <input type="text" value="" name="idNuevoCliente" id="id_nuevo_cliente">
+                <label for="id_socio">Ingrese su nombre completo tal como está registrado en Skilling</label>
                 <input type="text" value="" name="nombreNuevoCliente" id="nombre_nuevo_cliente">
                 <button class="button-verificar-cliente" role="button">Verificar</button>
             </div>
@@ -218,10 +221,10 @@
                     <div class="paso">
                         <div class="block">
                             <div class="title-paso">Paso 3 : ENVIAR USDT A TU CUENTA DE
-                                LIBERTEX</div> 
-                            <div class="text-paso">Explicación de como enviar USDT a tu cuenta en Libertex</div>
+                                SKILLING</div> 
+                            <div class="text-paso">Explicación de como enviar USDT a tu cuenta en Skilling</div>
                             {% comment %} <video preload="none" class='modal-video' src="{% static 'video/como_depositar_libertex.mp4' %}" controls='true' width='400px'></video> {% endcomment %}
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/Aegit07MdpQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class='modal-video'></iframe>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/urtZcVofok8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="paso">

@@ -15,8 +15,10 @@ const btn = document.querySelector('#btn-send')
 const section_de_validacion = document.getElementById('nuevo_id_cliente')
 const mensaje_verificado = document.querySelector('.mensaje-verificar-cliente')
 
-const input_validar = document.querySelector('#id_nuevo_cliente')
 const input_idCliente = document.querySelector('#id_cliente')
+
+const input = document.querySelector('#id_nuevo_cliente')
+const inputNombre = document.querySelector('#nombre_nuevo_cliente')
 
 var miParrafo = document.getElementById("mensaje");
 
@@ -98,11 +100,18 @@ async function obtenerDatos() {
 
   obtenerDatos()
 
-const deposito = (array)=>{
-    for(const element of array){
-        if(input_idCliente.value==element[0]&&element[1]==1){
-            return true
-        }
+// const deposito = (array)=>{
+//     for(const element of array){
+//         if(input_idCliente.value==element[0]&&element[1]==1){
+//             return true
+//         }
+//     }
+// }
+
+const deposito = ()=>{
+    const client = idClientes.filter(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase())
+    if(client.deposit > 0){
+        return true
     }
 }
 
@@ -231,6 +240,8 @@ function validar(input) {
     }
 }
 
+
+
 // function validarId(){
 //     if (input_idCliente.value == input_validar.value){
 //         return true;
@@ -296,6 +307,17 @@ if(form != null){
     //asociamos un evento tipo submit al form
     form.addEventListener('submit', e => {
         // verificamos que los datos estan ingresado correctamtente
+        if (!deposito()){
+            modalError(errorMensaje.noDeposito)
+            if (input_idCliente.value == ""||!validar()) {
+                errorC = false
+            }
+            if (!errorC) {
+                error(input_idCliente)
+                errorC = false
+    
+            }
+        }
         if (enviarDatos()) {
             //mostramos al usuario un modal para confirmar que ingreso los datos correctos
             const confirmar = confirm("Confirma que los datos estan ingresados correctamente")
@@ -312,6 +334,7 @@ if(form != null){
             modalError(errorMensaje.btnError)
             e.preventDefault();
         }
+        
     })
 }
 

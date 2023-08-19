@@ -35,7 +35,7 @@ async function obtenerDatos() {
 //retorna un boolean
 
 const verificarNuevoCliente = ()=>{
-  const client = idClientes.filter(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase()&&e.deposit!='0')
+  const client = idClientes.filter(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase())
   if(client.length > 0){
     return true
   }

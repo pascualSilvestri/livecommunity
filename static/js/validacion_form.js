@@ -110,11 +110,7 @@ async function obtenerDatos() {
 
 const deposito = ()=>{
     const client = idClientes.filter(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase())
-    console.log(client.deposit)
-    if(client.deposit > 0){
-        console.log()
-        return true
-    }
+    return client
 }
 
 //Logica para validar los inputs 
@@ -309,7 +305,8 @@ if(form != null){
     //asociamos un evento tipo submit al form
     form.addEventListener('submit', e => {
         // verificamos que los datos estan ingresado correctamtente
-        if (!deposito()){
+        client = deposito()
+        if (client.deposit == '0'){
             e.preventDefault();
             modalError(errorMensaje.noDeposito)
             if (input_idCliente.value == ""||!validar()) {

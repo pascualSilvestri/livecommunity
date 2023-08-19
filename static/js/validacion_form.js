@@ -74,7 +74,7 @@ function valido(cont) {
 //return un Boolean
 
 const enviarDatos = () => {
-    if (errorN && errorA && errorE && errorT && errorU) {
+    if (errorN && errorA && errorE && errorT && errorU&&errorC) {
         return true 
     }
 }
@@ -110,7 +110,9 @@ async function obtenerDatos() {
 
 const deposito = ()=>{
     const client = idClientes.filter(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase())
+    console.log(client.deposit)
     if(client.deposit > 0){
+        console.log()
         return true
     }
 }
@@ -308,6 +310,7 @@ if(form != null){
     form.addEventListener('submit', e => {
         // verificamos que los datos estan ingresado correctamtente
         if (!deposito()){
+            e.preventDefault();
             modalError(errorMensaje.noDeposito)
             if (input_idCliente.value == ""||!validar()) {
                 errorC = false
@@ -318,7 +321,7 @@ if(form != null){
     
             }
         }else{
-            e.preventDefault();
+            errorC = true
         }
         if (enviarDatos()) {
             //mostramos al usuario un modal para confirmar que ingreso los datos correctos

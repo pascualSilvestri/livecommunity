@@ -3,8 +3,9 @@ from django.views.decorators.csrf import csrf_exempt
 from ...utils.limpiarTablas import limpiar_datos_fpa, limpiar_registros,limpiar_cpa,limpiar_ganacias
 from ...utils.funciones import existe,existe_cpa,existe_ganancia
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
+from ...utils.bonos import bonoDirecto,bonoIndirecto
 from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias
-from ...usuarios.models import Cuenta,Usuario,Spread
+from ...usuarios.models import Cuenta,Usuario,Spread,BonoCpa,BonoCpaIndirecto
 from datetime import datetime
 import pandas as pd
 import os
@@ -213,14 +214,37 @@ def upload_cpa(request):
                         client= cpa['client'],
                         fpa= fpa
                     )
-                    montos = Cuenta.objects.filter(fpa=fpa)[0]
-                    montos.monto_cpa += cpa['monto']
-                    montos.cpa += 1
+                    
                     
                     if not existe_cpa(fecha_creacion,cpa['monto'],cpa['client'],cpa['fpa'],cpas):
-                        new_cpa.save()
-                        montos.save()
-                
+                        bono_directo = BonoCpa
+                        bono_indirecto = BonoCpaIndirecto
+                        cuenta = Cuenta.objects.filter(fpa=fpa)[0]
+                        
+                        if cuenta.fpa != 'none':
+                            print(cuenta.fpa)
+                            usuario_up_line = Usuario.objects.filter(fpa=fpa)
+                            
+                            if usuario_up_line.exists():
+                                cuenta_up_line = Cuenta.objects.filter(fpa=usuario_up_line.first().uplink)
+                            else:
+                                cuenta_up_line = None
+                            cuenta.monto_cpa += cpa['monto']
+                            cuenta.cpa += 1
+                            
+                            bonoDirecto(cuenta,bono_directo)
+                            if cuenta_up_line != None:
+                                if cuenta_up_line.exists() :
+                                    bonoIndirecto(cuenta_up_line[0],bono_indirecto)
+                            
+                            new_cpa.save()
+                            cuenta.save()
+                            # usuario_up_line[0].save()
+                            if cuenta_up_line != None:
+                                if cuenta_up_line.exists():
+                                    cuenta_up_line[0].save()
+                            
+                    
             else:
                 print("ErrorMessege Document is not format")
                 return JsonResponse({"ErrorMessege": "Document is not format"})

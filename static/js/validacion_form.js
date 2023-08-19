@@ -317,6 +317,8 @@ if(form != null){
                 errorC = false
     
             }
+        }else{
+            e.preventDefault();
         }
         if (enviarDatos()) {
             //mostramos al usuario un modal para confirmar que ingreso los datos correctos

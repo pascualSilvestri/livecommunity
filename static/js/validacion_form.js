@@ -74,7 +74,7 @@ function valido(cont) {
 //return un Boolean
 
 const enviarDatos = () => {
-    if (errorN && errorA && errorE && errorT && errorU&&errorC) {
+    if (errorN && errorA && errorE && errorT && errorU) {
         return true 
     }
 }
@@ -109,8 +109,12 @@ async function obtenerDatos() {
 // }
 
 const deposito = ()=>{
-    const client = idClientes.filter(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase())
+    const client = idClientes.find(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase())
     return client
+    // if(client.deposit > 0){
+    //     console.log()
+    //     return true
+    // }
 }
 
 //Logica para validar los inputs 
@@ -304,39 +308,31 @@ function validar(input) {
 if(form != null){
     //asociamos un evento tipo submit al form
     form.addEventListener('submit', e => {
+        const client = deposito()
         // verificamos que los datos estan ingresado correctamtente
-        client = deposito()
-        if (client.deposit == '0'){
+        if (client.deposit=='0'){
             e.preventDefault();
             modalError(errorMensaje.noDeposito)
-            if (input_idCliente.value == ""||!validar()) {
-                errorC = false
-            }
-            if (!errorC) {
-                error(input_idCliente)
-                errorC = false
-    
-            }
         }else{
-            errorC = true
-        }
-        if (enviarDatos()) {
-            //mostramos al usuario un modal para confirmar que ingreso los datos correctos
-            const confirmar = confirm("Confirma que los datos estan ingresados correctamente")
-            if (confirmar) {
-                //enviamos el formulario
-                form.submit()
+            if (enviarDatos()) {
+                //mostramos al usuario un modal para confirmar que ingreso los datos correctos
+                const confirmar = confirm("Confirma que los datos estan ingresados correctamente")
+                if (confirmar) {
+                    //enviamos el formulario
+                    form.submit()
+                }else{
+                    //prevenimos el envio de datos si el usuario cancela el modal
+                    e.preventDefault();
+                }
+    
             }else{
-                //prevenimos el envio de datos si el usuario cancela el modal
+                //prevenimos el envio de datos si los datos no estan correctametne ingresados
+                modalError(errorMensaje.btnError)
                 e.preventDefault();
             }
-
-        }else{
-            //prevenimos el envio de datos si los datos no estan correctametne ingresados
-            modalError(errorMensaje.btnError)
-            e.preventDefault();
+            
         }
-        
+       
     })
 }
 

@@ -222,9 +222,8 @@ def upload_cpa(request):
                         cuenta = Cuenta.objects.filter(fpa=fpa)[0]
                         
                         if cuenta.fpa != 'none':
-                            print(cuenta.fpa)
-                            usuario_up_line = Usuario.objects.filter(fpa=fpa)
                             
+                            usuario_up_line = Usuario.objects.filter(fpa=fpa)
                             if usuario_up_line.exists():
                                 cuenta_up_line = Cuenta.objects.filter(fpa=usuario_up_line.first().uplink)
                             else:
@@ -235,14 +234,15 @@ def upload_cpa(request):
                             bonoDirecto(cuenta,bono_directo)
                             if cuenta_up_line != None:
                                 if cuenta_up_line.exists() :
-                                    bonoIndirecto(cuenta_up_line[0],bono_indirecto)
-                            
+                                    cuenta_up = cuenta_up_line.first()
+                                    cuenta_up.cpaIndirecto += 1
+                                    print(f'hijo: {usuario_up_line[0].fpa} padre: {cuenta_up_line[0].fpa}')
+                                    bonoIndirecto(cuenta_up,bono_indirecto)
+                                    cuenta_up.save()
                             new_cpa.save()
                             cuenta.save()
                             # usuario_up_line[0].save()
-                            if cuenta_up_line != None:
-                                if cuenta_up_line.exists():
-                                    cuenta_up_line[0].save()
+                                    
                             
                     
             else:

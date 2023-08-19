@@ -44,8 +44,19 @@
 .form-verificar-cliente{
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     gap: 20px;
+}
+
+#nombre_nuevo_cliente{
+  border: 2px solid #999;
+  width: 500px;
+  height: 3rem;
+  border-radius: 30px;
+  padding: 0 0 0 .7rem;
+  font-family: sans-serif;
+  font-weight: 700;
 }
 
 

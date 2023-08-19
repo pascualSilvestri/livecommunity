@@ -37,7 +37,6 @@ class Usuario(AbstractUser):
     registrado = models.BooleanField(default=False)
     aceptado= models.BooleanField(default=False)
     eliminado= models.BooleanField(default=False)
-    haveBono= models.BooleanField(default=False)
     # bonoIndirecto_2=models.BooleanField(default=False)
     # bonoIndirecto_3=models.BooleanField(default=False)
     # bonoIndirecto_4=models.BooleanField(default=False)
@@ -68,6 +67,8 @@ class Cuenta(models.Model):
     level_bono_directo=models.IntegerField(default=0)
     level_bono_indirecto=models.IntegerField(default=0)
     retiros= models.FloatField(default=0.0)
+    have_bono= models.BooleanField(default=False)
+    have_bono_indirecto= models.BooleanField(default=False)
     
     def __str__(self):
         return self.fpa

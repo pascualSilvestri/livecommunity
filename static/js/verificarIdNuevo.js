@@ -1,30 +1,13 @@
 const bandera = false
 const idClientes = []
 const input = document.querySelector('#id_nuevo_cliente')
+const inputNombre = document.querySelector('#nombre_nuevo_cliente')
 // const input_idCliente = document.querySelector('#id_cliente')
 const section_A_Validar = document.querySelector('.validacion-2')
 const mensaje_verificado = document.querySelector('.mensaje-verificar-cliente')
 const mensaje_no_verificado = document.querySelector('.error-verificar-cliente')
 const btn_validar = document.querySelector('.button-verificar-cliente')
 const section_de_validacion = document.querySelector('.verificar-nuevo-cliente')
-//obtener datos de la api de django
-// const datos = fetch('verificarNuevoCliente/')
-//     .then(response => {
-//         if (response.ok) {
-//             return response.json();
-//         } else {
-//             throw new Error('Error en la respuesta del servidor');
-//         }
-//     })
-//     .then(data => {
-//         data['data'].forEach(element => {
-//             idClientes.push(element)
-//         });
-//     })
-//     .catch(error => {
-//         // Maneja errores
-//         console.error(error);
-//     });
 
 async function obtenerDatos() {
     try {
@@ -38,7 +21,6 @@ async function obtenerDatos() {
       }
       const data = await response.json();
       data['data'].forEach(element => {
-        
         idClientes.push(element);
       });
     } catch (error) {
@@ -48,34 +30,37 @@ async function obtenerDatos() {
 
   obtenerDatos()
 
-  
+ 
 //Verifica si esta el elemento en la base datos 
 //retorna un boolean
-const verificarNuevoCliente = (input,array)=>{
-    for(const element of array){
-        if(input.value==element[0]){
-            return true
-        }
-    }
+
+const verificarNuevoCliente = ()=>{
+  const client = idClientes.filter(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase())
+  if(client.length > 0){
+    return true
+  }
 }
 
-// input_idCliente.value = input.value
+// if(btn_validar != null){
+//   btn_validar.addEventListener('click',(e) =>{
+//     verificarNuevoCliente()
+//   })
+// }
+// // // input_idCliente.value = input.value
 
-//compruebo que el input no sea null
+// // //compruebo que el input no sea null
 if(btn_validar != null){
     //le asocio un evento tipo blur validar cuando desenfoca 
     btn_validar.addEventListener('click', e => {
         //una exprecion regular para validar que sean solo numeros y minimo 10 caracter
-        const redex = /^[0-9]{5,}$/
+        // const redex = /^[0-9]{2,}$/
         //verifico con la funcion verificarNuevo si exite en base de datos
         //con la exprecion regular verifico que sea numero y mini 10 caracter
-        if(verificarNuevoCliente(input,idClientes)&&redex.test(input.value)){
+        if(verificarNuevoCliente()){
             //si cumple con los requerimientos se habilitas las siguientes secciones
             section_A_Validar.style.display = 'block'
-
             section_de_validacion.style.display = 'none'
-
-            //Muestra mensaje de verificacion valida 3 segundos 
+            //Muestra mensaje de verificacion valida 3 egundos 
 
         }else{
             //si no cumple no se muestran las siguientes secciones

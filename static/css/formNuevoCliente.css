@@ -122,3 +122,12 @@
     outline: none;
     color: dodgerblue;
 }
+
+
+@media only screen and (max-width: 720px) {
+
+  #nombre_nuevo_cliente{
+    width: 90%;
+  }
+
+}

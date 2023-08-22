@@ -148,24 +148,31 @@ header{
     height: 400px;
     background: black;
     margin: 0 0 0 3rem;
-
   }
 
   @media only screen and (max-width: 720px) {
     .hero{
-      height: 75vh;
+      height: auto;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: center;
       max-width: 100%;
+    }
+
+    .hero-right{
+      width: 90%;
+      height: 400px;
+      background: black;
+      margin: 0 0 3rem 0;
+    }
+    .hero-right iframe{
+      width: 100%;
     }
     .hero h1 {
       font-size: 13vw;
     }
-    .hero-right{
-      margin: 0;
-  
-    }
+
+
   }
   
   

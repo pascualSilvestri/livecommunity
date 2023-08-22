@@ -14,7 +14,7 @@ class Relation_fpa_client(models.Model):
     status = models.CharField(max_length=100,null=True)
     
     def __str__(self):
-        return self.fpa
+        return self.client
 
 class Registro_archivo(models.Model):
     id= models.AutoField(primary_key=True)
@@ -37,6 +37,7 @@ class Registro_archivo(models.Model):
 
 
 class Registros_cpa(models.Model):
+    id = models.AutoField(primary_key=True)
     fecha_creacion= models.DateField(null=True)
     monto= models.FloatField()
     cpa= models.CharField(max_length=50)

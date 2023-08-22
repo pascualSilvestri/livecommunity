@@ -102,11 +102,10 @@ def upload_registros(request):
             excel_file = request.FILES["csvFileRegistro"]
             file_name = excel_file.name  # Obtengon el nombre del archivo
             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
-
-            print(file_extension)
-
-
+            
+            
             if file_extension == ".xlsx":
+                
                 file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
                 new_data=limpiar_registros(file_data)
                 

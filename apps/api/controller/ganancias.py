@@ -467,3 +467,95 @@ def filter_ganancia_to_date_by_id(request,pk,desde,hasta):
     except ValueError:
         print(ValueError)
         return ValueError
+
+# def ganancias_all_for_id(request):
+#     if request.method == 'GET':
+#         try:
+#             ganancias = Registros_ganancias.objects.all()
+#             spred = Spread.objects.all()
+#             # cpas = Registros_cpa.objects.all()
+#             data=[]
+            
+#             for r in ganancias:
+#                 data_for_id=[]
+#                 fpa=[]
+#                 for g in ganancias:
+#                     if g.fpa == r.fpa and not (r.fpa in fpa) :
+#                         fpa.append(r.fpa)
+#                         if g.pagado == False:
+#                             if g.partner_earning != 0:
+#                                 monto_spread = round(calcula_porcentaje_directo(float(g.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
+#                             else:
+#                                 monto_spread = g.partner_earning
+#                             data_for_id.append( 
+#                                 {
+#                                     'creacion':g.fecha_first_trade,
+#                                     'monto':g.partner_earning,
+#                                     'monto_spread':monto_spread,
+#                                     'tipo_comision':'Reverashe',
+#                                     'client':g.client,
+#                                     'retiro':g.withdrawals,
+#                                     'isPago':g.pagado
+#                                 }
+#                             )
+#                 data.append(data_for_id)
+            
+#             response = JsonResponse({'data': data})
+            
+#             return response
+#         except Exception as e:
+#             return JsonResponse({'Error':e.__str__()})
+#     else:
+#         return JsonResponse({'Error':'Metodo invalidos'})
+
+
+
+
+
+def ganancias_all_for_id(request,desde,hasta):
+    if request.method == 'GET':
+        try:
+            ganancias = Registros_ganancias.objects.all()
+            spred = Spread.objects.all()
+
+            data = []
+
+            fpas_seen = []  # Para evitar duplicados de fpa
+            for f in ganancias:
+                fpas_seen.append(f.fpa)
+            
+            fpa_set = set(fpas_seen)
+            fpa_list= list(fpa_set)
+            for g in fpa_list:
+
+                data_for_id = []
+                ganancias_by_id=ganancias.filter(Q(fecha_first_trade__gte=desde) & Q(fecha_first_trade__lte=hasta),fpa=g,pagado=False).exclude(fecha_first_trade=None)
+                
+                for r in ganancias_by_id:    
+                
+                    if not r.pagado and r.partner_earning != 0:
+                        monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
+                    else:
+                        monto_spread = r.partner_earning
+                    data_for_id.append({
+                        'id':r.id,
+                        'creacion': r.fecha_first_trade,
+                        'monto': r.partner_earning,
+                        'monto_spread': monto_spread,
+                        'tipo_comision': 'Reverashe',
+                        'client': r.client,
+                        'retiro': r.withdrawals,
+                        'isPago': r.pagado,
+                        'fpa':r.fpa
+                    })
+                data.append(data_for_id)
+            
+            data = [subarray for subarray in data if subarray]
+
+            response = JsonResponse({'data': data})
+
+            return response
+        except Exception as e:
+            return JsonResponse({'Error': str(e)})
+    else:
+        return JsonResponse({'Error': 'Método inválido'})

@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from .controller.users import postNewAfiliado,postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,users_eliminados,users_pendientes,updatePassword
 from .controller.registros import verificar,registrosGetAll,getRegistroById,filter_registros_fecha_by_id
-from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa,ganancias_cpa_by_id
+from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa,ganancias_cpa_by_id,ganancias_all_for_id
 from .controller.cuenta import montosGet
 from .controller.files import upload_fpa,upload_registros,upload_cpa,upload_ganancias
 
@@ -46,6 +46,7 @@ urlpatterns = [
       path('filtrarganaciasrevshare/<pk>/', filtrar_ganancias_by_revshare_By_Id, name = 'filtradoRevshareById'),
       path('cpas/',ganancias_cpa,name='cpa'),
       path('cpas/<pk>/',ganancias_cpa_by_id,name='cpa'),
+      path('gananciasallforid/<desde>/<hasta>/',ganancias_all_for_id,name='gananciasAllForId'),
       #############################################################################################
       ########################             Users                   ###############################
       #############################################################################################

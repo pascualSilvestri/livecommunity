@@ -96,7 +96,7 @@ def getUser(request,email):
                 data = []
                 for u in usuarios:
                     
-                    if u.email == email:
+                    if u.email.upper() == email.upper():
                 
                         data.append({
                             'fpa':u.fpa,

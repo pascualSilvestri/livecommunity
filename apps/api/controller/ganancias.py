@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...utils.funciones import formatera_retiro
-from ...usuarios.models import Spread
+from ...usuarios.models import Spread,Usuario
 from ...api.models import Registros_ganancias,Registros_cpa
 import re
 
@@ -467,3 +467,60 @@ def filter_ganancia_to_date_by_id(request,pk,desde,hasta):
     except ValueError:
         print(ValueError)
         return ValueError
+
+
+def ganancias_all_for_id(request,desde,hasta):
+    if request.method == 'GET':
+        try:
+            ganancias = Registros_ganancias.objects.all()
+            usuarios = Usuario.objects.all()
+            spred = Spread.objects.all()
+
+            data = []
+
+            fpas_seen = []  # Para evitar duplicados de fpa
+            for f in ganancias:
+                fpas_seen.append(f.fpa)
+            
+            fpa_set = set(fpas_seen)
+            fpa_list= list(fpa_set)
+            for g in fpa_list:
+
+                data_for_id = []
+                ganancias_by_id=ganancias.filter(Q(fecha_first_trade__gte=desde) & Q(fecha_first_trade__lte=hasta),fpa=g,pagado=False).exclude(fecha_first_trade=None)
+                
+                for r in ganancias_by_id:    
+                
+                    if not r.pagado and r.partner_earning != 0:
+                        monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
+                    else:
+                        monto_spread = r.partner_earning
+                    
+                    usuario = usuarios.filter(fpa = r.fpa)
+                    if usuario.exists():
+                        wallet = usuario.first().wallet.__str__()
+                    else:
+                        wallet = 'Usuario no registrado'
+                    data_for_id.append({
+                        'id':r.id,
+                        'creacion': r.fecha_first_trade,
+                        'monto': r.partner_earning,
+                        'monto_spread': monto_spread,
+                        'tipo_comision': 'Reverashe',
+                        'client': r.client,
+                        'retiro': r.withdrawals,
+                        'isPago': r.pagado,
+                        'fpa':r.fpa,
+                        'wallet':wallet
+                    })
+                data.append(data_for_id)
+            
+            data = [subarray for subarray in data if subarray]
+
+            response = JsonResponse({'data': data})
+
+            return response
+        except Exception as e:
+            return JsonResponse({'Error': str(e)})
+    else:
+        return JsonResponse({'Error': 'Método inválido'})

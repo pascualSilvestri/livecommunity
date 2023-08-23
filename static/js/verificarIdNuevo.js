@@ -35,7 +35,11 @@ async function obtenerDatos() {
 //retorna un boolean
 
 const verificarNuevoCliente = ()=>{
-  const client = idClientes.filter(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase())
+
+  console.log(idClientes)
+  // const client = idClientes.filter(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase())
+  const client = idClientes.filter(e=> e.client==input.value)
+  console.log(client)
   if(client.length > 0){
     return true
   }
@@ -46,9 +50,9 @@ const verificarNuevoCliente = ()=>{
 //     verificarNuevoCliente()
 //   })
 // }
-// // // input_idCliente.value = input.value
 
-// // //compruebo que el input no sea null
+
+
 if(btn_validar != null){
     //le asocio un evento tipo blur validar cuando desenfoca 
     btn_validar.addEventListener('click', e => {

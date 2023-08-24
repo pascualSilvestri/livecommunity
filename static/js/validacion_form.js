@@ -269,7 +269,7 @@ if (input_idCliente != null){
             if (input_idCliente.value == "") {
                 errorC = false
             }
-        } else if (!deposito(idClientes)) {
+        } else if (deposito(idClientes)==false) {
             modalError(errorMensaje.noDeposito)
             if (input_idCliente.value == "" || !validar()) {
                 errorC = false

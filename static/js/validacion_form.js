@@ -46,9 +46,9 @@ const errorMensaje = {
     'email': `El formato correcto es ejemplo@correo.com`,
     'usuario': `Debe comenzar con un @ ejemplo @usuarioTelegram`,
     'btnError': "Por favor complete los campo correctamente.",
-    'idCliente':'Su cuenta no esta verificada correctamente, por favor verifique el ID ingresado',
-    'telefono':'Acepta solo numeros',
-    'noDeposito':'Para terminar el proceso de registro debe fondear la cuenta de libertex.'
+    'idCliente': 'Su cuenta no esta verificada correctamente, por favor verifique el ID ingresado',
+    'telefono': 'Acepta solo numeros',
+    'noDeposito': 'Para terminar el proceso de registro debe fondear la cuenta de libertex.'
 };
 
 
@@ -74,48 +74,44 @@ function valido(cont) {
 //return un Boolean
 
 const enviarDatos = () => {
-    if (errorN && errorA && errorE && errorT && errorU) {
-        return true 
+    if (errorN && errorA && errorE && errorT && errorU && errorC) {
+        return true
     }
 }
 
 async function obtenerDatos() {
     try {
 
-        //Local http://127.0.0.1:8000/verificar/
-        //produc https://livecommunity.info/verificar/
+        //http://127.0.0.1:8000/api/verificar/
         //https://livecommunity.info/api/verificar/
-      const response = await fetch('https://livecommunity.info/api/verificar/'); // cambiar a localhost para local 
-      if (!response.ok) {
-        throw new Error('Error en la respuesta del servidor');
-      }
-      const data = await response.json();
-      data['data'].forEach(element => {  
-        idClientes.push(element);
-      });
+        const response = await fetch('http://127.0.0.1:8000/api/verificar/'); // cambiar a localhost para local 
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+        }
+        const data = await response.json();
+        data['data'].forEach(element => {
+            idClientes.push(element);
+        });
     } catch (error) {
-      console.error(error);
+        console.error(error);
     }
-  }
-
-  obtenerDatos()
-
-// const deposito = (array)=>{
-//     for(const element of array){
-//         if(input_idCliente.value==element[0]&&element[1]==1){
-//             return true
-//         }
-//     }
-// }
-
-const deposito = ()=>{
-    const client = idClientes.find(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase())
-    return client
-    // if(client.deposit > 0){
-    //     console.log()
-    //     return true
-    // }
 }
+
+obtenerDatos()
+
+const deposito = (array) => {
+
+    const client = array.filter(c => c.client == input_idCliente.value)
+    if (client[0].deposit == 1) {
+        return true
+    } else {
+        return false
+    }
+}
+
+
+
+
 
 //Logica para validar los inputs 
 //toma un valor input 
@@ -210,7 +206,7 @@ function validar(input) {
                         error(input)
                         errorT = false
 
-                    }   
+                    }
                 }
 
             }
@@ -242,61 +238,62 @@ function validar(input) {
     }
 }
 
+function validarId() {
+    if (input_idCliente.value == input_validar.value) {
+        return true;
+    }
+    return false;
+}
 
+if (input_idCliente != null){
+    input_idCliente.addEventListener('blur', e => {
 
-// function validarId(){
-//     if (input_idCliente.value == input_validar.value){
-//         return true;
-//     }
-//     return false;
-// }
-
-// input_idCliente.addEventListener('blur',e=>{
-//     if (input_idCliente.value != "" && redex["telefono"].test(input_idCliente.value)&& validarId()&&deposito(idClientes)) {
-//         valido(input_idCliente)
-
-//         mensaje_verificado.style.display= 'block'
-//         setTimeout(()=> {
-
-//             if(mensaje_verificado!=null){
-//                 mensaje_verificado.style.display = 'none'
-//             }
-        
-//         }, 3000); 
-//         section_de_validacion.style.display = 'none'
-//         errorC = true
-//         if (input_idCliente.value == "") {
-//             errorC = false
-//         }
-//     } else if (!deposito(idClientes)){
-//         modalError(errorMensaje.noDeposito)
-//         if (input_idCliente.value == ""||!validar()) {
-//             errorC = false
-//         }
-//         if (!errorC) {
-//             error(input_idCliente)
-//             errorC = false
-
-//         }
-//     }else {
-//         modalError(errorMensaje.idCliente)
-//         section_de_validacion.style.display = 'flex'
-//         // section_de_validacion.scrollIntoView()
-//         window.scrollTo({
-//             top: 1200,
-//             behavior: "smooth"
-//           });
-//         if (input_idCliente.value == ""||!validar()) {
-//             errorC = false
-//         }
-//         if (!errorC) {
-//             error(input_idCliente)
-//             errorC = false
-
-//         }
-
-//     }
-// })
+        if (input_idCliente.value != "" && redex["telefono"].test(input_idCliente.value) && validarId() && deposito(idClientes)) {
+            valido(input_idCliente)
+    
+            mensaje_verificado.style.display = 'block'
+            setTimeout(() => {
+    
+                if (mensaje_verificado != null) {
+                    mensaje_verificado.style.display = 'none'
+                }
+    
+            }, 3000);
+            section_de_validacion.style.display = 'none'
+            errorC = true
+            if (input_idCliente.value == "") {
+                errorC = false
+            }
+        } else if (!deposito(idClientes)) {
+            modalError(errorMensaje.noDeposito)
+            if (input_idCliente.value == "" || !validar()) {
+                errorC = false
+            }
+            if (!errorC) {
+                error(input_idCliente)
+                errorC = false
+    
+            }
+        } else {
+            modalError(errorMensaje.idCliente)
+            section_de_validacion.style.display = 'flex'
+            // section_de_validacion.scrollIntoView()
+            window.scrollTo({
+                top: 1200,
+                behavior: "smooth"
+            });
+            if (input_idCliente.value == "" || !validar()) {
+                errorC = false
+            }
+            if (!errorC) {
+                error(input_idCliente)
+                errorC = false
+    
+            }
+    
+        }
+    })
+} 
 
 
 //validamos que los datos esten correcto
@@ -305,32 +302,23 @@ function validar(input) {
 
 
 // verificamos que no es null el form
-if(form != null){
+if (form != null) {
     //asociamos un evento tipo submit al form
     form.addEventListener('submit', e => {
         const client = deposito()
         // verificamos que los datos estan ingresado correctamtente
-        if (client.deposit=='0'){
-            e.preventDefault();
-            modalError(errorMensaje.noDeposito)
-        }else{
-            if (enviarDatos()) {
-                //mostramos al usuario un modal para confirmar que ingreso los datos correctos
-                const confirmar = confirm("Confirma que los datos estan ingresados correctamente")
-                if (confirmar) {
-                    //enviamos el formulario
-                    form.submit()
-                }else{
-                    //prevenimos el envio de datos si el usuario cancela el modal
-                    e.preventDefault();
-                }
-    
-            }else{
-                //prevenimos el envio de datos si los datos no estan correctametne ingresados
-                modalError(errorMensaje.btnError)
+        if (enviarDatos()) {
+            //mostramos al usuario un modal para confirmar que ingreso los datos correctos
+            const confirmar = confirm("Confirma que los datos estan ingresados correctamente")
+            if (!confirmar) {
+                //prevenimos el envio de datos si el usuario cancela el modal
                 e.preventDefault();
             }
-            
+
+        } else {
+            //prevenimos el envio de datos si los datos no estan correctametne ingresados
+            modalError(errorMensaje.btnError)
+            e.preventDefault();
         }
        
     })

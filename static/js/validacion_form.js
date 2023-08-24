@@ -277,7 +277,7 @@ if (input_idCliente != null){
         } else {
             modalError(errorMensaje.idCliente)
             section_de_validacion.style.display = 'flex'
-            // section_de_validacion.scrollIntoView()
+            section_de_validacion.scrollIntoView()
             window.scrollTo({
                 top: 1200,
                 behavior: "smooth"
@@ -305,7 +305,6 @@ if (input_idCliente != null){
 if (form != null) {
     //asociamos un evento tipo submit al form
     form.addEventListener('submit', e => {
-        const client = deposito()
         // verificamos que los datos estan ingresado correctamtente
         if (enviarDatos()) {
             //mostramos al usuario un modal para confirmar que ingreso los datos correctos

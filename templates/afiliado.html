@@ -278,10 +278,10 @@
                             <span>Teléfono</span>
                         </div>
     
-                        {% comment %} <div class="inputbox">
+                        <div class="inputbox">
                             <input type="text" name="idcliente" id="id_cliente" required="required" data-cliente class="input-default" required='required'>
                             <span>Ingresar de nuevo idCliente</span>
-                        </div> {% endcomment %}
+                        </div>
         
                         <div class="inputbox telegram-form">
                             <input placeholder="@usuario"  type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
@@ -290,7 +290,7 @@
                         <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo <a id='link-telegram' class="link-video-telegram">Click Aqui</a></p>
                 
         
-                        <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.idAfiliado}}">
+                        <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.fpa}}">
                         <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
         
                         <div class="input-button">

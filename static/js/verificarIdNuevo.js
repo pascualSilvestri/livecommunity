@@ -12,10 +12,9 @@ const section_de_validacion = document.querySelector('.verificar-nuevo-cliente')
 async function obtenerDatos() {
     try {
       
-        //Local http://127.0.0.1:8000/verificar/
-        //produc https://livecommunity.info/verificar/
+        //http://127.0.0.1:8000/api/verificar/
         //https://livecommunity.info/api/verificar/
-      const response = await fetch('https://livecommunity.info/api/verificar/'); // cambiar a localhost para local
+      const response = await fetch('http://127.0.0.1:8000/api/verificar/'); // cambiar a localhost para local
       if (!response.ok) {
         throw new Error('Error en la respuesta del servidor');
       }
@@ -36,10 +35,8 @@ async function obtenerDatos() {
 
 const verificarNuevoCliente = ()=>{
 
-  console.log(idClientes)
   // const client = idClientes.filter(e=> e.full_name.toLowerCase() == inputNombre.value.toLowerCase() && e.fpa.toLowerCase()== input.value.toLowerCase())
   const client = idClientes.filter(e=> e.client==input.value)
-  console.log(client)
   if(client.length > 0){
     return true
   }

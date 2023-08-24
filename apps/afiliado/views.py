@@ -13,7 +13,7 @@ import logging
 import asyncio
 from asgiref.sync import sync_to_async
 from ..api.models import Relation_fpa_client
-
+from ..usuarios.models import Usuario
 
 chat_id = CHAT_ID_BOT
 token = TELEGRAM_BOT_TOKEN
@@ -65,22 +65,26 @@ def clienteform(request):
         telefono = request.POST.get('telefono').strip()
         idAfiliado2 = request.POST.get('idAfiliado').strip()
         userTelegram = request.POST.get('userTelegram').strip()
-        # idCliente = request.POST.get('idcliente').strip()
+        idCliente = request.POST.get('idcliente').strip()
         
-        afiliado = Afiliado.objects.filter(fpa = idAfiliado2)
+        
+        registro = Relation_fpa_client.objects.filter(client=idCliente)
+        
+        if registro.exists():
+            fpa = registro.first().fpa
+        else:
+            fpa = ''
+            
+        afiliado = Afiliado.objects.filter(fpa = fpa)
         
         
         if afiliado.exists():
             afiliado2 = afiliado.first().upline
         else:
             afiliado2 = None
+            
 
-        client = Relation_fpa_client.objects.filter(fpa=idAfiliado2)
-        # Crear un objeto de modelo con los datos del formulario, incluyendo la ruta del archivo
-        if client.exists():
-            idCliente = client.first().client
-        else:
-            idCliente = ''
+
             
         cliente = Cliente(
             nombre=nombre,
@@ -111,6 +115,7 @@ def clienteform(request):
         try:
             enviar_mensaje_sync(mensaje, chat_id, token)
         except Exception as e:
+            print(e.__str__())
             return render(request, 'linkGrupos.html')
 
     return render(request, 'linkGrupos.html')

@@ -16,6 +16,7 @@ const section_de_validacion = document.getElementById('nuevo_id_cliente')
 const mensaje_verificado = document.querySelector('.mensaje-verificar-cliente')
 
 const input_idCliente = document.querySelector('#id_cliente')
+const input_validar = document.querySelector('#id_nuevo_cliente')
 
 const input = document.querySelector('#id_nuevo_cliente')
 const inputNombre = document.querySelector('#nombre_nuevo_cliente')
@@ -102,11 +103,15 @@ obtenerDatos()
 const deposito = (array) => {
 
     const client = array.filter(c => c.client == input_idCliente.value)
-    if (client[0].deposit == 1) {
-        return true
-    } else {
-        return false
+
+    if(client.length>0){
+        if (client[0].deposit == 1) {
+            return true
+        } else {
+            return false
+        }
     }
+    
 }
 
 

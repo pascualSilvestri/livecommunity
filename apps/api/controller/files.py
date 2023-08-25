@@ -139,6 +139,14 @@ def upload_registros(request):
                         fecha_primer_deposito = datetime.strptime(
                             fecha_primer_deposito_string, "%Y-%m-%d"
                         ).date()
+                        
+                                        
+                    register = registros.filter(client=data['client'])
+                    
+                    if register.exists():
+                        r = register.first()
+                        r.primer_deposito = data["primer_deposito"]
+                        r.save()
                     
                     registro = Registro_archivo(
                         client= data['client'],

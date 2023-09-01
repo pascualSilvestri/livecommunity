@@ -6,6 +6,8 @@ from ...utils.funciones import formatera_retiro
 from ...usuarios.models import Spread,Usuario
 from ...api.models import Registros_ganancias,Registros_cpa
 import re
+import json 
+
 
 @csrf_exempt  
 def ganancia_get_all(request):
@@ -524,3 +526,31 @@ def ganancias_all_for_id(request,desde,hasta):
             return JsonResponse({'Error': str(e)})
     else:
         return JsonResponse({'Error': 'Método inválido'})
+
+
+@csrf_exempt  
+def ganancia_a_pagar(request):
+
+    if request.method == 'PUT':
+        try:
+            
+            datos = json.loads(request.body)
+            ganancias = Registros_ganancias.objects.all()
+
+            for d in datos.get('body'):
+                
+                ganancia = ganancias.filter(fpa=d['fpa'],id=d['id'])
+                
+                if ganancia.exists():
+                    g = ganancia.first()
+                    g.pagado = True
+                    g.save()
+                
+            
+            return JsonResponse({"data":datos})
+            
+        except Exception as e:
+            return JsonResponse({'Error':e.__str__()},status=400)
+    else:
+        return JsonResponse({'Error':'Metodo Incorrecto'})
+

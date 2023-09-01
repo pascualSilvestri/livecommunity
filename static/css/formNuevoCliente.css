@@ -108,15 +108,15 @@
 #id_nuevo_cliente{
     
     display: block;
-	 margin: 30px auto;
-	 border: none;
-	 padding: 0;
-	 width: 15ch;
-	 background: repeating-linear-gradient(90deg, dimgrey 0, dimgrey 1ch, transparent 0, transparent 1.5ch) 0 100%/ 14.5ch 2px no-repeat;
-	 font: 3ch droid sans mono, consolas, monospace;
-	 letter-spacing: 0.5ch;
-    
+    margin: 30px auto;
+    border: none;
+    width: 15ch;
+    background: repeating-linear-gradient(90deg, dimgrey 0, dimgrey 1.3ch, transparent 0, transparent 2.5ch) 0 100%/ 14.5ch 2px no-repeat;
+    font: 3ch droid sans mono, consolas, monospace;
+    letter-spacing: 1.5ch;
 }
+    
+
 
 #id_nuevo_cliente:focus {
     outline: none;

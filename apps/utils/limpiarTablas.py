@@ -79,33 +79,28 @@ def limpiar_cpa(dataframe):
     return dataframe.to_dict(orient='records')
 
 
-def limpiar_ganacias(dataframe):
-    new_columns = {
-    'Customer ID':'client', 
-    'Customer Name':'full_name', 
-    'Customer Country':'country', 
-    'Equity (USD)':'equity',
-    'Account Balance (USD)':'balance', 
-    'Partner Earnings (USD)':'partner_earning',
-    'Skilling Earnings (USD)':'skilling_earning', 
-    'Skilling Markup (USD)':'skilling_markup',
-    'Skilling Commission (USD)':'skilling_commission', 
-    'Volume (USD)':'volumen', 
-    'Last Trade Date':'fecha_last_trade',
-    'First Trade Date':'fecha_first_trade', 
-    'Closed Trade Count':'closed_trade_count', 
-    'Customer PnL (realized)':'customer_pnl',
-    'Net Deposits (USD)':'deposito_neto', 
-    'Deposits (USD)':'deposito', 
-    'Withdrawals (USD)':'withdrawals'
-    }
-    dataframe.rename(columns=new_columns, inplace=True)
-    
-    dataframe.loc["fecha_last_trade"] = pd.to_datetime(dataframe["fecha_last_trade"]).dt.date
-    dataframe.loc["fecha_first_trade"] = pd.to_datetime(dataframe["fecha_first_trade"]).dt.date
-    dataframe['volumen'] = dataframe['volumen'].str.replace(',', '', regex=False).astype(float).astype(str)
-    dataframe['customer_pnl'] = dataframe['customer_pnl'].str.replace(',', '', regex=False).astype(float).astype(str)
+def limpiar_ganacias(dataFrame):
 
-    
-    
-    return dataframe.to_dict(orient='records')
+    column_mapping = {
+        'Customer ID':'client',
+        'Position ID':'position',
+        'Symbol':'symbol',
+        'Direction':'direccion',
+        'Volume Traded (units)':'volumen_trader',
+        'Volume (USD)':'volumne',
+        'Trade date':'fecha_operacion',
+        'Trade Time (GMT)':'hora_operacion',
+        'Realized PnL':'pnl',
+        'Platform':'plataforma',
+        'Partner Earnings (USD)':'partner_earning',
+        'Skilling Earnings (USD)':'skilling_earning',
+        'Skilling Markup (USD)':'skilling_markup',
+        'Skilling Commission (USD)':'skilling_commission',
+        'Deal ID':'deal_id'
+    }
+
+    dataFrame.rename(columns=column_mapping, inplace=True)
+
+    dataFrame = dataFrame[['client', 'position', 'symbol', 'fecha_operacion', 'partner_earning', 'skilling_earning','skilling_commission', 'deal_id']]
+
+    return dataFrame.to_dict(orient='records')

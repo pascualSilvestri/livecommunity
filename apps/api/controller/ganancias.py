@@ -3,10 +3,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...utils.funciones import formatera_retiro
-from ...usuarios.models import Spread,Usuario
+from ...usuarios.models import Spread,Usuario,Cuenta,BonoAPagar
 from ...api.models import Registros_ganancias,Registros_cpa
 import re
 import json 
+from decimal import Decimal
 
 
 @csrf_exempt  
@@ -26,12 +27,12 @@ def ganancia_get_all(request):
                         monto_spread = r.partner_earning
                     data.append( 
                         {
-                            'creacion':r.fecha_first_trade,
+                            'creacion':r.fecha_operacion,
                             'monto':r.partner_earning,
                             'monto_spread':monto_spread,
                             'tipo_comision':'Reverashe',
                             'client':r.client,
-                            'retiro':r.withdrawals,
+                            
                             'isPago':r.pagado
                         }
                     )
@@ -74,12 +75,12 @@ def ganancia_only_more_cero(request):
                         monto_spread = r.partner_earning
                     data.append( 
                         {
-                            'creacion':r.fecha_first_trade,
+                            'creacion':r.fecha_operacion,
                             'monto':r.partner_earning,
                             'monto_spread':monto_spread,
                             'tipo_comision':'Reverashe',
                             'client':r.client,
-                            'retiro':r.withdrawals,
+                            
                             'isPago':r.pagado
                         }
                     )
@@ -88,7 +89,7 @@ def ganancia_only_more_cero(request):
             
             return response
         except Exception as e:
-            return JsonResponse({'Error':e.__str__()})
+            return JsonResponse({'Error':str(e)})
     else:
         return JsonResponse({'Error':'Metodo invalidos'})
 
@@ -103,19 +104,19 @@ def ganancia_by_id(request,pk):
             spred = Spread.objects.all()
             data=[]
             for r in ganancias:
-                if r.pagado == False and r.fecha_first_trade != None:
+                # if r.pagado == False and r.fecha_operacion != None:
+                if r.fecha_operacion != None:
                     if r.partner_earning != 0:
                         monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
                     else:
                         monto_spread = r.partner_earning
                     data.append( 
                         {
-                            'creacion':r.fecha_first_trade,
+                            'creacion':r.fecha_operacion,
                             'monto':r.partner_earning,
                             'monto_spread':monto_spread,
                             'tipo_comision':'Reverashe',
                             'client':r.client,
-                            'retiro':r.withdrawals,
                             'isPago':r.pagado
                         }
                     )
@@ -150,15 +151,12 @@ def retiros_totales(request):
         try:
             ganancias = Registros_ganancias.objects.all()
             
-            total = 0
             data=[]
             for m in ganancias:
-                retiro = formatera_retiro(m.withdrawals)
-                # retiro = m.withdrawals.replace(')','').strip()
+                
                 data.append({
                     'fpa':m.fpa,
-                    'fecha':m.fecha_first_trade,
-                    'retiro':retiro
+                    'fecha':m.fecha_operacion,
                 })
             
             response = JsonResponse({'data':data})
@@ -352,7 +350,7 @@ def filtradoGananciasRevshare(request):
                 monto_spread= round(calcula_porcentaje_directo(float(r.partner_earning,20,10)),2)
                 data.append( 
                     {
-                        'creacion':r.fecha_first_trade,
+                        'creacion':r.fecha_operacion,
                         'monto':r.partner_earning,
                         'monto_spread':monto_spread,
                         'tipo_comision':'Reverash',
@@ -381,10 +379,10 @@ def filtrar_ganancias_by_revshare_By_Id(request,pk):
             
             for r in ganancias:
                 monto_spread= round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
-                if r.pagado == False and r.fecha_first_trade != None:
+                if r.pagado == False and r.fecha_operacion != None:
                     data.append( 
                         {
-                            'creacion':r.fecha_first_trade,
+                            'creacion':r.fecha_operacion,
                             'monto':r.partner_earning,
                             'monto_spread':monto_spread,
                             'tipo_comision':'Reverashare',
@@ -410,7 +408,7 @@ def filterGananciasFecha(request,desde,hasta):
     
     try:
         if request.method == 'GET':
-            ganancias = Registros_ganancias.objects.filter(Q(fecha_first_trade__gte=desde) & Q(fecha_first_trade__lte=hasta))
+            ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta))
             spred = Spread.objects.all()
             data= []
             for r in ganancias:
@@ -421,12 +419,12 @@ def filterGananciasFecha(request,desde,hasta):
                 data.append( 
                 
                     {
-                        'creacion':r.fecha_first_trade,
+                        'creacion':r.fecha_operacion,
                         'monto':r.partner_earning,
                         'monto_spread':monto_spread,
                         'tipo_comision':'Reverashe',
                         'client':r.client,
-                        'retiro':r.withdrawals,
+                        
                         'isPago':r.pagado
                     }
                 
@@ -448,7 +446,7 @@ def filter_ganancia_to_date_by_id(request,pk,desde,hasta):
     spread = Spread.objects.all()
     try:
         if request.method == 'GET':
-            ganancias = Registros_ganancias.objects.filter(Q(fecha_first_trade__gte=desde) & Q(fecha_first_trade__lte=hasta),fpa=pk,pagado=False)
+            ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta),fpa=pk,pagado=False)
             
             data= []
             monto_a_pagar=0
@@ -475,8 +473,10 @@ def ganancias_all_for_id(request,desde,hasta):
     if request.method == 'GET':
         try:
             ganancias = Registros_ganancias.objects.all()
+            cpas = Registros_cpa.objects.all()
             usuarios = Usuario.objects.all()
             spred = Spread.objects.all()
+            bonos = BonoAPagar.objects.all()
 
             data = []
 
@@ -489,28 +489,72 @@ def ganancias_all_for_id(request,desde,hasta):
             for g in fpa_list:
 
                 data_for_id = []
-                ganancias_by_id=ganancias.filter(Q(fecha_first_trade__gte=desde) & Q(fecha_first_trade__lte=hasta),fpa=g,pagado=False).exclude(fecha_first_trade=None)
+                ganancias_by_id=ganancias.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta),fpa=g,pagado=False).exclude(fecha_operacion=None)
+                cpa_by_id = cpas.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta),fpa=g,pagado=False).exclude(fecha_creacion=None)
+                bonos_by_id = bonos.filter(Q(date__gte=desde) & Q(date__lte=hasta),fpa=g,pagado=False).exclude(date=None)
+                
+                
+                for b in bonos_by_id:
+                    if b.pagado == False:
+                        usuario = usuarios.filter(fpa = b.fpa)
+                        if usuario.exists():
+                            wallet = usuario.first().wallet.__str__()
+                        else:
+                            wallet = 'Usuario no registrado en back office'
+                        
+                        data_for_id.append({
+                            'id':b.id_bono,
+                            'creacion': b.date,
+                            'monto_spread': b.monto_total,
+                            'monto': b.monto_total,
+                            'tipo':'bono',
+                            'client': None,
+                            'isPago': b.pagado,
+                            'fpa':b.fpa,
+                            'wallet':wallet
+                        })
+                
+                
+                
+                for c in cpa_by_id:
+                    if c.pagado == False:
+                        usuario = usuarios.filter(fpa = c.fpa)
+                        if usuario.exists():
+                            wallet = usuario.first().wallet.__str__()
+                        else:
+                            wallet = 'Usuario no registrado en back office'
+                        
+                        data_for_id.append({
+                            'id':c.id,
+                            'creacion': c.fecha_creacion,
+                            'monto_spread': c.monto,
+                            'monto': c.monto,
+                            'tipo':'CPA',
+                            'client': c.client,
+                            'isPago': c.pagado,
+                            'fpa':c.fpa,
+                            'wallet':wallet
+                        })
                 
                 for r in ganancias_by_id:    
                 
                     if not r.pagado and r.partner_earning != 0:
                         monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
                     else:
-                        monto_spread = r.partner_earning
+                        monto_spread = r.monto_a_pagar
                     
                     usuario = usuarios.filter(fpa = r.fpa)
                     if usuario.exists():
                         wallet = usuario.first().wallet.__str__()
                     else:
-                        wallet = 'Usuario no registrado'
+                        wallet = 'Usuario no registrado en back office'
                     data_for_id.append({
                         'id':r.id,
-                        'creacion': r.fecha_first_trade,
+                        'creacion': r.fecha_operacion,
                         'monto': r.partner_earning,
                         'monto_spread': monto_spread,
-                        'tipo_comision': 'Reverashe',
+                        'tipo':'reverashe',
                         'client': r.client,
-                        'retiro': r.withdrawals,
                         'isPago': r.pagado,
                         'fpa':r.fpa,
                         'wallet':wallet
@@ -536,21 +580,54 @@ def ganancia_a_pagar(request):
             
             datos = json.loads(request.body)
             ganancias = Registros_ganancias.objects.all()
+            cpas = Registros_cpa.objects.all()
+            cuentas = Cuenta.objects.all()
+            bonos = BonoAPagar.objects.all()
+            
 
             for d in datos.get('body'):
                 
                 ganancia = ganancias.filter(fpa=d['fpa'],id=d['id'])
+                cpa = cpas.filter(fpa=d['fpa'],id=d['id'])
+                bono = bonos.filter(fpa=d['fpa'],id_bono=d['id'])
                 
-                if ganancia.exists():
+                # print(ganancia.first().fpa)
+                cuenta = cuentas.filter(fpa=d['fpa'])
+                if cuenta.exists():
+                    c= cuenta.first()
+                    
+                if bono.exists() and d['tipo']=='bono':
+                    bo = bono.first()
+                    bo.pagado = True
+                    bo_decimal = Decimal(bo.monto_total)
+                    c.monto_a_pagar -= bo_decimal
+                    bo.save()
+                
+                if cpa.exists() and d['tipo']=='CPA':
+                    cp = cpa.first()
+                    cp.pagado = True
+                    c_decimal = Decimal(cp.monto)
+                    c.monto_cpa -= c_decimal
+                    c.monto_a_pagar -= c_decimal
+                    cp.save()
+                        
+                
+                if ganancia.exists() and d['tipo']=='reverashe':
                     g = ganancia.first()
                     g.pagado = True
+                    g_monto_decimal = Decimal(g.monto_a_pagar)  # Convierte g.monto_a_pagar a Decimal
+                    c.monto_a_pagar -= g_monto_decimal
+                    if c.monto_a_pagar < 0:
+                        c.monto_a_pagar = 0
                     g.save()
+                c.save()        
+                
                 
             
             return JsonResponse({"data":datos})
             
         except Exception as e:
-            return JsonResponse({'Error':e.__str__()},status=400)
+            return JsonResponse({'Error':e.__str__()})
     else:
         return JsonResponse({'Error':'Metodo Incorrecto'})
 

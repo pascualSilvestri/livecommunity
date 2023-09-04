@@ -236,7 +236,7 @@ def upload_cpa(request):
                             else:
                                 cuenta_up_line = None
                             cuenta.monto_cpa += cpa['monto']
-                            cuenta.monto_a_pagar += Decimal(cpa['monto'])
+                            # cuenta.monto_a_pagar += Decimal(cpa['monto'])
                             cuenta.cpa += 1
                             
                             bonoDirecto(cuenta,bono_directo)

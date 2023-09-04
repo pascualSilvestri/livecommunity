@@ -608,7 +608,7 @@ def ganancia_a_pagar(request):
                     cp.pagado = True
                     c_decimal = Decimal(cp.monto)
                     c.monto_cpa -= c_decimal
-                    c.monto_a_pagar -= c_decimal
+                    # c.monto_a_pagar -= c_decimal
                     cp.save()
                         
                 

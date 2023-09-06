@@ -226,7 +226,7 @@ def upload_cpa(request):
                     if not existe_cpa(fecha_creacion,cpa['monto'],cpa['client'],cpa['fpa'],cpas):
                         bono_directo = BonoCpa
                         bono_indirecto = BonoCpaIndirecto
-                        cuenta = Cuenta.objects.filter(fpa=fpa)[0]
+                        cuenta = Cuenta.objects.filter(fpa=fpa).first()
                         
                         if cuenta.fpa != 'none':
                             
@@ -275,6 +275,8 @@ def upload_ganancias(request):
         try:
             fpas = Relation_fpa_client.objects.all()
             ganancias = Registros_ganancias.objects.all()
+            usuarios = Usuario.objects.all()
+            cuentas = Cuenta.objects.all()
             spred = Spread.objects.all()
             
             excel_file = request.FILES["csvFileGanancias"] #Obtengo el archivo
@@ -325,18 +327,30 @@ def upload_ganancias(request):
                     )
                     
                     if not existe_ganancia(ganancia,ganancias):
-                        ganancia.save() 
-                        cuenta = Cuenta.objects.filter(fpa=fpa)
+                        
+                        usuario = usuarios.filter(fpa=ganancia.fpa)
+                        
+                        if usuario.exists():
+                            up_line = usuario.first().uplink
+                        else:
+                            up_line = None
+                        
+                        cuenta = cuentas.filter(fpa=fpa)
+                        cuenta_up_line = cuentas.filter(fpa=up_line)
+                        
                         if cuenta.exists and g['partner_earning'] != 'NaN':
                             c = cuenta.first()
-                            # print(f'1-{c}')
                             if (c != None):
-                                # print(f'2-{c}')
-                                c.monto_total += Decimal(g['partner_earning'])
-                                c.monto_a_pagar += Decimal(round(calcula_porcentaje_directo(float(g['partner_earning']),spred[0].porcentaje,spred[1].porcentaje),2))
-                                
-
+                                c.monto_total += Decimal(ganancia.partner_earning)
+                                c.monto_a_pagar += Decimal(ganancia.monto_a_pagar)
                                 c.save()
+                        
+                        if cuenta_up_line.exists():
+                            c_up_line = cuenta_up_line.first()
+                            c_up_line.monto_a_pagar += Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
+                            c_up_line.save()
+                        ganancia.save() 
+                                
 
             else:
                 print("ErrorMessege Document is not format")

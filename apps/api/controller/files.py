@@ -9,7 +9,7 @@ from ...usuarios.models import Cuenta,Usuario,Spread,BonoCpa,BonoCpaIndirecto
 from datetime import datetime
 import pandas as pd
 import os
-
+from decimal import Decimal
 
 @csrf_exempt
 def upload_fpa(request):
@@ -226,7 +226,7 @@ def upload_cpa(request):
                     if not existe_cpa(fecha_creacion,cpa['monto'],cpa['client'],cpa['fpa'],cpas):
                         bono_directo = BonoCpa
                         bono_indirecto = BonoCpaIndirecto
-                        cuenta = Cuenta.objects.filter(fpa=fpa)[0]
+                        cuenta = Cuenta.objects.filter(fpa=fpa).first()
                         
                         if cuenta.fpa != 'none':
                             
@@ -236,6 +236,7 @@ def upload_cpa(request):
                             else:
                                 cuenta_up_line = None
                             cuenta.monto_cpa += cpa['monto']
+                            # cuenta.monto_a_pagar += Decimal(cpa['monto'])
                             cuenta.cpa += 1
                             
                             bonoDirecto(cuenta,bono_directo)
@@ -274,36 +275,33 @@ def upload_ganancias(request):
         try:
             fpas = Relation_fpa_client.objects.all()
             ganancias = Registros_ganancias.objects.all()
+            usuarios = Usuario.objects.all()
+            cuentas = Cuenta.objects.all()
             spred = Spread.objects.all()
-            excel_file = request.FILES["csvFileGanancias"]
-            file_name = excel_file.name  # Obtengon el nombre del archivo
+            
+            excel_file = request.FILES["csvFileGanancias"] #Obtengo el archivo
+            file_name = excel_file.name  # Obtengo el nombre del archivo
             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
 
             if file_extension == ".csv":
-                file_data = pd.read_csv(excel_file)  # obtengo los datos de larchivo
+                file_data = pd.read_csv(excel_file)  # obtengo los datos del archivo
                 new_data= limpiar_ganacias(file_data)
                 
                 for g in new_data:
                     fpa_id = fpas.filter(client=int(g['client']))
                     if fpa_id.exists():
                         fpa = fpa_id[0].fpa
+                        full_name = fpa_id[0].full_name
                     else:
                         fpa = None
+                        full_name=''
                     
-                    fecha_first_trade_string = str(g["fecha_first_trade"])
+                    fecha_first_trade_string = str(g["fecha_operacion"])
                     if fecha_first_trade_string == "nan":
                         fecha_first_trade = None
                     else:
                         fecha_first_trade = datetime.strptime(
                             fecha_first_trade_string, "%Y-%m-%d"
-                        ).date()
-                    
-                    fecha_last_trade_string = str(g["fecha_last_trade"])
-                    if fecha_last_trade_string == "nan":
-                        fecha_last_trade = None
-                    else:
-                        fecha_last_trade = datetime.strptime(
-                            fecha_last_trade_string, "%Y-%m-%d"
                         ).date()
                     
                     if g['partner_earning'] != 'NaN':
@@ -313,46 +311,53 @@ def upload_ganancias(request):
                     
                     ganancia = Registros_ganancias(
                         client = str(int(g['client'])),
+                        position=str(int(g['position'])),
+                        symbol=g['symbol'],
                         fpa = fpa,
-                        full_name = g['full_name'],
-                        country = g['country'],
-                        equity = g['equity'],
-                        balance = g['balance'],
+                        full_name = full_name,
                         partner_earning = g['partner_earning'],
                         monto_a_pagar=monto_a_pagar,
                         skilling_earning = g['skilling_earning'],
-                        skilling_markup = g['skilling_markup'],
                         skilling_commission = g['skilling_commission'],
-                        volumen = g['volumen'],
-                        fecha_last_trade = fecha_last_trade,
-                        fecha_first_trade = fecha_first_trade,
-                        closed_trade_count = g['closed_trade_count'],
-                        customer_pnl = g['customer_pnl'],
-                        deposito_neto = g['deposito_neto'],
-                        deposito = g['deposito'],
-                        withdrawals = g['withdrawals'],
+                        fecha_operacion = fecha_first_trade,
+                        deal_id=g['deal_id'],
                         spreak_direct = spred[1].porcentaje,
                         spreak_indirecto = spred[2].porcentaje,
                         spreak_socio = spred[0].porcentaje
                     )
                     
-                    
-                    if not existe_ganancia(g['client'],fpa, g['full_name'],g['country'],g['equity'],g['balance'],g['partner_earning'],g['skilling_earning'],g['skilling_markup'],g['skilling_commission'],g['volumen'],fecha_last_trade,fecha_first_trade,g['closed_trade_count'],g['customer_pnl'],g['deposito_neto'],g['deposito'], g['withdrawals'],ganancias):
-                        ganancia.save()
-                        cuenta = Cuenta.objects.filter(fpa=fpa).first()
-                        if g['partner_earning'] != 'NaN':
-                            cuenta.monto_total += g['partner_earning']
-                            cuenta.monto_a_pagar += round(calcula_porcentaje_directo(float(g['partner_earning']),spred[0].porcentaje,spred[1].porcentaje),2)
-                            cuenta.save()
-                
-                
+                    if not existe_ganancia(ganancia,ganancias):
+                        
+                        usuario = usuarios.filter(fpa=ganancia.fpa)
+                        
+                        if usuario.exists():
+                            up_line = usuario.first().uplink
+                        else:
+                            up_line = None
+                        
+                        cuenta = cuentas.filter(fpa=fpa)
+                        cuenta_up_line = cuentas.filter(fpa=up_line)
+                        
+                        if cuenta.exists and g['partner_earning'] != 'NaN':
+                            c = cuenta.first()
+                            if (c != None):
+                                c.monto_total += Decimal(ganancia.partner_earning)
+                                c.monto_a_pagar += Decimal(ganancia.monto_a_pagar)
+                                c.save()
+                        
+                        if cuenta_up_line.exists():
+                            c_up_line = cuenta_up_line.first()
+                            c_up_line.monto_a_pagar += Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
+                            c_up_line.save()
+                        ganancia.save() 
+                                
+
             else:
                 print("ErrorMessege Document is not format")
                 return JsonResponse({"ErrorMessege": "Document is not format"})
         except Exception as e:
             print(e)
             return JsonResponse({"Error": "Salto la exception"})
-        print("message Archivo CSV recibido y procesado exitosamente.")
         return JsonResponse(
             {"message": "Archivo CSV recibido y procesado exitosamente."}
         )
@@ -361,3 +366,106 @@ def upload_ganancias(request):
         return JsonResponse(
             {"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400
         )
+
+
+
+
+
+
+
+
+
+
+
+# def upload_ganancias(request):
+#     if request.method == "POST" and request.FILES.get("csvFileGanancias"):
+#         try:
+#             fpas = Relation_fpa_client.objects.all()
+#             ganancias = Registros_ganancias.objects.all()
+#             spred = Spread.objects.all()
+#             excel_file = request.FILES["csvFileGanancias"]
+#             file_name = excel_file.name  # Obtengon el nombre del archivo
+#             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
+
+#             if file_extension == ".csv":
+#                 file_data = pd.read_csv(excel_file)  # obtengo los datos de larchivo
+#                 new_data= limpiar_ganacias(file_data)
+                
+#                 for g in new_data:
+#                     fpa_id = fpas.filter(client=int(g['client']))
+#                     if fpa_id.exists():
+#                         fpa = fpa_id[0].fpa
+#                     else:
+#                         fpa = None
+                    
+#                     fecha_first_trade_string = str(g["fecha_first_trade"])
+#                     if fecha_first_trade_string == "nan":
+#                         fecha_first_trade = None
+#                     else:
+#                         fecha_first_trade = datetime.strptime(
+#                             fecha_first_trade_string, "%Y-%m-%d"
+#                         ).date()
+                    
+#                     fecha_last_trade_string = str(g["fecha_last_trade"])
+#                     if fecha_last_trade_string == "nan":
+#                         fecha_last_trade = None
+#                     else:
+#                         fecha_last_trade = datetime.strptime(
+#                             fecha_last_trade_string, "%Y-%m-%d"
+#                         ).date()
+                    
+#                     if g['partner_earning'] != 'NaN':
+#                         monto_a_pagar=  round(calcula_porcentaje_directo(float(g['partner_earning']),spred[0].porcentaje,spred[1].porcentaje),2)
+#                     else:
+#                         monto_a_pagar=0
+                    
+#                     ganancia = Registros_ganancias(
+#                         client = str(int(g['client'])),
+#                         fpa = fpa,
+#                         full_name = g['full_name'],
+#                         country = g['country'],
+#                         equity = g['equity'],
+#                         balance = g['balance'],
+#                         partner_earning = g['partner_earning'],
+#                         monto_a_pagar=monto_a_pagar,
+#                         skilling_earning = g['skilling_earning'],
+#                         skilling_markup = g['skilling_markup'],
+#                         skilling_commission = g['skilling_commission'],
+#                         volumen = g['volumen'],
+#                         fecha_last_trade = fecha_last_trade,
+#                         fecha_first_trade = fecha_first_trade,
+#                         closed_trade_count = g['closed_trade_count'],
+#                         customer_pnl = g['customer_pnl'],
+#                         deposito_neto = g['deposito_neto'],
+#                         deposito = g['deposito'],
+#                         withdrawals = g['withdrawals'],
+#                         spreak_direct = spred[1].porcentaje,
+#                         spreak_indirecto = spred[2].porcentaje,
+#                         spreak_socio = spred[0].porcentaje
+#                     )
+                    
+                    
+#                     if not existe_ganancia(g['client'],fpa, g['full_name'],g['country'],g['equity'],g['balance'],g['partner_earning'],g['skilling_earning'],g['skilling_markup'],g['skilling_commission'],g['volumen'],fecha_last_trade,fecha_first_trade,g['closed_trade_count'],g['customer_pnl'],g['deposito_neto'],g['deposito'], g['withdrawals'],ganancias):
+#                         ganancia.save()
+#                         cuenta = Cuenta.objects.filter(fpa=fpa).first()
+#                         if g['partner_earning'] != 'NaN':
+#                             cuenta.monto_total += g['partner_earning']
+#                             cuenta.monto_a_pagar += round(calcula_porcentaje_directo(float(g['partner_earning']),spred[0].porcentaje,spred[1].porcentaje),2)
+#                             cuenta.save()
+                
+                
+#             else:
+#                 print("ErrorMessege Document is not format")
+#                 return JsonResponse({"ErrorMessege": "Document is not format"})
+#         except Exception as e:
+#             print(e)
+#             return JsonResponse({"Error": "Salto la exception"})
+#         print("message Archivo CSV recibido y procesado exitosamente.")
+#         return JsonResponse(
+#             {"message": "Archivo CSV recibido y procesado exitosamente."}
+#         )
+#     else:
+#         print("error Se esperaba un archivo CSV en la solicitud POST.")
+#         return JsonResponse(
+#             {"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400
+#         )

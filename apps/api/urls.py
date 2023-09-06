@@ -2,10 +2,10 @@ from django.urls import path
 from . import views
 from .controller.users import postNewAfiliado,postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,users_eliminados,users_pendientes,updatePassword
 from .controller.registros import verificar,registrosGetAll,getRegistroById,filter_registros_fecha_by_id
-from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa,ganancias_cpa_by_id,ganancias_all_for_id
+from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa,ganancias_cpa_by_id,ganancias_all_for_id,ganancia_a_pagar
 from .controller.cuenta import montosGet
 from .controller.files import upload_fpa,upload_registros,upload_cpa,upload_ganancias
-
+from .controller.bonos import reseteo_bonos
 
 app_name = 'api'
 
@@ -19,7 +19,7 @@ urlpatterns = [
       path('verificar/',verificar,name='verificar'),
       path('registros/',registrosGetAll,name='registros'),
       path('registrosbyid/<pk>/',getRegistroById,name='registrosById'),
-        path('filtrarregistrosfecha/<pk>/<desde>/<hasta>/', filter_registros_fecha_by_id, name = 'registrosFiltradoFecha'),
+      path('filtrarregistrosfecha/<pk>/<desde>/<hasta>/', filter_registros_fecha_by_id, name = 'registrosFiltradoFecha'),
       #############################################################################################
       ########################             Ganancias                ###############################
       #############################################################################################
@@ -47,6 +47,7 @@ urlpatterns = [
       path('cpas/',ganancias_cpa,name='cpa'),
       path('cpas/<pk>/',ganancias_cpa_by_id,name='cpa'),
       path('gananciasallforid/<desde>/<hasta>/',ganancias_all_for_id,name='gananciasAllForId'),
+      path('pagando/',ganancia_a_pagar, name ='pagando'),
       #############################################################################################
       ########################             Users                   ###############################
       #############################################################################################
@@ -89,5 +90,8 @@ urlpatterns = [
       path('archivoregistros/',upload_registros,name = 'archivoRegistros'),
       path('archivocpa/',upload_cpa,name='archivoCpa'),
       path('archivoganancias/',upload_ganancias,name='archivoGanancias'),
-      
+      #############################################################################################
+      ########################             Bonos                    ###############################
+      #############################################################################################
+      path('resetBono',reseteo_bonos , name='reset_bonos'),
 ]     

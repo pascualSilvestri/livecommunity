@@ -14,7 +14,7 @@ def existe_cpa(fecha,monto,client,fpa,cpas):
             return True
     return False
 
-def existe_ganancia(ganancia: Registros_ganancias, ganancias: list[Registros_ganancias]) -> bool:
+def existe_ganancia(ganancia: Registros_ganancias, ganancias: list) -> bool:
     g = ganancias.filter(
         client=ganancia.client,
         fpa=ganancia.fpa,

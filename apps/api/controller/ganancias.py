@@ -616,6 +616,9 @@ def ganancia_a_pagar(request):
                     g.pagado = True
                     g_monto_decimal = Decimal(g.monto_a_pagar)  # Convierte g.monto_a_pagar a Decimal
                     c.monto_a_pagar -= g_monto_decimal
+                    c.monto_total -= Decimal(g.partner_earning)
+                    c.spread_directo -= Decimal(g.partner_earning)
+                    
                     if c.monto_a_pagar < 0:
                         c.monto_a_pagar = 0
                     g.save()

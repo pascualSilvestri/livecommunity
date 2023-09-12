@@ -343,12 +343,15 @@ def upload_ganancias(request):
                             if (c != None):
                                 c.monto_total += Decimal(ganancia.partner_earning)
                                 c.monto_a_pagar += Decimal(ganancia.monto_a_pagar)
+                                c.spread_directo += Decimal(ganancia.monto_a_pagar)
                                 c.save()
                         
                         if cuenta_up_line.exists():
                             c_up_line = cuenta_up_line.first()
                             c_up_line.monto_a_pagar += Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
+                            c_up_line.spread_indirecto+= Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
                             c_up_line.save()
+
                         ganancia.save() 
                                 
 

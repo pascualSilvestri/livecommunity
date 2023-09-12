@@ -33,7 +33,7 @@ class Registro_archivo(models.Model):
     comision= models.FloatField(default=0)
     
     def __str__(self):
-        return self.client
+        return self.fpa
 
 
 class Registros_cpa(models.Model):

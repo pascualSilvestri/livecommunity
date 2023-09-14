@@ -537,28 +537,27 @@ def ganancias_all_for_id(request,desde,hasta):
                         })
                 
                 for r in ganancias_by_id:    
-                
-                    if not r.pagado and r.partner_earning != 0:
-                        monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
-                    else:
-                        monto_spread = r.monto_a_pagar
+                    if r.monto_a_pagar > 0:
                     
-                    usuario = usuarios.filter(fpa = r.fpa)
-                    if usuario.exists():
-                        wallet = usuario.first().wallet.__str__()
-                    else:
-                        wallet = 'Usuario no registrado en back office'
-                    data_for_id.append({
-                        'id':r.id,
-                        'creacion': r.fecha_operacion,
-                        'monto': r.partner_earning,
-                        'monto_spread': monto_spread,
-                        'tipo':'reverashe',
-                        'client': r.client,
-                        'isPago': r.pagado,
-                        'fpa':r.fpa,
-                        'wallet':wallet
-                    })
+                       
+                        monto_spread = r.monto_a_pagar
+                        
+                        usuario = usuarios.filter(fpa = r.fpa)
+                        if usuario.exists():
+                            wallet = usuario.first().wallet.__str__()
+                        else:
+                            wallet = 'Usuario no registrado en back office'
+                        data_for_id.append({
+                            'id':r.id,
+                            'creacion': r.fecha_operacion,
+                            'monto': r.partner_earning,
+                            'monto_spread': monto_spread,
+                            'tipo':'reverashe',
+                            'client': r.client,
+                            'isPago': r.pagado,
+                            'fpa':r.fpa,
+                            'wallet':wallet
+                        })
                 data.append(data_for_id)
             
             data = [subarray for subarray in data if subarray]

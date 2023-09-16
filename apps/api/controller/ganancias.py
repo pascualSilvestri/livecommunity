@@ -608,54 +608,53 @@ def ganancia_a_pagar(request):
             bonos = BonoAPagar.objects.all()
             spreads = SpreadIndirecto.objects.all()
             
-            print(datos['body'][0]['tipo'])
-            # for d in datos.get('body'):
+            for d in datos.get('body'):
                 
-            #     ganancia = ganancias.filter(fpa=d['fpa'],id=d['id'])
-            #     cpa = cpas.filter(fpa=d['fpa'],id=d['id'])
-            #     bono = bonos.filter(fpa=d['fpa'],id_bono=d['id'])
-            #     spread = spreads.filter(fpa=d['fpa'],id=d['id'])
+                ganancia = ganancias.filter(fpa=d['fpa'],id=d['id'])
+                cpa = cpas.filter(fpa=d['fpa'],id=d['id'])
+                bono = bonos.filter(fpa=d['fpa'],id_bono=d['id'])
+                spread = spreads.filter(fpa=d['fpa'],id=d['id'])
                 
-            #     # print(ganancia.first().fpa)
-            #     cuenta = cuentas.filter(fpa=d['fpa'])
-            #     if cuenta.exists():
-            #         c= cuenta.first()
+                # print(ganancia.first().fpa)
+                cuenta = cuentas.filter(fpa=d['fpa'])
+                if cuenta.exists():
+                    c= cuenta.first()
                     
-            #     if bono.exists() and d['tipo']=='bono':
-            #         bo = bono.first()
-            #         bo.pagado = True
-            #         bo_decimal = Decimal(bo.monto_total)
-            #         c.monto_a_pagar -= bo_decimal
-            #         bo.save()
+                if bono.exists() and d['tipo']=='bono':
+                    bo = bono.first()
+                    bo.pagado = True
+                    bo_decimal = Decimal(bo.monto_total)
+                    c.monto_a_pagar -= bo_decimal
+                    bo.save()
                 
-            #     if spread.exists() and d['tipo']=='spreadIndirecto':
-            #         sp = spread.first()
-            #         sp.pagado = True
-            #         c.monto_a_pagar -= Decimal(sp.monto)
-            #         c.spread_indirecto -= Decimal(sp.monto)
-            #         sp.save()
+                if spread.exists() and d['tipo']=='spreadIndirecto':
+                    sp = spread.first()
+                    sp.pagado = True
+                    c.monto_a_pagar -= Decimal(sp.monto)
+                    c.spread_indirecto -= Decimal(sp.monto)
+                    sp.save()
 
-            #     if cpa.exists() and d['tipo']=='CPA':
-            #         cp = cpa.first()
-            #         cp.pagado = True
-            #         c_decimal = Decimal(cp.monto)
-            #         c.monto_cpa -= c_decimal
-            #         # c.monto_a_pagar -= c_decimal
-            #         cp.save()
+                if cpa.exists() and d['tipo']=='CPA':
+                    cp = cpa.first()
+                    cp.pagado = True
+                    c_decimal = Decimal(cp.monto)
+                    c.monto_cpa -= c_decimal
+                    # c.monto_a_pagar -= c_decimal
+                    cp.save()
                         
                 
-            #     if ganancia.exists() and d['tipo']=='reverashe':
-            #         g = ganancia.first()
-            #         g.pagado = True
-            #         g_monto_decimal = Decimal(g.monto_a_pagar)  # Convierte g.monto_a_pagar a Decimal
-            #         c.monto_a_pagar -= g_monto_decimal
-            #         c.monto_total -= Decimal(g.partner_earning)
-            #         c.spread_directo -= Decimal(g.spreak_direct)
+                if ganancia.exists() and d['tipo']=='reverashe':
+                    g = ganancia.first()
+                    g.pagado = True
+                    g_monto_decimal = Decimal(g.monto_a_pagar)  # Convierte g.monto_a_pagar a Decimal
+                    c.monto_a_pagar -= g_monto_decimal
+                    c.monto_total -= Decimal(g.partner_earning)
+                    c.spread_directo -= Decimal(g.monto_a_pagar)
                     
-            #         if c.monto_a_pagar < 0:
-            #             c.monto_a_pagar = 0
-            #         g.save()
-            #     c.save()        
+                    if c.monto_a_pagar < 0:
+                        c.monto_a_pagar = 0
+                    g.save()
+                c.save()        
                 
                 
             

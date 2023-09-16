@@ -4,7 +4,7 @@ from ...utils.limpiarTablas import limpiar_datos_fpa, limpiar_registros,limpiar_
 from ...utils.funciones import existe,existe_cpa,existe_ganancia
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...utils.bonos import bonoDirecto,bonoIndirecto
-from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias
+from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
 from ...usuarios.models import Cuenta,Usuario,Spread,BonoCpa,BonoCpaIndirecto
 from datetime import datetime
 import pandas as pd
@@ -350,7 +350,15 @@ def upload_ganancias(request):
                             c_up_line = cuenta_up_line.first()
                             c_up_line.monto_a_pagar += Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
                             c_up_line.spread_indirecto+= Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
-                            c_up_line.save()
+                            spread_indirecto=SpreadIndirecto(
+                                monto= Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2)),
+                                fpa_child=fpa ,
+                                fpa= c_up_line.fpa,
+                                fecha_creacion= fecha_first_trade
+                            )
+                            if spread_indirecto.monto > 0:
+                                spread_indirecto.save()
+                                c_up_line.save()
 
                         ganancia.save() 
                                 

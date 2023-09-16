@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...utils.funciones import formatera_retiro
-from ...usuarios.models import Spread,Usuario,Cuenta,BonoAPagar
+from ...usuarios.models import Spread,Usuario,Cuenta,BonoAPagar,BonoCpa,BonoCpaIndirecto
 from ...api.models import Registros_ganancias,Registros_cpa
 import re
 import json 
@@ -43,6 +43,164 @@ def reseteo_bonos(request):
                 'status':200,
                 'data':'bonos guardados'
             })
+
+            
+            response = JsonResponse({'data': data})
+            
+            return response
+        except Exception as e:
+            return JsonResponse({'Error':str(e)})
+    else:
+        return JsonResponse({'Error':'Metodo invalidos'})
+    
+
+
+def get_bono_cpa(request):
+    if request.method == 'GET':
+        try:
+            
+            bonoCpas = BonoCpa.objects.all()
+            data = []
+            for bonoCpa in bonoCpas:
+                data.append({
+                    'valor':bonoCpa.valor,
+                    'bono':bonoCpa.bono
+                })
+
+            
+            response = JsonResponse({'data': data})
+            
+            return response
+        except Exception as e:
+            return JsonResponse({'Error':str(e)})
+    else:
+        return JsonResponse({'Error':'Metodo invalidos'})
+    
+
+
+@csrf_exempt
+def put_bono_cpa(request):
+    if request.method == 'PUT':
+        try:
+            body = json.loads(request.body)
+            datos = body['data']
+
+            for dato in datos:
+                bono = BonoCpa.objects.filter(bono=dato['bono']).first()
+
+                bono.valor = dato['valor']
+                bono.save()
+
+            data={
+                'result':'ok',
+                'status':200,
+                'data':'bonos guardados'
+            }
+
+            
+            response = JsonResponse({'data': data})
+            
+            return response
+        except Exception as e:
+            return JsonResponse({'Error':str(e)})
+    else:
+        return JsonResponse({'Error':'Metodo invalidos'})
+
+
+def get_bono_cpa_indirecto(request):
+    if request.method == 'GET':
+        try:
+            
+            bonoCpas = BonoCpaIndirecto.objects.all()
+            data = []
+            for bonoCpa in bonoCpas:
+                data.append({
+                    'valor':bonoCpa.valor,
+                    'bono':bonoCpa.bono
+                })
+
+            
+            response = JsonResponse({'data': data})
+            
+            return response
+        except Exception as e:
+            return JsonResponse({'Error':str(e)})
+    else:
+        return JsonResponse({'Error':'Metodo invalidos'})
+    
+
+
+@csrf_exempt
+def put_bono_cpa_indirecto(request):
+    if request.method == 'PUT':
+        try:
+            body = json.loads(request.body)
+            datos = body['data']
+
+            print(datos)
+            for dato in datos:
+                bono = BonoCpaIndirecto.objects.filter(bono=dato['bono']).first()
+
+                bono.valor = dato['valor']
+                bono.save()
+
+            data={
+                'result':'ok',
+                'status':200,
+                'data':'bonos guardados'
+            }
+
+            
+            response = JsonResponse({'data': data})
+            
+            return response
+        except Exception as e:
+            return JsonResponse({'Error':str(e)})
+    else:
+        return JsonResponse({'Error':'Metodo invalidos'})
+    
+
+
+def get_spread(request):
+    if request.method == 'GET':
+        try:
+            
+            spreads = Spread.objects.all()
+            data = []
+            for spread in spreads:
+                data.append({
+                    'porcentaje':spread.porcentaje,
+                    'spread':spread.spread
+                })
+
+            
+            response = JsonResponse({'data': data})
+            
+            return response
+        except Exception as e:
+            return JsonResponse({'Error':str(e)})
+    else:
+        return JsonResponse({'Error':'Metodo invalidos'})
+    
+
+
+@csrf_exempt
+def put_spread(request):
+    if request.method == 'PUT':
+        try:
+            body = json.loads(request.body)
+            datos = body['data']    
+
+            # print(datos)
+            for dato in datos:
+                spread = Spread.objects.filter(spread=dato['spread']).first()
+                spread.porcentaje = dato['porcentaje']
+                spread.save()
+            data={
+                'result':'ok',
+                'status':200,
+                'data':'bonos guardados'
+            }
 
             
             response = JsonResponse({'data': data})

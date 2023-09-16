@@ -5,7 +5,7 @@ from .controller.registros import verificar,registrosGetAll,getRegistroById,filt
 from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa,ganancias_cpa_by_id,ganancias_all_for_id,ganancia_a_pagar
 from .controller.cuenta import montosGet
 from .controller.files import upload_fpa,upload_registros,upload_cpa,upload_ganancias
-from .controller.bonos import reseteo_bonos
+from .controller.bonos import reseteo_bonos,get_bono_cpa,put_bono_cpa,get_spread,get_bono_cpa_indirecto,put_bono_cpa_indirecto,put_spread
 
 app_name = 'api'
 
@@ -94,4 +94,11 @@ urlpatterns = [
       ########################             Bonos                    ###############################
       #############################################################################################
       path('resetBono',reseteo_bonos , name='reset_bonos'),
+      path('getbonocpa',get_bono_cpa , name='getbonocpa'),
+      path('getspread',get_spread , name='getSpread'),
+      path('getbonocpaindirecto',get_bono_cpa_indirecto , name='getbonocpaindirecto'),
+      path('putbonocpa',put_bono_cpa , name='putbonocpa'),
+      path('putbonocpaindirecto',put_bono_cpa_indirecto , name='putbonocpaindirecto'),
+      path('putspread',put_spread , name='putSpread'),
+      
 ]     

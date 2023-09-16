@@ -72,6 +72,7 @@ class Registros_ganancias(models.Model):
 
 
 class Cpa_a_pagar(models.Model):
+    id= models.AutoField(primary_key=True)
     monto= models.FloatField()
     client= models.CharField(max_length=50)
     fpa= models.CharField(max_length=50)
@@ -80,3 +81,16 @@ class Cpa_a_pagar(models.Model):
     
     def __str__(self):
         return self.client
+
+
+
+class SpreadIndirecto(models.Model):
+    id= models.AutoField(primary_key=True)
+    monto= models.FloatField()
+    fpa_child= models.CharField(max_length=50)
+    fpa= models.CharField(max_length=50)
+    fecha_creacion= models.DateField(auto_created=True)
+    pagado = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.fpa

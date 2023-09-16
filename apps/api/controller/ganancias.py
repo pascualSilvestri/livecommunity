@@ -4,7 +4,7 @@ from django.db.models import Q
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...utils.funciones import formatera_retiro
 from ...usuarios.models import Spread,Usuario,Cuenta,BonoAPagar
-from ...api.models import Registros_ganancias,Registros_cpa
+from ...api.models import Registros_ganancias,Registros_cpa,SpreadIndirecto
 import re
 import json 
 from decimal import Decimal
@@ -477,6 +477,7 @@ def ganancias_all_for_id(request,desde,hasta):
             usuarios = Usuario.objects.all()
             spred = Spread.objects.all()
             bonos = BonoAPagar.objects.all()
+            spread_indirecto = SpreadIndirecto.objects.all()
 
             data = []
 
@@ -492,8 +493,31 @@ def ganancias_all_for_id(request,desde,hasta):
                 ganancias_by_id=ganancias.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta),fpa=g,pagado=False).exclude(fecha_operacion=None)
                 cpa_by_id = cpas.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta),fpa=g,pagado=False).exclude(fecha_creacion=None)
                 bonos_by_id = bonos.filter(Q(date__gte=desde) & Q(date__lte=hasta),fpa=g,pagado=False).exclude(date=None)
+                spread_indirecto_dy_id = spread_indirecto.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta),fpa=g,pagado=False).exclude(fecha_creacion=None)
                 
-                
+
+                for s in spread_indirecto_dy_id:
+                     if s.pagado == False:
+                        usuario = usuarios.filter(fpa = s.fpa)
+                        if usuario.exists():
+                            wallet = usuario.first().wallet.__str__()
+                        else:
+                            wallet = 'Usuario no registrado en back office'
+                        
+                        data_for_id.append({
+                            'id':s.id,
+                            'creacion': s.fecha_creacion,
+                            'monto_spread': s.monto,
+                            'monto': s.monto,
+                            'tipo':'spreadIndirecto',
+                            'client': None,
+                            'isPago': s.pagado,
+                            'fpa':s.fpa,
+                            'wallet':wallet
+                        })
+
+
+
                 for b in bonos_by_id:
                     if b.pagado == False:
                         usuario = usuarios.filter(fpa = b.fpa)
@@ -582,47 +606,56 @@ def ganancia_a_pagar(request):
             cpas = Registros_cpa.objects.all()
             cuentas = Cuenta.objects.all()
             bonos = BonoAPagar.objects.all()
+            spreads = SpreadIndirecto.objects.all()
             
-
-            for d in datos.get('body'):
+            print(datos['body'][0]['tipo'])
+            # for d in datos.get('body'):
                 
-                ganancia = ganancias.filter(fpa=d['fpa'],id=d['id'])
-                cpa = cpas.filter(fpa=d['fpa'],id=d['id'])
-                bono = bonos.filter(fpa=d['fpa'],id_bono=d['id'])
+            #     ganancia = ganancias.filter(fpa=d['fpa'],id=d['id'])
+            #     cpa = cpas.filter(fpa=d['fpa'],id=d['id'])
+            #     bono = bonos.filter(fpa=d['fpa'],id_bono=d['id'])
+            #     spread = spreads.filter(fpa=d['fpa'],id=d['id'])
                 
-                # print(ganancia.first().fpa)
-                cuenta = cuentas.filter(fpa=d['fpa'])
-                if cuenta.exists():
-                    c= cuenta.first()
+            #     # print(ganancia.first().fpa)
+            #     cuenta = cuentas.filter(fpa=d['fpa'])
+            #     if cuenta.exists():
+            #         c= cuenta.first()
                     
-                if bono.exists() and d['tipo']=='bono':
-                    bo = bono.first()
-                    bo.pagado = True
-                    bo_decimal = Decimal(bo.monto_total)
-                    c.monto_a_pagar -= bo_decimal
-                    bo.save()
+            #     if bono.exists() and d['tipo']=='bono':
+            #         bo = bono.first()
+            #         bo.pagado = True
+            #         bo_decimal = Decimal(bo.monto_total)
+            #         c.monto_a_pagar -= bo_decimal
+            #         bo.save()
                 
-                if cpa.exists() and d['tipo']=='CPA':
-                    cp = cpa.first()
-                    cp.pagado = True
-                    c_decimal = Decimal(cp.monto)
-                    c.monto_cpa -= c_decimal
-                    # c.monto_a_pagar -= c_decimal
-                    cp.save()
+            #     if spread.exists() and d['tipo']=='spreadIndirecto':
+            #         sp = spread.first()
+            #         sp.pagado = True
+            #         c.monto_a_pagar -= Decimal(sp.monto)
+            #         c.spread_indirecto -= Decimal(sp.monto)
+            #         sp.save()
+
+            #     if cpa.exists() and d['tipo']=='CPA':
+            #         cp = cpa.first()
+            #         cp.pagado = True
+            #         c_decimal = Decimal(cp.monto)
+            #         c.monto_cpa -= c_decimal
+            #         # c.monto_a_pagar -= c_decimal
+            #         cp.save()
                         
                 
-                if ganancia.exists() and d['tipo']=='reverashe':
-                    g = ganancia.first()
-                    g.pagado = True
-                    g_monto_decimal = Decimal(g.monto_a_pagar)  # Convierte g.monto_a_pagar a Decimal
-                    c.monto_a_pagar -= g_monto_decimal
-                    c.monto_total -= Decimal(g.partner_earning)
-                    c.spread_directo -= Decimal(g.partner_earning)
+            #     if ganancia.exists() and d['tipo']=='reverashe':
+            #         g = ganancia.first()
+            #         g.pagado = True
+            #         g_monto_decimal = Decimal(g.monto_a_pagar)  # Convierte g.monto_a_pagar a Decimal
+            #         c.monto_a_pagar -= g_monto_decimal
+            #         c.monto_total -= Decimal(g.partner_earning)
+            #         c.spread_directo -= Decimal(g.spreak_direct)
                     
-                    if c.monto_a_pagar < 0:
-                        c.monto_a_pagar = 0
-                    g.save()
-                c.save()        
+            #         if c.monto_a_pagar < 0:
+            #             c.monto_a_pagar = 0
+            #         g.save()
+            #     c.save()        
                 
                 
             

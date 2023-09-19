@@ -98,5 +98,7 @@ urlpatterns = [
       path('getspread',get_spread , name='getSpread'),
       path('getbonocpaindirecto',get_bono_cpa_indirecto , name='getbonocpaindirecto'),
       path('putbonocpa',put_bono_cpa , name='putbonocpa'),
+      path('putbonocpaindirecto',put_bono_cpa_indirecto , name='putbonocpaindirecto'),
+      path('putspread',put_spread , name='putSpread'),
       
 ]     

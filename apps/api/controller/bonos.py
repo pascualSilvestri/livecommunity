@@ -137,8 +137,9 @@ def put_bono_cpa_indirecto(request):
             body = json.loads(request.body)
             datos = body['data']
 
+            print(datos)
             for dato in datos:
-                bono = BonoCpa.objects.filter(bono=dato['bono']).first()
+                bono = BonoCpaIndirecto.objects.filter(bono=dato['bono']).first()
 
                 bono.valor = dato['valor']
                 bono.save()
@@ -188,14 +189,13 @@ def put_spread(request):
     if request.method == 'PUT':
         try:
             body = json.loads(request.body)
-            datos = body['data']
+            datos = body['data']    
 
+            # print(datos)
             for dato in datos:
-                bono = BonoCpa.objects.filter(bono=dato['bono']).first()
-
-                bono.valor = dato['valor']
-                bono.save()
-
+                spread = Spread.objects.filter(spread=dato['spread']).first()
+                spread.porcentaje = dato['porcentaje']
+                spread.save()
             data={
                 'result':'ok',
                 'status':200,

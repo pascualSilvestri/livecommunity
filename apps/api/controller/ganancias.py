@@ -4,7 +4,7 @@ from django.db.models import Q
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...utils.funciones import formatera_retiro
 from ...usuarios.models import Spread,Usuario,Cuenta,BonoAPagar
-from ...api.models import Registros_ganancias,Registros_cpa
+from ...api.models import Registros_ganancias,Registros_cpa,SpreadIndirecto
 import re
 import json 
 from decimal import Decimal
@@ -323,7 +323,7 @@ def filtarGananciasCpaById(request,pk):
                         'monto':r.monto,
                         'monto_spread':r.monto,
                         'tipo_comision':'CPA',
-                        'id_usuario':r.client,
+                        'client':r.client,
                         'codigo':r.fpa,
                         'isPago':r.pagado
                     }
@@ -354,7 +354,7 @@ def filtradoGananciasRevshare(request):
                         'monto':r.partner_earning,
                         'monto_spread':monto_spread,
                         'tipo_comision':'Reverash',
-                        'id_usuario':r.client,
+                        'client':r.client,
                         'codigo':r.fpa,
                         'isPago':r.pagado
                     }
@@ -386,7 +386,7 @@ def filtrar_ganancias_by_revshare_By_Id(request,pk):
                             'monto':r.partner_earning,
                             'monto_spread':monto_spread,
                             'tipo_comision':'Reverashare',
-                            'id_usuario':r.client,
+                            'client':r.client,
                             'codigo':r.fpa,
                             'isPago':r.pagado
                         }
@@ -477,6 +477,7 @@ def ganancias_all_for_id(request,desde,hasta):
             usuarios = Usuario.objects.all()
             spred = Spread.objects.all()
             bonos = BonoAPagar.objects.all()
+            spread_indirecto = SpreadIndirecto.objects.all()
 
             data = []
 
@@ -492,8 +493,31 @@ def ganancias_all_for_id(request,desde,hasta):
                 ganancias_by_id=ganancias.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta),fpa=g,pagado=False).exclude(fecha_operacion=None)
                 cpa_by_id = cpas.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta),fpa=g,pagado=False).exclude(fecha_creacion=None)
                 bonos_by_id = bonos.filter(Q(date__gte=desde) & Q(date__lte=hasta),fpa=g,pagado=False).exclude(date=None)
+                spread_indirecto_dy_id = spread_indirecto.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta),fpa=g,pagado=False).exclude(fecha_creacion=None)
                 
-                
+
+                for s in spread_indirecto_dy_id:
+                     if s.pagado == False:
+                        usuario = usuarios.filter(fpa = s.fpa)
+                        if usuario.exists():
+                            wallet = usuario.first().wallet.__str__()
+                        else:
+                            wallet = 'Usuario no registrado en back office'
+                        
+                        data_for_id.append({
+                            'id':s.id,
+                            'creacion': s.fecha_creacion,
+                            'monto_spread': s.monto,
+                            'monto': s.monto,
+                            'tipo':'spreadIndirecto',
+                            'client': None,
+                            'isPago': s.pagado,
+                            'fpa':s.fpa,
+                            'wallet':wallet
+                        })
+
+
+
                 for b in bonos_by_id:
                     if b.pagado == False:
                         usuario = usuarios.filter(fpa = b.fpa)
@@ -537,28 +561,27 @@ def ganancias_all_for_id(request,desde,hasta):
                         })
                 
                 for r in ganancias_by_id:    
-                
-                    if not r.pagado and r.partner_earning != 0:
-                        monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
-                    else:
-                        monto_spread = r.monto_a_pagar
+                    if r.monto_a_pagar > 0:
                     
-                    usuario = usuarios.filter(fpa = r.fpa)
-                    if usuario.exists():
-                        wallet = usuario.first().wallet.__str__()
-                    else:
-                        wallet = 'Usuario no registrado en back office'
-                    data_for_id.append({
-                        'id':r.id,
-                        'creacion': r.fecha_operacion,
-                        'monto': r.partner_earning,
-                        'monto_spread': monto_spread,
-                        'tipo':'reverashe',
-                        'client': r.client,
-                        'isPago': r.pagado,
-                        'fpa':r.fpa,
-                        'wallet':wallet
-                    })
+                       
+                        monto_spread = r.monto_a_pagar
+                        
+                        usuario = usuarios.filter(fpa = r.fpa)
+                        if usuario.exists():
+                            wallet = usuario.first().wallet.__str__()
+                        else:
+                            wallet = 'Usuario no registrado en back office'
+                        data_for_id.append({
+                            'id':r.id,
+                            'creacion': r.fecha_operacion,
+                            'monto': r.partner_earning,
+                            'monto_spread': monto_spread,
+                            'tipo':'reverashe',
+                            'client': r.client,
+                            'isPago': r.pagado,
+                            'fpa':r.fpa,
+                            'wallet':wallet
+                        })
                 data.append(data_for_id)
             
             data = [subarray for subarray in data if subarray]
@@ -583,13 +606,14 @@ def ganancia_a_pagar(request):
             cpas = Registros_cpa.objects.all()
             cuentas = Cuenta.objects.all()
             bonos = BonoAPagar.objects.all()
+            spreads = SpreadIndirecto.objects.all()
             
-
             for d in datos.get('body'):
                 
                 ganancia = ganancias.filter(fpa=d['fpa'],id=d['id'])
                 cpa = cpas.filter(fpa=d['fpa'],id=d['id'])
                 bono = bonos.filter(fpa=d['fpa'],id_bono=d['id'])
+                spread = spreads.filter(fpa=d['fpa'],id=d['id'])
                 
                 # print(ganancia.first().fpa)
                 cuenta = cuentas.filter(fpa=d['fpa'])
@@ -603,6 +627,15 @@ def ganancia_a_pagar(request):
                     c.monto_a_pagar -= bo_decimal
                     bo.save()
                 
+                if spread.exists() and d['tipo']=='spreadIndirecto':
+                    sp = spread.first()
+                    sp.pagado = True
+                    c.monto_a_pagar -= Decimal(sp.monto)
+                    c.spread_indirecto -= Decimal(sp.monto)
+                    if c.spread_indirecto < 0:
+                        c.spread_indirecto = 0
+                    sp.save()
+
                 if cpa.exists() and d['tipo']=='CPA':
                     cp = cpa.first()
                     cp.pagado = True
@@ -618,7 +651,7 @@ def ganancia_a_pagar(request):
                     g_monto_decimal = Decimal(g.monto_a_pagar)  # Convierte g.monto_a_pagar a Decimal
                     c.monto_a_pagar -= g_monto_decimal
                     c.monto_total -= Decimal(g.partner_earning)
-                    c.spread_directo -= Decimal(g.partner_earning)
+                    c.spread_directo -= Decimal(g.monto_a_pagar)
                     
                     if c.monto_a_pagar < 0:
                         c.monto_a_pagar = 0

@@ -216,7 +216,8 @@ def upload_cpa(request):
                         
                     new_cpa = Registros_cpa(
                         fecha_creacion= fecha_creacion,
-                        monto= cpa['monto'],
+                        monto_real= cpa['monto'],
+                        monto= 65,
                         cpa= cpa['cpa'],
                         client= cpa['client'],
                         fpa= fpa

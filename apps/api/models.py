@@ -39,6 +39,7 @@ class Registro_archivo(models.Model):
 class Registros_cpa(models.Model):
     id = models.AutoField(primary_key=True)
     fecha_creacion= models.DateField(null=True)
+    monto_real= models.FloatField()
     monto= models.FloatField()
     cpa= models.CharField(max_length=50)
     client= models.CharField(max_length=50)

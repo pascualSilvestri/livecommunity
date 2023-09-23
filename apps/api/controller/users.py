@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from ...usuarios.models import Usuario
+from ...usuarios.models import Usuario,Cuenta
 from ...afiliado.models import Afiliado
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
@@ -13,10 +13,16 @@ def postNewAfiliado(request):
         # if 'application/json' in request.content_type:
             try:
                 afiliados = Afiliado.objects.all()
+                
                 # Decodificar el cuerpo de la solicitud como JSON
                 fpa = request.POST.get('fpa').upper()
                 url = request.POST.get('url')
                 upline = request.POST.get('up_line').upper()
+
+                cuenta = Cuenta.objects.filter(fpa=fpa)
+                if not cuenta.exists():
+                    c = Cuenta(fpa=fpa)
+                    c.save()
                 # Crear un nuevo usuario y guardar los datos en la base de datos
                 new_afiliado = Afiliado(
                     fpa = fpa,

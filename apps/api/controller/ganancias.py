@@ -322,7 +322,7 @@ def filtarGananciasCpaById(request,pk):
                         'monto':r.monto,
                         'monto_spread':r.monto,
                         'tipo_comision':'CPA',
-                        'id_usuario':r.client,
+                        'client':r.client,
                         'codigo':r.fpa,
                         'isPago':r.pagado
                     }
@@ -353,7 +353,7 @@ def filtradoGananciasRevshare(request):
                         'monto':r.partner_earning,
                         'monto_spread':monto_spread,
                         'tipo_comision':'Reverash',
-                        'id_usuario':r.client,
+                        'client':r.client,
                         'codigo':r.fpa,
                         'isPago':r.pagado
                     }
@@ -385,7 +385,7 @@ def filtrar_ganancias_by_revshare_By_Id(request,pk):
                             'monto':r.partner_earning,
                             'monto_spread':monto_spread,
                             'tipo_comision':'Reverashare',
-                            'id_usuario':r.client,
+                            'client':r.client,
                             'codigo':r.fpa,
                             'isPago':r.pagado
                         }
@@ -631,6 +631,8 @@ def ganancia_a_pagar(request):
                     sp.pagado = True
                     c.monto_a_pagar -= Decimal(sp.monto)
                     c.spread_indirecto -= Decimal(sp.monto)
+                    if c.spread_indirecto < 0:
+                        c.spread_indirecto = 0
                     sp.save()
 
                 if cpa.exists() and d['tipo']=='CPA':

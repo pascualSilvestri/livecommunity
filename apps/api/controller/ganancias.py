@@ -114,7 +114,7 @@ def ganancia_by_id(request,pk):
                             'creacion':r.fecha_operacion,
                             'monto':r.partner_earning,
                             'monto_spread':monto_spread,
-                            'tipo_comision':'Reverashe',
+                            'tipo_comision':r.symbol,
                             'client':r.client,
                             'isPago':r.pagado
                         }
@@ -421,7 +421,7 @@ def filterGananciasFecha(request,desde,hasta):
                         'creacion':r.fecha_operacion,
                         'monto':r.partner_earning,
                         'monto_spread':monto_spread,
-                        'tipo_comision':'Reverashe',
+                        'tipo_comision':r.symbol,
                         'client':r.client,
                         
                         'isPago':r.pagado
@@ -459,7 +459,7 @@ def filterGananciasFechaById(request,pk,desde,hasta):
                             'creacion':r.fecha_operacion,
                             'monto':r.partner_earning,
                             'monto_spread':monto_spread,
-                            'tipo_comision':'Reverashe',
+                            'tipo_comision':r.symbol,
                             'client':r.client,
                             'isPago':r.pagado
                         }

@@ -24,6 +24,13 @@ class Spread(models.Model):
     
     def __str__(self):
         return self.spread
+    
+class CPA(models.Model):
+    id=  models.AutoField('id', primary_key=True)
+    cpa= models.FloatField()
+    
+    def __str__(self):
+        return str(self.id)
 
 
 class Usuario(AbstractUser):

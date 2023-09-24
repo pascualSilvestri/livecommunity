@@ -5,7 +5,7 @@ from ...utils.funciones import existe,existe_cpa,existe_ganancia
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...utils.bonos import bonoDirecto,bonoIndirecto
 from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
-from ...usuarios.models import Cuenta,Usuario,Spread,BonoCpa,BonoCpaIndirecto
+from ...usuarios.models import Cuenta,Usuario,Spread,BonoCpa,BonoCpaIndirecto,CPA
 from datetime import datetime
 import pandas as pd
 import os
@@ -104,12 +104,16 @@ def upload_registros(request):
             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
             
             
+            
             if file_extension == ".xlsx":
                 
                 file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
                 new_data=limpiar_registros(file_data)
                 
+                
                 for data in new_data:
+                   
+
                     fpa_id = fpas.filter(client=data['client'])
                     if fpa_id.exists():
                         fpa = fpa_id[0].fpa
@@ -139,32 +143,32 @@ def upload_registros(request):
                         fecha_primer_deposito = datetime.strptime(
                             fecha_primer_deposito_string, "%Y-%m-%d"
                         ).date()
-                        
-                                        
-                    register = registros.filter(client=data['client'])
+                    
+
+                    register = registros.filter(client=data['client'],fecha_registro=fecha_registro,country=data['country'])
                     
                     if register.exists():
                         r = register.first()
                         r.primer_deposito = data["primer_deposito"]
                         r.save()
-                    
-                    registro = Registro_archivo(
-                        client= data['client'],
-                        fecha_registro= fecha_registro,
-                        fpa= fpa,
-                        status= data['status'],
-                        fecha_calif=fecha_calif,
-                        country= data['country'],
-                        posicion_cuenta= data['posicion_cuenta'],
-                        volumen= data['volumen'],
-                        primer_deposito= data['primer_deposito'],
-                        fecha_primer_deposito=fecha_primer_deposito,
-                        neto_deposito= data['neto_deposito'],
-                        numeros_depositos= data['numeros_depositos'],
-                        comision= data['comision'],
-                    )
-                    
-                    if not existe(data['client'],fecha_registro,fpa,data['status'],fecha_calif,data['country'],data['posicion_cuenta'],fecha_primer_deposito,data['neto_deposito'],data['numeros_depositos'],registros):
+                    else:
+                        registro = Registro_archivo(
+                            client= data['client'],
+                            fecha_registro= fecha_registro,
+                            fpa= fpa,
+                            status= data['status'],
+                            fecha_calif=fecha_calif,
+                            country= data['country'],
+                            posicion_cuenta= data['posicion_cuenta'],
+                            volumen= data['volumen'],
+                            primer_deposito= data['primer_deposito'],
+                            fecha_primer_deposito=fecha_primer_deposito,
+                            neto_deposito= data['neto_deposito'],
+                            numeros_depositos= data['numeros_depositos'],
+                            comision= data['comision'],
+                        )
+                        
+                        # if not existe(data['client'],fecha_registro,fpa,data['status'],fecha_calif,data['country'],data['posicion_cuenta'],fecha_primer_deposito,data['neto_deposito'],data['numeros_depositos'],registros):
                         registro.save()
 
                 
@@ -190,6 +194,7 @@ def upload_cpa(request):
         try:
             fpas = Relation_fpa_client.objects.all()
             cpas = Registros_cpa.objects.all()
+            cpa_value = CPA.objects.filter(id=1).first()
             excel_file = request.FILES["csvFileCpa"]
             file_name = excel_file.name  # Obtengon el nombre del archivo
             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
@@ -200,35 +205,41 @@ def upload_cpa(request):
                 
                     
                 for cpa in new_data:
-                    fpa_id = fpas.filter(client=cpa['client']).first()
-                    if fpa_id:
-                        fpa = fpa_id.fpa
-                    else:
-                        fpa = None
-
                     fecha_creacion_string = str(cpa["fecha_creacion"])
+
                     if fecha_creacion_string == "none":
                         fecha_creacion = None
                     else:
                         fecha_creacion = datetime.strptime(
                             fecha_creacion_string, "%Y-%m-%d"
                         ).date()
+
+                    cpa_queryset = cpas.filter(client=cpa['client'])
+                    
+                    if cpa_queryset.exists():
+                        pass
+                    else:
+                        fpa_id = fpas.filter(client=cpa['client']).first()
+                        if fpa_id:
+                            fpa = fpa_id.fpa
+                        else:
+                            fpa = None
+
+                        new_cpa = Registros_cpa(
+                            fecha_creacion= fecha_creacion,
+                            monto_real= cpa['monto'],
+                            monto= cpa_value.cpa,
+                            cpa= cpa['cpa'],
+                            client= cpa['client'],
+                            fpa= fpa
+                        )
                         
-                    new_cpa = Registros_cpa(
-                        fecha_creacion= fecha_creacion,
-                        monto_real= cpa['monto'],
-                        monto= 65,
-                        cpa= cpa['cpa'],
-                        client= cpa['client'],
-                        fpa= fpa
-                    )
-                    
-                    
-                    if not existe_cpa(fecha_creacion,cpa['monto'],cpa['client'],cpa['fpa'],cpas):
+                        
+                        # if not existe_cpa(fecha_creacion,cpa['monto'],cpa['client'],cpa['fpa'],cpas):
                         bono_directo = BonoCpa
                         bono_indirecto = BonoCpaIndirecto
                         cuenta = Cuenta.objects.filter(fpa=fpa).first()
-                        
+                            
                         if cuenta.fpa != 'none':
                             
                             usuario_up_line = Usuario.objects.filter(fpa=fpa)
@@ -236,7 +247,7 @@ def upload_cpa(request):
                                 cuenta_up_line = Cuenta.objects.filter(fpa=usuario_up_line.first().uplink)
                             else:
                                 cuenta_up_line = None
-                            cuenta.monto_cpa += cpa['monto']
+                            cuenta.monto_cpa += Decimal(cpa_value.cpa)
                             # cuenta.monto_a_pagar += Decimal(cpa['monto'])
                             cuenta.cpa += 1
                             
@@ -250,16 +261,13 @@ def upload_cpa(request):
                                     cuenta_up.save()
                             new_cpa.save()
                             cuenta.save()
-                            # usuario_up_line[0].save()
-                                    
-                            
-                    
+                                # usuario_up_line[0].save()
             else:
                 print("ErrorMessege Document is not format")
                 return JsonResponse({"error": "Document is not format"},status=400)
         except Exception as e:
-            print(e)
-            return JsonResponse({"Error": "Salto la exception"})
+            print(str(e))
+            return JsonResponse({"Error": str(e)},status=402)
         print("message Archivo CSV recibido y procesado exitosamente.")
         return JsonResponse(
             {"message": "Archivo CSV recibido y procesado exitosamente."}

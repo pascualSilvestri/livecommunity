@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from .controller.users import postNewAfiliado,postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,users_eliminados,users_pendientes,updatePassword
 from .controller.registros import verificar,registrosGetAll,getRegistroById,filter_registros_fecha_by_id
-from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa,ganancias_cpa_by_id,ganancias_all_for_id,ganancia_a_pagar
+from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa,ganancias_cpa_by_id,ganancias_all_for_id,ganancia_a_pagar,filterGananciasFechaById
 from .controller.cuenta import montosGet
 from .controller.files import upload_fpa,upload_registros,upload_cpa,upload_ganancias
 from .controller.bonos import reseteo_bonos,get_bono_cpa,put_bono_cpa,get_spread,get_bono_cpa_indirecto,put_bono_cpa_indirecto,put_spread
@@ -36,6 +36,7 @@ urlpatterns = [
       path('gananciatotaluser/<pk>/', ganancias_total_user, name = 'ganaciaTotalUser'),
       #Filtrado por fecha ganancias
       path('filtrargananciasfecha/<desde>/<hasta>/', filterGananciasFecha, name = 'gananciasFiltradoFecha'),
+      path('filtrargananciasfechaById/<pk>/<desde>/<hasta>/', filterGananciasFechaById, name = 'gananciasFiltradoFecha'),
       #Filtrado por CPA
       path('filtrarganaciascpa/', filtarGananciasCpa, name = 'filtradoCpa'),
       #Filtrado por CPA y id del usuario

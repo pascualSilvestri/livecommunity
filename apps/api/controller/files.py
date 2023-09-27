@@ -238,29 +238,31 @@ def upload_cpa(request):
                         # if not existe_cpa(fecha_creacion,cpa['monto'],cpa['client'],cpa['fpa'],cpas):
                         bono_directo = BonoCpa
                         bono_indirecto = BonoCpaIndirecto
-                        cuenta = Cuenta.objects.filter(fpa=fpa).first()
-                            
-                        if cuenta.fpa != 'none':
-                            
-                            usuario_up_line = Usuario.objects.filter(fpa=fpa)
-                            if usuario_up_line.exists():
-                                cuenta_up_line = Cuenta.objects.filter(fpa=usuario_up_line.first().uplink)
-                            else:
-                                cuenta_up_line = None
-                            cuenta.monto_cpa += Decimal(cpa_value.cpa)
-                            # cuenta.monto_a_pagar += Decimal(cpa['monto'])
-                            cuenta.cpa += 1
-                            
-                            bonoDirecto(cuenta,bono_directo)
-                            if cuenta_up_line != None:
-                                if cuenta_up_line.exists() :
-                                    cuenta_up = cuenta_up_line.first()
-                                    cuenta_up.cpaIndirecto += 1
-                                    print(f'hijo: {usuario_up_line[0].fpa} padre: {cuenta_up_line[0].fpa}')
-                                    bonoIndirecto(cuenta_up,bono_indirecto)
-                                    cuenta_up.save()
-                            new_cpa.save()
-                            cuenta.save()
+
+                        if fpa != None:
+                            cuenta = Cuenta.objects.filter(fpa=fpa).first()
+                                
+                            if cuenta.fpa != 'none':
+                                
+                                usuario_up_line = Usuario.objects.filter(fpa=fpa)
+                                if usuario_up_line.exists():
+                                    cuenta_up_line = Cuenta.objects.filter(fpa=usuario_up_line.first().uplink)
+                                else:
+                                    cuenta_up_line = None
+                                cuenta.monto_cpa += Decimal(cpa_value.cpa)
+                                # cuenta.monto_a_pagar += Decimal(cpa['monto'])
+                                cuenta.cpa += 1
+                                
+                                bonoDirecto(cuenta,bono_directo)
+                                if cuenta_up_line != None:
+                                    if cuenta_up_line.exists() :
+                                        cuenta_up = cuenta_up_line.first()
+                                        cuenta_up.cpaIndirecto += 1
+                                        print(f'hijo: {usuario_up_line[0].fpa} padre: {cuenta_up_line[0].fpa}')
+                                        bonoIndirecto(cuenta_up,bono_indirecto)
+                                        cuenta_up.save()
+                                new_cpa.save()
+                                cuenta.save()
                                 # usuario_up_line[0].save()
             else:
                 print("ErrorMessege Document is not format")
@@ -377,8 +379,8 @@ def upload_ganancias(request):
                 print("ErrorMessege Document is not format")
                 return JsonResponse({"error": "Document is not format"},status=402)
         except Exception as e:
-            print(e)
-            return JsonResponse({"Error": "Salto la exception"})
+            print(str(e))
+            return JsonResponse({"Error": "Salto la exception"},status=502)
         return JsonResponse(
             {"message": "Archivo CSV recibido y procesado exitosamente."}
         )

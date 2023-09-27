@@ -59,8 +59,6 @@ class Registros_ganancias(models.Model):
     full_name = models.CharField(max_length=200)
     partner_earning = models.DecimalField(max_digits=10, decimal_places=2)
     monto_a_pagar= models.DecimalField(max_digits=10, decimal_places=2)
-    skilling_earning = models.DecimalField(max_digits=10, decimal_places=2)
-    skilling_commission = models.DecimalField(max_digits=10, decimal_places=2)
     fecha_operacion = models.DateField(null=True)
     position=models.CharField(max_length=100)
     spreak_direct = models.FloatField(default=0)

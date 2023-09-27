@@ -93,14 +93,11 @@ def limpiar_ganacias(dataFrame):
         'Realized PnL':'pnl',
         'Platform':'plataforma',
         'Partner Earnings (USD)':'partner_earning',
-        'Skilling Earnings (USD)':'skilling_earning',
-        'Skilling Markup (USD)':'skilling_markup',
-        'Skilling Commission (USD)':'skilling_commission',
         'Deal ID':'deal_id'
     }
 
     dataFrame.rename(columns=column_mapping, inplace=True)
 
-    dataFrame = dataFrame[['client', 'position', 'symbol', 'fecha_operacion', 'partner_earning', 'skilling_earning','skilling_commission', 'deal_id']]
+    dataFrame = dataFrame[['client', 'position', 'symbol', 'fecha_operacion', 'partner_earning', 'deal_id']]
 
     return dataFrame.to_dict(orient='records')

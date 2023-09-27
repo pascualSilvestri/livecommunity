@@ -33,12 +33,13 @@ class Registro_archivo(models.Model):
     comision= models.FloatField(default=0)
     
     def __str__(self):
-        return self.fpa
+        return self.client
 
 
 class Registros_cpa(models.Model):
     id = models.AutoField(primary_key=True)
     fecha_creacion= models.DateField(null=True)
+    monto_real= models.FloatField()
     monto= models.FloatField()
     cpa= models.CharField(max_length=50)
     client= models.CharField(max_length=50)
@@ -58,8 +59,6 @@ class Registros_ganancias(models.Model):
     full_name = models.CharField(max_length=200)
     partner_earning = models.DecimalField(max_digits=10, decimal_places=2)
     monto_a_pagar= models.DecimalField(max_digits=10, decimal_places=2)
-    skilling_earning = models.DecimalField(max_digits=10, decimal_places=2)
-    skilling_commission = models.DecimalField(max_digits=10, decimal_places=2)
     fecha_operacion = models.DateField(null=True)
     position=models.CharField(max_length=100)
     spreak_direct = models.FloatField(default=0)
@@ -68,7 +67,7 @@ class Registros_ganancias(models.Model):
     pagado = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.client
+        return self.fpa
 
 
 class Cpa_a_pagar(models.Model):

@@ -49,7 +49,7 @@ const errorMensaje = {
     'btnError': "Por favor complete los campo correctamente.",
     'idCliente': 'Su cuenta no esta verificada correctamente, por favor verifique el ID ingresado',
     'telefono': 'Acepta solo numeros',
-    'noDeposito': 'Para terminar el proceso de registro debe fondear la cuenta de libertex.'
+    'noDeposito': 'Para terminar el proceso de registro debe fondear la cuenta de Skilling.'
 };
 
 

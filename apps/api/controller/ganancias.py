@@ -2,7 +2,6 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
-from ...utils.funciones import formatera_retiro
 from ...usuarios.models import Spread,Usuario,Cuenta,BonoAPagar
 from ...api.models import Registros_ganancias,Registros_cpa,SpreadIndirecto
 import re
@@ -115,7 +114,7 @@ def ganancia_by_id(request,pk):
                             'creacion':r.fecha_operacion,
                             'monto':r.partner_earning,
                             'monto_spread':monto_spread,
-                            'tipo_comision':'Reverashe',
+                            'tipo_comision':r.symbol,
                             'client':r.client,
                             'isPago':r.pagado
                         }
@@ -422,7 +421,7 @@ def filterGananciasFecha(request,desde,hasta):
                         'creacion':r.fecha_operacion,
                         'monto':r.partner_earning,
                         'monto_spread':monto_spread,
-                        'tipo_comision':'Reverashe',
+                        'tipo_comision':r.symbol,
                         'client':r.client,
                         
                         'isPago':r.pagado
@@ -437,6 +436,58 @@ def filterGananciasFecha(request,desde,hasta):
     except ValueError:
         print(ValueError)
         return ValueError
+
+def filterGananciasFechaById(request,pk,desde,hasta):
+    
+    # fecha_desde = datetime.strptime(desde, "%Y-%m-%d").date
+    # fecha_hasta = datetime.strptime(hasta, "%Y-%m-%d").date
+    if request.method == 'GET':
+        try:
+            ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde,fpa=pk) & Q(fecha_operacion__lte=hasta,fpa=pk))
+            cpas = Registros_cpa.objects.filter(Q(fecha_creacion__gte=desde,fpa=pk) & Q(fecha_creacion__lte=hasta,fpa=pk))
+            spred = Spread.objects.all()
+            data=[]
+            for r in ganancias:
+                # if r.pagado == False and r.fecha_operacion != None:
+                if r.fecha_operacion != None:
+                    if r.partner_earning != 0:
+                        monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
+                    else:
+                        monto_spread = r.partner_earning
+                    data.append( 
+                        {
+                            'creacion':r.fecha_operacion,
+                            'monto':r.partner_earning,
+                            'monto_spread':monto_spread,
+                            'tipo_comision':r.symbol,
+                            'client':r.client,
+                            'isPago':r.pagado
+                        }
+                    )
+            
+            for c in cpas:
+                data.append( 
+                        {
+                            'creacion':c.fecha_creacion,
+                            'monto':c.monto,
+                            'monto_spread':c.monto,
+                            'tipo_comision':'CPA',
+                            'client':c.client,
+                            'retiro':0,
+                            'isPago':c.pagado
+                        }
+                    )
+                
+            response = JsonResponse({'data': data})
+            
+            return response
+        except Exception as e:
+            return JsonResponse({'Error':e.__str__()})
+    else:
+        return JsonResponse({'Error':'Metodo invalidos'})
+
+    
+
 
 
 def filter_ganancia_to_date_by_id(request,pk,desde,hasta):

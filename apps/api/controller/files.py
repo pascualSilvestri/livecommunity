@@ -329,8 +329,6 @@ def upload_ganancias(request):
                             full_name = full_name,
                             partner_earning = g['partner_earning'],
                             monto_a_pagar=monto_a_pagar,
-                            skilling_earning = g['skilling_earning'],
-                            skilling_commission = g['skilling_commission'],
                             fecha_operacion = fecha_first_trade,
                             deal_id=g['deal_id'],
                             spreak_direct = spred[1].porcentaje,

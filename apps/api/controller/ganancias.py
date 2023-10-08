@@ -497,30 +497,62 @@ def filter_ganancia_to_date_by_id(request,pk,desde,hasta):
     spread = Spread.objects.all()
     try:
         if request.method == 'GET':
+            cpa = Registros_cpa.objects.filter(Q(fecha_creacion__gte=desde,fpa=pk) & Q(fecha_creacion__lte=hasta,fpa=pk))
             ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta),fpa=pk,pagado=False)
+            spread_indirecto = SpreadIndirecto.objects.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta),fpa=pk,pagado=False)
+            cuenta = Cuenta.objects.filter(fpa=pk).first()
             
             data= []
-            monto_a_pagar=0
+            monto_total = 0
+            monto_cpa = 0
+            monto_directo = 0
+            monto_indirecto = 0
+            monto_bono_directo = cuenta.monto_bono_directo
+            monto_bono_indirecto = cuenta.monto_bono_indirecto
+            level_bono_directo = cuenta.level_bono_directo
+            level_bono_indirecto = cuenta.level_bono_indirecto
+           
+            
             for r in ganancias:
-                # monto_a_pagar += calcula_porcentaje_directo(float(r.monto_a_pagar),spread[0].porcentaje,spread[1].porcentaje)
-                monto_a_pagar += r.monto_a_pagar
-                
+                monto_total += r.partner_earning
+                monto_directo += r.monto_a_pagar
+            
+            for s in spread_indirecto:
+                monto_indirecto += s.monto
+            
+            for c in cpa:
+                monto_cpa += c.monto
+            
+            monto_a_pagar =Decimal(monto_directo) + Decimal(monto_indirecto)
+            
             data.append( 
-                    {
-                        'monto': round(monto_a_pagar,2)
+                    {                      
+                        'monto_total':monto_total,
+                        'monto_directo':monto_directo,
+                        'monto_indirecto':round(monto_indirecto,2),
+                        'monto_cpa':monto_cpa,
+                        'monto_bono_directo':monto_bono_directo,
+                        'monto_bono_indirecto':monto_bono_indirecto,
+                        'level_bono_directo':level_bono_directo,
+                        'level_bono_indirecto':level_bono_indirecto,
+                        'monto_a_pagar':round(monto_a_pagar,2)
                     }
                 )
             
-            
+            # round(monto_a_pagar,2)
             response = JsonResponse({'data':data})
             return response
         
     except ValueError:
-        print(ValueError)
-        return ValueError
+        return JsonResponse({'error':str(ValueError)})
 
 
 def ganancias_all_for_id(request,desde,hasta):
+    """
+    This function retrieves all the earnings data for a given time period and FPA (Fixed Payment Agreement) ID.
+    It returns a JSON response with the data organized by FPA ID, and each FPA ID has a list of earnings data associated with it.
+    The earnings data includes information about spread, CPA, bonuses, and reversals.
+    """
     if request.method == 'GET':
         try:
             ganancias = Registros_ganancias.objects.all()

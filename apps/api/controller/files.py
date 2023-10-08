@@ -361,8 +361,8 @@ def upload_ganancias(request):
                                 c_up_line.monto_a_pagar += Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
                                 c_up_line.spread_indirecto+= Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
                                 spread_indirecto=SpreadIndirecto(
-                                    monto= Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2)),
-                                    fpa_child=fpa ,
+                                    monto = Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2)),
+                                    fpa_child=fpa,
                                     fpa= c_up_line.fpa,
                                     fecha_creacion= fecha_first_trade
                                 )

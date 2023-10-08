@@ -507,10 +507,16 @@ def filter_ganancia_to_date_by_id(request,pk,desde,hasta):
             monto_cpa = 0
             monto_directo = 0
             monto_indirecto = 0
-            monto_bono_directo = cuenta.monto_bono_directo
-            monto_bono_indirecto = cuenta.monto_bono_indirecto
-            level_bono_directo = cuenta.level_bono_directo
-            level_bono_indirecto = cuenta.level_bono_indirecto
+            if cuenta != None:
+                monto_bono_directo = cuenta.monto_bono_directo
+                monto_bono_indirecto = cuenta.monto_bono_indirecto
+                level_bono_directo = cuenta.level_bono_directo
+                level_bono_indirecto = cuenta.level_bono_indirecto
+            else:
+                monto_bono_directo = 0
+                monto_bono_indirecto = 0
+                level_bono_directo = 0
+                level_bono_indirecto = 0
            
             
             for r in ganancias:

@@ -103,8 +103,7 @@ def upload_registros(request):
             file_name = excel_file.name  # Obtengon el nombre del archivo
             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
             
-            
-            
+        
             if file_extension == ".xlsx":
                 
                 file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
@@ -112,9 +111,9 @@ def upload_registros(request):
                 
                 
                 for data in new_data:
-                   
 
                     fpa_id = fpas.filter(client=data['client'])
+
                     if fpa_id.exists():
                         fpa = fpa_id[0].fpa
                     else:
@@ -150,6 +149,8 @@ def upload_registros(request):
                     if register.exists():
                         r = register.first()
                         r.primer_deposito = data["primer_deposito"]
+                        r.neto_deposito = data["neto_deposito"]
+                        r.numeros_depositos = data["numeros_depositos"]
                         r.save()
                     else:
                         registro = Registro_archivo(

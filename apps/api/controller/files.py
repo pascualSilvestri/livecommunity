@@ -103,8 +103,7 @@ def upload_registros(request):
             file_name = excel_file.name  # Obtengon el nombre del archivo
             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
             
-            
-            
+        
             if file_extension == ".xlsx":
                 
                 file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
@@ -112,9 +111,9 @@ def upload_registros(request):
                 
                 
                 for data in new_data:
-                   
 
                     fpa_id = fpas.filter(client=data['client'])
+
                     if fpa_id.exists():
                         fpa = fpa_id[0].fpa
                     else:
@@ -150,6 +149,8 @@ def upload_registros(request):
                     if register.exists():
                         r = register.first()
                         r.primer_deposito = data["primer_deposito"]
+                        r.neto_deposito = data["neto_deposito"]
+                        r.numeros_depositos = data["numeros_depositos"]
                         r.save()
                     else:
                         registro = Registro_archivo(
@@ -205,8 +206,8 @@ def upload_cpa(request):
                 
                     
                 for cpa in new_data:
-                    fecha_creacion_string = str(cpa["fecha_creacion"])
 
+                    fecha_creacion_string = str(cpa["fecha_creacion"])
                     if fecha_creacion_string == "none":
                         fecha_creacion = None
                     else:
@@ -246,24 +247,25 @@ def upload_cpa(request):
                                 
                                 usuario_up_line = Usuario.objects.filter(fpa=fpa)
                                 if usuario_up_line.exists():
-                                    cuenta_up_line = Cuenta.objects.filter(fpa=usuario_up_line.first().uplink)
+                                    up_line_usuario = usuario_up_line.first().uplink
+                                    cuenta_up_line = Cuenta.objects.filter(fpa=up_line_usuario)
                                 else:
                                     cuenta_up_line = None
                                 cuenta.monto_cpa += Decimal(cpa_value.cpa)
                                 # cuenta.monto_a_pagar += Decimal(cpa['monto'])
                                 cuenta.cpa += 1
-                                
                                 bonoDirecto(cuenta,bono_directo)
+                                bonoIndirecto(cuenta,bono_indirecto)
                                 if cuenta_up_line != None:
-                                    if cuenta_up_line.exists() :
+                                    if cuenta_up_line.exists():
                                         cuenta_up = cuenta_up_line.first()
                                         cuenta_up.cpaIndirecto += 1
-                                        print(f'hijo: {usuario_up_line[0].fpa} padre: {cuenta_up_line[0].fpa}')
                                         bonoIndirecto(cuenta_up,bono_indirecto)
                                         cuenta_up.save()
                                 new_cpa.save()
                                 cuenta.save()
                                 # usuario_up_line[0].save()
+
             else:
                 print("ErrorMessege Document is not format")
                 return JsonResponse({"error": "Document is not format"},status=400)
@@ -277,7 +279,7 @@ def upload_cpa(request):
     else:
         print("error Se esperaba un archivo CSV en la solicitud POST.")
         return JsonResponse(
-            {"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400
+            {"error": "Se esperaba un archivo xlsx en la solicitud POST."}, status=400
         )
 
 @csrf_exempt

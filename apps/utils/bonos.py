@@ -1,5 +1,6 @@
 
 def  bonoIndirecto(up_link,cpa):
+    print(up_link.fpa,up_link.cpaIndirecto,up_link.cpa,up_link.level_bono_indirecto)
     if up_link.cpaIndirecto >= 5 and up_link.cpa >=2 and up_link.level_bono_indirecto == 0:
         up_link.monto_bono_indirecto = int(cpa.objects.get(bono='level1').valor)
         up_link.level_bono_indirecto += 1

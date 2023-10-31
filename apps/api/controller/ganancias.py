@@ -408,6 +408,7 @@ def filterGananciasFecha(request,desde,hasta):
     try:
         if request.method == 'GET':
             ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta))
+            cpas = Registros_cpa.objects.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta))
             spred = Spread.objects.all()
             data= []
             for r in ganancias:
@@ -423,19 +424,32 @@ def filterGananciasFecha(request,desde,hasta):
                         'monto_spread':monto_spread,
                         'tipo_comision':r.symbol,
                         'client':r.client,
-                        
                         'isPago':r.pagado
                     }
                 
                 )
             
+            for c in cpas:
+                data.append( 
+                        {
+                            'creacion':c.fecha_creacion,
+                            'monto':c.monto,
+                            'monto_spread':c.monto,
+                            'tipo_comision':'CPA',
+                            'client':c.client,
+                            'retiro':0,
+                            'isPago':c.pagado
+                        }
+                    )
             
             response = JsonResponse({'data':data})
             return response
         
     except ValueError:
         print(ValueError)
-        return ValueError
+        return JsonResponse({'error':str(ValueError)})
+        
+        
 
 def filterGananciasFechaById(request,pk,desde,hasta):
     
@@ -448,7 +462,7 @@ def filterGananciasFechaById(request,pk,desde,hasta):
             spred = Spread.objects.all()
             data=[]
             for r in ganancias:
-                # if r.pagado == False and r.fecha_operacion != None:
+                
                 if r.fecha_operacion != None:
                     if r.partner_earning != 0:
                         monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
@@ -498,8 +512,8 @@ def filter_ganancia_to_date_by_id(request,pk,desde,hasta):
     try:
         if request.method == 'GET':
             cpa = Registros_cpa.objects.filter(Q(fecha_creacion__gte=desde,fpa=pk) & Q(fecha_creacion__lte=hasta,fpa=pk))
-            ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta),fpa=pk,pagado=False)
-            spread_indirecto = SpreadIndirecto.objects.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta),fpa=pk,pagado=False)
+            ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta),fpa=pk)
+            spread_indirecto = SpreadIndirecto.objects.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta),fpa=pk)
             cuenta = Cuenta.objects.filter(fpa=pk).first()
             
             data= []

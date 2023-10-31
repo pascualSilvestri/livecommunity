@@ -82,7 +82,7 @@ def getRegistroById(request,pk):
             registros = Registro_archivo.objects.filter(fpa=pk)
             data=[]
             for r in registros:
-                nombres = Registros_ganancias.objects.filter(client=r.client)
+                nombres = Relation_fpa_client.objects.filter(client=r.client)
                 if nombres.exists():
                     nombre = nombres[0].full_name
                 else:
@@ -121,7 +121,7 @@ def filter_registros_fecha_by_id(request,pk,desde,hasta):
             
             data= []
             for r in registros:
-                nombres = Registros_ganancias.objects.filter(client=r.client)
+                nombres = Relation_fpa_client.objects.filter(client=r.client)
                 if nombres.exists():
                     nombre = nombres[0].full_name
                 else:

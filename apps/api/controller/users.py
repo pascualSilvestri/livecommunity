@@ -360,4 +360,14 @@ def updatePassword(request,pk):
     
     else:
         return JsonResponse({'Error':'Metodo incorrecto'})
-
+@csrf_exempt  
+def deleteUser(request,pk):
+    try:
+        if request.method == 'DELETE':
+            user = Usuario.objects.get(fpa=pk)
+            user.delete()
+            return JsonResponse({'data':'Usuario eliminado'})
+        else:
+            return JsonResponse({'Error':'Metodo invalido'})
+    except Exception as e:
+        return JsonResponse({'Error':e})

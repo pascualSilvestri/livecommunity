@@ -352,7 +352,7 @@ def filtradoGananciasRevshare(request):
                         'creacion':r.fecha_operacion,
                         'monto':r.partner_earning,
                         'monto_spread':monto_spread,
-                        'tipo_comision':'Reverash',
+                        'tipo_comision':r.symbol,
                         'client':r.client,
                         'codigo':r.fpa,
                         'isPago':r.pagado

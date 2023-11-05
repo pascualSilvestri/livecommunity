@@ -277,14 +277,18 @@ def usuarioValido(request,email,password):
     
     return response
 
-@csrf_exempt  
+@csrf_exempt    
 def eliminarUser(request,pk):
-    
-    user = Usuario.objects.get(fpa=pk)
-    user.eliminado = True
-    user.save()
+
+    if request.method == 'DELETE':
         
-    response = JsonResponse({'data': 'User eliminado'})
+        user = Usuario.objects.get(fpa=pk)
+        user.eliminado = True
+        user.save()
+            
+        response = JsonResponse({'data': 'User eliminado'})
+    else:
+        response = JsonResponse({'Error':'Metodo invalido'})
 
     return response
 
@@ -360,14 +364,18 @@ def updatePassword(request,pk):
     
     else:
         return JsonResponse({'Error':'Metodo incorrecto'})
+
+
+
 @csrf_exempt  
 def deleteUser(request,pk):
     try:
-        if request.method == 'DELETE':
+        if request.method == 'POST':
             user = Usuario.objects.get(fpa=pk)
             user.delete()
             return JsonResponse({'data':'Usuario eliminado'})
         else:
             return JsonResponse({'Error':'Metodo invalido'})
     except Exception as e:
+        print(e.__str__())
         return JsonResponse({'Error':e})

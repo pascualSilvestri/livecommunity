@@ -73,29 +73,70 @@ def registrosGetAll(request):
     else:
             return JsonResponse({'Error':'Metodo invalido'})
 
+# @csrf_exempt 
+# def getRegistroById(request,pk):
+    
+#     if request.method == 'GET':
+        
+#         try:
+#             registros = Registro_archivo.objects.filter(fpa=pk)
+#             data=[]
+#             for r in registros:
+#                 nombres = Relation_fpa_client.objects.filter(client=r.client)
+#                 if nombres.exists():
+#                     nombre = nombres[0].full_name
+#                 else:
+#                     nombre = 'None'
+#                 data.append(
+#                     {'id_usuario':r.client,
+#                     'fecha_registro':r.fecha_registro,
+#                     'codigo':r.fpa,
+#                     'pais':r.country,
+#                     'primer_deposito':r.primer_deposito,
+#                     'deposito_neto':r.neto_deposito,
+#                     'cantidad_deposito':r.numeros_depositos,
+#                     'id_broker':r.client,
+#                     'nombre':nombre
+#                     }
+#                 )
+            
+#             response = JsonResponse({'data': data})
+            
+#             return response
+        
+#         except Exception:
+#             return JsonResponse({'Error':str(Exception)})
+#     else:
+#         return JsonResponse({'Error':'Metodo invalido'})
+
+
+
+
 @csrf_exempt 
 def getRegistroById(request,pk):
     
     if request.method == 'GET':
         
         try:
-            registros = Registro_archivo.objects.filter(fpa=pk)
+            customer = Relation_fpa_client.objects.filter(fpa=pk)
             data=[]
-            for r in registros:
-                nombres = Relation_fpa_client.objects.filter(client=r.client)
-                if nombres.exists():
+            for r in customer:
+                registros= Registro_archivo.objects.filter(clien=r.client)
+                registro = registros.first()
+                if customer.exists():
                     nombre = nombres[0].full_name
                 else:
                     nombre = 'None'
+                
                 data.append(
                     {'id_usuario':r.client,
-                    'fecha_registro':r.fecha_registro,
+                    'fecha_registro':registro.fecha_registro,
                     'codigo':r.fpa,
-                    'pais':r.country,
-                    'primer_deposito':r.primer_deposito,
-                    'deposito_neto':r.neto_deposito,
-                    'cantidad_deposito':r.numeros_depositos,
-                    'id_broker':r.client,
+                    'pais':registro.country,
+                    'primer_deposito':registro.primer_deposito,
+                    'deposito_neto':registro.neto_deposito,
+                    'cantidad_deposito':registro.numeros_depositos,
+                    'id_broker':registro.client,
                     'nombre':nombre
                     }
                 )
@@ -108,7 +149,10 @@ def getRegistroById(request,pk):
             return JsonResponse({'Error':str(Exception)})
     else:
         return JsonResponse({'Error':'Metodo invalido'})
+    
 
+
+    
 @csrf_exempt 
 def filter_registros_fecha_by_id(request,pk,desde,hasta):
     

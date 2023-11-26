@@ -123,7 +123,7 @@ def getRegistroById(request,pk):
             for r in customer:
                 registros= Registro_archivo.objects.filter(clien=r.client)
                 registro = registros.first()
-                nombre = r.full_name
+                
                 
                 data.append(
                     {'id_usuario':r.client,
@@ -134,7 +134,7 @@ def getRegistroById(request,pk):
                     'deposito_neto':registro.neto_deposito,
                     'cantidad_deposito':registro.numeros_depositos,
                     'id_broker':registro.client,
-                    'nombre':nombre
+                    'nombre':r.full_name
                     }
                 )
             

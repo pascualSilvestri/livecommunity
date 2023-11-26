@@ -123,10 +123,7 @@ def getRegistroById(request,pk):
             for r in customer:
                 registros= Registro_archivo.objects.filter(clien=r.client)
                 registro = registros.first()
-                if customer.exists():
-                    nombre = r.full_name
-                else:
-                    nombre = 'None'
+                nombre = r.full_name
                 
                 data.append(
                     {'id_usuario':r.client,

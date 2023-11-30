@@ -42,11 +42,7 @@ h2 { font-size: 1.8em; } /* 24px */
   height: auto;
   /* display: block;  */
 }
-.main-contain-home{
-  max-width: 80vw;
-  margin: 0 auto;
-  height: 100vh;
-}
+
 
 .main-contain{
     max-width: 80vw;

@@ -3,3 +3,4 @@ python-telegram-bot
 mysqlclient
 django-cors-headers
 openpyxl
+pandas

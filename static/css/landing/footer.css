@@ -1,0 +1,41 @@
+footer{
+    display: flex;
+    margin-top: 3rem;
+    width: 100%;
+    justify-content: space-between;
+    background: #071435;
+    padding: 20px 60px;
+}
+footer .img-container{
+    width: 51px;
+    height: 35px;
+}
+footer .logo{
+    width: 100%;
+    height: 100%;
+}
+
+footer .btn {
+    font-family: Satoshi;
+    padding: 10px 40px;
+    color: white;
+    background: #BE1E6D;
+    /* margin-top: 5px; */
+    border-radius: 7px;
+    font-weight:800;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+footer .redes{
+    width: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 140px;
+
+}
+
+footer .redes img{
+    width: 25px;
+}

@@ -1,5 +1,17 @@
+.bg-2{
+    width: 100%;  
+    background-image: url("../../img/Desktop2.png");
+    /* Set a specific height */
+    height: 170vh;
+  
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .about-us{
-    margin: 4em auto;
+    margin: 1em auto;
     width: 85%;
     font-family: Satoshi;
     color: white;
@@ -26,10 +38,10 @@ h2{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr;
-    grid-column-gap: 15px;
+    grid-column-gap: 20px;
     grid-row-gap: 0px;
     margin-top: 2rem;
-    width: 95%;
+    width: 90%;
 }
 .about-us-card{
     border-radius: 18px;

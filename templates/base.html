@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{% static 'css/landing/about.css' %}">
     <link rel="stylesheet" href="{% static 'css/landing/inicioPreguntas.css' %}">
     <link rel="stylesheet" href="{% static 'css/landing/staff.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing/navbar.css' %}">
 
 
 
@@ -21,11 +23,40 @@
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 <body id="scrollbar">
+
+    <nav>
+        <div class="img-container">
+            <img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
+        </div>
+        <ul class="list">
+            <li id="selected"><a href="#">Inicio</a></li>
+            <li><a href="#">Brokers</a></li>
+            <li><a href="#">Servicios Live</a></li>
+            <li><a href="#">Presenciales</a></li>
+        </ul>
+    
+    </nav>
+
+
     {% block content %}
     
     {% endblock content %}
 
-    
+    <footer>
+        <div class="img-container">
+            <img class="logo" src="{% static 'img/logo.png' %}" alt="logo livecommunity">
+        </div>
+        <div class="redes">
+            <a href="https://www.instagram.com/">
+                <img src="{% static 'img/iconig.png' %}" alt="logo instagram">
+            </a>
+            <a href="https://web.telegram.org/k/">
+                <img src="{% static 'img/icontelegram.jpg' %}" alt="logo telegram">
+            </a>
+        </div>
+        <a class="btn" href="">COMENZAR</a>
+
+    </footer>
 
     <script src="{% static 'js/app.js' %}" type="module"></script>
     <script src="{% static 'js/validacion_form.js' %}" type="module"></script>

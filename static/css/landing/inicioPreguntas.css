@@ -1,0 +1,43 @@
+.inicio-preguntas{
+    color: white;
+    text-align: center;
+    margin-top: 2rem;
+}
+.inicio-preguntas h2{
+    margin-bottom: 1rem;
+}
+.preguntas-container{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-top: 2rem;
+    margin: 0 auto;
+}
+.preguntas-left{
+    width: 50%;
+}
+
+.preguntas-right{
+    width: 50%;
+}
+.pregunta{
+    padding: 10px 5px 20px 70px;
+    text-align: start;
+}
+
+.pregunta::before {
+	position: absolute;
+	width: 80px;
+    margin-left: -35px;
+    margin-top: 5px;    
+    content: url("../../img/Signo\ de\ pregunta.png");
+}
+.pregunta h5{
+    font-size: 18px;
+    width: 80%;
+    margin-bottom: 10px;
+}
+.pregunta p{
+    font-size: 15px;
+    font-weight: 100;
+}

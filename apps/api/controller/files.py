@@ -11,6 +11,15 @@ import pandas as pd
 import os
 from decimal import Decimal
 
+
+MENSAJE_ERROR = {
+    "errorMethod": "Se esperaba un archivo CSV en la solicitud POST.",
+    "errorFormat": "Document is not format",
+    "errorExcption": "Salto la exception",
+    "message": "Archivo CSV recibido y procesado exitosamente.",
+}
+
+
 @csrf_exempt
 def upload_fpa(request):
     if request.method == "POST" and request.FILES.get("csvFileFpa"):
@@ -73,19 +82,26 @@ def upload_fpa(request):
                         fpa = fpas.filter(fpa=data["fpa"], client=data["id_client"])
                         if not fpa.exists():
                             newData.save()
+                        else:
+                            fpa = fpa.first()
+                            fpa.fecha_registro = fecha_registro
+                            fpa.fecha_creacion = fecha_creacion
+                            fpa.fecha_verificacion = fecha_verificacion
+                            fpa.status = data["status"]
+                            fpa.save()
                             
                     except Exception as e:
                         print(e)
 
             else:
-                print("ErrorMessege Document is not format")
-                return JsonResponse({"error": "Document is not format"},status=402)
+                print(MENSAJE_ERROR["errorFormat"])
+                return JsonResponse({MENSAJE_ERROR["errorFormat"]},status=402)
         except Exception as e:
             print(e)
             return JsonResponse({"Error": "Salto la exception"})
         print("message Archivo CSV recibido y procesado exitosamente.")
         return JsonResponse(
-            {"message": "Archivo CSV recibido y procesado exitosamente."}
+            {"message": MENSAJE_ERROR["message"]}
         )
     else:
         print("error Se esperaba un archivo CSV en la solicitud POST.")
@@ -148,6 +164,11 @@ def upload_registros(request):
                     
                     if register.exists():
                         r = register.first()
+                        r.fpa = fpa
+                        r.status = data['status']
+                        r.fecha_calif = fecha_calif
+                        r.posicion_cuenta = data['posicion_cuenta']
+                        r.volumen = data['volumen']
                         r.primer_deposito = data["primer_deposito"]
                         r.neto_deposito = data["neto_deposito"]
                         r.numeros_depositos = data["numeros_depositos"]

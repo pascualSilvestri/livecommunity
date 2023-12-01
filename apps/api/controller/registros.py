@@ -121,9 +121,12 @@ def getRegistroById(request,pk):
             customer = Relation_fpa_client.objects.filter(fpa=pk)
             data=[]
             for r in customer:
-                registros= Registro_archivo.objects.filter(clien=r.client)
+                registros= Registro_archivo.objects.filter(client=r.client)
                 registro = registros.first()
-                
+                if customer.exists():
+                    nombre = nombres[0].full_name
+                else:
+                    nombre = 'None'
                 
                 data.append(
                     {'id_usuario':r.client,
@@ -134,7 +137,7 @@ def getRegistroById(request,pk):
                     'deposito_neto':registro.neto_deposito,
                     'cantidad_deposito':registro.numeros_depositos,
                     'id_broker':registro.client,
-                    'nombre':r.full_name
+                    'nombre':nombre
                     }
                 )
             
@@ -188,3 +191,46 @@ def filter_registros_fecha_by_id(request,pk,desde,hasta):
         return ValueError
 
 
+
+
+# @csrf_exempt
+# def filter_registros_fecha_by_id(request, pk, desde, hasta):
+#     # fecha_desde = datetime.strptime(desde, "%Y-%m-%d").date
+#     # fecha_hasta = datetime.strptime(hasta, "%Y-%m-%d").date
+
+#     if request.method == "GET":
+#         try:
+#             customer = Relation_fpa_client.objects.filter(fpa=pk)
+#             data = []
+#             for r in customer:
+#                 registros = Registro_archivo.objects.filter(
+#                     Q(fecha_registro__gte=desde) & Q(fecha_registro__lte=hasta),
+#                     client=r.client,
+#                 )
+#                 registro = registros.first()
+
+#                 if registro is not None:
+#                     data.append(
+#                         {
+#                             "id_usuario": r.client,
+#                             "fecha_registro": registro.fecha_registro,
+#                             "codigo": r.fpa,
+#                             "pais": registro.country,
+#                             "primer_deposito": registro.primer_deposito,
+#                             "deposito_neto": registro.neto_deposito,
+#                             "cantidad_deposito": registro.numeros_depositos,
+#                             "id_broker": registro.client,
+#                             "nombre": r.full_name,
+#                         }
+#                     )
+#                 else:
+#                     return JsonResponse({"Error": "No se encontraron registros"})
+
+#                 response = JsonResponse({"data": data})
+
+#                 return response
+
+#         except Exception as e:
+#             return JsonResponse({"Error": str(e)})
+#     else:
+#         return JsonResponse({"Error": "Metodo invalido"})

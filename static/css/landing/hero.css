@@ -3,6 +3,7 @@ body{
     scroll-behavior: smooth;
     overflow-y: scroll;
     background: #081a48;
+    overflow-x: hidden;
   
 }
 .main-contain-home{
@@ -24,7 +25,6 @@ body{
 
 
 header{
-    min-height: 80vh;
     width: 100%;  
     background-image: url("../../img/Desktop1.png");
     /* Set a specific height */
@@ -84,7 +84,22 @@ header{
 
 
 
+@media (max-width: 640px) {
+    .hero video{
+        width: 95vw;
+    }
+    .hero{
+        padding-top: 10px;
+    }
+    .hero h1 {
+        font-size: 40px;
+    }
+    header{
+        height: 90vh;
 
+    }
+    
+}
 
 
 

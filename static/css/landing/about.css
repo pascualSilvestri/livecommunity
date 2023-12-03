@@ -34,7 +34,131 @@ h2{
     width: 90%;
 }
 
-.about-us-cards-container{
+
+.wrapper {
+    max-width: 1100px;
+    width: 100%;
+    position: relative;
+    margin-top: 2rem;
+  }
+  .wrapper i {
+    top: 50%;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    font-size: 1.25rem;
+    position: absolute;
+    text-align: center;
+    line-height: 50px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.23);
+    transform: translateY(-50%);
+    transition: transform 0.1s linear;
+    color: rgb(37, 37, 37);
+  }
+  .wrapper i:active{
+    transform: translateY(-50%) scale(0.85);
+  }
+  .wrapper i:first-child{
+    left: -22px;
+  }
+  .wrapper i:last-child{
+    right: -22px;
+  }
+  .wrapper .carousel{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% / 3) - 12px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    border-radius: 8px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel.no-transition {
+    scroll-behavior: auto;
+  }
+  .carousel.dragging {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+  .carousel.dragging .card {
+    cursor: grab;
+    user-select: none;
+  }
+  .carousel :where(.card, .img) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .carousel .card {
+    scroll-snap-align: start;
+    height: 300px;
+    list-style: none;
+    background-color: rgba(255, 255, 255, 0.158);
+    cursor: pointer;
+    flex-direction: column;
+    padding-bottom: 10px;
+    border-radius: 18px;
+    color: white;
+  }
+  
+  .card img{
+      width: 100%;
+      height: 195px;
+      border-radius: 18px;
+  }
+  
+  .card h4{
+      padding: 5px 0 10px 0;
+      text-transform: uppercase;
+      font-size: 19px;
+  }
+  
+  .card p{
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+  }
+  .card p span{
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+  
+  }
+  @media screen and (max-width: 900px) {
+    .wrapper .carousel {
+      grid-auto-columns: calc((100% / 2) - 9px);
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+      .wrapper .carousel {
+          grid-auto-columns: calc((100% / 1.75) - 9px);
+        }
+  }
+  @media screen and (min-width: 900px) {
+    .wrapper .carousel {
+        grid-auto-columns: calc((100% / 4) - 12px);
+    }
+    .carousel.dragging .card {
+        cursor:default;
+        user-select: none;
+      }
+    .carousel .card {
+
+        cursor: default;
+   
+      }
+}
+
+/* CARD CONTAINER OLD */
+/* .about-us-cards-container{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr;
@@ -67,4 +191,4 @@ h2{
 .about-us-card p span{
     font-size: 12px;
     font-weight: 500;
-}
+} */

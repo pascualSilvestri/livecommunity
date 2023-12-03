@@ -41,32 +41,36 @@
     <h2>¿Quienes Somos?</h2>
     <p class="text">Somos una academoa de Trading dedicada al desarrollo de traders con o sin conocimientos previos, nuestro objetivo es poder brindar todos los conocimientos correspondientes para que puedas profesionalizarte y convertirte en un Trader rentable.</p>
 
-    <div class="about-us-cards-container">
-        <div class="about-us-card">
-            <img src="{% static 'img/user.webp' %}" alt="CEO 1">
-            <h4>Agustin Gentile</h4>
-            <p>Nacionalidad : <span>agentino</span> </p>
-            <p>Fecha de nacimiento : <span>xx-xx-xxxx</span> </p>
-        </div>
-        <div class="about-us-card">
-            <img src="{% static 'img/user.webp' %}" alt="CEO 2">
-            <h4>Cristian Escobar</h4>
-            <p>Nacionalidad : <span>agentino</span> </p>
-            <p>Fecha de nacimiento : <span>xx-xx-xxxx</span> </p>
-        </div>
-        <div class="about-us-card">
-            <img src="{% static 'img/user.webp' %}" alt="CEO 3">
-            <h4>Dario Rosero</h4>
-            <p>Nacionalidad : <span>colomiano</span> </p>
-            <p>Fecha de nacimiento : <span>xx-xx-xxxx</span> </p>
-        </div>
-        <div class="about-us-card">
-            <img src="{% static 'img/user.webp' %}" alt="CEO 4">
-            <h4>Diego Rodriguez</h4>
-            <p>Nacionalidad : <span>agentino</span> </p>
-            <p>Fecha de nacimiento : <span>xx-xx-xxxx</span> </p>
-        </div>
-    </div>
+    <div class="wrapper">
+        <i id="left" class="fa-solid fa-angle-left"></i>
+        <ul class="carousel">
+          <li class="card"">
+              <img src="{% static 'img/user.webp' %}" alt="CEO 1">
+              <h4>Agustin Gentile</h4>
+              <p>Nacionalidad : <span>argentino</span> </p>
+              <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+          </li>
+          <li class="card">
+              <img src="{% static 'img/user.webp' %}" alt="CEO 2">
+              <h4>Cristian Escobar</h4>
+              <p>Nacionalidad : <span>argentino</span> </p>
+              <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+          </li>
+          <li class="card">
+              <img src="{% static 'img/user.webp' %}" alt="CEO 3">
+              <h4>Dario Rosero</h4>
+              <p>Nacionalidad : <span>colombiano</span> </p>
+              <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+          </li>
+          <li class="card">
+              <img src="{% static 'img/user.webp' %}" alt="CEO 4">
+              <h4>Diego Rodriguez</h4>
+              <p>Nacionalidad : <span>argentino</span> </p>
+              <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+          </li>
+        </ul>
+        <i id="right" class="fa-solid fa-angle-right"></i>
+      </div>
 </section>
 
 <!-- FIN DEL ABOUT US -->

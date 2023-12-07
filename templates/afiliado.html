@@ -164,13 +164,13 @@
 {% comment %} Input para verificar al cliente {% endcomment %}
     <section class="text-center verificar-nuevo-cliente" id='nuevo_id_cliente'>
             <h4 class="text-verificar-cliente">
-                El registro puede tardar 12 horas. Una vez que esté verificada su cuenta, podrá continuar.
-                <br> <a id='link-id-cliente' class="link-video-telegram">(Ver Video)</a>
+                El registro puede tardar 4 horas aproximadamente. Una vez que esté verificada su cuenta, podrá continuar.
 
             </h4>
+            <a id='link-id-cliente' class="link-video-verificacion">(Ver Video)</a>
 
             <div class="form-verificar-cliente">
-                <label for="id_socio">Ingrese el código de verificación enviado a su correo electrónico. Este puede tardar hasta 2 horas en llegar. Por favor busque en su bandeja de entrada y carpeta de spam.</label>
+                <label for="id_socio">Ingrese el código de verificación de su cuenta. En caso de no poder continuar, luego de haber transcurrido las 4 horas, tendra que registrarse nuevamente.</label>
                 <input type="text" value="" name="idNuevoCliente" id="id_nuevo_cliente">
                 {% comment %} <label for="id_socio">Ingrese su nombre completo tal como está registrado en Skilling</label>
                 <input type="text" value="" name="nombreNuevoCliente" id="nombre_nuevo_cliente"> {% endcomment %}
@@ -277,7 +277,7 @@
     
                         <div class="inputbox">
                             <input type="text" name="idcliente" id="id_cliente" required="required" data-cliente class="input-default" required='required'>
-                            <span>Ingresar codigo recibido por email</span>
+                            <span>Ingresar código de 6 dígitos (verificación)</span>
                         </div>
         
                         <div class="inputbox telegram-form">
@@ -318,7 +318,7 @@
 <div class="modal-id-cliente" hidden>
     <span class="salir-cliente">X</span>
     {% comment %} <video preload="none" width="400" class='modal-video' src="{% static 'video/verificar_cuenta_id.mp4' %}" controls='true'></video> {% endcomment %}
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/2V8kqTMuLT0?si=5uAXHgoNBkOvnc6_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class='modal-video'></iframe>
+    <iframe width="560" height="315" src="https://youtube.com/embed/_RzXDpfsIyo?si=OkfgpGAcOCta3Q7H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class='modal-video'></iframe>
     
 </div>
 

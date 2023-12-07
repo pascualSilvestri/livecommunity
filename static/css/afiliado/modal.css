@@ -24,6 +24,13 @@
 .link-video-telegram{
     cursor: pointer;
 }
+.link-video-verificacion{
+    font-size: 22px;
+    padding-bottom: 15px;
+    font-weight: 600;
+    padding-top: 5px;
+    color: rgb(4, 84, 171);
+}
 
 
 

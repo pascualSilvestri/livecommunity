@@ -13,7 +13,6 @@
     max-width: 1100px;
     width: 100%;
     position: relative;
-    margin-top: 2rem;
   }
   .wrapperStaff i {
     top: 50%;
@@ -111,17 +110,19 @@
       text-align: center;
   
   }
+  /* MEDIA QUERY TABLET */
   @media screen and (max-width: 900px) {
     .wrapperStaff .carouselStaff {
       grid-auto-columns: calc((100% / 3) - 9px);
     }
   }
-  
+  /* MEDIA QUERY  MOBILE */
   @media screen and (max-width: 600px) {
       .wrapperStaff .carouselStaff {
           grid-auto-columns: calc((100% / 2) - 9px);
         }
   }
+  /* MEDIA QUERY DESKTOP */
   @media screen and (min-width: 900px) {
     .wrapperStaff .carouselStaff {
         display: grid;
@@ -137,7 +138,7 @@
       }
     .carouselStaff .cardStaff {
         cursor: default;
-        height: 150px;
+        height: 155px;
 
       }
       .wrapperStaff i{

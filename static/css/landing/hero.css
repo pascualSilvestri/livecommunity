@@ -68,6 +68,8 @@ header{
 .hero video{
     border-radius: 20px;
     margin: 20px 0 20px 0;
+    width: 70vw;
+
 }
 
 .hero .btn{
@@ -84,7 +86,7 @@ header{
 
 
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
     .hero video{
         width: 95vw;
     }

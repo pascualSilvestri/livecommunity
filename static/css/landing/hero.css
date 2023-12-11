@@ -82,8 +82,14 @@ header{
     font-weight:800;
     font-size: 18px;
     text-decoration: none;
-}
+    transition: background 0.15s ease-in-out 0.2s;
 
+
+}
+.hero .btn:hover{
+    background-color: #7e0c45;
+
+}
 
 
 @media (max-width: 900px) {

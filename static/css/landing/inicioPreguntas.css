@@ -64,7 +64,7 @@
         border-right: 1px solid #111111;
         border-bottom: 1px solid #111111;
         padding: 1rem 2em;
-        width: 95%;
+        width: 90%;
         margin: 0 auto;
         color: #000;
         background: #eee;
@@ -96,7 +96,7 @@
         cursor: pointer;
         position: relative;
         padding-right: calc(1.75rem + .75rem + .75rem);
-        width: 95%;
+        width: 90%;
         margin: 0 auto;
         color: #000;
         background: #eee;

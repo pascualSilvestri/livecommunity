@@ -6,7 +6,7 @@ footer{
     background: #071435;
     padding: 20px 60px;
 }
-footer .img-container{
+footer .img-container-footer{
     width: 51px;
     height: 35px;
 }
@@ -38,4 +38,25 @@ footer .redes{
 
 footer .redes img{
     width: 25px;
+}
+
+@media screen and (max-width: 600px) {
+    footer{ 
+        margin-bottom: 5rem;
+        flex-direction: column;
+        padding: 3rem auto;
+        align-items: center;
+        background: transparent;
+    }
+    footer .redes{
+        margin: 1.5rem 0;
+    }
+    footer .btn {
+        margin: 1.5rem 0;
+    }
+    footer .img-container-footer{
+        margin: 1.5rem 0;
+
+    }
+
 }

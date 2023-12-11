@@ -1,3 +1,21 @@
+.bg-3{
+    width: 100%;  
+    background-image: url("../../img/Desktop3.png");
+    /* Set a specific height */
+    height: 90vh;
+  
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+@media screen and (max-width: 900px) {
+  .bg-3{
+    background-image: url("../../img/Desktop3.png");
+    height: 70vh;
+  }
+}
+
 .inicio-preguntas{
     color: white;
     text-align: center;

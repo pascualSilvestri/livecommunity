@@ -41,12 +41,13 @@ footer .redes img{
 
 @media screen and (max-width: 600px) {
     footer{ 
-        margin-bottom: 5rem;
+        padding-bottom: 7rem;
+        padding-top: 3rem;
         flex-direction: column;
-        padding: 3rem auto;
         align-items: center;
-        background: transparent;
-    }
+        background: rgb(9,27,71);
+        background: linear-gradient(180deg, rgba(9,27,71,1) 0%, rgba(151, 71, 255, 0.418) 100%);
+        }
     footer .redes{
         margin: 1.5rem 0;
     }

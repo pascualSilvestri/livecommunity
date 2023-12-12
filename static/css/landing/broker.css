@@ -1,0 +1,108 @@
+.broker{
+    font-family: Satoshi;
+    
+}
+.broker-container{
+    width: 100%;
+    background: rgb(190,30,109);
+    background: linear-gradient(180deg, rgba(190,30,109,0.5522584033613445) 0%, rgba(9,27,71,1) 100%);
+}
+
+.broker-presentation{
+    padding-top: 15vh;
+    width: 80%;
+    margin: 0 auto;
+    color: whitesmoke;
+    text-align: start;
+    height: 70vh;
+    
+
+}
+
+.broker-presentation .broker-title{
+    text-align: start;
+    padding: 1.5rem 0;
+    font-size: 38px;
+}
+
+.broker-presentation .broker-text {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 23px;
+    margin-bottom: 1rem;
+
+}
+
+.broker-presentation .broker-enlace {
+    font-size: 20px;
+    font-weight: 900;
+    text-decoration: none;
+    color: white;
+}
+.broker-presentation .broker-enlace::before {
+    position: absolute;
+    margin-left: 185px;
+    margin-top: 0px;
+    content: url("../../img/Flecha.png");
+}
+
+/* BROKER VIDEOS */
+.broker-videos{
+    padding-top: 1.2rem;
+}
+.broker-video {
+    margin: 0 auto;
+    height: 270px;
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    padding-top: 3rem;
+}
+
+.broker-video .video{
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+}
+
+.video-title-container{
+    margin: 0 auto;
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-title{
+    color: white;
+    text-align: center;
+    padding: 10px 15px;
+}
+
+.line{
+    width: 100%;
+    height: 2px;
+    background: white;
+}
+.btn-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+.btn-registrate{
+    font-family: Satoshi;
+    padding: 10px 40px;
+    color: white;
+    background: #BE1E6D;
+    /* margin-top: 5px; */
+    border-radius: 7px;
+    font-weight:800;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.footer-broker{
+    background: rgb(9,27,71);
+    background: linear-gradient(180deg, rgba(9,27,71,1) 0%, rgba(151, 71, 255, 0.418) 100%);
+}

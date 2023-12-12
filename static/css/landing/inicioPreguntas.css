@@ -1,18 +1,20 @@
 .bg-3{
-    width: 100%;  
+    padding-top: 3rem;
+    padding-bottom:0rem;
+    width: 100%;
     background-image: url("../../img/Desktop3.png");
-    /* Set a specific height */
     height: 90vh;
-  
-  /* Position and center the image to scale nicely on all screens */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size:cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 @media screen and (max-width: 900px) {
   .bg-3{
     background-image: url("../../img/Desktop3.png");
-    height: 70vh;
+    height: 100%;
+    padding-bottom: 3rem;
+    padding-top: 0rem;
+
   }
 }
 

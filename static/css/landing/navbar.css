@@ -39,7 +39,7 @@ nav li:focus {
     border-top:none;
 
 }
-#selected{
+.selected{
     border-bottom: 2px solid #f1f1f1;
     border-top:none;
 }
@@ -98,7 +98,7 @@ nav li {
 
 
     }
-    #selected{
+    .selected{
         border-bottom: none;
         border-top: 3px solid #f1f1f1;
         padding: 20px 7px 5px 7px;

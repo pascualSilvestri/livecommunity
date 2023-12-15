@@ -15,8 +15,6 @@
     color: whitesmoke;
     text-align: start;
     height: 70vh;
-    
-
 }
 
 .broker-presentation .broker-title{
@@ -25,11 +23,11 @@
     font-size: 38px;
 }
 
-.broker-presentation .broker-text {
+.broker-presentation .broker-text{
     font-size: 17px;
     font-weight: 600;
     line-height: 23px;
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
 
 }
 
@@ -48,15 +46,16 @@
 
 /* BROKER VIDEOS */
 .broker-videos{
-    padding-top: 1.2rem;
+
 }
 .broker-video {
     margin: 0 auto;
-    height: 270px;
+    height: 400px;
     width: 85%;
     display: flex;
     justify-content: center;
     padding-top: 3rem;
+    flex-direction: column;
 }
 
 .broker-video .video{
@@ -105,4 +104,22 @@
 .footer-broker{
     background: rgb(9,27,71);
     background: linear-gradient(180deg, rgba(9,27,71,1) 0%, rgba(151, 71, 255, 0.418) 100%);
+}
+
+@media screen and (min-width: 900px) {
+    .broker-presentation{
+        text-align: center;
+        padding-top: 25vh;
+
+    }
+    .broker-presentation .broker-title{
+        text-align: center;
+    }
+    .broker-videos{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        width: 90%;
+        margin: 0 auto;
+    }
 }

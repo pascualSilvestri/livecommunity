@@ -113,11 +113,14 @@ h2 { font-size: 1.8em; } /* 24px */
 }
 
 .inprocess-container{
-  margin: 7rem auto 0 auto;
+
+  background: #121b31;
+  height: 100vh;
 }
 .inprocess-container h2{
   color: white;
   margin-bottom: 2rem;
+  padding-top: 7rem;
 }
 .inprocess-container .img-container{
   width: 519px;

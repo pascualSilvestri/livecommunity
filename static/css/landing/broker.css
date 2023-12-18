@@ -1,6 +1,5 @@
 .broker{
     font-family: Satoshi;
-    
 }
 .broker-container{
     width: 100%;
@@ -48,10 +47,25 @@
 .broker-videos{
 
 }
+
+.bg-broker{
+    width: 100%;  
+    background-image: url("../../img/FondoBroker.png");
+    height: 120vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+@media screen and (max-width: 900px) {
+    .bg-broker{
+        background-image: url("../../img/FondoBrokerMb.png");
+        height: 210vh;
+  }
+}
 .broker-video {
     margin: 0 auto;
-    height: 400px;
-    width: 85%;
+    height: 320px;
+    width: 90%;
     display: flex;
     justify-content: center;
     padding-top: 3rem;
@@ -76,6 +90,9 @@
     color: white;
     text-align: center;
     padding: 10px 15px;
+    height: 70px;
+    display: flex;
+    align-items: center;
 }
 
 .line{
@@ -110,6 +127,11 @@
     .broker-presentation{
         text-align: center;
         padding-top: 25vh;
+
+    }
+    .broker-video{
+        height: 360px;
+        width: 80%;
 
     }
     .broker-presentation .broker-title{

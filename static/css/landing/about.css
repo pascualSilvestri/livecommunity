@@ -1,13 +1,10 @@
 .bg-2{
     width: 100%;  
     background-image: url("../../img/Desktop2.png");
-    /* Set a specific height */
     height: 180vh;
-  
-  /* Position and center the image to scale nicely on all screens */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 @media screen and (max-width: 900px) {
   .bg-2{

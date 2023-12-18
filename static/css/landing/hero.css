@@ -44,7 +44,7 @@ header{
 }
 
 .hero{
-    height: 80vh;
+    height: 120vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -65,10 +65,11 @@ header{
 
   }
 
-.hero video{
+.hero-video{
     border-radius: 20px;
     margin: 20px 0 20px 0;
     width: 70vw;
+    height: 480px;
 
 }
 
@@ -93,11 +94,12 @@ header{
 
 
 @media (max-width: 900px) {
-    .hero video{
+    .hero-video{
         width: 95vw;
     }
     .hero{
         padding-top: 10px;
+        height: 80vh;
     }
     .hero h1 {
         font-size: 40px;

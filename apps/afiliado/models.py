@@ -6,6 +6,7 @@ from django.conf import settings
 class Afiliado(models.Model):
     fpa = models.CharField(max_length=50)
     url = models.URLField()
+    url_video = models.URLField()
     upline = models.CharField(max_length=50)
     
     def __str__(self):

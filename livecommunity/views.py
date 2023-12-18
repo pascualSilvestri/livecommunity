@@ -3,8 +3,16 @@ from django.shortcuts import render
 from apps.afiliado.models  import Afiliado
 
 
-def Home(request):
-    return render(request, "index.html")
+def home(request):
+
+    url_video_insercion =convertir_url_youtube ("https://www.youtube.com/watch?v=HgKjhFEguyU")
+    url_register = ""
+    context = {
+        "afiliado": None,
+        "url_video": url_video_insercion,
+        "url_register": url_register
+    }
+    return render(request, "index.html",context)
 
 
 # PRIMER SPRIG
@@ -46,12 +54,28 @@ def convertir_url_youtube(url_original):
     return url_insercion
 
 
+
 def home_pk(request, pk):
-    afiliado = Afiliado.objects.get(fpa=pk)
-    url_video_insercion = convertir_url_youtube(afiliado.url_video)
+    try:
+        afiliado = Afiliado.objects.get(fpa=pk)
+    except Afiliado.DoesNotExist:
+        afiliado = None
 
-    context = {"afiliado": afiliado, "url_video": url_video_insercion}
- 
-    # return JsonResponse(data)
+    if afiliado:
+        url_video_insercion = convertir_url_youtube(afiliado.url_video)
+        url_register = afiliado.url
+        context = {
+            "afiliado": afiliado,
+            "url_video": url_video_insercion,
+            "url_register": url_register
+        }
+    else:
+        url_video_insercion = "https://www.youtube.com/watch?v=HgKjhFEguyU"
+        url_register = "livecommunity.info"
+        context = {
+            "afiliado": None,
+            "url_video": url_video_insercion,
+            "url_register": url_register
+        }
 
-    return render(request,'index.html',context)
+    return render(request, 'index.html', context)

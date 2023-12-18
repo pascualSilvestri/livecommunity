@@ -3,8 +3,8 @@
   src: url("../fonts/Provicali.otf");
 }
 @font-face {
-  font-family: "Satoshi";
-  src: url("../fonts/Satoshi-Variable.ttf");
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat.ttf");
 }
 
 :root{
@@ -21,7 +21,7 @@
     scroll-behavior: smooth;
 }
 html{
-    font-family: Satoshi;
+    font-family: Montserrat;
     overflow-x: inherit;   
 }
 body{

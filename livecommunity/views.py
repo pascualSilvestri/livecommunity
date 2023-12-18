@@ -8,15 +8,15 @@ def Home(request):
 
 
 # PRIMER SPRIG
-def Broker(request):
+def broker(request):
     return render(request, "inprocess.html")
 
 
-def Presenciales(request):
+def presenciales(request):
     return render(request, "inprocess.html")
 
 
-def Servicios(request):
+def servicios(request):
     return render(request, "inprocess.html")
 
 

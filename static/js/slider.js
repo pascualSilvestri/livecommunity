@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var sliderContainer = document.querySelector('.slider-container')
-    if (sliderContainer) {
+    var aboutUs = document.querySelector('.about-us')
+    if (aboutUs) {
         const wrapper = document.querySelector('.wrapper')
         const carousel = document.querySelector('.carousel')
         const firstCardWidth = carousel.querySelector('.card').offsetWidth

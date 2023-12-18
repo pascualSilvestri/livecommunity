@@ -28,7 +28,7 @@ header{
     width: 100%;  
     background-image: url("../../img/Desktop1.png");
     /* Set a specific height */
-    height: 140vh;
+    height: 130vh;
     
     /* Position and center the image to scale nicely on all screens */
     background-position: center;
@@ -95,7 +95,7 @@ header{
 
 @media (max-width: 900px) {
     .hero-video{
-        width: 95vw;
+        width: 85vw;
     }
     .hero{
         padding-top: 10px;

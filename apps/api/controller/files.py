@@ -11,87 +11,143 @@ import pandas as pd
 import os
 from decimal import Decimal
 
+
+def convertir_fecha(fecha_string):
+    if str(fecha_string) == "nan":
+        return None
+    else:
+        return datetime.strptime(fecha_string, "%Y-%m-%d").date()
+
 @csrf_exempt
+
 def upload_fpa(request):
     if request.method == "POST" and request.FILES.get("csvFileFpa"):
         try:
-            fpas = Relation_fpa_client.objects.all()
             csv_file = request.FILES["csvFileFpa"]
-            file_name = csv_file.name  # Obtengon el nombre del archivo
-            file_extension = os.path.splitext(file_name)[
-                1
-            ]  # obtengo la extencion del archivo
+            file_name = csv_file.name
+            file_extension = os.path.splitext(file_name)[1]
 
             if file_extension == ".csv":
-                file_data = pd.read_csv(
-                    csv_file, encoding="utf-8"
-                )  # obtengo los datos de larchivo
-
+                file_data = pd.read_csv(csv_file, encoding="utf-8")
                 data_limpia = limpiar_datos_fpa(file_data)
-                # print(data_limpia)
+
                 for data in data_limpia:
-                    # print(type(data['id_client']))
-                    fecha_registro_string = str(data["fecha_registro"])
-                    if fecha_registro_string == "nan":
-                        fecha_registro = None
-                    else:
-                        fecha_registro = datetime.strptime(
-                            fecha_registro_string, "%Y-%m-%d"
-                        ).date()
+                    fecha_registro = convertir_fecha(data["fecha_registro"])
+                    fecha_creacion = convertir_fecha(data["fecha_creacion_cuenta"])
+                    fecha_verificacion = convertir_fecha(data["verificacion"])
 
-                    fecha_creacion_string = str(data["fecha_creacion_cuenta"])
-                    if fecha_creacion_string == "nan":
-                        fecha_creacion = None
-                    else:
-                        fecha_creacion = datetime.strptime(
-                            fecha_creacion_string, "%Y-%m-%d"
-                        ).date()
-
-                    fecha_verificacion_string = str(data["verificacion"])
-                    if fecha_verificacion_string == "nan":
-                        fecha_verificacion = None
-                    else:
-                        fecha_verificacion = datetime.strptime(
-                            fecha_verificacion_string, "%Y-%m-%d"
-                        ).date()
-
-                    newData = Relation_fpa_client(
-                        fpa=data["fpa"],
-                        client=data["id_client"],
-                        full_name=data["full_name"],
-                        country=data["country"],
-                        fecha_registro=fecha_registro,
-                        fecha_creacion=fecha_creacion,
-                        fecha_verificacion=fecha_verificacion,
-                        status=data["status"],
-                    )
-                    montos= Cuenta(fpa=data["fpa"])
                     try:
-                        f = Cuenta.objects.filter(fpa=data["fpa"])
-                        if not f.exists():
-                            montos.save()
-                        fpa = fpas.filter(fpa=data["fpa"], client=data["id_client"])
-                        if not fpa.exists():
-                            newData.save()
-                            
+                        # Actualizar o crear nuevo registro
+                        obj, created = Relation_fpa_client.objects.update_or_create(
+                            fpa=data["fpa"],
+                            client=data["id_client"],
+                            defaults={
+                                'full_name': data["full_name"],
+                                'country': data["country"],
+                                'fecha_registro': fecha_registro,
+                                'fecha_creacion': fecha_creacion,
+                                'fecha_verificacion': fecha_verificacion,
+                                'status': data["status"],
+                            }
+                        )
+                        # Crear cuenta si no existe
+                        Cuenta.objects.get_or_create(fpa=data["fpa"])
+
                     except Exception as e:
                         print(e)
 
             else:
-                print("ErrorMessege Document is not format")
-                return JsonResponse({"error": "Document is not format"},status=402)
+                return JsonResponse({"error": "Document is not format"}, status=402)
+
         except Exception as e:
             print(e)
             return JsonResponse({"Error": "Salto la exception"})
-        print("message Archivo CSV recibido y procesado exitosamente.")
-        return JsonResponse(
-            {"message": "Archivo CSV recibido y procesado exitosamente."}
-        )
+
+        return JsonResponse({"message": "Archivo CSV recibido y procesado exitosamente."})
+
     else:
-        print("error Se esperaba un archivo CSV en la solicitud POST.")
-        return JsonResponse(
-            {"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400
-        )
+        return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400)
+
+# def upload_fpa(request):
+#     if request.method == "POST" and request.FILES.get("csvFileFpa"):
+#         try:
+#             fpas = Relation_fpa_client.objects.all()
+#             csv_file = request.FILES["csvFileFpa"]
+#             file_name = csv_file.name  # Obtengon el nombre del archivo
+#             file_extension = os.path.splitext(file_name)[
+#                 1
+#             ]  # obtengo la extencion del archivo
+
+#             if file_extension == ".csv":
+#                 file_data = pd.read_csv(
+#                     csv_file, encoding="utf-8"
+#                 )  # obtengo los datos de larchivo
+
+#                 data_limpia = limpiar_datos_fpa(file_data)
+#                 # print(data_limpia)
+#                 for data in data_limpia:
+#                     # print(type(data['id_client']))
+#                     fecha_registro_string = str(data["fecha_registro"])
+#                     if fecha_registro_string == "nan":
+#                         fecha_registro = None
+#                     else:
+#                         fecha_registro = datetime.strptime(
+#                             fecha_registro_string, "%Y-%m-%d"
+#                         ).date()
+
+#                     fecha_creacion_string = str(data["fecha_creacion_cuenta"])
+#                     if fecha_creacion_string == "nan":
+#                         fecha_creacion = None
+#                     else:
+#                         fecha_creacion = datetime.strptime(
+#                             fecha_creacion_string, "%Y-%m-%d"
+#                         ).date()
+
+#                     fecha_verificacion_string = str(data["verificacion"])
+#                     if fecha_verificacion_string == "nan":
+#                         fecha_verificacion = None
+#                     else:
+#                         fecha_verificacion = datetime.strptime(
+#                             fecha_verificacion_string, "%Y-%m-%d"
+#                         ).date()
+
+#                     newData = Relation_fpa_client(
+#                         fpa=data["fpa"],
+#                         client=data["id_client"],
+#                         full_name=data["full_name"],
+#                         country=data["country"],
+#                         fecha_registro=fecha_registro,
+#                         fecha_creacion=fecha_creacion,
+#                         fecha_verificacion=fecha_verificacion,
+#                         status=data["status"],
+#                     )
+#                     montos= Cuenta(fpa=data["fpa"])
+#                     try:
+#                         f = Cuenta.objects.filter(fpa=data["fpa"])
+#                         if not f.exists():
+#                             montos.save()
+#                         fpa = fpas.filter(fpa=data["fpa"], client=data["id_client"])
+#                         if not fpa.exists():
+#                             newData.save()
+                            
+#                     except Exception as e:
+#                         print(e)
+
+#             else:
+#                 print("ErrorMessege Document is not format")
+#                 return JsonResponse({"error": "Document is not format"},status=402)
+#         except Exception as e:
+#             print(e)
+#             return JsonResponse({"Error": "Salto la exception"})
+#         print("message Archivo CSV recibido y procesado exitosamente.")
+#         return JsonResponse(
+#             {"message": "Archivo CSV recibido y procesado exitosamente."}
+#         )
+#     else:
+#         print("error Se esperaba un archivo CSV en la solicitud POST.")
+#         return JsonResponse(
+#             {"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400
+#         )
 
 @csrf_exempt
 def upload_registros(request):

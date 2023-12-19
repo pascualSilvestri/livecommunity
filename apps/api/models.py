@@ -67,7 +67,7 @@ class Registros_ganancias(models.Model):
     pagado = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.fpa
+        return self.client
 
 
 class Cpa_a_pagar(models.Model):

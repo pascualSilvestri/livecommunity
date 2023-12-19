@@ -1,0 +1,214 @@
+.staff{
+    margin: 4em auto;
+    width: 85%;
+    font-family: Montserrat;
+    color: white;
+    align-items: center;
+}
+
+
+
+
+.wrapperStaff {
+    max-width: 1100px;
+    width: 100%;
+    position: relative;
+  }
+  .wrapperStaff i {
+    top: 50%;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    font-size: 1.25rem;
+    position: absolute;
+    text-align: center;
+    line-height: 50px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.23);
+    transform: translateY(-50%);
+    transition: transform 0.1s linear;
+    color: rgb(37, 37, 37);
+  }
+  .wrapperStaff i:active{
+    transform: translateY(-50%) scale(0.85);
+  }
+  .wrapperStaff i:first-child{
+    left: -22px;
+  }
+  .wrapperStaff i:last-child{
+    right: -22px;
+  }
+  .wrapperStaff .carouselStaff{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% / 3) - 12px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 9px;
+    border-radius: 8px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-top: 75px;
+
+  }
+  .carouselStaff::-webkit-scrollbar {
+    display: none;
+  }
+  .carouselStaff.no-transition {
+    scroll-behavior: auto;
+  }
+  .carouselStaff.dragging {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+  .carouselStaff.dragging .cardStaff {
+    cursor: grab;
+    user-select: none;
+  }
+  .carouselStaff :where(.cardStaff, .img) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .carouselStaff .cardStaff {
+    scroll-snap-align: start;
+    height: 185px;
+    list-style: none;
+    cursor: pointer;
+    flex-direction: column;
+    color: white;
+    border-radius: 18px;
+    background-color: rgba(255, 255, 255, 0.158);
+    text-align: center;
+    padding-bottom: 15px;
+  }
+  
+  .cardStaff img{
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    margin-top: -60px;
+    object-fit: cover;
+    object-position: right top;
+  }
+  
+  .cardStaff h4{
+    text-align: center;
+    padding: 5px 0 10px 0;
+    text-transform: uppercase;
+    font-size: 17px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .cardStaff p{
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+  }
+
+  .cardStaff p span{
+    font-size: 12px;
+    font-weight: 500;
+      text-align: center;
+  
+  }
+
+.staff-1{
+  object-position: center -25px !important;
+}
+/* MEDIA QUERY TABLET */
+@media screen and (max-width: 900px) {
+  .wrapperStaff .carouselStaff {
+    grid-auto-columns: calc((100% / 3) - 9px);
+  }
+}
+/* MEDIA QUERY  MOBILE */
+@media screen and (max-width: 600px) {
+    .wrapperStaff .carouselStaff {
+        grid-auto-columns: calc((100% / 2) - 9px);
+      }
+}
+/* MEDIA QUERY DESKTOP */
+@media screen and (min-width: 900px) {
+  .wrapperStaff .carouselStaff {
+    grid-auto-columns: calc((100% / 5) - 12px);
+    gap: 16px;
+}
+  /* .wrapperStaff .carouselStaff {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-column-gap: 10px;
+      grid-row-gap: 80px;
+      padding-top: 75px;
+  }
+  .carouselStaff.dragging .cardStaff {
+      cursor:default;
+      user-select: none;
+    }
+  .carouselStaff .cardStaff {
+      cursor: default;
+      height: 155px;
+
+    }
+    .wrapperStaff i{
+      display: none;
+    }
+    .infinite-cardStaff{
+      display: none;
+    } */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* STAFF OLD */
+/* .grid-staff {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 70px;
+    margin-top: 60px;
+}
+
+.card-staff{
+    border-radius: 18px;
+    background-color: rgba(255, 255, 255, 0.158);
+    text-align: center;
+    padding-bottom: 15px;
+}
+.card-staff img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-top: -50px;
+}
+
+.card-staff h4{
+    padding: 5px 0 10px 0;
+    text-transform: uppercase;
+    font-size: 17px;
+
+}
+
+.card-staff p{
+    font-size: 12px;
+    font-weight: 700;
+}
+.card-staff p span{
+    font-size: 12px;
+    font-weight: 500;
+} */

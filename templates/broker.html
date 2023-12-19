@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block title %}Broker{% endblock %} 
+
+{% block content %}
+
+
+<div class="broker">
+    <!-- INICIO PRESENTATION -->
+    <div class="broker-container">
+        <div class="broker-presentation">
+            <h2 class="broker-title">SKILLING</h2>
+            <p class="broker-text">Un Broker fundado en el año 2016, regulado por la
+                CySEC de Chipre y la FSA de Seychelles. Las
+                cuentas standar de Skilling requieren un deposito
+                minimo de 200 USD. Esta plataforma confiable nos
+                brinda todas las herramientas para que podamos
+                desarrollarnos como Traders Profesionales</p>
+                <a class="broker-enlace" href="https://skilling.com/row/es/trading-platforms/skilling-trader/">Mas sobre Skilling</a>
+        </div>
+    </div>
+    
+    <!-- FIN PRESENTATION -->
+
+    <!-- INICIO VIDEOS -->
+    <div class="broker-videos">
+
+        <!-- VIDEO -->
+        <div class="broker-video">
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+        </div>
+        <div class="video-title-container">
+            <div class="line"></div>
+            <h3 class="video-title">EXPLORACION</h3>
+            <div class="line"></div>
+
+        </div>
+        <!-- FIN VIDEO -->
+
+        <!-- VIDEO -->
+        <div class="broker-video">
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+        </div>
+        <div class="video-title-container">
+            <div class="line"></div>
+            <h3 class="video-title">ABRIR OPERACION</h3>
+            <div class="line"></div>
+        </div>
+        <!-- FIN VIDEO -->
+
+        <!-- VIDEO -->
+        <div class="broker-video">
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+        </div>
+        <div class="video-title-container">
+            <div class="line"></div>
+            <h3 class="video-title">COLOCAR SL/TP</h3>
+            <div class="line"></div>
+        </div>
+        <!-- FIN VIDEO -->
+
+        <!-- VIDEO -->
+        <div class="broker-video">
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+        </div>
+        <div class="video-title-container">
+            <div class="line"></div>
+            <h3 class="video-title">TOMA DE PARCIALES</h3>
+            <div class="line"></div>
+        </div>
+        <!-- FIN VIDEO -->
+
+    </div>
+    <!-- FIN VIDEOS -->
+    <div class="btn-container">
+        <a class="btn-registrate" href="">REGISTRATE</a>
+
+    </div>
+
+        {% block faq %}
+            {% include './faq.html' %}
+        {% endblock faq %}
+    
+    
+        <footer class="footer-broker">
+            <div class="img-container-footer">
+                <img class="logo" src="{% static 'img/logo.png' %}" alt="logo livecommunity">
+            </div>
+            <div class="redes">
+                <a href="https://www.instagram.com/">
+                    <img src="{% static 'img/iconig.png' %}" alt="logo instagram">
+                </a>
+                <a href="https://web.telegram.org/k/">
+                    <img src="{% static 'img/icontelegram.jpg' %}" alt="logo telegram">
+                </a>
+            </div>
+        
+        </footer>
+
+
+</div>
+
+{% endblock content %}

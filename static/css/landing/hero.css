@@ -9,7 +9,7 @@ body{
 .main-contain-home{
     max-width: 80vw;
     margin: 0 auto;
-    height: 100vh;
+    height: 100%;
 }
 
 .hero-contain{
@@ -99,17 +99,39 @@ header{
     }
     .hero{
         padding-top: 10px;
-        height: 80vh;
+        height: 105vh;
     }
     .hero h1 {
         font-size: 40px;
+        margin-top: 4.5rem;    
     }
     header{
-        height: 90vh;
-
+        height: 100%;
+        margin-bottom: 3rem;
     }
     
 }
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 33px;
+        margin-top: 2.5rem;
+    }
+    .hero{
+        padding-top: 10px;
+        height: 80vh;
+    }
+    
+    header{
+        height: 100%;
+        margin-bottom: 3rem;
+    }
+    .hero-video{
+        width: 90vw;
+    }
+    
+}
+
 
 
 

@@ -115,43 +115,51 @@
       text-align: center;
   
   }
-  /* MEDIA QUERY TABLET */
-  @media screen and (max-width: 900px) {
-    .wrapperStaff .carouselStaff {
-      grid-auto-columns: calc((100% / 3) - 9px);
-    }
-  }
-  /* MEDIA QUERY  MOBILE */
-  @media screen and (max-width: 600px) {
-      .wrapperStaff .carouselStaff {
-          grid-auto-columns: calc((100% / 2) - 9px);
-        }
-  }
-  /* MEDIA QUERY DESKTOP */
-  @media screen and (min-width: 900px) {
-    .wrapperStaff .carouselStaff {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        grid-column-gap: 10px;
-        grid-row-gap: 80px;
-        padding-top: 75px;
-    }
-    .carouselStaff.dragging .cardStaff {
-        cursor:default;
-        user-select: none;
-      }
-    .carouselStaff .cardStaff {
-        cursor: default;
-        height: 155px;
 
+.staff-1{
+  object-position: center -25px !important;
+}
+/* MEDIA QUERY TABLET */
+@media screen and (max-width: 900px) {
+  .wrapperStaff .carouselStaff {
+    grid-auto-columns: calc((100% / 3) - 9px);
+  }
+}
+/* MEDIA QUERY  MOBILE */
+@media screen and (max-width: 600px) {
+    .wrapperStaff .carouselStaff {
+        grid-auto-columns: calc((100% / 2) - 9px);
       }
-      .wrapperStaff i{
-        display: none;
-      }
-      .infinite-cardStaff{
-        display: none;
-      }
+}
+/* MEDIA QUERY DESKTOP */
+@media screen and (min-width: 900px) {
+  .wrapperStaff .carouselStaff {
+    grid-auto-columns: calc((100% / 5) - 12px);
+    gap: 16px;
+}
+  /* .wrapperStaff .carouselStaff {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-column-gap: 10px;
+      grid-row-gap: 80px;
+      padding-top: 75px;
+  }
+  .carouselStaff.dragging .cardStaff {
+      cursor:default;
+      user-select: none;
+    }
+  .carouselStaff .cardStaff {
+      cursor: default;
+      height: 155px;
+
+    }
+    .wrapperStaff i{
+      display: none;
+    }
+    .infinite-cardStaff{
+      display: none;
+    } */
 }
 
 

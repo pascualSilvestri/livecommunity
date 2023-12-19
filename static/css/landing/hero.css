@@ -114,7 +114,7 @@ header{
 
 @media (max-width: 600px) {
     .hero h1 {
-        font-size: 33px;
+        font-size: 30px;
         margin-top: 2.5rem;
     }
     .hero{
@@ -128,6 +128,7 @@ header{
     }
     .hero-video{
         width: 90vw;
+        height: 360px;
     }
     
 }

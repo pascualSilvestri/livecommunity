@@ -1,13 +1,16 @@
 .staff{
-    margin: 4em auto;
-    width: 85%;
-    font-family: Montserrat;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  padding: 4rem;
+  width: 85%;
+  font-family: Montserrat;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
 }
-
+.staff h2{
+  text-align: center;
+}
 
 
 
@@ -123,6 +126,9 @@
 }
 /* MEDIA QUERY TABLET */
 @media screen and (max-width: 900px) {
+  .staff {
+    padding: 0;
+  }
   .wrapperStaff .carouselStaff {
     grid-auto-columns: calc((100% / 3) - 9px);
   }
@@ -131,6 +137,9 @@
 @media screen and (max-width: 600px) {
     .wrapperStaff .carouselStaff {
         grid-auto-columns: calc((100% / 2) - 9px);
+      }
+      .staff {
+        padding: 0;
       }
 }
 /* MEDIA QUERY DESKTOP */

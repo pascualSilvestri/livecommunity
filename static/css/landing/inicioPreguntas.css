@@ -1,9 +1,8 @@
 .bg-3{
-    padding-top: 3rem;
-    padding-bottom:0rem;
+    padding-bottom:3rem;
     width: 100%;
     background-image: url("../../img/Desktop3.png");
-    height: 90vh;
+    height: 100%;
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;

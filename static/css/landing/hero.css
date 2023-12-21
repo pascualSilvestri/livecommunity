@@ -26,7 +26,8 @@ body{
 
 header{
     width: 100%;  
-    background-image: url("../../img/Desktop1.png");
+    background-image: url("../../img/FondoLiveMobile.png");
+
     /* Set a specific height */
     height: 130vh;
     
@@ -38,7 +39,7 @@ header{
 
 @media (min-width: 1000px) {
     header{
-        background-image:url("../../img/Desktop1.png");
+        background-image: url("../../img/FondoLiveMobile.png");
 
     }
 }

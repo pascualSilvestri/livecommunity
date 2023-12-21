@@ -1,11 +1,16 @@
 .staff{
-    margin: 4em auto;
-    width: 85%;
-    font-family: Satoshi;
-    color: white;
-    align-items: center;
+  padding: 4rem;
+  width: 85%;
+  font-family: Montserrat;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
 }
-
+.staff h2{
+  text-align: center;
+}
 
 
 
@@ -73,7 +78,7 @@
   }
   .carouselStaff .cardStaff {
     scroll-snap-align: start;
-    height: 180px;
+    height: 185px;
     list-style: none;
     cursor: pointer;
     flex-direction: column;
@@ -88,7 +93,9 @@
     width: 125px;
     height: 125px;
     border-radius: 50%;
-    margin-top: -50px;
+    margin-top: -60px;
+    object-fit: cover;
+    object-position: right top;
   }
   
   .cardStaff h4{
@@ -96,6 +103,9 @@
     padding: 5px 0 10px 0;
     text-transform: uppercase;
     font-size: 17px;
+    height: 65px;
+    display: flex;
+    align-items: center;
   }
   
   .cardStaff p{
@@ -110,43 +120,57 @@
       text-align: center;
   
   }
-  /* MEDIA QUERY TABLET */
-  @media screen and (max-width: 900px) {
-    .wrapperStaff .carouselStaff {
-      grid-auto-columns: calc((100% / 3) - 9px);
-    }
-  }
-  /* MEDIA QUERY  MOBILE */
-  @media screen and (max-width: 600px) {
-      .wrapperStaff .carouselStaff {
-          grid-auto-columns: calc((100% / 2) - 9px);
-        }
-  }
-  /* MEDIA QUERY DESKTOP */
-  @media screen and (min-width: 900px) {
-    .wrapperStaff .carouselStaff {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        grid-column-gap: 10px;
-        grid-row-gap: 80px;
-        padding-top: 75px;
-    }
-    .carouselStaff.dragging .cardStaff {
-        cursor:default;
-        user-select: none;
-      }
-    .carouselStaff .cardStaff {
-        cursor: default;
-        height: 155px;
 
+.staff-1{
+  object-position: center -25px !important;
+}
+/* MEDIA QUERY TABLET */
+@media screen and (max-width: 900px) {
+  .staff {
+    padding: 0;
+  }
+  .wrapperStaff .carouselStaff {
+    grid-auto-columns: calc((100% / 3) - 9px);
+  }
+}
+/* MEDIA QUERY  MOBILE */
+@media screen and (max-width: 600px) {
+    .wrapperStaff .carouselStaff {
+        grid-auto-columns: calc((100% / 2) - 9px);
       }
-      .wrapperStaff i{
-        display: none;
+      .staff {
+        padding: 0;
       }
-      .infinite-cardStaff{
-        display: none;
-      }
+}
+/* MEDIA QUERY DESKTOP */
+@media screen and (min-width: 900px) {
+  .wrapperStaff .carouselStaff {
+    grid-auto-columns: calc((100% / 5) - 12px);
+    gap: 16px;
+}
+  /* .wrapperStaff .carouselStaff {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-column-gap: 10px;
+      grid-row-gap: 80px;
+      padding-top: 75px;
+  }
+  .carouselStaff.dragging .cardStaff {
+      cursor:default;
+      user-select: none;
+    }
+  .carouselStaff .cardStaff {
+      cursor: default;
+      height: 155px;
+
+    }
+    .wrapperStaff i{
+      display: none;
+    }
+    .infinite-cardStaff{
+      display: none;
+    } */
 }
 
 

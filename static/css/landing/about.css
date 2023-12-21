@@ -1,29 +1,36 @@
 .bg-2{
     width: 100%;  
     background-image: url("../../img/Desktop2.png");
-    height: 180vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    /* Set a specific height */
+    height: 100%;
+  
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 @media screen and (max-width: 900px) {
   .bg-2{
-    background-image: url("../../img/Desktop2.png");
-    height: 165vh;
+    height: 100%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .bg-2{
+    height: 100%;
   }
 }
 
 .about-us{
     margin: 1em auto;
-    width: 85%;
-    font-family: Satoshi;
+    width: 80%;
+    font-family: Montserrat;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-h2{
-    font-size: 34px;
+.about-us h2{
+    font-size: 30px;
     font-weight: 900;
     padding: 18px;
     text-align: center;
@@ -31,9 +38,9 @@ h2{
 
 .about-us .text{
     font-weight: 700;
-    font-size: 18px;
+    font-size: 17px;
     text-align: center;
-    margin: 0 auto;
+    margin: 1rem auto 2rem auto;
     width: 90%;
 }
 
@@ -97,12 +104,12 @@ h2{
   }
   .carousel :where(.card, .img) {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
   }
   .carousel .card {
     scroll-snap-align: start;
-    height: 300px;
+    /* height: 315px; */
     list-style: none;
     background-color: rgba(255, 255, 255, 0.158);
     cursor: pointer;
@@ -115,15 +122,41 @@ h2{
   .card img{
       width: 100%;
       height: 195px;
-      border-radius: 18px;
+      border-radius: 18px 18px 0 0;
+      object-fit: cover;
+      object-position: top;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1.0) 50%, transparent 100%);
+
   }
   
   .card h4{
-      padding: 5px 0 10px 0;
+      padding: 5px 0 4px 0;
       text-transform: uppercase;
       font-size: 18px;
       text-align: center;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      margin-top: -30px;
+
   }
+
+  .card ul{
+    list-style-position: outside;
+    padding-left: 27px;
+    list-style-type: disclosure-closed;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: 70%;
+    justify-content: space-evenly;
+  }
+
+  .card ul li{
+    font-size: 13px;
+
+  }
+  
   
   .card p{
       font-size: 13px;
@@ -140,11 +173,17 @@ h2{
     .wrapper .carousel {
       grid-auto-columns: calc((100% / 2) - 9px);
     }
+    .about-us{
+      width: 85%;
+    }
   }
   
   @media screen and (max-width: 600px) {
       .wrapper .carousel {
           grid-auto-columns: calc((100% / 1.75) - 9px);
+        }
+        .about-us{
+          width: 85%;
         }
   }
   @media screen and (min-width: 900px) {
@@ -152,7 +191,7 @@ h2{
         grid-auto-columns: calc((100% / 4) - 12px);
         gap: 16px;
     }
-    .carousel.dragging .card {
+    /* .carousel.dragging .card {
         cursor:default;
         user-select: none;
       }
@@ -164,7 +203,7 @@ h2{
       }
       .infinite-card{
         display: none;
-      }
+      } */
 }
 
 /* CARD CONTAINER OLD */

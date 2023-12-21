@@ -15,12 +15,9 @@
             <div class="hero">
                 
                     <h1>Bienvenido a<br> Live Community !!!</h1>
-                    <video controls> 
-                        <source src="hero.mp4" type="video/mp4">
-                    </video>
+                    <iframe class="hero-video" src="{{ url_video }}" frameborder="0" allowfullscreen></iframe>
 
-                    
-                    <a class="btn" href="">COMENZAR</a>
+                    <a class="btn" href="{{ url_register }}">COMENZAR</a>
                     
                     
             </div>
@@ -44,39 +41,93 @@
     <div class="wrapper">
         <i id="left" class="fa-solid fa-angle-left"></i>
         <ul class="carousel">
-          <li class="card"">
-              <img src="{% static 'img/user.webp' %}" alt="CEO 1">
-              <h4>Agustin Gentile</h4>
-              <p>Nacionalidad : <span>argentino</span> </p>
-              <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
-          </li>
-          <li class="card">
-              <img src="{% static 'img/user.webp' %}" alt="CEO 2">
-              <h4>Cristian Escobar</h4>
-              <p>Nacionalidad : <span>argentino</span> </p>
-              <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
-          </li>
-          <li class="card">
-              <img src="{% static 'img/user.webp' %}" alt="CEO 3">
-              <h4>Dario Rosero</h4>
-              <p>Nacionalidad : <span>colombiano</span> </p>
-              <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
-          </li>
-          <li class="card">
-              <img src="{% static 'img/user.webp' %}" alt="CEO 4">
-              <h4>Diego Rodriguez</h4>
-              <p>Nacionalidad : <span>argentino</span> </p>
-              <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
-          </li>
+            <li class="card">
+                <img class="ceo-1" loading="lazy" src="{% static 'img/ceos/AgusGentile.png' %}" alt="CEO 1">
+                <h4>Agustin Gentile</h4>
+                <ul>
+                    <li>Buenos Aires - Argentina</li>
+                    <li>Scalping - Intraday</li>
+                    <li>4 años de Trading</li>
+                    <li>Trader, Educador y Analista</li>
+                </ul>
+            </li>
+            <li class="card">
+                <img class="ceo-3" loading="lazy" src="{% static 'img/ceos/DarioRosero.png' %}" alt="CEO 3">
+                <h4>Dario Rosero</h4>
+                <p>Nacionalidad : <span>colombiano</span> </p>
+                <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+            </li>
+            <li class="card">
+                <img class="ceo-2" loading="lazy" src="{% static 'img/ceos/DiegoRodriguez.png' %}" alt="CEO 4">
+                <h4>Diego Rodriguez</h4>
+                <ul>
+                    <li>Buenos Aires - Argentina</li>
+                    <li>Scalping - Intraday - Swing</li>
+                    <li>+4 años de Trading</li>
+                    <li>ADM de Sistema y Finanzas</li>
+                </ul>
+            </li>
+            
+            <li class="card">
+                <img class="ceo-4" loading="lazy" src="{% static 'img/ceos/CrisEscobar.png' %}" alt="CEO 2">
+                <h4>Cristian Escobar</h4>
+                <ul>
+                    <li>Córdoba - Argentina</li>
+                    <li>Scalping - Intraday - Swing</li>
+                    <li>4 años de Trading</li>
+                    <li>Smart money concept</li>
+                    <li>Desarrollo personal</li>
+                    <li>Sistemas educativos</li>
+                </ul>
+            </li>
+            
+            <li class="card">
+                <img class="ceo-5" loading="lazy" src="{% static 'img/ceos/JoaquinPugliese.png' %}" alt="CEO 4">
+                <h4>Joaquin Pugliese</h4>
+                <ul>
+                    <li>Scalping / Intraday / Spot</li>
+                    <li>Scalper Crypto- Intraday Trading</li>
+                    <li>Trading + 3 años operando en mercados de Forex,
+                     Criptomonedas, Materias Primas y Índices. </li>
+                    <li>+4 años de experiencia en Negocios Digitales</li>
+                </ul>
+            </li>
+            <li class="card">
+                <img class="ceo-6" loading="lazy" src="{% static 'img/ceos/CarlosCorvalan.png' %}" alt="CEO 4">
+                <h4>Carlos Corvalan</h4>
+                <p>Nacionalidad : <span>argentino</span> </p>
+                <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+            </li>
+            
+            <li class="card">
+                <img class="ceo-7" loading="lazy" src="{% static 'img/ceos/AndreaGonzalez.png' %}" alt="CEO 4">
+                <h4>Andrea Gonzalez Ibañez</h4>
+                <ul>
+                    <li>Tucumán - Argentina</li>
+                    <li>Intraday - SmartMoney</li>
+                    <li>+6 años en Criptomonedas, blockchain,
+                    negocios digitales y 2 años en trading</li>
+                    <li>Legales, eventos, redes sociales,
+                     marketing y marca</li>
+
+                </ul>
+            </li>
+            <li class="card">
+                <img class="ceo-8" loading="lazy" src="{% static 'img/ceos/AleOrieta.png' %}" alt="CEO 4">
+                <h4>Alejandro Orieta</h4>
+                <ul>
+                    <li>Sgo. del Estero - Argentina</li>
+                    <li>Scalper Crypto- Intraday Trading</li>
+                    <li>Trader (8 años) - Conferencista y Negocios Digitales</li>
+                    <li>Marketing - Network y Expansión</li>
+                </ul>
+            </li>
         </ul>
         <i id="right" class="fa-solid fa-angle-right"></i>
       </div>
 </section>
 
 <!-- FIN DEL ABOUT US -->
-
-
-
 
 <!-- STAFF -->
 <section class="staff">
@@ -86,53 +137,93 @@
             <i id="left" class="fa-solid fa-angle-left"></i>
             <ul class="carouselStaff">
                 <li class="cardStaff">
-                    <img src="{% static 'img/user.webp' %}" alt="persona del staff">
+                    <img loading="lazy" src="{% static 'img/staff/MaxiLujan.png' %}" alt="persona del staff">
                     <h4>Maxi Lujan</h4>
                     <p>Nacionalidad : <span>agentino</span> </p>
                     <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
                 </li>
                 <li class="cardStaff">
-                    <img src="{% static 'img/user.webp' %}" alt="persona del staff">
-                    <h4>Lucas Bassini</h4>
-                    <p>Nacionalidad : <span>agentino</span> </p>
-                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
-                </li>
-                <li class="cardStaff">
-                    <img src="{% static 'img/user.webp' %}" alt="persona del staff">
+                    <img loading="lazy" src="{% static 'img/staff/AnthonyRosero.png' %}" alt="persona del staff">
                     <h4>Anthony Rosero</h4>
                     <p>Nacionalidad : <span>agentino</span> </p>
                     <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
                 </li>
                 <li class="cardStaff">
-                    <img src="{% static 'img/user.webp' %}" alt="persona del staff">
+                    <img loading="lazy" src="{% static 'img/staff/OttoSalgado.png' %}" alt="persona del staff">
                     <h4>OTTO SALGADO</h4>
                     <p>Nacionalidad : <span>agentino</span> </p>
                     <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
                 </li>
+
                 <li class="cardStaff">
-                    <img src="{% static 'img/user.webp' %}" alt="persona del staff">
-                    <h4>MAXI NAGEL</h4>
-                    <p>Nacionalidad : <span>agentino</span> </p>
-                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
-                </li>
-                <li class="cardStaff">
-                    <img src="{% static 'img/user.webp' %}" alt="persona del staff">
-                    <h4>CRHISTIAN SANTANDER</h4>
-                    <p>Nacionalidad : <span>agentino</span> </p>
-                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
-                </li>
-                <li class="cardStaff">
-                    <img src="{% static 'img/user.webp' %}" alt="persona del staff">
+                    <img loading="lazy" src="{% static 'img/staff/MaxiFarias.png' %}" alt="persona del staff">
                     <h4>MAXI FARIAS</h4>
                     <p>Nacionalidad : <span>agentino</span> </p>
                     <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
                 </li>
+                
                 <li class="cardStaff">
-                    <img src="{% static 'img/user.webp' %}" alt="persona del staff">
-                    <h4>HERMILIO RODRIGUEZ</h4>
+                    <img loading="lazy" src="{% static 'img/staff/MauroAlvarez.png' %}" alt="persona del staff">
+                    <h4>Mauro Alvarez</h4>
                     <p>Nacionalidad : <span>agentino</span> </p>
                     <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
                 </li>
+                <li class="cardStaff">
+                    <img class="staff-1" loading="lazy" src="{% static 'img/staff/MatiasPiedra.png' %}" alt="persona del staff">
+                    <h4>Matias Piedra</h4>
+                    <p>Nacionalidad : <span>agentino</span> </p>
+                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+                </li>
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/DiegoCeron.png' %}" alt="persona del staff">
+                    <h4>Diego Ceron</h4>
+                    <p>Nacionalidad : <span>agentino</span> </p>
+                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+                </li>
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/AylenHeredia.png' %}" alt="persona del staff">
+                    <h4>Aylen Heredia</h4>
+                    <p>Nacionalidad : <span>agentino</span> </p>
+                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+                </li>
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/RodrigoEquis.png' %}" alt="persona del staff">
+                    <h4>Rodrigo Equis</h4>
+                    <p>Nacionalidad : <span>agentino</span> </p>
+                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+                </li>
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/JoseLinares.png' %}" alt="persona del staff">
+                    <h4>Jose Linares</h4>
+                    <p>Nacionalidad : <span>agentino</span> </p>
+                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+                </li>
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/ErnestoRaez.png' %}" alt="persona del staff">
+                    <h4>Ernesto Raez</h4>
+                    <p>Nacionalidad : <span>agentino</span> </p>
+                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+                </li>
+
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/AlexCamacho.png' %}" alt="persona del staff">
+                    <h4>Alexander Camacho</h4>
+                    <p>Nacionalidad : <span>agentino</span> </p>
+                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+                </li>
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/user.webp' %}" alt="persona del staff">
+                    <h4>Lucas Bassini</h4>
+                    <p>Nacionalidad : <span>agentino</span> </p>
+                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+                </li>
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/user.webp' %}" alt="persona del staff">
+                    <h4>CRHISTIAN SANTANDER</h4>
+                    <p>Nacionalidad : <span>agentino</span> </p>
+                    <p>Fecha de nacimiento :<br> <span>xx-xx-xxxx</span> </p>
+                </li>
+
             </ul>
             <i id="right" class="fa-solid fa-angle-right"></i>
         </div>

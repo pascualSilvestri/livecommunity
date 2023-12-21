@@ -9,7 +9,7 @@ body{
 .main-contain-home{
     max-width: 80vw;
     margin: 0 auto;
-    height: 100vh;
+    height: 100%;
 }
 
 .hero-contain{
@@ -26,11 +26,8 @@ body{
 
 header{
     width: 100%;  
-    background-image: url("../../img/Desktop1.png");
-    /* Set a specific height */
-    height: 140vh;
-    
-    /* Position and center the image to scale nicely on all screens */
+    background-image: url("../../img/FondoLiveMobile.png");
+    height: 130vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -38,13 +35,12 @@ header{
 
 @media (min-width: 1000px) {
     header{
-        background-image:url("../../img/Desktop1.png");
-
+        background-image: url("../../img/FondoLiveDsktp.png");
     }
 }
 
 .hero{
-    height: 80vh;
+    height: 120vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -55,7 +51,7 @@ header{
 }  
 
 .hero h1 {
-    font-family: Satoshi;
+    font-family: Montserrat;
     font-size: 50px;
     font-weight: 900;
     color: rgb(255, 255, 255);
@@ -65,15 +61,16 @@ header{
 
   }
 
-.hero video{
+.hero-video{
     border-radius: 20px;
     margin: 20px 0 20px 0;
     width: 70vw;
+    height: 620px;
 
 }
 
 .hero .btn{
-    font-family: Satoshi;
+    font-family: Montserrat;
     padding: 10px 50px;
     color: white;
     background: #BE1E6D;
@@ -93,21 +90,45 @@ header{
 
 
 @media (max-width: 900px) {
-    .hero video{
-        width: 95vw;
+    .hero-video{
+        width: 85vw;
     }
     .hero{
         padding-top: 10px;
+        height: 105vh;
     }
     .hero h1 {
         font-size: 40px;
+        margin-top: 4.5rem;    
     }
     header{
-        height: 90vh;
-
+        height: 100%;
+        margin-bottom: 3rem;
     }
     
 }
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 30px;
+        margin-top: 2.5rem;
+    }
+    .hero{
+        padding-top: 10px;
+        height: 80vh;
+    }
+    
+    header{
+        height: 100%;
+        margin-bottom: 3rem;
+    }
+    .hero-video{
+        width: 90vw;
+        height: 360px;
+    }
+    
+}
+
 
 
 

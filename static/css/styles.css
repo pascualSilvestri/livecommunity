@@ -3,8 +3,8 @@
   src: url("../fonts/Provicali.otf");
 }
 @font-face {
-  font-family: "Satoshi";
-  src: url("../fonts/Satoshi-Variable.ttf");
+  font-family: "Montserrat";
+  src: url("../fonts/Montserrat.ttf");
 }
 
 :root{
@@ -21,7 +21,7 @@
     scroll-behavior: smooth;
 }
 html{
-    font-family: Satoshi;
+    font-family: Montserrat;
     overflow-x: inherit;   
 }
 body{
@@ -110,4 +110,35 @@ h2 { font-size: 1.8em; } /* 24px */
       height:63px;
       line-height: 66px;
 }
+}
+
+.inprocess-container{
+  background: #121b31;
+  height: 100vh;
+}
+.inprocess-container h2{
+  color: white;
+  margin-bottom: 2rem;
+  padding-top: 7rem;
+  text-align: center;
+}
+.inprocess-container .img-container{
+  width: 519px;
+  height: 324px;
+  margin: 0 auto;
+}
+.inprocess-container .img-container img{
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  .inprocess-container h2{
+    font-size: 25px;
+  }
+  .inprocess-container .img-container{
+    width: 280px;
+    height: 189px;
+    display: block;
+  }
 }

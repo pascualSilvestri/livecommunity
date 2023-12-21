@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Espera a que se cargue el DOM antes de intentar seleccionar el elemento
-    var staffContainer = document.querySelector('.staff-container')
+    var staff = document.querySelector('.staff')
 
-    if (staffContainer) {
+    if (staff) {
         // Realiza operaciones solo si el elemento fue encontrado
         const wrapperStaff = document.querySelector('.wrapperStaff')
         const carouselStaff = document.querySelector('.carouselStaff')

@@ -1,5 +1,6 @@
 .broker{
-    font-family: Satoshi;
+    font-family: Montserrat;
+    
 }
 .broker-container{
     width: 100%;
@@ -14,6 +15,8 @@
     color: whitesmoke;
     text-align: start;
     height: 70vh;
+    
+
 }
 
 .broker-presentation .broker-title{
@@ -22,11 +25,11 @@
     font-size: 38px;
 }
 
-.broker-presentation .broker-text{
+.broker-presentation .broker-text {
     font-size: 17px;
     font-weight: 600;
     line-height: 23px;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
 
 }
 
@@ -45,31 +48,15 @@
 
 /* BROKER VIDEOS */
 .broker-videos{
-
-}
-
-.bg-broker{
-    width: 100%;  
-    background-image: url("../../img/FondoBroker.png");
-    height: 120vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-@media screen and (max-width: 900px) {
-    .bg-broker{
-        background-image: url("../../img/FondoBrokerMb.png");
-        height: 210vh;
-  }
+    padding-top: 1.2rem;
 }
 .broker-video {
     margin: 0 auto;
-    height: 320px;
-    width: 90%;
+    height: 270px;
+    width: 85%;
     display: flex;
     justify-content: center;
     padding-top: 3rem;
-    flex-direction: column;
 }
 
 .broker-video .video{
@@ -90,9 +77,6 @@
     color: white;
     text-align: center;
     padding: 10px 15px;
-    height: 70px;
-    display: flex;
-    align-items: center;
 }
 
 .line{
@@ -107,7 +91,7 @@
     margin-top: 3rem;
 }
 .btn-registrate{
-    font-family: Satoshi;
+    font-family: Montserrat;
     padding: 10px 40px;
     color: white;
     background: #BE1E6D;
@@ -121,27 +105,4 @@
 .footer-broker{
     background: rgb(9,27,71);
     background: linear-gradient(180deg, rgba(9,27,71,1) 0%, rgba(151, 71, 255, 0.418) 100%);
-}
-
-@media screen and (min-width: 900px) {
-    .broker-presentation{
-        text-align: center;
-        padding-top: 25vh;
-
-    }
-    .broker-video{
-        height: 360px;
-        width: 80%;
-
-    }
-    .broker-presentation .broker-title{
-        text-align: center;
-    }
-    .broker-videos{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        width: 90%;
-        margin: 0 auto;
-    }
 }

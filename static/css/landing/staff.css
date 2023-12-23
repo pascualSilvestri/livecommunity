@@ -78,7 +78,7 @@
   }
   .carouselStaff .cardStaff {
     scroll-snap-align: start;
-    height: 185px;
+    height: 220px;
     list-style: none;
     cursor: pointer;
     flex-direction: column;
@@ -120,7 +120,22 @@
       text-align: center;
   
   }
+  .cardStaff ul{
+    list-style-position: outside;
+    padding-left: 27px;
+    list-style-type: disclosure-closed;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: 70%;
+    justify-content: space-evenly;
+  }
 
+  .cardStaff ul li{
+    font-size: 13px;
+
+  }
+  
 .staff-1{
   object-position: center -25px !important;
 }

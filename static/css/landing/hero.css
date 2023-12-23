@@ -26,11 +26,8 @@ body{
 
 header{
     width: 100%;  
-    background-image: url("../../img/Desktop1.png");
-    /* Set a specific height */
+    background-image: url("../../img/FondoLiveMobile.png");
     height: 130vh;
-    
-    /* Position and center the image to scale nicely on all screens */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -38,8 +35,7 @@ header{
 
 @media (min-width: 1000px) {
     header{
-        background-image:url("../../img/Desktop1.png");
-
+        background-image: url("../../img/FondoLiveDsktp.png");
     }
 }
 
@@ -69,7 +65,7 @@ header{
     border-radius: 20px;
     margin: 20px 0 20px 0;
     width: 70vw;
-    height: 480px;
+    height: 620px;
 
 }
 

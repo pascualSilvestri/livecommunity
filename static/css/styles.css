@@ -120,6 +120,7 @@ h2 { font-size: 1.8em; } /* 24px */
   color: white;
   margin-bottom: 2rem;
   padding-top: 7rem;
+  text-align: center;
 }
 .inprocess-container .img-container{
   width: 519px;

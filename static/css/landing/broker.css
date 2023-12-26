@@ -14,9 +14,8 @@
     margin: 0 auto;
     color: whitesmoke;
     text-align: start;
-    height: 70vh;
-    
-
+    height: 100%;
+    padding-bottom: 1rem;
 }
 
 .broker-presentation .broker-title{
@@ -29,7 +28,7 @@
     font-size: 17px;
     font-weight: 600;
     line-height: 23px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.8rem;
 
 }
 
@@ -41,7 +40,7 @@
 }
 .broker-presentation .broker-enlace::before {
     position: absolute;
-    margin-left: 185px;
+    margin-left: 205px;
     margin-top: 0px;
     content: url("../../img/Flecha.png");
 }
@@ -52,11 +51,12 @@
 }
 .broker-video {
     margin: 0 auto;
-    height: 270px;
+    height: 300px;
     width: 85%;
     display: flex;
     justify-content: center;
     padding-top: 3rem;
+    flex-direction: column;
 }
 
 .broker-video .video{
@@ -71,6 +71,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 80px;
+
 }
 
 .video-title{
@@ -105,4 +107,22 @@
 .footer-broker{
     background: rgb(9,27,71);
     background: linear-gradient(180deg, rgba(9,27,71,1) 0%, rgba(151, 71, 255, 0.418) 100%);
+}
+
+
+@media screen and (min-width: 900px) {
+    .broker-videos{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+    .broker-video {
+        height: 420px;
+    }
+    .video-title-container{
+        height: 100px;
+    }
+    
 }

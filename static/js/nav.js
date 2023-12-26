@@ -36,6 +36,5 @@ function changeClass(clickedElement) {
     navigationLinks.forEach(function (link) {
         link.parentElement.classList.remove('selected')
     })
-
     clickedElement.parentElement.classList.add('selected')
 }

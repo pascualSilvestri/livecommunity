@@ -56,11 +56,14 @@ header{
     font-weight: 900;
     color: rgb(255, 255, 255);
     text-align: center;
-    padding: 20px 0 20px 0;
+    padding: 20px 0 0 0;
     line-height: 55px;
 
   }
-
+  .hero .logo-live{
+    width: 260px;
+    margin-bottom: 1.8rem;
+}
 .hero-video{
     border-radius: 20px;
     margin: 20px 0 20px 0;
@@ -110,8 +113,9 @@ header{
 
 @media (max-width: 600px) {
     .hero h1 {
-        font-size: 30px;
+        font-size: 40px;
         margin-top: 2.5rem;
+        padding-bottom: 0;
     }
     .hero{
         padding-top: 10px;
@@ -126,7 +130,10 @@ header{
         width: 90vw;
         height: 360px;
     }
-    
+    .hero .logo-live{
+        width: 200px;
+        margin-bottom: 1.8rem;
+    }
 }
 
 

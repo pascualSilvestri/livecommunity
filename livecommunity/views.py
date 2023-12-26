@@ -17,7 +17,7 @@ def home(request):
 
 # PRIMER SPRIG
 def broker(request):
-    return render(request, "inprocess.html")
+    return render(request,'broker.html')
 
 
 def presenciales(request):

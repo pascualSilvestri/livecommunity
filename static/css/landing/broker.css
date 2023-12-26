@@ -1,35 +1,45 @@
 .broker{
     font-family: Montserrat;
-    
+    background-color: #fcfcfc;
 }
 .broker-container{
     width: 100%;
-    background: rgb(190,30,109);
-    background: linear-gradient(180deg, rgba(190,30,109,0.5522584033613445) 0%, rgba(9,27,71,1) 100%);
+    background-image: url("../../img/FondoWave.png"); 
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 5rem;
 }
 
 .broker-presentation{
-    padding-top: 15vh;
-    width: 80%;
+    padding-top: 7vh;
+    width: 90%;
     margin: 0 auto;
     color: whitesmoke;
     text-align: start;
-    height: 70vh;
-    
-
+    height: 100%;
+    padding-bottom: 1rem;
+}
+.presentation-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.broker-presentation .broker-title{
-    text-align: start;
-    padding: 1.5rem 0;
-    font-size: 38px;
+.broker-presentation .broker-logo{
+    width: 150px;
+    filter: drop-shadow(1px 2px 3px #1d1d1d);
 }
 
 .broker-presentation .broker-text {
-    font-size: 17px;
+    font-size: 12px;
     font-weight: 600;
-    line-height: 23px;
-    margin-bottom: 1rem;
+    line-height: 18px;
+    margin-bottom: 1.8rem;
+    width: 100%;
+    margin: 1.6rem auto 2rem 0;
 
 }
 
@@ -41,7 +51,7 @@
 }
 .broker-presentation .broker-enlace::before {
     position: absolute;
-    margin-left: 185px;
+    margin-left: 205px;
     margin-top: 0px;
     content: url("../../img/Flecha.png");
 }
@@ -52,11 +62,12 @@
 }
 .broker-video {
     margin: 0 auto;
-    height: 270px;
+    height: 300px;
     width: 85%;
     display: flex;
     justify-content: center;
     padding-top: 3rem;
+    flex-direction: column;
 }
 
 .broker-video .video{
@@ -71,10 +82,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 80px;
+
 }
 
 .video-title{
-    color: white;
+    color: #091b47;
     text-align: center;
     padding: 10px 15px;
 }
@@ -82,7 +95,7 @@
 .line{
     width: 100%;
     height: 2px;
-    background: white;
+    background: #091b47;
 }
 .btn-container{
     width: 100%;
@@ -94,8 +107,8 @@
     font-family: Montserrat;
     padding: 10px 40px;
     color: white;
-    background: #BE1E6D;
-    /* margin-top: 5px; */
+    background: linear-gradient(90deg, #112afb 0%, #1bcbb7 100%);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;    /* margin-top: 5px; */
     border-radius: 7px;
     font-weight:800;
     font-size: 18px;
@@ -104,5 +117,30 @@
 
 .footer-broker{
     background: rgb(9,27,71);
-    background: linear-gradient(180deg, rgba(9,27,71,1) 0%, rgba(151, 71, 255, 0.418) 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #1bcbb7 33%, #112afb 66% ,#1bcbb7 100%);
+}
+.footer-broker .redes{
+    margin: 0;
+    padding-top: 2rem;
+}
+.footer-broker .img-container-footer {
+    width: 140px;
+    height: auto;
+    margin: 1rem 0;
+}
+@media screen and (min-width: 900px) {
+    .broker-videos{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+    .broker-video {
+        height: 420px;
+    }
+    .video-title-container{
+        height: 100px;
+    }
+    
 }

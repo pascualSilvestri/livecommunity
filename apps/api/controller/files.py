@@ -42,9 +42,8 @@ def upload_fpa(request):
                         if registro.fpa is None and registro.fpa == 'none':
                             registro.fpa = data["fpa"]
                             registro.save()
-                    except Registro_archivo.DoesNotExist:
-                        # Si no existe el registro, continúa con el siguiente
-                        continue
+                    except Exception as e:
+                        pass
 
                     try:
                         # Actualizar o crear nueva relación
@@ -60,6 +59,7 @@ def upload_fpa(request):
                                 'status': data["status"],
                             }
                         )
+                        
 
                         # Crear cuenta si no existe
                         Cuenta.objects.get_or_create(fpa=data["fpa"])
@@ -72,12 +72,12 @@ def upload_fpa(request):
 
         except Exception as e:
             print(e)
-            return JsonResponse({"Error": "Salto la exception"})
+            return JsonResponse({"Error": "Salto la exception"},status=403)
 
         return JsonResponse({"message": "Archivo CSV recibido y procesado exitosamente."})
 
     else:
-        return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400)
+        return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=405)
 
 
 # def upload_fpa(request):

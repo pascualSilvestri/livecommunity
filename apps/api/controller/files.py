@@ -39,7 +39,7 @@ def upload_fpa(request):
                     try:
                         registro = Registro_archivo.objects.get(client=data["id_client"])
                         # Si el registro existe y el fpa es None, actualizarlo
-                        if registro.fpa is None and registro.fpa == 'none':
+                        if registro.fpa is None or registro.fpa == 'none':
                             registro.fpa = data["fpa"]
                             registro.save()
                     except Registro_archivo.DoesNotExist:
@@ -272,7 +272,7 @@ def upload_registros(request):
                         r.primer_deposito = data["primer_deposito"]
                         r.neto_deposito = data["neto_deposito"]
                         r.numeros_depositos = data["numeros_depositos"]
-                        if r.fpa is None and r.fpa == 'none':
+                        if r.fpa is None or r.fpa == 'none':
                             r.fpa = fpa
                         r.save()
                     else:

@@ -32,6 +32,8 @@
     margin-top: 2rem;
     margin: 0 auto;
 }
+
+
 .preguntas-container-mobile{
     display: none;
 }
@@ -52,7 +54,7 @@
 	width: 80px;
     margin-left: -35px;
     margin-top: 5px;    
-    content: url("../../img/Signo\ de\ pregunta.png");
+    content: url("../../img/question.png");
 }
 .pregunta h5{
     font-size: 18px;

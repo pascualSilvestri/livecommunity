@@ -4,7 +4,7 @@
 }
 .broker-container{
     width: 100%;
-    background-image: url("../../img/FondoWave.png"); 
+    background-image: url("../../img/FondoWaveDsktp.png"); 
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -19,7 +19,7 @@
     color: whitesmoke;
     text-align: start;
     height: 100%;
-    padding-bottom: 1rem;
+    padding-bottom: 1.5rem;
 }
 .presentation-container{
     display: flex;
@@ -97,11 +97,14 @@
     height: 2px;
     background: #091b47;
 }
-.btn-container{
+.btn-registrate-container-mobile{
     width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 3rem;
+}
+.btn-registrate-container-desktop{
+    display: none;
 }
 .btn-registrate{
     font-family: Montserrat;
@@ -118,6 +121,8 @@
 .footer-broker{
     background: rgb(9,27,71);
     background: linear-gradient(180deg, #ffffff 0%, #1bcbb7 33%, #112afb 66% ,#1bcbb7 100%);
+    display: flex;
+    flex-direction: column-reverse;
 }
 .footer-broker .redes{
     margin: 0;
@@ -128,6 +133,65 @@
     height: auto;
     margin: 1rem 0;
 }
+.broker .inicio-preguntas h2{
+    color: #091b47;
+    padding: 1.5rem 0;
+}
+.broker-mobile{
+    display:block;
+}
+.broker-desktop{
+    display: none;
+}
+
+@media screen and (min-width: 600px) {
+    .btn-registrate-container-mobile{
+        display: none;
+
+    }
+    .broker-container {
+        background-position: bottom;
+    }
+    .btn-registrate-container-desktop{
+        display: block;
+    }
+    .footer-broker {
+        background: rgb(9,27,71);
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .footer-broker .redes {
+        margin: 0;
+        padding-top: 0;
+    }
+    .broker-presentation .broker-text {
+        font-size: 20px;
+        line-height: 25px;
+    }
+    .broker-video {
+        margin: 0 auto;
+        height: 450px;
+    }
+    .broker .preguntas-container-desktop{
+        color: #091b47;
+    }
+    .broker .inicio-preguntas h2 {
+        font-size: 38px;
+        font-weight: 900;
+    }
+    .broker .pregunta h5 {
+        font-size: 20px;
+    }
+    .pregunta p {
+        font-size: 15px;
+        font-weight: 400;
+    }
+}
+
 @media screen and (min-width: 900px) {
     .broker-videos{
         display: grid;
@@ -135,6 +199,8 @@
         grid-template-rows: repeat(2, 1fr);
         grid-column-gap: 0px;
         grid-row-gap: 0px;
+        width: 90%;
+        margin: 0 auto;
     }
     .broker-video {
         height: 420px;
@@ -142,5 +208,65 @@
     .video-title-container{
         height: 100px;
     }
+    .broker-presentation {
+        padding-top: 15vh;
+    }
+    .broker-presentation .broker-logo {
+        width: 280px;
+        filter: drop-shadow(1px 4px 4px #1d1d1d);
+    }
+    .broker-presentation .broker-text {
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 34px;
+    }
+    .broker-mobile{
+        display: none;
+
+    }
+    .broker-desktop{
+        display:block;
+    }
+    .broker-container {
+        background-position: bottom;
+    }
+    .broker-presentation .broker-text {
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 40px;
+    }
+    .broker-presentation .broker-enlace {
+        font-size: 25px;
+    }
+    .broker-presentation .broker-enlace::before {
+        margin-left: 255px;
+    }    
+    .video-title {
+        font-size: 28px;
+        font-weight: 800;
+    }
+    .broker-video {
+        height: 450px;
+    }
+
+    .btn-registrate-container-mobile{
+        display: none;
+
+    }
+    .btn-registrate-container-desktop{
+        display: block;
+    }
+    .footer-broker {
+        background: rgb(9,27,71);
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: row;
+    }
     
+    .footer-broker .redes {
+        margin: 0;
+        padding-top: 0;
+    }
 }

@@ -19,7 +19,6 @@ def convertir_fecha(fecha_string):
         return datetime.strptime(fecha_string, "%Y-%m-%d").date()
 
 @csrf_exempt
-
 def upload_fpa(request):
     if request.method == "POST" and request.FILES.get("csvFileFpa"):
         try:
@@ -36,8 +35,18 @@ def upload_fpa(request):
                     fecha_creacion = convertir_fecha(data["fecha_creacion_cuenta"])
                     fecha_verificacion = convertir_fecha(data["verificacion"])
 
+                    # Intenta obtener el registro, si no existe, continúa con el siguiente
                     try:
-                        # Actualizar o crear nuevo registro
+                        registro = Registro_archivo.objects.get(client=data["id_client"])
+                        # Si el registro existe y el fpa es None, actualizarlo
+                        if registro.fpa is None and registro.fpa == 'none':
+                            registro.fpa = data["fpa"]
+                            registro.save()
+                    except Exception as e:
+                        pass
+
+                    try:
+                        # Actualizar o crear nueva relación
                         obj, created = Relation_fpa_client.objects.update_or_create(
                             fpa=data["fpa"],
                             client=data["id_client"],
@@ -50,6 +59,8 @@ def upload_fpa(request):
                                 'status': data["status"],
                             }
                         )
+                        
+
                         # Crear cuenta si no existe
                         Cuenta.objects.get_or_create(fpa=data["fpa"])
 
@@ -61,12 +72,13 @@ def upload_fpa(request):
 
         except Exception as e:
             print(e)
-            return JsonResponse({"Error": "Salto la exception"})
+            return JsonResponse({"Error": "Salto la exception"},status=403)
 
         return JsonResponse({"message": "Archivo CSV recibido y procesado exitosamente."})
 
     else:
-        return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400)
+        return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=405)
+
 
 # def upload_fpa(request):
 #     if request.method == "POST" and request.FILES.get("csvFileFpa"):
@@ -148,6 +160,59 @@ def upload_fpa(request):
 #         return JsonResponse(
 #             {"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400
 #         )
+    
+################################################Registros####################################################
+    
+
+# @csrf_exempt
+# def upload_registros(request):
+#     if request.method == "POST" and request.FILES.get("csvFileRegistro"):
+#         try:
+#             excel_file = request.FILES["csvFileRegistro"]
+#             file_name = excel_file.name
+#             file_extension = os.path.splitext(file_name)[1]
+
+#             if file_extension == ".xlsx":
+#                 file_data = pd.read_excel(excel_file, engine='openpyxl')
+#                 new_data = limpiar_registros(file_data)
+
+#                 for data in new_data:
+#                     # Conversión de fechas
+#                     fecha_registro = pd.to_datetime(data["fecha_registro"], errors='coerce', format="%Y-%m-%d").date() if data["fecha_registro"] != "none" else None
+#                     fecha_calif = pd.to_datetime(data["fecha_calif"], errors='coerce', format="%Y-%m-%d").date() if data["fecha_calif"] != "none" else None
+#                     fecha_primer_deposito = pd.to_datetime(data["fecha_primer_deposito"], errors='coerce', format="%Y-%m-%d").date() if data["fecha_primer_deposito"] != "none" else None
+
+#                     # Obtener o crear el fpa correspondiente
+#                     fpa_obj = Relation_fpa_client.objects.filter(client=data['client']).first()
+#                     fpa = fpa_obj.fpa if fpa_obj else None
+
+#                     # Actualizar o crear el registro
+#                     registro, created = Registro_archivo.objects.update_or_create(
+#                         client=data['client'],
+#                         fecha_registro=fecha_registro,
+#                         country=data['country'],
+#                         defaults={
+#                             'fpa': fpa,
+#                             'status': data['status'],
+#                             'fecha_calif': fecha_calif,
+#                             'posicion_cuenta': data['posicion_cuenta'],
+#                             'volumen': data['volumen'],
+#                             'primer_deposito': data['primer_deposito'],
+#                             'fecha_primer_deposito': fecha_primer_deposito,
+#                             'neto_deposito': data['neto_deposito'],
+#                             'numeros_depositos': data['numeros_depositos'],
+#                             'comision': data['comision'],
+#                         }
+#                     )
+#             else:
+#                 return JsonResponse({"error": "Formato de documento no válido"}, status=400)
+#         except Exception as e:
+#             return JsonResponse({"Error": str(e)}, status=400)
+
+#         return JsonResponse({"message": "Archivo CSV recibido y procesado exitosamente."})
+#     else:
+#         return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400)
+
 
 @csrf_exempt
 def upload_registros(request):
@@ -207,6 +272,8 @@ def upload_registros(request):
                         r.primer_deposito = data["primer_deposito"]
                         r.neto_deposito = data["neto_deposito"]
                         r.numeros_depositos = data["numeros_depositos"]
+                        if r.fpa is None and r.fpa == 'none':
+                            r.fpa = fpa
                         r.save()
                     else:
                         registro = Registro_archivo(

@@ -64,7 +64,11 @@
 .pregunta p{
     font-size: 15px;
     font-weight: 300;
+   text-transform: lowercase;
 }
+.pregunta p:first-letter {
+    text-transform: uppercase;
+  }
 
 /* MEDIA QUERY TABLET */
 @media screen and (max-width: 900px) {
@@ -92,8 +96,11 @@
         font-weight: 400;
         font-size: 15px;
         text-align: start;
-
+        text-transform: lowercase;
     }
+    details div:first-letter {
+        text-transform: uppercase;
+      }
     
     details div > * + * {
         margin-top: 1.5em;

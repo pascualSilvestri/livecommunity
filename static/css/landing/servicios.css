@@ -81,7 +81,7 @@
 }
 .btn-consultar{
     font-family: Montserrat;
-    padding: 16px 40px;
+    padding: 14px 40px;
     color: white;
     background: #c51d17;
     margin-top: 10px;
@@ -108,4 +108,56 @@
     width: 140px;
     height: auto;
     margin: 1rem 0;
+}
+@media screen and (min-width: 600px) {
+
+    .pres-container {
+        background-position: center;
+        background-image: url("../../img/FondoPresencialesDktp.png"); 
+    }
+    .pres-video {
+        height: 500px;
+    }
+    .footer-pres {
+        background: #c51d17;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .pres-videos{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 20px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .pres-video {
+        height: 500px;
+    }
+    .pres-presentation {
+        padding-top: 23vh;
+        width: 60%;
+    }
+    .pres-text{
+        font-size: 2.2rem;
+        text-align: center;
+        font-weight: 900;
+        line-height: 45px;
+    }
+    .pres-text span{
+        font-size: 2.8rem;
+        text-align: center;
+        font-weight: 900;
+        line-height: 65px;
+    }
+    .pres-container {
+        padding-bottom: 2rem;
+    }
 }

@@ -21,7 +21,7 @@ def broker(request):
 
 
 def presenciales(request):
-    return render(request, "inprocess.html")
+    return render(request, "presenciales.html")
 
 
 def servicios(request):

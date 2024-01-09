@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block title %}Presenciales{% endblock %} 
+
+{% block content %}
+<div class="pres">
+
+    <!-- INICIO PRESENTATION -->
+    <div class="pres-container">
+        <div class="pres-presentation">
+            
+            <p class="pres-text">Podes acceder a nuestros Presenciales y comenzar a estudiar en las distintas Sedes inauguradas a <br><span>Nivel Mundial</span></p>
+            <img src="{% static 'img/LogoLiveRojo.png' %}" alt="logo telegram">
+
+        </div>
+    </div>
+
+
+    <!-- INICIO VIDEOS -->
+    <div class="pres-videos">
+
+        <!-- VIDEO -->
+        <div class="pres-video">
+            <h3 class="pres-sede">CORDOBA</h3>
+            <p class="pres-ubi">Calle 1234, Cordoba Capital</p>
+
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+            <div class="btn-consultar-container">
+                <a class="btn-consultar" href="">CONSULTAR</a>
+            </div>
+            
+        </div>
+        
+        <!-- FIN VIDEO -->
+
+        <!-- VIDEO -->
+        <div class="pres-video">
+            <h3 class="pres-sede">TUCUMAN</h3>
+            <p class="pres-ubi">Calle 1234, Tucuman</p>
+
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+            <div class="btn-consultar-container">
+                <a class="btn-consultar" href="">CONSULTAR</a>
+            </div>
+            
+        </div>
+        
+        <!-- FIN VIDEO -->
+
+        <!-- VIDEO -->
+        <div class="pres-video">
+            <h3 class="pres-sede">PUERTO MADRYN</h3>
+            <p class="pres-ubi">Calle 1234, Puerto Madryn</p>
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+            <div class="btn-consultar-container">
+                <a class="btn-consultar" href="">CONSULTAR</a>
+            </div>
+        </div>
+        
+        <!-- FIN VIDEO -->
+
+        <!-- VIDEO -->
+        <div class="pres-video">
+            <h3 class="pres-sede">COLOMBIA</h3>
+            <p class="pres-ubi">Calle 1234, COLOMBIA</p>
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+            <div class="btn-consultar-container">
+                <a class="btn-consultar" href="">CONSULTAR</a>
+            </div>
+        
+        </div>
+        
+        <!-- FIN VIDEO -->
+
+    </div>
+    <!-- FIN VIDEOS -->
+
+    <footer class="footer-pres">
+        <div class="img-container-footer">
+            <img class="logo" src="{% static 'img/LogoLive.png' %}" alt="logo live community">
+        </div>
+        <div class="redes">
+            <a href="https://www.instagram.com/">
+                <img src="{% static 'img/iconig.png' %}" alt="logo instagram">
+            </a>
+            <a href="https://web.telegram.org/k/">
+                <img src="{% static 'img/icontelegram.jpg' %}" alt="logo telegram">
+            </a>
+        </div>
+
+    
+    </footer>
+
+
+</div>
+
+{% endblock content %}

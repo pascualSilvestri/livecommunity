@@ -4,7 +4,7 @@ from ...utils.limpiarTablas import limpiar_datos_fpa, limpiar_registros,limpiar_
 from ...utils.funciones import existe,existe_cpa,existe_ganancia
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...utils.bonos import bonoDirecto,bonoIndirecto
-from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
+from ...skilling.models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
 from ...usuarios.models import Cuenta,Usuario,Spread,BonoCpa,BonoCpaIndirecto,CPA
 from datetime import datetime
 import pandas as pd
@@ -303,10 +303,10 @@ def upload_registros(request):
                 
             else:
                 print("ErrorMessege Document is not format")
-                return JsonResponse({"error": "Document is not format"},status=400)
+                return JsonResponse({"error": "Document is not format"},status=401)
         except Exception as e:
             print(e)
-            return JsonResponse({"Error": "Salto la exception"},status=400)
+            return JsonResponse({"Error": e.__str__()})
         print("message Archivo CSV recibido y procesado exitosamente.")
         return JsonResponse(
             {"message": "Archivo CSV recibido y procesado exitosamente."}
@@ -314,7 +314,7 @@ def upload_registros(request):
     else:
         print("error Se esperaba un archivo CSV en la solicitud POST.")
         return JsonResponse(
-            {"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400
+            {"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=403
         )
 
 @csrf_exempt

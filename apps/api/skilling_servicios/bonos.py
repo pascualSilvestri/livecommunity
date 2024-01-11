@@ -4,7 +4,7 @@ from django.db.models import Q
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...utils.funciones import formatera_retiro
 from ...usuarios.models import Spread,Usuario,Cuenta,BonoAPagar,BonoCpa,BonoCpaIndirecto
-from ...api.models import Registros_ganancias,Registros_cpa
+from ...skilling.models import Registros_ganancias,Registros_cpa
 import re
 import json 
 from decimal import Decimal

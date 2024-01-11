@@ -31,11 +31,21 @@ class CPA(models.Model):
     
     def __str__(self):
         return str(self.id)
+    
+class Broker(models.Model):
+    idBroker=  models.AutoField('id', primary_key=True)
+    broker= models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.broker
 
 
 class Usuario(AbstractUser):
     # Agrega campos adicionales personalizados para tu modelo de usuario, por ejemplo:
-    fpa = models.CharField(max_length=50)
+    uid = models.CharField(max_length=50,null=True)
+    codigo_bingx = models.CharField(max_length=50,null=True)
+    fpa_bingx = models.CharField(max_length=50,null=True)
+    fpa = models.CharField(max_length=50,null=True)
     telephone = models.CharField(max_length=15,null=True)
     wallet = models.CharField(max_length=100,null=True)
     uplink = models.CharField(max_length=50,null=True)
@@ -44,6 +54,7 @@ class Usuario(AbstractUser):
     registrado = models.BooleanField(default=False)
     aceptado= models.BooleanField(default=False)
     eliminado= models.BooleanField(default=False)
+    broker_id= models.ForeignKey(Broker, on_delete=models.CASCADE)
     # bonoIndirecto_2=models.BooleanField(default=False)
     # bonoIndirecto_3=models.BooleanField(default=False)
     # bonoIndirecto_4=models.BooleanField(default=False)

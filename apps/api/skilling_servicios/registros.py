@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import make_password
 import json 
 from datetime import datetime
 from django.db.models import Q
-from ...api.models import Registro_archivo,Registros_ganancias,Relation_fpa_client
+from ...skilling.models import Registro_archivo,Registros_ganancias,Relation_fpa_client
 
 @csrf_exempt 
 def verificar(request):

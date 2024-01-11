@@ -1,4 +1,4 @@
-from ..api.models import Registros_ganancias
+from ..skilling.models import Registros_ganancias
 
 def existe(client,fecha_registro,fpa,status,fecha_calif,country,posicion_cuenta,fecha_primer_deposito,neto_deposito,numeros_depositos,registros):
     

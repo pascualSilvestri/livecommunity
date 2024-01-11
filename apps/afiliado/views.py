@@ -12,7 +12,7 @@ import os
 import logging
 import asyncio
 from asgiref.sync import sync_to_async
-from ..api.models import Relation_fpa_client
+from ..skilling.models import Relation_fpa_client
 from ..usuarios.models import Usuario
 
 chat_id = CHAT_ID_BOT

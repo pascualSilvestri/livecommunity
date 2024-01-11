@@ -1,7 +1,8 @@
 from django.contrib import admin
-from .models import Usuario,BonoCpa,BonoCpaIndirecto,Spread,Cuenta,BonoAPagar,CPA
+from .models import Usuario,BonoCpa,BonoCpaIndirecto,Spread,Cuenta,BonoAPagar,CPA, Broker
 # Register your models here.
 admin.site.register(Usuario)
+admin.site.register(Broker)
 admin.site.register(BonoCpa)
 admin.site.register(BonoCpaIndirecto)
 admin.site.register(Spread)

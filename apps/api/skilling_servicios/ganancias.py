@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...usuarios.models import Spread,Usuario,Cuenta,BonoAPagar
-from ...api.models import Registros_ganancias,Registros_cpa,SpreadIndirecto
+from ...skilling.models import Registros_ganancias,Registros_cpa,SpreadIndirecto
 import re
 import json 
 from decimal import Decimal

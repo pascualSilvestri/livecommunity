@@ -281,30 +281,51 @@
 
     .serv-container {
         background-position: center;
-        background-image: url("../../img/FondoservencialesDktp.png"); 
+        background-image: url("../../img/ServiciosDesktop.png"); 
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+
     }
     .serv-video {
         height: 500px;
     }
     .footer-serv {
-        background: #c51d17;
+        background: #160b83;
         justify-content: space-between;
         align-items: center;
         margin-top: 2rem;
         display: flex;
         flex-direction: row;
+        padding: 1rem 4rem;
     }
 }
 
 @media screen and (min-width: 900px) {
-    .serv-videos{
+    .serv-videos-free{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
         grid-column-gap: 0px;
         grid-row-gap: 20px;
         width: 90%;
         margin: 0 auto;
+    }
+    .serv-videos-premium{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 20px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .puntito-azul-2::before {
+        display: none;
+    }
+    .puntito-amarillo-1::before {
+        display: none;
+    }
+    .puntito-amarillo-2::before {
+        margin-left: 350px;
+        margin-top: -40px;
     }
     .serv-video {
         height: 500px;
@@ -327,5 +348,37 @@
     }
     .serv-container {
         padding-bottom: 2rem;
+    }
+    .recorda{
+        width: 50%;
+    }
+    .recorda::before {
+        position: absolute;
+        margin-left: 170px;
+    }
+    .decision-container img {
+        width: 30%;
+    }
+    .decision-container p {
+        width: 45%;
+        margin: 3.2rem auto;
+        text-align: center;
+        font-size: 44px;
+        font-weight: 600;
+    }
+    .decision{
+        width: 60%;
+        justify-content: space-around;
+    }
+    .opcion1 h3{
+        padding: 15px 30px;
+
+    }
+    .opcion2 h3{
+        padding: 15px 30px;
+
+    }
+    .preguntas-container-desktop{
+        color: rgba(24, 24, 24, 0.925);
     }
 }

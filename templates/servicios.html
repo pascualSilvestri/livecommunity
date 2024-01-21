@@ -1,10 +1,127 @@
 {% extends 'base.html' %}
 {% load static %} 
 
-{% block title %}Presenciales{% endblock %} 
+{% block title %}Servicios{% endblock %} 
 
 {% block content %}
 
-<h1>Servicios</h1>
+<div class="serv">
+
+    <!-- INICIO servENTATION -->
+    <div class="serv-container">
+        <div class="serv-presentation">
+            <h1>Bienvenido a los Servicios de LIVE</h1>
+            <p>Una ves que apertures tu cuenta de
+                Broker cumpliendo el minimo requisito
+                vas a poder acceder totalmente Gratis
+                a los SERVICIOS FREE</p>
+        </div>
+    </div>
+
+
+    <!-- INICIO VIDEOS -->
+    <div class="serv-videos-free">
+
+        <!-- VIDEO -->
+        <div class="serv-video">
+            <h3 class="free puntito-azul-1">ACCESOS FREE</h3>
+
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+
+        </div>
+        <!-- FIN VIDEO -->
+
+         <!-- VIDEO -->
+         <div class="serv-video">
+            <h3 class="puntito-azul-2 free">SEÑALES FREE</h3>
+
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+
+        </div>
+        <!-- FIN VIDEO -->
+
+    </div>
+    <!-- FIN VIDEOS -->
+
+    <section class="serv-free-container">
+        <p>Accediendo a los <span class="free">SERVICIOS FREE</span> de Live Community obtendras el 50% de descuento en los <span class="premium">SERVICIOS PREMIUM</span> </p>
+    </section>
+
+    <div class="btn-registrate-container-serv">
+        <a class="btn-registrate-serv" href="">REGISTRATE</a>
+    </div>
+    <h2 class="premium-tittle">SERVICIOS PREMIUM</h2>
+
+    <div class="serv-videos-premium">
+
+         <!-- VIDEO -->
+         <div class="serv-video">
+            <h3 class="puntito-amarillo-1 premium">CANAL PRO</h3>
+
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+
+        </div>
+        <!-- FIN VIDEO -->
+
+
+         <!-- VIDEO -->
+         <div class="serv-video">
+            <h3 class="puntito-amarillo-2 premium">SEÑALES VIP</h3>
+
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+
+        </div>
+        <!-- FIN VIDEO -->
+    </div>
+
+    <div class="recorda">
+        <h3>RECORDÁ</h3>
+        <p>Accediendo a los servicios FREE obtendras el 50% de descuento en los Servicios Premium</p>
+    </div>
+
+    <div class="decision-container">
+        <img src="{% static 'img/IlustracionServiciosLive.png' %}" alt="illustracion">
+        <p>¿Estas listo para
+            convertirte en el
+            nuevo trader 
+            y cambiar tu vida ?</p>
+        <div class="decision">
+            <div class="opcion1">
+                <h3>Servicios Premium</h3>  
+                <div class="btn-contratar-decision-container">
+                    <a class="btn-vacio contratar" href="">Contratar</a>
+                </div>        
+            </div>
+            <div class="opcion2">
+                <h3>Servicios Free</h3>  
+                <div class="btn-registrate-decision-container">
+                    <a class="btn-vacio registrate" href="">Registrate</a>
+                </div>        
+            </div>
+        </div>
+    </div>
+
+    {% block faqServicios %}
+        {% include './faqServicios.html' %}    
+    {% endblock faqServicios %}
+
+    <footer class="footer-serv">
+        <div class="img-container-footer">
+            <img class="logo" src="{% static 'img/LogoLive.png' %}" alt="logo live community">
+        </div>
+        <div class="redes">
+            <a href="https://www.instagram.com/">
+                <img src="{% static 'img/iconig.png' %}" alt="logo instagram">
+            </a>
+            <a href="https://web.telegram.org/k/">
+                <img src="{% static 'img/icontelegram.jpg' %}" alt="logo telegram">
+            </a>
+        </div>
+
+    
+    </footer>
+
+
+</div>
 
 {% endblock content %}

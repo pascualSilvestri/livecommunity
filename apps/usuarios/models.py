@@ -54,7 +54,7 @@ class Usuario(AbstractUser):
     registrado = models.BooleanField(default=False)
     aceptado= models.BooleanField(default=False)
     eliminado= models.BooleanField(default=False)
-    broker_id= models.ForeignKey(Broker, on_delete=models.CASCADE)
+    broker_id= models.ForeignKey(Broker, on_delete=models.CASCADE, null=True)
     # bonoIndirecto_2=models.BooleanField(default=False)
     # bonoIndirecto_3=models.BooleanField(default=False)
     # bonoIndirecto_4=models.BooleanField(default=False)

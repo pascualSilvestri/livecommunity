@@ -499,6 +499,8 @@ def upload_ganancias(request):
                         
                         else:
                             ganancia.fpa = fpa
+                            
+                            ganancia.save()
                                 
 
             else:

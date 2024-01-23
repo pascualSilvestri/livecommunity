@@ -496,6 +496,9 @@ def upload_ganancias(request):
                                     c_up_line.save()
 
                             ganancia.save() 
+                        
+                        else:
+                            ganancia.fpa = fpa
                                 
 
             else:

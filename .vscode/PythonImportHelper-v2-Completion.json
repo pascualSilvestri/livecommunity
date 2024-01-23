@@ -2167,7 +2167,7 @@
         "kind": 2,
         "importPath": "apps.api.controller.registros",
         "description": "apps.api.controller.registros",
-        "peekOfCode": "def getRegistroById(request,pk):\n    if request.method == 'GET':\n        try:\n            registros = Registro_archivo.objects.filter(fpa=pk)\n            data=[]\n            for r in registros:\n                nombres = Relation_fpa_client.objects.filter(client=r.client)\n                if nombres.exists():\n                    nombre = nombres[0].full_name\n                else:",
+        "peekOfCode": "def getRegistroById(request,pk):\n    if request.method == 'GET':\n        try:\n            customer = Relation_fpa_client.objects.filter(fpa=pk)\n            data=[]\n            for r in customer:\n                registros= Registro_archivo.objects.filter(client=r.client)\n                registro = registros.first()\n                if customer.exists():\n                    nombre = nombres[0].full_name",
         "detail": "apps.api.controller.registros",
         "documentation": {}
     },
@@ -3305,7 +3305,7 @@
         "kind": 5,
         "importPath": "livecommunity.settings",
         "description": "livecommunity.settings",
-        "peekOfCode": "TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'\nCHAT_ID_BOT = '@pruebapas'\nDEBUG = True\nSTATICFILES_DIRS = (os.path.join(BASE_DIR,\"static\"),)\nALLOWED_HOSTS = []\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }",
+        "peekOfCode": "TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'\nCHAT_ID_BOT = '@liveingresos'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static/')\nDEBUG = False\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',",
         "detail": "livecommunity.settings",
         "documentation": {}
     },
@@ -3314,7 +3314,16 @@
         "kind": 5,
         "importPath": "livecommunity.settings",
         "description": "livecommunity.settings",
-        "peekOfCode": "CHAT_ID_BOT = '@pruebapas'\nDEBUG = True\nSTATICFILES_DIRS = (os.path.join(BASE_DIR,\"static\"),)\nALLOWED_HOSTS = []\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}",
+        "peekOfCode": "CHAT_ID_BOT = '@liveingresos'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static/')\nDEBUG = False\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_ROOT",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'static/')\nDEBUG = False\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',\n        'PASSWORD': 'live2023community01',",
         "detail": "livecommunity.settings",
         "documentation": {}
     },
@@ -3323,16 +3332,7 @@
         "kind": 5,
         "importPath": "livecommunity.settings",
         "description": "livecommunity.settings",
-        "peekOfCode": "DEBUG = True\nSTATICFILES_DIRS = (os.path.join(BASE_DIR,\"static\"),)\nALLOWED_HOSTS = []\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n####################################################",
-        "detail": "livecommunity.settings",
-        "documentation": {}
-    },
-    {
-        "label": "STATICFILES_DIRS",
-        "kind": 5,
-        "importPath": "livecommunity.settings",
-        "description": "livecommunity.settings",
-        "peekOfCode": "STATICFILES_DIRS = (os.path.join(BASE_DIR,\"static\"),)\nALLOWED_HOSTS = []\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n####################################################\n#",
+        "peekOfCode": "DEBUG = False\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',\n        'PASSWORD': 'live2023community01',\n        'HOST': '127.0.0.1',",
         "detail": "livecommunity.settings",
         "documentation": {}
     },
@@ -3341,7 +3341,16 @@
         "kind": 5,
         "importPath": "livecommunity.settings",
         "description": "livecommunity.settings",
-        "peekOfCode": "ALLOWED_HOSTS = []\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n####################################################\n#\n#########          PRODUCCION            ###########",
+        "peekOfCode": "ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',\n        'PASSWORD': 'live2023community01',\n        'HOST': '127.0.0.1',\n        'PORT': '3306',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_TRUSTED_ORIGINS",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',\n        'PASSWORD': 'live2023community01',\n        'HOST': '127.0.0.1',\n        'PORT': '3306',\n    }",
         "detail": "livecommunity.settings",
         "documentation": {}
     },
@@ -3350,7 +3359,7 @@
         "kind": 5,
         "importPath": "livecommunity.settings",
         "description": "livecommunity.settings",
-        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n####################################################\n#\n#########          PRODUCCION            ###########\n#",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',\n        'PASSWORD': 'live2023community01',\n        'HOST': '127.0.0.1',\n        'PORT': '3306',\n    }\n}",
         "detail": "livecommunity.settings",
         "documentation": {}
     },

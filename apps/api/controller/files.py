@@ -470,38 +470,23 @@ def upload_ganancias(request):
                             else:
                                 up_line = None
                             
-                            cuenta = cuentas.filter(fpa=fpa)
                             cuenta_up_line = cuentas.filter(fpa=up_line)
-                            
-                            if cuenta.exists and g['partner_earning'] != 'NaN':
-                                c = cuenta.first()
-                                if (c != None):
-                                    c.monto_total += Decimal(ganancia.partner_earning)
-                                    c.monto_a_pagar += Decimal(ganancia.monto_a_pagar)
-                                    c.spread_directo += Decimal(ganancia.monto_a_pagar)
-                                    c.save()
                             
                             if cuenta_up_line.exists():
                                 c_up_line = cuenta_up_line.first()
-                                c_up_line.monto_a_pagar += Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
-                                c_up_line.spread_indirecto+= Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
+                                # c_up_line.monto_a_pagar += Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
+                                # c_up_line.spread_indirecto+= Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2))
                                 spread_indirecto=SpreadIndirecto(
                                     monto = Decimal(round(calcular_porcentaje_indirecto(ganancia.monto_a_pagar,spred[2].porcentaje),2)),
                                     fpa_child=fpa,
                                     fpa= c_up_line.fpa,
-                                    fecha_creacion= fecha_first_trade
+                                    fecha_creacion= fecha_first_trade,
                                 )
                                 if spread_indirecto.monto > 0:
                                     spread_indirecto.save()
                                     c_up_line.save()
 
-                            ganancia.save() 
-                        
-                        else:
-                            if ganancia.fpa != None:
-                                ganancia.fpa = fpa
-                                ganancia.save()
-                                
+                            ganancia.save()             
 
             else:
                 print("ErrorMessege Document is not format")

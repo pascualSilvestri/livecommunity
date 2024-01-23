@@ -2,3 +2,5 @@ Django==4.2.1
 python-telegram-bot
 mysqlclient
 django-cors-headers
+pandas
+openpyxl

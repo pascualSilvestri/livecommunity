@@ -3371,7 +3371,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def home_pk(request, pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    if afiliado:\n        url_video_insercion =  convertir_url_youtube(afiliado.url_video) if afiliado.url_video !=\"\" or afiliado.url_video == \"0\" else \"https://www.youtube.com/watch?v=HgKjhFEguyU\"\n        url_register = afiliado.url\n        context = {\n            \"afiliado\": afiliado,",
+        "peekOfCode": "def home_pk(request, pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    if afiliado:\n        url_video_insercion =  convertir_url_youtube(afiliado.url_video) if (afiliado.url_video !=\"\" or afiliado.url_video != \"0\" )else \"https://www.youtube.com/watch?v=HgKjhFEguyU\"\n        url_register = afiliado.url\n        context = {\n            \"afiliado\": afiliado,",
         "detail": "livecommunity.views",
         "documentation": {}
     },

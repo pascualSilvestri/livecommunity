@@ -17,7 +17,8 @@ def convertir_fecha(fecha_string):
         return None
     else:
         return datetime.strptime(fecha_string, "%Y-%m-%d").date()
-
+    
+    
 @csrf_exempt
 def upload_fpa(request):
     if request.method == "POST" and request.FILES.get("csvFileFpa"):
@@ -35,31 +36,26 @@ def upload_fpa(request):
                     fecha_creacion = convertir_fecha(data["fecha_creacion_cuenta"])
                     fecha_verificacion = convertir_fecha(data["verificacion"])
 
-                    # Intenta obtener el registro, si no existe, continúa con el siguiente
+                    # Buscar si el client ya existe
                     try:
-                        registro = Registro_archivo.objects.get(client=data["id_client"])
-                        # Si el registro existe y el fpa es None, actualizarlo
-                        if registro.fpa is None and registro.fpa == 'none':
-                            registro.fpa = data["fpa"]
-                            registro.save()
-                    except Exception as e:
-                        pass
-
-                    try:
-                        # Actualizar o crear nueva relación
-                        obj, created = Relation_fpa_client.objects.update_or_create(
+                        client_obj = Relation_fpa_client.objects.get(client=data["id_client"])
+                        # Si el client existe y el fpa es None o 'none', actualizar el fpa
+                        if client_obj.fpa is None or client_obj.fpa.lower() == 'none':
+                            client_obj.fpa = data["fpa"]
+                            client_obj.save()
+                        # Si el fpa ya tiene otro valor, posiblemente quieras manejar esta situación también
+                    except Relation_fpa_client.DoesNotExist:
+                        # El client no existe, por lo que se crea uno nuevo
+                        Relation_fpa_client.objects.create(
                             fpa=data["fpa"],
                             client=data["id_client"],
-                            defaults={
-                                'full_name': data["full_name"],
-                                'country': data["country"],
-                                'fecha_registro': fecha_registro,
-                                'fecha_creacion': fecha_creacion,
-                                'fecha_verificacion': fecha_verificacion,
-                                'status': data["status"],
-                            }
+                            full_name=data["full_name"],
+                            country=data["country"],
+                            fecha_registro=fecha_registro,
+                            fecha_creacion=fecha_creacion,
+                            fecha_verificacion=fecha_verificacion,
+                            status=data["status"],
                         )
-                        
 
                         # Crear cuenta si no existe
                         Cuenta.objects.get_or_create(fpa=data["fpa"])
@@ -72,7 +68,7 @@ def upload_fpa(request):
 
         except Exception as e:
             print(e)
-            return JsonResponse({"Error": "Salto la exception"},status=403)
+            return JsonResponse({"Error": "Salto la exception"}, status=403)
 
         return JsonResponse({"message": "Archivo CSV recibido y procesado exitosamente."})
 
@@ -501,6 +497,9 @@ def upload_ganancias(request):
                                     c_up_line.save()
 
                             ganancia.save() 
+                        
+                        else:
+                            ganancia.fpa = fpa
                                 
 
             else:

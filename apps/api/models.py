@@ -55,7 +55,7 @@ class Registros_ganancias(models.Model):
     client = models.CharField(max_length=100)
     symbol=models.CharField(max_length=100)
     deal_id=models.CharField(max_length=100)
-    fpa=    models.CharField(max_length=200,null=True)
+    fpa=models.CharField(max_length=200,null=True)
     full_name = models.CharField(max_length=200)
     partner_earning = models.DecimalField(max_digits=10, decimal_places=2)
     monto_a_pagar= models.DecimalField(max_digits=10, decimal_places=2)

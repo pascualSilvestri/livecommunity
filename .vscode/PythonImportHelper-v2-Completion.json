@@ -1756,7 +1756,7 @@
         "kind": 6,
         "importPath": "apps.afiliado.models",
         "description": "apps.afiliado.models",
-        "peekOfCode": "class Afiliado(models.Model):\n    fpa = models.CharField(max_length=50)\n    url = models.URLField()\n    url_video = models.URLField()\n    upline = models.CharField(max_length=50)\n    def __str__(self):\n        return self.fpa\nclass Cliente(models.Model):\n    nombre = models.CharField(max_length=200)\n    apellido = models.CharField(max_length=200)",
+        "peekOfCode": "class Afiliado(models.Model):\n    fpa = models.CharField(max_length=50)\n    url = models.URLField()\n    url_video = models.URLField(default=\"https://www.youtube.com/watch?v=HgKjhFEguy\")\n    upline = models.CharField(max_length=50)\n    def __str__(self):\n        return self.fpa\nclass Cliente(models.Model):\n    nombre = models.CharField(max_length=200)\n    apellido = models.CharField(max_length=200)",
         "detail": "apps.afiliado.models",
         "documentation": {}
     },
@@ -3317,7 +3317,7 @@
         "kind": 5,
         "importPath": "livecommunity.urls",
         "description": "livecommunity.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('',views.home, name = 'home'),\n    path('broker',views.broker, name = 'broker'),\n    path('presenciales',views.presenciales, name = 'presenciales'),\n    path('servicios',views.servicios, name = 'servicios'),\n    path('Afiliado/',include('apps.afiliado.urls')),\n    path('api/',include('apps.api.urls')),\n    path('<pk>',views.home_pk, name = 'homePk'),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('',views.home, name = 'home'),\n    path('broker',views.broker, name = 'broker'),\n    path('presenciales',views.presenciales, name = 'presenciales'),\n    path('servicios',views.servicios, name = 'servicios'),\n    path('Afiliado/',include('apps.afiliado.urls')),\n    path('api/',include('apps.api.urls')),\n    path('<pk>',views.home_pk, name = 'home_pk'),\n    path('broker/<pk>',views.broker_pk, name = 'broker_pk'),",
         "detail": "livecommunity.urls",
         "documentation": {}
     },
@@ -3372,6 +3372,33 @@
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
         "peekOfCode": "def home_pk(request, pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    if afiliado:\n        url_video_insercion = convertir_url_youtube(afiliado.url_video)\n        url_register = afiliado.url\n        context = {\n            \"afiliado\": afiliado,",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "broker_pk",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def broker_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    url_register = afiliado.url\n    context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "presenciales_pk",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def presenciales_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    url_register = afiliado.url\n    context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "servicios_pk",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def servicios_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    url_register = afiliado.url\n    context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register",
         "detail": "livecommunity.views",
         "documentation": {}
     },

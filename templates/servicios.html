@@ -10,6 +10,8 @@
     <!-- INICIO servENTATION -->
     <div class="serv-container">
         <div class="serv-presentation">
+            <img class="logo-live" src="{% static 'img/LogoLive.png' %}" alt="Logo livecommunity">
+
             <h1>Bienvenido a los Servicios de LIVE</h1>
             <p>Una ves que apertures tu cuenta de
                 Broker cumpliendo el minimo requisito
@@ -48,7 +50,7 @@
     </section>
 
     <div class="btn-registrate-container-serv">
-        <a class="btn-registrate-serv" href="">REGISTRATE</a>
+        <a class="btn-registrate-serv" href="{{ url_register }}">REGISTRATE</a>
     </div>
     <h2 class="premium-tittle">SERVICIOS PREMIUM</h2>
 
@@ -95,7 +97,7 @@
             <div class="opcion2">
                 <h3>Servicios Free</h3>  
                 <div class="btn-registrate-decision-container">
-                    <a class="btn-vacio registrate" href="">Registrate</a>
+                    <a class="btn-vacio registrate" href="{{ url_register }}">Registrate</a>
                 </div>        
             </div>
         </div>

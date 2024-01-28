@@ -62,10 +62,12 @@ def home_pk(request, pk):
         afiliado = None
 
     if afiliado:
-        url_video_insercion = convertir_url_youtube(afiliado.url_video)
+        # url_video_insercion = "https://www.youtube.com/watch?v=HgKjhFEguyU" if afiliado.url_video==0 or afiliado.url_video==''  else  convertir_url_youtube(afiliado.url_video) 
+        url_video_insercion =convertir_url_youtube ("https://www.youtube.com/watch?v=HgKjhFEguyU")
         url_register = afiliado.url
         context = {
             "afiliado": afiliado,
+            "id":afiliado.fpa,
             "url_video": url_video_insercion,
             "url_register": url_register
         }
@@ -74,8 +76,54 @@ def home_pk(request, pk):
         url_register = "livecommunity.info"
         context = {
             "afiliado": None,
+            "id":afiliado.fpa,
             "url_video": url_video_insercion,
             "url_register": url_register
         }
 
     return render(request, 'index.html', context)
+
+def broker_pk(request,pk):
+    try:
+        afiliado = Afiliado.objects.get(fpa=pk)
+    except Afiliado.DoesNotExist:
+        afiliado = None
+    
+    url_register = afiliado.url
+    context = {
+        "afiliado": afiliado,
+        "id":afiliado.fpa,
+        "url_register": url_register
+    }
+
+    return render(request,'broker.html',context)
+
+
+def presenciales_pk(request,pk):
+    try:
+        afiliado = Afiliado.objects.get(fpa=pk)
+    except Afiliado.DoesNotExist:
+        afiliado = None
+    
+    url_register = afiliado.url
+    context = {
+        "afiliado": afiliado,
+        "id":afiliado.fpa,
+        "url_register": url_register
+    }
+    return render(request, "presenciales.html",context)
+
+
+def servicios_pk(request,pk):
+    try:
+        afiliado = Afiliado.objects.get(fpa=pk)
+    except Afiliado.DoesNotExist:
+        afiliado = None
+    
+    url_register = afiliado.url
+    context = {
+        "afiliado": afiliado,
+        "id":afiliado.fpa,
+        "url_register": url_register
+    }
+    return render(request, "servicios.html",context)

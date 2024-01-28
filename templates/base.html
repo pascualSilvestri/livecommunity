@@ -32,10 +32,10 @@
             <img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
         </div>
         <ul class="list">
-            <li id="inicio"><a href="/" >Inicio</a></li>
-            <li id="broker" ><a href="/broker" >Broker</a></li>
-            <li id="presenciales" ><a href="/presenciales" >Presenciales</a></li>
-            <li id="servicios" ><a href="/servicios" >Servicios Live</a></li>
+            <li id="inicio"><a href="/{{ id }}" >Inicio</a></li>
+            <li id="broker" ><a href="/broker/{{ id }}" >Broker</a></li>
+            <li id="presenciales" ><a href="/presenciales/{{ id }}" >Presenciales</a></li>
+            <li id="servicios" ><a href="/servicios/{{ id }}" >Servicios Live</a></li>
         </ul>
     
     </nav>

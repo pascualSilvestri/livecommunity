@@ -62,7 +62,7 @@ def home_pk(request, pk):
         afiliado = None
 
     if afiliado:
-        url_video_insercion =  convertir_url_youtube(afiliado.url_video) if (afiliado.url_video !="" or afiliado.url_video != "0" )else "https://www.youtube.com/watch?v=HgKjhFEguyU"
+        url_video_insercion = "https://www.youtube.com/watch?v=HgKjhFEguyU" if afiliado.url_video==0 or afiliado.url_video==''  else  convertir_url_youtube(afiliado.url_video) 
         url_register = afiliado.url
         context = {
             "afiliado": afiliado,

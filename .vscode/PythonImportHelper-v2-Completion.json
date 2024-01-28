@@ -3368,7 +3368,7 @@
         "kind": 5,
         "importPath": "livecommunity.urls",
         "description": "livecommunity.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('',views.home, name = 'home'),\n    path('broker',views.broker, name = 'broker'),\n    path('presenciales',views.presenciales, name = 'presenciales'),\n    path('servicios',views.servicios, name = 'servicios'),\n    path('Afiliado/',include('apps.afiliado.urls')),\n    path('api/',include('apps.api.urls')),\n    path('<pk>',views.home_pk, name = 'home_pk'),\n    path('broker/<pk>',views.broker_pk, name = 'broker_pk'),",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('',views.home, name = 'home'),\n    path('broker/',views.broker, name = 'broker'),\n    path('presenciales/',views.presenciales, name = 'presenciales'),\n    path('servicios/',views.servicios, name = 'servicios'),\n    path('Afiliado/',include('apps.afiliado.urls')),\n    path('api/',include('apps.api.urls')),\n    path('<pk>',views.home_pk, name = 'home_pk'),\n    path('broker/<pk>',views.broker_pk, name = 'broker_pk'),",
         "detail": "livecommunity.urls",
         "documentation": {}
     },
@@ -3422,7 +3422,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def home_pk(request, pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    if afiliado:\n        url_video_insercion = convertir_url_youtube(afiliado.url_video)\n        url_register = afiliado.url\n        context = {\n            \"afiliado\": afiliado,",
+        "peekOfCode": "def home_pk(request, pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    if afiliado:\n        url_video_insercion = afiliado.url_video if afiliado.url_video ==\"\" else convertir_url_youtube(afiliado.url_video)\n        url_register = afiliado.url\n        context = {\n            \"afiliado\": afiliado,",
         "detail": "livecommunity.views",
         "documentation": {}
     },

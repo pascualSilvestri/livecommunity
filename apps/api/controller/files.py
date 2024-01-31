@@ -361,28 +361,29 @@ def upload_cpa(request):
 
                         if fpa != None:
                             cuenta = Cuenta.objects.filter(fpa=fpa).first()
-                                
-                            if cuenta.fpa != 'none' and cuenta.fpa != None:
-                                
-                                usuario_up_line = Usuario.objects.filter(fpa=fpa)
-                                if usuario_up_line.exists():
-                                    up_line_usuario = usuario_up_line.first().uplink
-                                    cuenta_up_line = Cuenta.objects.filter(fpa=up_line_usuario)
-                                else:
-                                    cuenta_up_line = None
-                                cuenta.monto_cpa += Decimal(cpa_value.cpa)
-                                # cuenta.monto_a_pagar += Decimal(cpa['monto'])
-                                cuenta.cpa += 1
-                                bonoDirecto(cuenta,bono_directo)
-                                bonoIndirecto(cuenta,bono_indirecto)
-                                if cuenta_up_line != None:
-                                    if cuenta_up_line.exists():
-                                        cuenta_up = cuenta_up_line.first()
-                                        cuenta_up.cpaIndirecto += 1
-                                        bonoIndirecto(cuenta_up,bono_indirecto)
-                                        cuenta_up.save()
-                                new_cpa.save()
-                                cuenta.save()
+                            
+                            if cuenta != None:    
+                                if cuenta.fpa != 'none' and cuenta.fpa != None:
+                                    
+                                    usuario_up_line = Usuario.objects.filter(fpa=fpa)
+                                    if usuario_up_line.exists():
+                                        up_line_usuario = usuario_up_line.first().uplink
+                                        cuenta_up_line = Cuenta.objects.filter(fpa=up_line_usuario)
+                                    else:
+                                        cuenta_up_line = None
+                                    cuenta.monto_cpa += Decimal(cpa_value.cpa)
+                                    # cuenta.monto_a_pagar += Decimal(cpa['monto'])
+                                    cuenta.cpa += 1
+                                    bonoDirecto(cuenta,bono_directo)
+                                    bonoIndirecto(cuenta,bono_indirecto)
+                                    if cuenta_up_line != None:
+                                        if cuenta_up_line.exists():
+                                            cuenta_up = cuenta_up_line.first()
+                                            cuenta_up.cpaIndirecto += 1
+                                            bonoIndirecto(cuenta_up,bono_indirecto)
+                                            cuenta_up.save()
+                                    new_cpa.save()
+                                    cuenta.save()
                                 # usuario_up_line[0].save()
 
             else:

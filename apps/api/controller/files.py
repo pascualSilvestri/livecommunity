@@ -362,7 +362,7 @@ def upload_cpa(request):
                         if fpa != None:
                             cuenta = Cuenta.objects.filter(fpa=fpa).first()
                                 
-                            if cuenta.fpa != 'none':
+                            if cuenta.fpa != 'none' and cuenta.fpa != None:
                                 
                                 usuario_up_line = Usuario.objects.filter(fpa=fpa)
                                 if usuario_up_line.exists():

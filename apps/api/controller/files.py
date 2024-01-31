@@ -390,7 +390,7 @@ def upload_cpa(request):
                 return JsonResponse({"error": "Document is not format"},status=400)
         except Exception as e:
             print(str(e))
-            return JsonResponse({"error": str(e)})
+            return JsonResponse({"error": str(e)},status=400)
         print("message Archivo CSV recibido y procesado exitosamente.")
         return JsonResponse(
             {"message": "Archivo CSV recibido y procesado exitosamente."}

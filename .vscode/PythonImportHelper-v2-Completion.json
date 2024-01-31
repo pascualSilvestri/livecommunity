@@ -3305,7 +3305,7 @@
         "kind": 5,
         "importPath": "livecommunity.settings",
         "description": "livecommunity.settings",
-        "peekOfCode": "TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'\nCHAT_ID_BOT = '@liveingresos'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static/')\nDEBUG = False\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',",
+        "peekOfCode": "TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'\nCHAT_ID_BOT = '@liveingresos'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static/')\nDEBUG = True\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',",
         "detail": "livecommunity.settings",
         "documentation": {}
     },
@@ -3314,7 +3314,7 @@
         "kind": 5,
         "importPath": "livecommunity.settings",
         "description": "livecommunity.settings",
-        "peekOfCode": "CHAT_ID_BOT = '@liveingresos'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static/')\nDEBUG = False\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',",
+        "peekOfCode": "CHAT_ID_BOT = '@liveingresos'\nSTATIC_ROOT = os.path.join(BASE_DIR, 'static/')\nDEBUG = True\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',",
         "detail": "livecommunity.settings",
         "documentation": {}
     },
@@ -3323,7 +3323,7 @@
         "kind": 5,
         "importPath": "livecommunity.settings",
         "description": "livecommunity.settings",
-        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'static/')\nDEBUG = False\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',\n        'PASSWORD': 'live2023community01',",
+        "peekOfCode": "STATIC_ROOT = os.path.join(BASE_DIR, 'static/')\nDEBUG = True\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',\n        'PASSWORD': 'live2023community01',",
         "detail": "livecommunity.settings",
         "documentation": {}
     },
@@ -3332,7 +3332,7 @@
         "kind": 5,
         "importPath": "livecommunity.settings",
         "description": "livecommunity.settings",
-        "peekOfCode": "DEBUG = False\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',\n        'PASSWORD': 'live2023community01',\n        'HOST': '127.0.0.1',",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']\nCSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'livecommunity',\n        'USER': 'root',\n        'PASSWORD': 'live2023community01',\n        'HOST': '127.0.0.1',",
         "detail": "livecommunity.settings",
         "documentation": {}
     },

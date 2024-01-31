@@ -200,7 +200,7 @@ CHAT_ID_BOT = '@liveingresos'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']

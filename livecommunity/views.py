@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from apps.afiliado.models  import Afiliado
 
 
@@ -17,15 +17,30 @@ def home(request):
 
 # PRIMER SPRIG
 def broker(request):
-    return render(request,'broker.html')
+    url_register = "https://livecommunity.info/Afiliado/LM500S"
+    context ={
+        "afiliado": None,
+        "url_register": url_register
+    }
+    return render(request,'broker.html',context)
 
 
 def presenciales(request):
-    return render(request, "presenciales.html")
+    url_register = "https://livecommunity.info/Afiliado/LM500S"
+    context ={
+        "afiliado": None,
+        "url_register": url_register
+    }
+    return render(request, "presenciales.html",context)
 
 
 def servicios(request):
-    return render(request, "servicios.html")
+    url_register = "https://livecommunity.info/Afiliado/LM500S"
+    context ={
+        "afiliado": None,
+        "url_register": url_register
+    }
+    return render(request, "servicios.html",context)
 
 
 def convertir_url_youtube(url_original):
@@ -48,72 +63,76 @@ def convertir_url_youtube(url_original):
 def home_pk(request, pk):
     try:
         afiliado = Afiliado.objects.get(fpa=pk)
-    except Afiliado.DoesNotExist:
-        afiliado = None
-
-    if afiliado:
+        if afiliado:
         # url_video_insercion = "https://www.youtube.com/watch?v=HgKjhFEguyU" if afiliado.url_video==0 or afiliado.url_video==''  else  convertir_url_youtube(afiliado.url_video) 
-        url_video_insercion =convertir_url_youtube ("https://www.youtube.com/watch?v=HgKjhFEguyU")
-        url_register = afiliado.url
-        context = {
+            url_video_insercion =convertir_url_youtube ("https://www.youtube.com/watch?v=HgKjhFEguyU")
+            url_register = afiliado.url
+            context = {
             "afiliado": afiliado,
             "id":afiliado.fpa,
             "url_video": url_video_insercion,
             "url_register": url_register
-        }
-    else:
-        url_video_insercion = "https://www.youtube.com/watch?v=HgKjhFEguyU"
-        url_register = "livecommunity.info"
-        context = {
+            }
+        else:
+            url_video_insercion = "https://www.youtube.com/watch?v=HgKjhFEguyU"
+            url_register = "livecommunity.info"
+            context = {
             "afiliado": None,
             "id":afiliado.fpa,
             "url_video": url_video_insercion,
             "url_register": url_register
-        }
+            }
 
-    return render(request, 'index.html', context)
+        return render(request, 'index.html', context)
 
+    except Afiliado.DoesNotExist or Afiliado.NoneType:
+        return redirect('home')
+
+   
 def broker_pk(request,pk):
     try:
         afiliado = Afiliado.objects.get(fpa=pk)
-    except Afiliado.DoesNotExist:
-        afiliado = None
-    
-    url_register = afiliado.url
-    context = {
+        url_register = afiliado.url
+        context = {
         "afiliado": afiliado,
         "id":afiliado.fpa,
         "url_register": url_register
-    }
+        }
 
-    return render(request,'broker.html',context)
+        return render(request,'broker.html',context)
+    except Afiliado.DoesNotExist or Afiliado.NoneType:
+        return redirect('broker')
+    
+    
 
 
 def presenciales_pk(request,pk):
     try:
         afiliado = Afiliado.objects.get(fpa=pk)
-    except Afiliado.DoesNotExist:
-        afiliado = None
-    
-    url_register = afiliado.url
-    context = {
+        url_register = afiliado.url
+        context = {
         "afiliado": afiliado,
         "id":afiliado.fpa,
         "url_register": url_register
-    }
-    return render(request, "presenciales.html",context)
+        }
+        return render(request, "presenciales.html",context)
+    except Afiliado.DoesNotExist or Afiliado.NoneType:
+        return redirect('presenciales')
+    
+    
 
 
 def servicios_pk(request,pk):
     try:
         afiliado = Afiliado.objects.get(fpa=pk)
-    except Afiliado.DoesNotExist:
-        afiliado = None
-    
-    url_register = afiliado.url
-    context = {
+        url_register = afiliado.url
+        context = {
         "afiliado": afiliado,
         "id":afiliado.fpa,
         "url_register": url_register
-    }
-    return render(request, "servicios.html",context)
+        }
+        return render(request, "servicios.html",context)
+    except Afiliado.DoesNotExist or Afiliado.NoneType:
+        return redirect('servicios')
+    
+    

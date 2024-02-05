@@ -1225,6 +1225,14 @@
         "documentation": {}
     },
     {
+        "label": "redirect",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
         "label": "ObjectDoesNotExist",
         "importPath": "django.core.exceptions",
         "description": "django.core.exceptions",
@@ -3335,7 +3343,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def broker(request):\n    return render(request,'broker.html')\ndef presenciales(request):\n    return render(request, \"presenciales.html\")\ndef servicios(request):\n    return render(request, \"servicios.html\")\ndef convertir_url_youtube(url_original):\n    if 'youtu.be/' in url_original:\n        # URL corta de YouTube (youtu.be)\n        video_id = url_original.split('youtu.be/')[-1]",
+        "peekOfCode": "def broker(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={\n        \"afiliado\": None,\n        \"url_register\": url_register\n    }\n    return render(request,'broker.html',context)\ndef presenciales(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={",
         "detail": "livecommunity.views",
         "documentation": {}
     },
@@ -3344,7 +3352,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def presenciales(request):\n    return render(request, \"presenciales.html\")\ndef servicios(request):\n    return render(request, \"servicios.html\")\ndef convertir_url_youtube(url_original):\n    if 'youtu.be/' in url_original:\n        # URL corta de YouTube (youtu.be)\n        video_id = url_original.split('youtu.be/')[-1]\n    elif 'youtube.com/' in url_original and 'v=' in url_original:\n        # URL normal de YouTube",
+        "peekOfCode": "def presenciales(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={\n        \"afiliado\": None,\n        \"url_register\": url_register\n    }\n    return render(request, \"presenciales.html\",context)\ndef servicios(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={",
         "detail": "livecommunity.views",
         "documentation": {}
     },
@@ -3353,7 +3361,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def servicios(request):\n    return render(request, \"servicios.html\")\ndef convertir_url_youtube(url_original):\n    if 'youtu.be/' in url_original:\n        # URL corta de YouTube (youtu.be)\n        video_id = url_original.split('youtu.be/')[-1]\n    elif 'youtube.com/' in url_original and 'v=' in url_original:\n        # URL normal de YouTube\n        video_id = url_original.split('v=')[-1].split('&')[0]\n    else:",
+        "peekOfCode": "def servicios(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={\n        \"afiliado\": None,\n        \"url_register\": url_register\n    }\n    return render(request, \"servicios.html\",context)\ndef convertir_url_youtube(url_original):\n    if 'youtu.be/' in url_original:\n        # URL corta de YouTube (youtu.be)",
         "detail": "livecommunity.views",
         "documentation": {}
     },
@@ -3371,7 +3379,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def home_pk(request, pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    if afiliado:\n        # url_video_insercion = \"https://www.youtube.com/watch?v=HgKjhFEguyU\" if afiliado.url_video==0 or afiliado.url_video==''  else  convertir_url_youtube(afiliado.url_video) \n        url_video_insercion =convertir_url_youtube (\"https://www.youtube.com/watch?v=HgKjhFEguyU\")\n        url_register = afiliado.url\n        context = {",
+        "peekOfCode": "def home_pk(request, pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n        if afiliado:\n        # url_video_insercion = \"https://www.youtube.com/watch?v=HgKjhFEguyU\" if afiliado.url_video==0 or afiliado.url_video==''  else  convertir_url_youtube(afiliado.url_video) \n            url_video_insercion =convertir_url_youtube (\"https://www.youtube.com/watch?v=HgKjhFEguyU\")\n            url_register = afiliado.url\n            context = {\n            \"afiliado\": afiliado,\n            \"id\":afiliado.fpa,",
         "detail": "livecommunity.views",
         "documentation": {}
     },
@@ -3380,7 +3388,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def broker_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    url_register = afiliado.url\n    context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register",
+        "peekOfCode": "def broker_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n        url_register = afiliado.url\n        context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register\n        }\n        return render(request,'broker.html',context)",
         "detail": "livecommunity.views",
         "documentation": {}
     },
@@ -3389,7 +3397,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def presenciales_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    url_register = afiliado.url\n    context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register",
+        "peekOfCode": "def presenciales_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n        url_register = afiliado.url\n        context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register\n        }\n        return render(request, \"presenciales.html\",context)",
         "detail": "livecommunity.views",
         "documentation": {}
     },
@@ -3398,7 +3406,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def servicios_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n    except Afiliado.DoesNotExist:\n        afiliado = None\n    url_register = afiliado.url\n    context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register",
+        "peekOfCode": "def servicios_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n        url_register = afiliado.url\n        context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register\n        }\n        return render(request, \"servicios.html\",context)",
         "detail": "livecommunity.views",
         "documentation": {}
     },

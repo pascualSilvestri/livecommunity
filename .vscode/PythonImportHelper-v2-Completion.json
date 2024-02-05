@@ -3326,7 +3326,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def home(request):\n    url_video_insercion =convertir_url_youtube (\"https://www.youtube.com/watch?v=HgKjhFEguyU\")\n    url_register = \"\"\n    context = {\n        \"afiliado\": None,\n        \"url_video\": url_video_insercion,\n        \"url_register\": url_register\n    }\n    return render(request, \"index.html\",context)\n# PRIMER SPRIG",
+        "peekOfCode": "def home(request):\n    url_video_insercion =convertir_url_youtube (\"https://www.youtube.com/watch?v=HgKjhFEguyU\")\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context = {\n        \"afiliado\": None,\n        \"url_video\": url_video_insercion,\n        \"url_register\": url_register\n    }\n    return render(request, \"index.html\",context)\n# PRIMER SPRIG",
         "detail": "livecommunity.views",
         "documentation": {}
     },
@@ -3335,7 +3335,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def broker(request):\n    return render(request,'broker.html')\ndef presenciales(request):\n    return render(request, \"presenciales.html\")\ndef servicios(request):\n    return render(request, \"servicios.html\")\n# def Broker(request):\n#     return render(request,'broker.html')\n# def Presenciales(request):\n#     return render(request,'presenciales.html')",
+        "peekOfCode": "def broker(request):\n    return render(request,'broker.html')\ndef presenciales(request):\n    return render(request, \"presenciales.html\")\ndef servicios(request):\n    return render(request, \"servicios.html\")\ndef convertir_url_youtube(url_original):\n    if 'youtu.be/' in url_original:\n        # URL corta de YouTube (youtu.be)\n        video_id = url_original.split('youtu.be/')[-1]",
         "detail": "livecommunity.views",
         "documentation": {}
     },
@@ -3344,7 +3344,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def presenciales(request):\n    return render(request, \"presenciales.html\")\ndef servicios(request):\n    return render(request, \"servicios.html\")\n# def Broker(request):\n#     return render(request,'broker.html')\n# def Presenciales(request):\n#     return render(request,'presenciales.html')\n# def Servicios(request):\n#     return render(request,'servicios.html')",
+        "peekOfCode": "def presenciales(request):\n    return render(request, \"presenciales.html\")\ndef servicios(request):\n    return render(request, \"servicios.html\")\ndef convertir_url_youtube(url_original):\n    if 'youtu.be/' in url_original:\n        # URL corta de YouTube (youtu.be)\n        video_id = url_original.split('youtu.be/')[-1]\n    elif 'youtube.com/' in url_original and 'v=' in url_original:\n        # URL normal de YouTube",
         "detail": "livecommunity.views",
         "documentation": {}
     },
@@ -3353,7 +3353,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def servicios(request):\n    return render(request, \"servicios.html\")\n# def Broker(request):\n#     return render(request,'broker.html')\n# def Presenciales(request):\n#     return render(request,'presenciales.html')\n# def Servicios(request):\n#     return render(request,'servicios.html')\ndef convertir_url_youtube(url_original):\n    if 'youtu.be/' in url_original:",
+        "peekOfCode": "def servicios(request):\n    return render(request, \"servicios.html\")\ndef convertir_url_youtube(url_original):\n    if 'youtu.be/' in url_original:\n        # URL corta de YouTube (youtu.be)\n        video_id = url_original.split('youtu.be/')[-1]\n    elif 'youtube.com/' in url_original and 'v=' in url_original:\n        # URL normal de YouTube\n        video_id = url_original.split('v=')[-1].split('&')[0]\n    else:",
         "detail": "livecommunity.views",
         "documentation": {}
     },

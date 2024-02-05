@@ -2151,7 +2151,7 @@
         "kind": 2,
         "importPath": "apps.api.controller.registros",
         "description": "apps.api.controller.registros",
-        "peekOfCode": "def getRegistroById(request,pk):\n    if request.method == 'GET':\n        try:\n            registros = Registro_archivo.objects.filter(fpa=pk)\n            data=[]\n            for r in registros:\n                nombres = Relation_fpa_client.objects.filter(client=r.client)\n                if nombres.exists():\n                    nombre = nombres[0].full_name\n                else:",
+        "peekOfCode": "def getRegistroById(request,pk):\n    if request.method == 'GET':\n        try:\n            customer = Relation_fpa_client.objects.filter(fpa=pk)\n            data=[]\n            for r in customer:\n                registros= Registro_archivo.objects.filter(client=r.client)\n                registro = registros.first()\n                if customer.exists():\n                    nombre = nombres[0].full_name",
         "detail": "apps.api.controller.registros",
         "documentation": {}
     },

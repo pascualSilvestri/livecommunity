@@ -16,7 +16,7 @@ def home(request):
 
 
 # PRIMER SPRIG
-def broker(request):
+def broker_skilling(request):
     url_register = "https://livecommunity.info/Afiliado/LM500S"
     context ={
         "afiliado": None,
@@ -101,7 +101,7 @@ def broker_pk(request,pk):
 
         return render(request,'broker.html',context)
     except Afiliado.DoesNotExist or Afiliado.NoneType:
-        return redirect('broker')
+        return redirect('broker_skilling')
     
     
 

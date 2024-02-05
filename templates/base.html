@@ -33,7 +33,13 @@
         </div>
         <ul class="list">
             <li id="inicio"><a href="/{{ id }}" >Inicio</a></li>
-            <li id="broker" ><a href="/broker/{{ id }}" >Broker</a></li>
+            <li id="broker">
+                <span>Broker</span>
+                <ul class="sub_menu">
+                    <li><a href="/broker/skilling/{{ id }}" >Skilling</a></li>
+                    {% comment %} <li><a href="/broker/bingx/{{ id }}" >Bingx</a></li> {% endcomment %}
+                </ul>
+            </li>
             <li id="presenciales" ><a href="/presenciales/{{ id }}" >Presenciales</a></li>
             <li id="servicios" ><a href="/servicios/{{ id }}" >Servicios Live</a></li>
         </ul>

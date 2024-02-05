@@ -3325,7 +3325,7 @@
         "kind": 5,
         "importPath": "livecommunity.urls",
         "description": "livecommunity.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('',views.home, name = 'home'),\n    path('broker/',views.broker, name = 'broker'),\n    path('presenciales/',views.presenciales, name = 'presenciales'),\n    path('servicios/',views.servicios, name = 'servicios'),\n    path('Afiliado/',include('apps.afiliado.urls')),\n    path('api/',include('apps.api.urls')),\n    path('<pk>',views.home_pk, name = 'home_pk'),\n    path('broker/<pk>',views.broker_pk, name = 'broker_pk'),",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('',views.home, name = 'home'),\n    path('broker/skilling',views.broker_skilling, name = 'broker_skilling'),\n    path('presenciales/',views.presenciales, name = 'presenciales'),\n    path('servicios/',views.servicios, name = 'servicios'),\n    path('Afiliado/',include('apps.afiliado.urls')),\n    path('api/',include('apps.api.urls')),\n    path('<pk>',views.home_pk, name = 'home_pk'),\n    # path('broker/<pk>',views.broker_pk, name = 'broker_pk'),",
         "detail": "livecommunity.urls",
         "documentation": {}
     },
@@ -3339,11 +3339,11 @@
         "documentation": {}
     },
     {
-        "label": "broker",
+        "label": "broker_skilling",
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def broker(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={\n        \"afiliado\": None,\n        \"url_register\": url_register\n    }\n    return render(request,'broker.html',context)\ndef presenciales(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={",
+        "peekOfCode": "def broker_skilling(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={\n        \"afiliado\": None,\n        \"url_register\": url_register\n    }\n    return render(request,'broker.html',context)\ndef presenciales(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={",
         "detail": "livecommunity.views",
         "documentation": {}
     },

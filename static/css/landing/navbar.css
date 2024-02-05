@@ -65,7 +65,7 @@ nav li {
 
 
 .sub_menu{
-    display: block;
+    display: none;
     position: absolute; 
     right: -25px; 
     top: 50px;

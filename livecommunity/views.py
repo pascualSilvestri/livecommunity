@@ -6,7 +6,7 @@ from apps.afiliado.models  import Afiliado
 def home(request):
 
     url_video_insercion =convertir_url_youtube ("https://www.youtube.com/watch?v=HgKjhFEguyU")
-    url_register = ""
+    url_register = "https://livecommunity.info/Afiliado/LM500S"
     context = {
         "afiliado": None,
         "url_video": url_video_insercion,
@@ -26,16 +26,6 @@ def presenciales(request):
 
 def servicios(request):
     return render(request, "servicios.html")
-
-
-# def Broker(request):
-#     return render(request,'broker.html')
-
-# def Presenciales(request):
-#     return render(request,'presenciales.html')
-
-# def Servicios(request):
-#     return render(request,'servicios.html')
 
 
 def convertir_url_youtube(url_original):

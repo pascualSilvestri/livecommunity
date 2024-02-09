@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const carouselChildrens = [...carousel.children]
 
         let isDragging = false,
-            isAutoPlay = false,
+            isAutoPlay = true,
             startX,
             startScrollLeft,
             timeoutId
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Autoplay the carousel after every 2500 ms
             timeoutId = setTimeout(
                 () => (carousel.scrollLeft += firstCardWidth),
-                2500
+                2200
             )
         }
         autoPlay()

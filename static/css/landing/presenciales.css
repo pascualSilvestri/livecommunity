@@ -29,14 +29,11 @@
 .pres-presentation img{
     margin-top: 1rem;
 }
-.pres-videos{
-    padding-top: 1.2rem;
-    padding-bottom: 3rem;
 
-}
+
 .pres-video {
-    margin: 0 auto;
-    height: 450px;
+    margin: 3rem auto;
+    height: 420px;
     width: 90%;
     display: flex;
     justify-content: center;
@@ -51,10 +48,31 @@
     border-radius: 25px;
     margin-bottom: 2rem;
 }
+.sede-ubi-container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 80%;
+    margin: 1rem auto 4rem auto;
+}
+.sede-ubi{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.699);
+    padding: 20px 0;
+
+}
+.sede-ubi:last-of-type{
+    border: none;
+}
+
 .pres-sede{
     padding: 0.8rem 0;
     font-size: 1.7em;
     color: #c51d17;
+
 }
 .pres-ubi{
     padding: 0.5rem 0;
@@ -81,7 +99,7 @@
 }
 .btn-consultar{
     font-family: Montserrat;
-    padding: 14px 40px;
+    padding: 10px 20px;
     color: white;
     background: #c51d17;
     margin-top: 10px;
@@ -126,6 +144,8 @@
         display: flex;
         flex-direction: row;
     }
+
+    
 }
 
 @media screen and (min-width: 900px) {
@@ -160,4 +180,17 @@
     .pres-container {
         padding-bottom: 2rem;
     }
+
+    .sede-ubi-container{
+        flex-direction: row;
+    }
+
+    .sede-ubi{
+        flex-direction: column;
+        border: none;
+        width: 100px;
+        text-align: center;
+    }
+
+
 }

@@ -144,6 +144,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -1742,6 +1758,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0011_alter_afiliado_url_video",
+        "description": "apps.afiliado.migrations.0011_alter_afiliado_url_video",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('afiliado', '0010_afiliado_url_video'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='afiliado',\n            name='url_video',\n            field=models.URLField(default='https://www.youtube.com/watch?v=HgKjhFEguy'),\n        ),",
+        "detail": "apps.afiliado.migrations.0011_alter_afiliado_url_video",
+        "documentation": {}
+    },
+    {
         "label": "ClienteConfig",
         "kind": 6,
         "importPath": "apps.afiliado.apps",
@@ -3325,7 +3350,7 @@
         "kind": 5,
         "importPath": "livecommunity.urls",
         "description": "livecommunity.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('',views.home, name = 'home'),\n    path('broker/skilling',views.broker_skilling, name = 'broker_skilling'),\n    path('presenciales/',views.presenciales, name = 'presenciales'),\n    path('servicios/',views.servicios, name = 'servicios'),\n    path('Afiliado/',include('apps.afiliado.urls')),\n    path('api/',include('apps.api.urls')),\n    path('<pk>',views.home_pk, name = 'home_pk'),\n    # path('broker/<pk>',views.broker_pk, name = 'broker_pk'),",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('',views.home, name = 'home'),\n    path('broker/skilling/',views.broker_skilling, name = 'broker_skilling'),\n    path('presenciales/',views.presenciales, name = 'presenciales'),\n    path('servicios/',views.servicios, name = 'servicios'),\n    path('Afiliado/',include('apps.afiliado.urls')),\n    path('api/',include('apps.api.urls')),\n    path('<pk>',views.home_pk, name = 'home_pk'),\n    #path('broker/<pk>',views.broker_pk, name = 'broker_pk'),",
         "detail": "livecommunity.urls",
         "documentation": {}
     },

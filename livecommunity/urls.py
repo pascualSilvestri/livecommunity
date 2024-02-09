@@ -21,7 +21,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home, name = 'home'),
-    path('broker/skilling',views.broker_skilling, name = 'broker_skilling'),
+    path('broker/skilling/',views.broker_skilling, name = 'broker_skilling'),
     path('presenciales/',views.presenciales, name = 'presenciales'),
     path('servicios/',views.servicios, name = 'servicios'),
     path('Afiliado/',include('apps.afiliado.urls')),

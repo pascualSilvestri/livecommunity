@@ -23,6 +23,7 @@ urlpatterns = [
     path('',views.home, name = 'home'),
     path('broker/skilling/',views.broker_skilling, name = 'broker_skilling'),
     path('presenciales/',views.presenciales, name = 'presenciales'),
+    path('presenciales/consulta/',views.consultaForm, name = 'consultaForm'),
     path('servicios/',views.servicios, name = 'servicios'),
     path('Afiliado/',include('apps.afiliado.urls')),
     path('api/',include('apps.api.urls')),

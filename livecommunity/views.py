@@ -1,6 +1,10 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from apps.afiliado.models  import Afiliado
+from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_exempt
+import json
+
 
 
 def home(request):
@@ -136,3 +140,38 @@ def servicios_pk(request,pk):
         return redirect('servicios')
     
     
+# def consultaForm(request):
+#     if request.method == "POST":
+#         nombre = request.POST.get('nombre')
+#         telefono = request.POST.get('telefono')
+#         correo = request.POST.get('email')
+#         consulta = request.POST.get('consulta')
+#         print(nombre, telefono, correo, consulta)
+#         enviar_correo(nombre, telefono, correo, consulta)
+#     return redirect('home')
+
+@csrf_exempt 
+def consultaForm(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        nombre = data['nombre']
+        telefono = data['telefono']
+        correo = data['email']
+        consulta = data['consulta']
+        ubicacion = data['ubicacion']
+        id_user = data['id_user']
+
+        # Enviar correo electrónico usando los datos extraídos
+        enviar_correo(nombre, telefono, correo, consulta, ubicacion, id_user)
+
+        return JsonResponse({'message': 'Consulta enviada correctamente','status':200}, status=200)
+
+    
+def enviar_correo(nombre, telefono, correo, consulta, ubicacion, id_user):
+    asunto = 'Consulta desde la página web'
+    mensaje = f"Nombre: {nombre} {telefono}\nCorreo electrónico: {correo}\nConsulta:\n{consulta} \nUbicacion: {ubicacion} \nId User: {id_user}"
+    lista_destinatarios = ['pascualsilvestri14@gmail.com']  # Reemplaza con tu correo electrónico de destinatario
+    correo_remitente = 'pascualsilvestri14@gmail.com'  # Igual que EMAIL_HOST_USER
+
+    send_mail(asunto, mensaje, correo_remitente, lista_destinatarios)

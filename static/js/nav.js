@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Obtiene el valor de la variable desde localStorage
     var selectedLinkId = localStorage.getItem('selectedLinkId')
+    const brokerBtn = document.getElementById('broker')
+    const sub_menu = document.querySelector('.sub_menu')
 
     // Establece la clase 'selected' en el elemento correspondiente
     if (selectedLinkId) {
@@ -27,8 +29,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
             console.log('Toqué este enlace: ' + this)
         })
+    });
+
+    brokerBtn.addEventListener('click', function (event) {
+        toggleMenuBroker(sub_menu, 'block')
     })
+
+    sub_menu.addEventListener('mouseleave', function (event) {
+        toggleMenuBroker(sub_menu, 'none')
+    })
+
+
+
 })
+
+function toggleMenuBroker(btn,display){
+    btn.style.display = display
+}
 
 function changeClass(clickedElement) {
     var navigationLinks = document.querySelectorAll('nav a')

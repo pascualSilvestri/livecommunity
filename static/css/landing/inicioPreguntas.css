@@ -26,6 +26,7 @@
     margin-bottom: 1rem;
 }
 .preguntas-container-desktop{
+    color: white;
     display: flex;
     flex-direction: row;
     width: 90%;

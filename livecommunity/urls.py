@@ -21,13 +21,15 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home, name = 'home'),
-    path('broker/',views.broker, name = 'broker'),
+    path('broker/skilling/',views.broker_skilling, name = 'broker_skilling'),
     path('presenciales/',views.presenciales, name = 'presenciales'),
+    path('presenciales/consulta/',views.consultaForm, name = 'consultaForm'),
     path('servicios/',views.servicios, name = 'servicios'),
     path('Afiliado/',include('apps.afiliado.urls')),
     path('api/',include('apps.api.urls')),
     path('<pk>',views.home_pk, name = 'home_pk'),
-    path('broker/<pk>',views.broker_pk, name = 'broker_pk'),
+    #path('broker/<pk>',views.broker_pk, name = 'broker_pk'),
+    path('broker/skilling/<pk>',views.broker_pk, name = 'broker_skilling_pk'),
     path('presenciales/<pk>',views.presenciales_pk, name = 'presenciales_pk'),
     path('servicios/<pk>',views.servicios_pk, name = 'servicios_pk'),
 ]

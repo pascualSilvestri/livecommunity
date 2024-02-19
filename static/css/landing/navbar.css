@@ -59,6 +59,26 @@ nav li {
 
 }
 
+#broker{
+    position: relative;
+}
+
+
+.sub_menu{
+    display: none;
+    position: absolute; 
+    right: -25px; 
+    top: 50px;
+    background: #0000002c;
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: .5rem 1rem;
+}
+
+.sub_menu li{
+    list-style: none;
+}
+
 
 
 

@@ -171,7 +171,7 @@ def consultaForm(request):
 def enviar_correo(nombre, telefono, correo, consulta, ubicacion, id_user):
     asunto = 'Consulta desde la página web'
     mensaje = f"Nombre: {nombre} {telefono}\nCorreo electrónico: {correo}\nConsulta:\n{consulta} \nUbicacion: {ubicacion} \nId User: {id_user}"
-    lista_destinatarios = ['pascualsilvestri14@gmail.com']  # Reemplaza con tu correo electrónico de destinatario
-    correo_remitente = 'pascualsilvestri14@gmail.com'  # Igual que EMAIL_HOST_USER
+    lista_destinatarios = ['livecommunity.adm@gmail.com']  # Reemplaza con tu correo electrónico de destinatario
+    correo_remitente = 'livecommunity.adm@gmail.com'  # Igual que EMAIL_HOST_USER
 
     send_mail(asunto, mensaje, correo_remitente, lista_destinatarios)

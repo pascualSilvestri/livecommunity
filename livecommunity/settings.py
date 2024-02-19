@@ -160,14 +160,19 @@ CORS_ALLOW_METHODS = [
 #                                                                                                                  #         
 ####################################################################################################################
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'pascualsilvestri14@gmail.com'  # Reemplaza con tu dirección de correo electrónico
+# EMAIL_HOST_PASSWORD = 'wvao vklc wedn atgv' 
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'pascualsilvestri14@gmail.com'  # Reemplaza con tu dirección de correo electrónico
-EMAIL_HOST_PASSWORD = 'wvao vklc wedn atgv' 
-
-
+EMAIL_HOST_USER = 'livecommunity.adm@gmail.com'  # Reemplaza con tu dirección de correo electrónico
+EMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum' 
 
 
 ####################################################################################################################

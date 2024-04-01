@@ -59,11 +59,11 @@ def limpiar_registros(dataframe):
 
 def limpiar_cpa(dataframe):
     new_columns = {
-        'created':'fecha_creacion',
-        'amount':'monto', 
-        'Commission_Type':'cpa', 
-        'User_Id':'client', 
-        'AFP':'fpa'
+        'Created':'fecha_creacion',
+        'Amount':'monto', 
+        'Commission Type':'cpa', 
+        'User ID':'client', 
+        'afp':'fpa'
     }
     dataframe.rename(columns=new_columns, inplace=True)
     

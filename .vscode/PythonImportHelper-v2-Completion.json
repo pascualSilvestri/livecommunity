@@ -1137,6 +1137,14 @@
         "documentation": {}
     },
     {
+        "label": "forms",
+        "importPath": "django",
+        "description": "django",
+        "isExtraImport": true,
+        "detail": "django",
+        "documentation": {}
+    },
+    {
         "label": "settings",
         "importPath": "django.conf",
         "description": "django.conf",
@@ -1358,6 +1366,14 @@
         "description": "django.http",
         "isExtraImport": true,
         "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
         "documentation": {}
     },
     {
@@ -1672,6 +1688,14 @@
         "description": "apps.afiliado.models ",
         "isExtraImport": true,
         "detail": "apps.afiliado.models ",
+        "documentation": {}
+    },
+    {
+        "label": "send_mail",
+        "importPath": "django.core.mail",
+        "description": "django.core.mail",
+        "isExtraImport": true,
+        "detail": "django.core.mail",
         "documentation": {}
     },
     {
@@ -3122,7 +3146,7 @@
         "kind": 2,
         "importPath": "apps.utils.limpiarTablas",
         "description": "apps.utils.limpiarTablas",
-        "peekOfCode": "def limpiar_cpa(dataframe):\n    new_columns = {\n        'created':'fecha_creacion',\n        'amount':'monto', \n        'Commission_Type':'cpa', \n        'User_Id':'client', \n        'AFP':'fpa'\n    }\n    dataframe.rename(columns=new_columns, inplace=True)\n    # Filtrar las filas con el valor \"TOTAL\"",
+        "peekOfCode": "def limpiar_cpa(dataframe):\n    new_columns = {\n        'Created':'fecha_creacion',\n        'Amount':'monto', \n        'Commission Type':'cpa', \n        'User ID':'client', \n        'afp':'fpa'\n    }\n    dataframe.rename(columns=new_columns, inplace=True)\n    # Filtrar las filas con el valor \"TOTAL\"",
         "detail": "apps.utils.limpiarTablas",
         "documentation": {}
     },
@@ -3142,6 +3166,15 @@
         "description": "livecommunity.asgi",
         "peekOfCode": "application = get_asgi_application()",
         "detail": "livecommunity.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "ConsultaForm",
+        "kind": 6,
+        "importPath": "livecommunity.form",
+        "description": "livecommunity.form",
+        "peekOfCode": "class ConsultaForm(forms.ModelForm):\n    class Meta:\n        model = Cliente\n        fields = (\n            \"nombre\",\n            \"telefono\",\n            'correo',\n            'consulta'\n            )",
+        "detail": "livecommunity.form",
         "documentation": {}
     },
     {
@@ -3329,7 +3362,61 @@
         "kind": 5,
         "importPath": "livecommunity.settings",
         "description": "livecommunity.settings",
-        "peekOfCode": "CORS_ALLOW_METHODS = [\n    'DELETE',\n    'GET',\n    'OPTIONS',\n    'PATCH',\n    'POST',\n    'PUT',\n]\n# Tokken de telegram\n# CHAT_ID_BOT = '@+csPs8XoRyX4yMjBh'",
+        "peekOfCode": "CORS_ALLOW_METHODS = [\n    'DELETE',\n    'GET',\n    'OPTIONS',\n    'PATCH',\n    'POST',\n    'PUT',\n]\n####################################################################################################################\n#                                                                                                                  #",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "EMAIL_BACKEND",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'\nEMAIL_HOST = 'smtp.gmail.com'\nEMAIL_PORT = 587\nEMAIL_USE_TLS = True\nEMAIL_HOST_USER = 'livecommunity.adm@gmail.com'  # Reemplaza con tu dirección de correo electrónico\nEMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum' \n####################################################################################################################\n#                                                                                                                  #\n########################################## ZONA DE CAMBIOS #########################################################\n#                                                                                                                  #         ",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "EMAIL_HOST",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "EMAIL_HOST = 'smtp.gmail.com'\nEMAIL_PORT = 587\nEMAIL_USE_TLS = True\nEMAIL_HOST_USER = 'livecommunity.adm@gmail.com'  # Reemplaza con tu dirección de correo electrónico\nEMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum' \n####################################################################################################################\n#                                                                                                                  #\n########################################## ZONA DE CAMBIOS #########################################################\n#                                                                                                                  #         \n####################################################################################################################",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "EMAIL_PORT",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "EMAIL_PORT = 587\nEMAIL_USE_TLS = True\nEMAIL_HOST_USER = 'livecommunity.adm@gmail.com'  # Reemplaza con tu dirección de correo electrónico\nEMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum' \n####################################################################################################################\n#                                                                                                                  #\n########################################## ZONA DE CAMBIOS #########################################################\n#                                                                                                                  #         \n####################################################################################################################\n####################################################",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "EMAIL_USE_TLS",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "EMAIL_USE_TLS = True\nEMAIL_HOST_USER = 'livecommunity.adm@gmail.com'  # Reemplaza con tu dirección de correo electrónico\nEMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum' \n####################################################################################################################\n#                                                                                                                  #\n########################################## ZONA DE CAMBIOS #########################################################\n#                                                                                                                  #         \n####################################################################################################################\n####################################################\n#",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "EMAIL_HOST_USER",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "EMAIL_HOST_USER = 'livecommunity.adm@gmail.com'  # Reemplaza con tu dirección de correo electrónico\nEMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum' \n####################################################################################################################\n#                                                                                                                  #\n########################################## ZONA DE CAMBIOS #########################################################\n#                                                                                                                  #         \n####################################################################################################################\n####################################################\n#\n#########          LOCAL            ###########",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "EMAIL_HOST_PASSWORD",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "EMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum' \n####################################################################################################################\n#                                                                                                                  #\n########################################## ZONA DE CAMBIOS #########################################################\n#                                                                                                                  #         \n####################################################################################################################\n####################################################\n#\n#########          LOCAL            ###########\n# TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'",
         "detail": "livecommunity.settings",
         "documentation": {}
     },
@@ -3401,7 +3488,7 @@
         "kind": 5,
         "importPath": "livecommunity.urls",
         "description": "livecommunity.urls",
-        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('',views.home, name = 'home'),\n    path('broker/skilling/',views.broker_skilling, name = 'broker_skilling'),\n    path('presenciales/',views.presenciales, name = 'presenciales'),\n    path('servicios/',views.servicios, name = 'servicios'),\n    path('Afiliado/',include('apps.afiliado.urls')),\n    path('api/',include('apps.api.urls')),\n    path('<pk>',views.home_pk, name = 'home_pk'),\n    #path('broker/<pk>',views.broker_pk, name = 'broker_pk'),",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('',views.home, name = 'home'),\n    path('broker/skilling/',views.broker_skilling, name = 'broker_skilling'),\n    path('presenciales/',views.presenciales, name = 'presenciales'),\n    path('presenciales/consulta/',views.consultaForm, name = 'consultaForm'),\n    path('servicios/',views.servicios, name = 'servicios'),\n    path('Afiliado/',include('apps.afiliado.urls')),\n    path('api/',include('apps.api.urls')),\n    path('<pk>',views.home_pk, name = 'home_pk'),",
         "detail": "livecommunity.urls",
         "documentation": {}
     },
@@ -3483,6 +3570,24 @@
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
         "peekOfCode": "def servicios_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n        url_register = afiliado.url\n        context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register\n        }\n        return render(request, \"servicios.html\",context)",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "consultaForm",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def consultaForm(request):\n    if request.method == \"POST\":\n        data = json.loads(request.body)\n        nombre = data['nombre']\n        telefono = data['telefono']\n        correo = data['email']\n        consulta = data['consulta']\n        ubicacion = data['ubicacion']\n        id_user = data['id_user']\n        # Enviar correo electrónico usando los datos extraídos",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "enviar_correo",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def enviar_correo(nombre, telefono, correo, consulta, ubicacion, id_user):\n    asunto = 'Consulta desde la página web'\n    mensaje = f\"Nombre: {nombre} {telefono}\\nCorreo electrónico: {correo}\\nConsulta:\\n{consulta} \\nUbicacion: {ubicacion} \\nId User: {id_user}\"\n    lista_destinatarios = ['livecommunity.adm@gmail.com']  # Reemplaza con tu correo electrónico de destinatario\n    correo_remitente = 'livecommunity.adm@gmail.com'  # Igual que EMAIL_HOST_USER\n    send_mail(asunto, mensaje, correo_remitente, lista_destinatarios)",
         "detail": "livecommunity.views",
         "documentation": {}
     },

@@ -1999,7 +1999,43 @@
         "kind": 2,
         "importPath": "apps.api.controller.files",
         "description": "apps.api.controller.files",
-        "peekOfCode": "def convertir_fecha(fecha_string):\n    if str(fecha_string) == \"nan\":\n        return None\n    else:\n        return datetime.strptime(fecha_string, \"%Y-%m-%d\").date()\n@csrf_exempt\nasync def upload_fpa(request):\n    if request.method == \"POST\" and request.FILES.get(\"csvFileFpa\"):\n        try:\n            csv_file = await request.FILES[\"csvFileFpa\"]",
+        "peekOfCode": "def convertir_fecha(fecha_string):\n    if str(fecha_string) == \"nan\":\n        return None\n    else:\n        return datetime.strptime(fecha_string, \"%Y-%m-%d\").date()\n@csrf_exempt\ndef upload_fpa(request):\n    if request.method == \"POST\" and request.FILES.get(\"csvFileFpa\"):\n        try:\n            csv_file = request.FILES[\"csvFileFpa\"]",
+        "detail": "apps.api.controller.files",
+        "documentation": {}
+    },
+    {
+        "label": "upload_fpa",
+        "kind": 2,
+        "importPath": "apps.api.controller.files",
+        "description": "apps.api.controller.files",
+        "peekOfCode": "def upload_fpa(request):\n    if request.method == \"POST\" and request.FILES.get(\"csvFileFpa\"):\n        try:\n            csv_file = request.FILES[\"csvFileFpa\"]\n            file_name = csv_file.name\n            file_extension = os.path.splitext(file_name)[1]\n            if file_extension == \".csv\":\n                file_data = pd.read_csv(csv_file, encoding=\"utf-8\")\n                data_limpia = limpiar_datos_fpa(file_data)\n                for data in data_limpia:",
+        "detail": "apps.api.controller.files",
+        "documentation": {}
+    },
+    {
+        "label": "upload_registros",
+        "kind": 2,
+        "importPath": "apps.api.controller.files",
+        "description": "apps.api.controller.files",
+        "peekOfCode": "def upload_registros(request):\n    if request.method == \"POST\" and request.FILES.get(\"csvFileRegistro\"):\n        try:\n            fpas = Relation_fpa_client.objects.all()\n            registros=Registro_archivo.objects.all()\n            excel_file = request.FILES[\"csvFileRegistro\"]\n            file_name = excel_file.name  # Obtengon el nombre del archivo\n            file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo\n            if file_extension == \".xlsx\":\n                file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo",
+        "detail": "apps.api.controller.files",
+        "documentation": {}
+    },
+    {
+        "label": "upload_cpa",
+        "kind": 2,
+        "importPath": "apps.api.controller.files",
+        "description": "apps.api.controller.files",
+        "peekOfCode": "def upload_cpa(request):\n    if request.method == \"POST\" and request.FILES.get(\"csvFileCpa\"):\n        try:\n            fpas = Relation_fpa_client.objects.all()\n            cpas = Registros_cpa.objects.all()\n            cpa_value = CPA.objects.filter(id=1).first()\n            excel_file = request.FILES[\"csvFileCpa\"]\n            file_name = excel_file.name  # Obtengon el nombre del archivo\n            file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo\n            if file_extension == \".xlsx\":",
+        "detail": "apps.api.controller.files",
+        "documentation": {}
+    },
+    {
+        "label": "upload_ganancias",
+        "kind": 2,
+        "importPath": "apps.api.controller.files",
+        "description": "apps.api.controller.files",
+        "peekOfCode": "def upload_ganancias(request):\n    if request.method == \"POST\" and request.FILES.get(\"csvFileGanancias\"):\n        try:\n            fpas = Relation_fpa_client.objects.all()\n            ganancias = Registros_ganancias.objects.all()\n            usuarios = Usuario.objects.all()\n            cuentas = Cuenta.objects.all()\n            spred = Spread.objects.all()\n            excel_file = request.FILES[\"csvFileGanancias\"] #Obtengo el archivo\n            file_name = excel_file.name  # Obtengo el nombre del archivo",
         "detail": "apps.api.controller.files",
         "documentation": {}
     },
@@ -2163,6 +2199,33 @@
         "description": "apps.api.controller.ganancias",
         "peekOfCode": "def ganancia_a_pagar(request):\n    if request.method == 'PUT':\n        try:\n            datos = json.loads(request.body)\n            ganancias = Registros_ganancias.objects.all()\n            cpas = Registros_cpa.objects.all()\n            cuentas = Cuenta.objects.all()\n            bonos = BonoAPagar.objects.all()\n            spreads = SpreadIndirecto.objects.all()\n            for d in datos.get('body'):",
         "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "verificar",
+        "kind": 2,
+        "importPath": "apps.api.controller.registros",
+        "description": "apps.api.controller.registros",
+        "peekOfCode": "def verificar(request):\n    if request.method=='GET':\n        try:\n            registros = Registro_archivo.objects.all()\n            data = []\n            for r in registros:\n                fpa = Relation_fpa_client.objects.filter(client=r.client)\n                dep = 0\n                if r.primer_deposito>0:\n                    dep = 1",
+        "detail": "apps.api.controller.registros",
+        "documentation": {}
+    },
+    {
+        "label": "registrosGetAll",
+        "kind": 2,
+        "importPath": "apps.api.controller.registros",
+        "description": "apps.api.controller.registros",
+        "peekOfCode": "def registrosGetAll(request):\n    if request.method == 'GET':\n        try:\n            registros = Registro_archivo.objects.all()\n            data=[]\n            for r in registros:\n                nombres = Registros_ganancias.objects.filter(client=r.client)\n                if nombres.exists():\n                    nombre = nombres[0].full_name\n                else:",
+        "detail": "apps.api.controller.registros",
+        "documentation": {}
+    },
+    {
+        "label": "getRegistroById",
+        "kind": 2,
+        "importPath": "apps.api.controller.registros",
+        "description": "apps.api.controller.registros",
+        "peekOfCode": "def getRegistroById(request,pk):\n    if request.method == 'GET':\n        try:\n            customer = Relation_fpa_client.objects.filter(fpa=pk)\n            data=[]\n            for r in customer:\n                registros= Registro_archivo.objects.filter(client=r.client)\n                registro = registros.first()\n                if customer.exists():\n                    nombre = nombres[0].full_name",
+        "detail": "apps.api.controller.registros",
         "documentation": {}
     },
     {

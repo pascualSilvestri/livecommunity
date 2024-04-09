@@ -79,7 +79,7 @@ def limpiar_cpa(dataframe):
         # Usar .loc para reemplazar 'skilling-' en la columna client
         dataframe.loc[:, 'client'] = dataframe['client'].str.replace('skilling-', '', regex=False)
 
-        return dataframe
+        return dataframe.to_dict(orient='records')
 
     except Exception as e:
         new_columns = {
@@ -100,7 +100,7 @@ def limpiar_cpa(dataframe):
         # Usar .loc para reemplazar 'skilling-' en la columna client
         dataframe.loc[:, 'client'] = dataframe['client'].str.replace('skilling-', '', regex=False)
 
-        return dataframe
+        return dataframe.to_dict(orient='records')
     
     
     

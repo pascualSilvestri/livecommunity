@@ -20,16 +20,16 @@ def convertir_fecha(fecha_string):
     
     
 @csrf_exempt
-def upload_fpa(request):
+async def upload_fpa(request):
     if request.method == "POST" and request.FILES.get("csvFileFpa"):
         try:
-            csv_file = request.FILES["csvFileFpa"]
+            csv_file = await request.FILES["csvFileFpa"]
             file_name = csv_file.name
             file_extension = os.path.splitext(file_name)[1]
 
             if file_extension == ".csv":
                 file_data = pd.read_csv(csv_file, encoding="utf-8")
-                data_limpia = limpiar_datos_fpa(file_data)
+                data_limpia = await limpiar_datos_fpa(file_data)
 
                 for data in data_limpia:
                     fecha_registro = convertir_fecha(data["fecha_registro"])
@@ -211,10 +211,10 @@ def upload_fpa(request):
 
 
 @csrf_exempt
-def upload_registros(request):
+async def upload_registros(request):
     if request.method == "POST" and request.FILES.get("csvFileRegistro"):
         try:
-            fpas = Relation_fpa_client.objects.all()
+            fpas = await Relation_fpa_client.objects.all()
             registros=Registro_archivo.objects.all()
             excel_file = request.FILES["csvFileRegistro"]
             file_name = excel_file.name  # Obtengon el nombre del archivo
@@ -223,13 +223,13 @@ def upload_registros(request):
         
             if file_extension == ".xlsx":
                 
-                file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
-                new_data=limpiar_registros(file_data)
+                file_data = await pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
+                new_data= await limpiar_registros(file_data)
                 
                 
                 for data in new_data:
 
-                    fpa_id = fpas.filter(client=data['client'])
+                    fpa_id = await fpas.filter(client=data['client'])
 
                     if fpa_id.exists():
                         fpa = fpa_id[0].fpa
@@ -261,7 +261,7 @@ def upload_registros(request):
                         ).date()
                     
 
-                    register = registros.filter(client=data['client'],fecha_registro=fecha_registro,country=data['country'])
+                    register = await registros.filter(client=data['client'],fecha_registro=fecha_registro,country=data['country'])
                     
                     if register.exists():
                         r = register.first()
@@ -309,19 +309,19 @@ def upload_registros(request):
         )
 
 @csrf_exempt
-def upload_cpa(request):
+async def upload_cpa(request):
     if request.method == "POST" and request.FILES.get("csvFileCpa"):
         try:
-            fpas = Relation_fpa_client.objects.all()
-            cpas = Registros_cpa.objects.all()
+            fpas = await Relation_fpa_client.objects.all()
+            cpas = await Registros_cpa.objects.all()
             cpa_value = CPA.objects.filter(id=1).first()
-            excel_file = request.FILES["csvFileCpa"]
+            excel_file = await request.FILES["csvFileCpa"]
             file_name = excel_file.name  # Obtengon el nombre del archivo
             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
 
             if file_extension == ".xlsx":
                 file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
-                new_data= limpiar_cpa(file_data)
+                new_data= await limpiar_cpa(file_data)
                 
                     
                 for cpa in new_data:
@@ -339,7 +339,7 @@ def upload_cpa(request):
                     if cpa_queryset.exists():
                         pass
                     else:
-                        fpa_id = fpas.filter(client=cpa['client']).first()
+                        fpa_id = await fpas.filter(client=cpa['client']).first()
                         if fpa_id:
                             fpa = fpa_id.fpa
                         else:
@@ -403,26 +403,26 @@ def upload_cpa(request):
         )
 
 @csrf_exempt
-def upload_ganancias(request):
+async def upload_ganancias(request):
     if request.method == "POST" and request.FILES.get("csvFileGanancias"):
         try:
-            fpas = Relation_fpa_client.objects.all()
-            ganancias = Registros_ganancias.objects.all()
-            usuarios = Usuario.objects.all()
-            cuentas = Cuenta.objects.all()
-            spred = Spread.objects.all()
+            fpas = await Relation_fpa_client.objects.all()
+            ganancias = await Registros_ganancias.objects.all()
+            usuarios = await Usuario.objects.all()
+            cuentas = await Cuenta.objects.all()
+            spred = await Spread.objects.all()
             
-            excel_file = request.FILES["csvFileGanancias"] #Obtengo el archivo
+            excel_file = await request.FILES["csvFileGanancias"] #Obtengo el archivo
             file_name = excel_file.name  # Obtengo el nombre del archivo
             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
 
             if file_extension == ".csv":
                 file_data = pd.read_csv(excel_file)  # obtengo los datos del archivo
-                new_data= limpiar_ganacias(file_data)
+                new_data= await limpiar_ganacias(file_data)
                 
                 for g in new_data:
                     if g['partner_earning'] > 0:
-                        fpa_id = fpas.filter(client=int(g['client']))
+                        fpa_id = await fpas.filter(client=int(g['client']))
                         if fpa_id.exists():
                             fpa = fpa_id[0].fpa
                             full_name = fpa_id[0].full_name

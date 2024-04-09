@@ -8,16 +8,16 @@ from django.db.models import Q
 from ...api.models import Registro_archivo,Registros_ganancias,Relation_fpa_client
 
 @csrf_exempt 
-def verificar(request):
+async def verificar(request):
     if request.method=='GET':
         try:
-            registros = Registro_archivo.objects.all()
+            registros = await Registro_archivo.objects.all()
             
             
             data = []
             
             for r in registros:
-                fpa = Relation_fpa_client.objects.filter(client=r.client)
+                fpa = await Relation_fpa_client.objects.filter(client=r.client)
                 dep = 0
                 if r.primer_deposito>0:
                     dep = 1
@@ -26,7 +26,7 @@ def verificar(request):
                         {
                             'client':r.client,
                             'deposit':str(dep),
-                            'full_name':fpa.first().full_name.strip().lower(),
+                            'full_name': await fpa.first().full_name.strip().lower(),
                             'fpa':fpa.first().fpa
                             }
                         )
@@ -40,14 +40,14 @@ def verificar(request):
 
 
 
-def registrosGetAll(request):
+async def registrosGetAll(request):
     
     if request.method == 'GET':
         try:
             registros = Registro_archivo.objects.all()
             data=[]
             for r in registros:
-                nombres = Registros_ganancias.objects.filter(client=r.client)
+                nombres = await Registros_ganancias.objects.filter(client=r.client)
                 if nombres.exists():
                     nombre = nombres[0].full_name
                 else:
@@ -113,7 +113,7 @@ def registrosGetAll(request):
 
 
 @csrf_exempt 
-def getRegistroById(request,pk):
+async def getRegistroById(request,pk):
     
     if request.method == 'GET':
         
@@ -121,10 +121,10 @@ def getRegistroById(request,pk):
             customer = Relation_fpa_client.objects.filter(fpa=pk)
             data=[]
             for r in customer:
-                registros= Registro_archivo.objects.filter(client=r.client)
+                registros= await Registro_archivo.objects.filter(client=r.client)
                 registro = registros.first()
                 if customer.exists():
-                    nombre = nombres[0].full_name
+                    nombre = registros[0].full_name
                 else:
                     nombre = 'None'
                 

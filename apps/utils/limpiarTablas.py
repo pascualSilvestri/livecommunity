@@ -56,27 +56,74 @@ def limpiar_registros(dataframe):
 
     return dataframe.to_dict(orient='records')
 
-
+#################################COdigo en Prueba#####################################################
 def limpiar_cpa(dataframe):
-    new_columns = {
-        'Created':'fecha_creacion',
-        'Amount':'monto', 
-        'Commission Type':'cpa', 
-        'User ID':'client', 
-        'afp':'fpa'
-    }
-    dataframe.rename(columns=new_columns, inplace=True)
     
-    # Filtrar las filas con el valor "TOTAL"
-    dataframe = dataframe[dataframe['fecha_creacion'] != 'TOTAL']
-    
-    # Usar .loc para asignar valores a la columna fecha_creacion
-    dataframe.loc[:, "fecha_creacion"] = pd.to_datetime(dataframe["fecha_creacion"]).dt.date
-    
-    # Usar .loc para reemplazar 'skilling-' en la columna client
-    dataframe.loc[:, 'client'] = dataframe['client'].str.replace('skilling-', '')
+    try:
+        new_columns = {
+            'Created':'fecha_creacion',
+            'Amount':'monto', 
+            'Commission Type':'cpa', 
+            'User ID':'client', 
+            'afp':'fpa'
+        }
 
-    return dataframe.to_dict(orient='records')
+        dataframe.rename(columns=new_columns, inplace=True)
+        
+        # Filtrar las filas con el valor "TOTAL"
+        dataframe = dataframe[dataframe['fecha_creacion'] != 'TOTAL']
+        
+        # Usar .loc para asignar valores a la columna fecha_creacion
+        dataframe.loc[:, "fecha_creacion"] = pd.to_datetime(dataframe["fecha_creacion"]).dt.date
+        
+        # Usar .loc para reemplazar 'skilling-' en la columna client
+        dataframe.loc[:, 'client'] = dataframe['client'].str.replace('skilling-', '', regex=False)
+
+        return dataframe
+
+    except Exception as e:
+        new_columns = {
+            'created':'fecha_creacion',
+            'amount':'monto', 
+            'Commission_Type':'cpa', 
+            'User_Id':'client', 
+            'AFP':'fpa'
+        }
+        dataframe.rename(columns=new_columns, inplace=True)
+        
+        # Filtrar las filas con el valor "TOTAL"
+        dataframe = dataframe[dataframe['fecha_creacion'] != 'TOTAL']
+        
+        # Usar .loc para asignar valores a la columna fecha_creacion
+        dataframe.loc[:, "fecha_creacion"] = pd.to_datetime(dataframe["fecha_creacion"]).dt.date
+        
+        # Usar .loc para reemplazar 'skilling-' en la columna client
+        dataframe.loc[:, 'client'] = dataframe['client'].str.replace('skilling-', '', regex=False)
+
+        return dataframe
+    
+    
+    
+# def limpiar_cpa(dataframe):
+#     new_columns = {
+#         'Created':'fecha_creacion',
+#         'Amount':'monto', 
+#         'Commission Type':'cpa', 
+#         'User ID':'client', 
+#         'afp':'fpa'
+#     }
+#     dataframe.rename(columns=new_columns, inplace=True)
+    
+#     # Filtrar las filas con el valor "TOTAL"
+#     dataframe = dataframe[dataframe['fecha_creacion'] != 'TOTAL']
+    
+#     # Usar .loc para asignar valores a la columna fecha_creacion
+#     dataframe.loc[:, "fecha_creacion"] = pd.to_datetime(dataframe["fecha_creacion"]).dt.date
+    
+#     # Usar .loc para reemplazar 'skilling-' en la columna client
+#     dataframe.loc[:, 'client'] = dataframe['client'].str.replace('skilling-', '')
+
+#     return dataframe.to_dict(orient='records')
 
 
 def limpiar_ganacias(dataFrame):

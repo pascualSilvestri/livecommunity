@@ -581,15 +581,17 @@ def ganancias_all_for_id(request,desde,hasta):
             spred = Spread.objects.all()
             bonos = BonoAPagar.objects.all()
             spread_indirecto = SpreadIndirecto.objects.all()
+            fpa = Registros_cpa.objects.all()
 
             data = []
 
             fpas_seen = []  # Para evitar duplicados de fpa
-            for f in ganancias:
+            for f in fpa:
                 fpas_seen.append(f.fpa)
             
             fpa_set = set(fpas_seen)
             fpa_list= list(fpa_set)
+            print(fpa_list)
             for g in fpa_list:
 
                 data_for_id = []

@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ...usuarios.models import Spread,Usuario,Cuenta,BonoAPagar
-from ...api.models import Registros_ganancias,Registros_cpa,SpreadIndirecto
+from ...api.models import Registros_ganancias,Registros_cpa,SpreadIndirecto, Relation_fpa_client
 import re
 import json 
 from decimal import Decimal
@@ -581,17 +581,17 @@ def ganancias_all_for_id(request,desde,hasta):
             spred = Spread.objects.all()
             bonos = BonoAPagar.objects.all()
             spread_indirecto = SpreadIndirecto.objects.all()
-            fpa = Registros_cpa.objects.all()
+            fpa = Relation_fpa_client.objects.all()
 
             data = []
 
             fpas_seen = []  # Para evitar duplicados de fpa
             for f in fpa:
-                fpas_seen.append(f.fpa)
-            
+                if f.fpa != 'none':
+                    fpas_seen.append(f.fpa)
+            print(fpas_seen)
             fpa_set = set(fpas_seen)
             fpa_list= list(fpa_set)
-            print(fpa_list)
             for g in fpa_list:
 
                 data_for_id = []

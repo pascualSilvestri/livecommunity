@@ -18,7 +18,7 @@
     width: 85%;
     margin: 0 auto;
     color: #fcfcfc;
-    text-align: start;
+    text-align: center;
     height: 100%;
     padding-bottom: 1.5rem;
     display: flex;
@@ -36,7 +36,7 @@
     font-weight: 900;
 }
 .serv-presentation p{
-    text-align: start;
+    text-align: center;
     font-size: 24px;
     margin-bottom: 1rem;
     font-weight: 500;
@@ -218,7 +218,7 @@
     flex-direction: row;
     width: 95%;
     margin: 0 auto;
-    justify-content: space-between;
+    justify-content: center;
 }
 .opcion1{
     display: flex;
@@ -256,7 +256,7 @@
 }
 .btn-vacio{
     font-family: Montserrat;
-    padding: 10px 25px;
+    padding: 15px 80px;
     background: transparent;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;    /* margin-top: 5px; */
     border-radius: 20px;
@@ -396,7 +396,7 @@
     }
     .decision{
         width: 60%;
-        justify-content: space-around;
+        justify-content: center;
     }
     .opcion1 h3{
         padding: 15px 30px;

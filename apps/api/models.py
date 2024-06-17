@@ -14,7 +14,7 @@ class Relation_fpa_client(models.Model):
     status = models.CharField(max_length=100,null=True)
     
     def __str__(self):
-        return self.fpa
+        return self.client
 
 class Registro_archivo(models.Model):
     id= models.AutoField(primary_key=True)
@@ -55,7 +55,7 @@ class Registros_ganancias(models.Model):
     client = models.CharField(max_length=100)
     symbol=models.CharField(max_length=100)
     deal_id=models.CharField(max_length=100)
-    fpa=    models.CharField(max_length=200,null=True)
+    fpa=models.CharField(max_length=200,null=True)
     full_name = models.CharField(max_length=200)
     partner_earning = models.DecimalField(max_digits=10, decimal_places=2)
     monto_a_pagar= models.DecimalField(max_digits=10, decimal_places=2)
@@ -67,7 +67,7 @@ class Registros_ganancias(models.Model):
     pagado = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.fpa
+        return self.client
 
 
 class Cpa_a_pagar(models.Model):

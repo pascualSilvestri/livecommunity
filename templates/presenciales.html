@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+{% block title %}Presenciales{% endblock %} 
+
+{% block content %}
+<div class="pres">
+
+    <!-- INICIO PRESENTATION -->
+    <div class="pres-container">
+        <div class="pres-presentation">
+            
+            <p class="pres-text">Podes acceder a nuestros Presenciales y comenzar a estudiar en las distintas Sedes inauguradas a <br><span>Nivel Mundial</span></p>
+            <img src="{% static 'img/LogoLiveRojo.png' %}" alt="logo telegram">
+
+        </div>
+    </div>
+
+
+    <!-- INICIO VIDEO-->
+    
+        <div class="pres-video">
+            <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+               
+        </div>
+
+        <div class="sede-ubi-container">
+            <div class="sede-ubi">
+                <h3 class="pres-sede">CORDOBA</h3>
+                <div data-ubicacion='CORDOBA' data-id='{{ id }}' class="btn-consultar-container">
+                    <a class="btn-consultar">CONSULTAR</a>
+                </div>
+            </div>
+            <div class="sede-ubi">
+                <h3 class="pres-sede">TUCUMAN</h3>
+                <div data-ubicacion='TUCUMAN' data-id='{{ id }}' class="btn-consultar-container">
+                    <a class="btn-consultar">CONSULTAR</a>
+                </div>
+            </div>
+            <div class="sede-ubi">
+                <h3 class="pres-sede">COLOMBIA</h3>
+                <div data-ubicacion='COLOMBIA' data-id='{{ id }}' class="btn-consultar-container">
+                    <a class="btn-consultar">CONSULTAR</a>
+                </div>
+            </div>
+            <div class="sede-ubi">
+                <h3 class="pres-sede">PUERTO MADRYN</h3>
+                <div data-ubicacion='PUERTO_MADRYN' data-id='{{ id }}' class="btn-consultar-container">
+                    <a class="btn-consultar">CONSULTAR</a>
+                </div>
+            </div>
+            
+        </div>
+        
+     <!-- FIN VIDEO -->
+     <form id="modal" class="modalmask">
+        {% csrf_token %}
+        <div class="form modalbox movedown">
+            <a title="Close" class="close">X</a>
+            <div class="title">CONSULTAR</div>
+ 
+            <div class="input-container ic1">
+                <input id="firstname" class="input" name="nombre" type="text" placeholder=" " />
+                <div class="cut"></div>
+                <label for="firstname" class="placeholder">Nombre</label>
+            </div>
+            <div class="input-container ic2">
+                <input id="telefono" class="input" name="telefono" type="tel" placeholder=" " />
+                <div class="cut"></div>
+                <label for="telefono" class="placeholder">Teléfono</label>
+            </div>
+            <div class="input-container ic2">
+                <input id="email" class="input" name="email" type="text" placeholder=" " />
+                <div class="cut cut-short"></div>
+                <label for="email" class="placeholder">Email</label>
+            </div>
+            <div class="input-container ic2">
+                <textarea id="consulta" class="input consulta-text" name="consulta" placeholder="consultas..." rows="4" ></textarea>             
+            </div>
+            <button type="submit" id="btn_consulta_submit" class="submit">ENVIAR</button>
+                    
+            </div>
+        </form>
+
+    <footer class="footer-pres">
+        <div class="img-container-footer">
+            <img class="logo" src="{% static 'img/LogoLive.png' %}" alt="logo live community">
+        </div>
+        <div class="redes">
+            <a href="https://www.instagram.com/">
+                <img src="{% static 'img/iconig.png' %}" alt="logo instagram">
+            </a>
+            <a href="https://web.telegram.org/k/">
+                <img src="{% static 'img/icontelegram.jpg' %}" alt="logo telegram">
+            </a>
+        </div>
+
+    
+    </footer>
+
+
+</div>
+
+{% endblock content %}

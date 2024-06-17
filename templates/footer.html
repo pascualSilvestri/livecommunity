@@ -1,0 +1,21 @@
+{% load static %} 
+
+{% block footer %}
+
+<footer>
+    <div class="img-container-footer">
+        <img class="logo" src="{% static 'img/logo.png' %}" alt="logo livecommunity">
+    </div>
+    <div class="redes">
+        <a href="https://www.instagram.com/">
+            <img src="{% static 'img/iconig.png' %}" alt="logo instagram">
+        </a>
+        <a href="https://web.telegram.org/k/">
+            <img src="{% static 'img/icontelegram.jpg' %}" alt="logo telegram">
+        </a>
+    </div>
+    <a class="btn" href="{{ url_register}}">COMENZAR</a>
+
+</footer>
+
+{% endblock footer %}

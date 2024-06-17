@@ -11,87 +11,204 @@ import pandas as pd
 import os
 from decimal import Decimal
 
+
+def convertir_fecha(fecha_string):
+    if str(fecha_string) == "nan":
+        return None
+    else:
+        return datetime.strptime(fecha_string, "%Y-%m-%d").date()
+    
+    
 @csrf_exempt
 def upload_fpa(request):
     if request.method == "POST" and request.FILES.get("csvFileFpa"):
         try:
-            fpas = Relation_fpa_client.objects.all()
             csv_file = request.FILES["csvFileFpa"]
-            file_name = csv_file.name  # Obtengon el nombre del archivo
-            file_extension = os.path.splitext(file_name)[
-                1
-            ]  # obtengo la extencion del archivo
+            file_name = csv_file.name
+            file_extension = os.path.splitext(file_name)[1]
 
             if file_extension == ".csv":
-                file_data = pd.read_csv(
-                    csv_file, encoding="utf-8"
-                )  # obtengo los datos de larchivo
-
+                file_data = pd.read_csv(csv_file, encoding="utf-8")
                 data_limpia = limpiar_datos_fpa(file_data)
-                # print(data_limpia)
+
                 for data in data_limpia:
-                    # print(type(data['id_client']))
-                    fecha_registro_string = str(data["fecha_registro"])
-                    if fecha_registro_string == "nan":
-                        fecha_registro = None
-                    else:
-                        fecha_registro = datetime.strptime(
-                            fecha_registro_string, "%Y-%m-%d"
-                        ).date()
+                    fecha_registro = convertir_fecha(data["fecha_registro"])
+                    fecha_creacion = convertir_fecha(data["fecha_creacion_cuenta"])
+                    fecha_verificacion = convertir_fecha(data["verificacion"])
 
-                    fecha_creacion_string = str(data["fecha_creacion_cuenta"])
-                    if fecha_creacion_string == "nan":
-                        fecha_creacion = None
-                    else:
-                        fecha_creacion = datetime.strptime(
-                            fecha_creacion_string, "%Y-%m-%d"
-                        ).date()
-
-                    fecha_verificacion_string = str(data["verificacion"])
-                    if fecha_verificacion_string == "nan":
-                        fecha_verificacion = None
-                    else:
-                        fecha_verificacion = datetime.strptime(
-                            fecha_verificacion_string, "%Y-%m-%d"
-                        ).date()
-
-                    newData = Relation_fpa_client(
-                        fpa=data["fpa"],
-                        client=data["id_client"],
-                        full_name=data["full_name"],
-                        country=data["country"],
-                        fecha_registro=fecha_registro,
-                        fecha_creacion=fecha_creacion,
-                        fecha_verificacion=fecha_verificacion,
-                        status=data["status"],
-                    )
-                    montos= Cuenta(fpa=data["fpa"])
+                    # Buscar si el client ya existe
                     try:
-                        f = Cuenta.objects.filter(fpa=data["fpa"])
-                        if not f.exists():
-                            montos.save()
-                        fpa = fpas.filter(fpa=data["fpa"], client=data["id_client"])
-                        if not fpa.exists():
-                            newData.save()
-                            
+                        client_obj = Relation_fpa_client.objects.get(client=data["id_client"])
+                        # Si el client existe y el fpa es None o 'none', actualizar el fpa
+                        if client_obj.fpa is None or client_obj.fpa.lower() == 'none':
+                            client_obj.fpa = data["fpa"]
+                            client_obj.save()
+                        # Si el fpa ya tiene otro valor, posiblemente quieras manejar esta situación también
+                    except Relation_fpa_client.DoesNotExist:
+                        # El client no existe, por lo que se crea uno nuevo
+                        Relation_fpa_client.objects.create(
+                            fpa=data["fpa"],
+                            client=data["id_client"],
+                            full_name=data["full_name"],
+                            country=data["country"],
+                            fecha_registro=fecha_registro,
+                            fecha_creacion=fecha_creacion,
+                            fecha_verificacion=fecha_verificacion,
+                            status=data["status"],
+                        )
+
+                        # Crear cuenta si no existe
+                        Cuenta.objects.get_or_create(fpa=data["fpa"])
+
                     except Exception as e:
                         print(e)
 
             else:
-                print("ErrorMessege Document is not format")
-                return JsonResponse({"error": "Document is not format"},status=402)
+                return JsonResponse({"error": "Document is not format"}, status=402)
+
         except Exception as e:
             print(e)
-            return JsonResponse({"Error": "Salto la exception"})
-        print("message Archivo CSV recibido y procesado exitosamente.")
-        return JsonResponse(
-            {"message": "Archivo CSV recibido y procesado exitosamente."}
-        )
+            return JsonResponse({"Error": "Salto la exception"}, status=403)
+
+        return JsonResponse({"message": "Archivo CSV recibido y procesado exitosamente."})
+
     else:
-        print("error Se esperaba un archivo CSV en la solicitud POST.")
-        return JsonResponse(
-            {"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400
-        )
+        return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=405)
+
+
+# def upload_fpa(request):
+#     if request.method == "POST" and request.FILES.get("csvFileFpa"):
+#         try:
+#             fpas = Relation_fpa_client.objects.all()
+#             csv_file = request.FILES["csvFileFpa"]
+#             file_name = csv_file.name  # Obtengon el nombre del archivo
+#             file_extension = os.path.splitext(file_name)[
+#                 1
+#             ]  # obtengo la extencion del archivo
+
+#             if file_extension == ".csv":
+#                 file_data = pd.read_csv(
+#                     csv_file, encoding="utf-8"
+#                 )  # obtengo los datos de larchivo
+
+#                 data_limpia = limpiar_datos_fpa(file_data)
+#                 # print(data_limpia)
+#                 for data in data_limpia:
+#                     # print(type(data['id_client']))
+#                     fecha_registro_string = str(data["fecha_registro"])
+#                     if fecha_registro_string == "nan":
+#                         fecha_registro = None
+#                     else:
+#                         fecha_registro = datetime.strptime(
+#                             fecha_registro_string, "%Y-%m-%d"
+#                         ).date()
+
+#                     fecha_creacion_string = str(data["fecha_creacion_cuenta"])
+#                     if fecha_creacion_string == "nan":
+#                         fecha_creacion = None
+#                     else:
+#                         fecha_creacion = datetime.strptime(
+#                             fecha_creacion_string, "%Y-%m-%d"
+#                         ).date()
+
+#                     fecha_verificacion_string = str(data["verificacion"])
+#                     if fecha_verificacion_string == "nan":
+#                         fecha_verificacion = None
+#                     else:
+#                         fecha_verificacion = datetime.strptime(
+#                             fecha_verificacion_string, "%Y-%m-%d"
+#                         ).date()
+
+#                     newData = Relation_fpa_client(
+#                         fpa=data["fpa"],
+#                         client=data["id_client"],
+#                         full_name=data["full_name"],
+#                         country=data["country"],
+#                         fecha_registro=fecha_registro,
+#                         fecha_creacion=fecha_creacion,
+#                         fecha_verificacion=fecha_verificacion,
+#                         status=data["status"],
+#                     )
+#                     montos= Cuenta(fpa=data["fpa"])
+#                     try:
+#                         f = Cuenta.objects.filter(fpa=data["fpa"])
+#                         if not f.exists():
+#                             montos.save()
+#                         fpa = fpas.filter(fpa=data["fpa"], client=data["id_client"])
+#                         if not fpa.exists():
+#                             newData.save()
+                            
+#                     except Exception as e:
+#                         print(e)
+
+#             else:
+#                 print("ErrorMessege Document is not format")
+#                 return JsonResponse({"error": "Document is not format"},status=402)
+#         except Exception as e:
+#             print(e)
+#             return JsonResponse({"Error": "Salto la exception"})
+#         print("message Archivo CSV recibido y procesado exitosamente.")
+#         return JsonResponse(
+#             {"message": "Archivo CSV recibido y procesado exitosamente."}
+#         )
+#     else:
+#         print("error Se esperaba un archivo CSV en la solicitud POST.")
+#         return JsonResponse(
+#             {"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400
+#         )
+    
+################################################Registros####################################################
+    
+
+# @csrf_exempt
+# def upload_registros(request):
+#     if request.method == "POST" and request.FILES.get("csvFileRegistro"):
+#         try:
+#             excel_file = request.FILES["csvFileRegistro"]
+#             file_name = excel_file.name
+#             file_extension = os.path.splitext(file_name)[1]
+
+#             if file_extension == ".xlsx":
+#                 file_data = pd.read_excel(excel_file, engine='openpyxl')
+#                 new_data = limpiar_registros(file_data)
+
+#                 for data in new_data:
+#                     # Conversión de fechas
+#                     fecha_registro = pd.to_datetime(data["fecha_registro"], errors='coerce', format="%Y-%m-%d").date() if data["fecha_registro"] != "none" else None
+#                     fecha_calif = pd.to_datetime(data["fecha_calif"], errors='coerce', format="%Y-%m-%d").date() if data["fecha_calif"] != "none" else None
+#                     fecha_primer_deposito = pd.to_datetime(data["fecha_primer_deposito"], errors='coerce', format="%Y-%m-%d").date() if data["fecha_primer_deposito"] != "none" else None
+
+#                     # Obtener o crear el fpa correspondiente
+#                     fpa_obj = Relation_fpa_client.objects.filter(client=data['client']).first()
+#                     fpa = fpa_obj.fpa if fpa_obj else None
+
+#                     # Actualizar o crear el registro
+#                     registro, created = Registro_archivo.objects.update_or_create(
+#                         client=data['client'],
+#                         fecha_registro=fecha_registro,
+#                         country=data['country'],
+#                         defaults={
+#                             'fpa': fpa,
+#                             'status': data['status'],
+#                             'fecha_calif': fecha_calif,
+#                             'posicion_cuenta': data['posicion_cuenta'],
+#                             'volumen': data['volumen'],
+#                             'primer_deposito': data['primer_deposito'],
+#                             'fecha_primer_deposito': fecha_primer_deposito,
+#                             'neto_deposito': data['neto_deposito'],
+#                             'numeros_depositos': data['numeros_depositos'],
+#                             'comision': data['comision'],
+#                         }
+#                     )
+#             else:
+#                 return JsonResponse({"error": "Formato de documento no válido"}, status=400)
+#         except Exception as e:
+#             return JsonResponse({"Error": str(e)}, status=400)
+
+#         return JsonResponse({"message": "Archivo CSV recibido y procesado exitosamente."})
+#     else:
+#         return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400)
+
 
 @csrf_exempt
 def upload_registros(request):
@@ -148,9 +265,16 @@ def upload_registros(request):
                     
                     if register.exists():
                         r = register.first()
+                        r.fpa = fpa
+                        r.status = data['status']
+                        r.fecha_calif = fecha_calif
+                        r.posicion_cuenta = data['posicion_cuenta']
+                        r.volumen = data['volumen']
                         r.primer_deposito = data["primer_deposito"]
                         r.neto_deposito = data["neto_deposito"]
                         r.numeros_depositos = data["numeros_depositos"]
+                        if r.fpa is None and r.fpa == 'none':
+                            r.fpa = fpa
                         r.save()
                     else:
                         registro = Registro_archivo(
@@ -271,7 +395,7 @@ def upload_cpa(request):
                 return JsonResponse({"error": "Document is not format"},status=400)
         except Exception as e:
             print(str(e))
-            return JsonResponse({"Error": str(e)},status=402)
+            return JsonResponse({"error": str(e)},status=400)
         print("message Archivo CSV recibido y procesado exitosamente.")
         return JsonResponse(
             {"message": "Archivo CSV recibido y procesado exitosamente."}
@@ -373,6 +497,9 @@ def upload_ganancias(request):
                                     c_up_line.save()
 
                             ganancia.save() 
+                        
+                        else:
+                            ganancia.fpa = fpa
                                 
 
             else:

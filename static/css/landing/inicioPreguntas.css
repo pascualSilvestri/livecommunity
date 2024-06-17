@@ -1,0 +1,171 @@
+.bg-3{
+    padding-bottom:3rem;
+    width: 100%;
+    background-image: url("../../img/Desktop3.png");
+    height: 100%;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+@media screen and (max-width: 900px) {
+  .bg-3{
+    background-image: url("../../img/Desktop3.png");
+    height: 100%;
+    padding-bottom: 3rem;
+    padding-top: 0rem;
+
+  }
+}
+
+.inicio-preguntas{
+    color: white;
+    text-align: center;
+    margin-top: 2rem;
+}
+.inicio-preguntas h2{
+    margin-bottom: 1rem;
+}
+.preguntas-container-desktop{
+    color: white;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-top: 2rem;
+    margin: 0 auto;
+}
+
+
+.preguntas-container-mobile{
+    display: none;
+}
+.preguntas-left{
+    width: 50%;
+}
+
+.preguntas-right{
+    width: 50%;
+}
+.pregunta{
+    padding: 10px 5px 20px 70px;
+    text-align: start;
+}
+
+.pregunta::before {
+	position: absolute;
+	width: 80px;
+    margin-left: -35px;
+    margin-top: 5px;    
+    content: url("../../img/question.png");
+}
+.pregunta h5{
+    font-size: 18px;
+    width: 80%;
+    margin-bottom: 10px;
+}
+.pregunta p{
+    font-size: 15px;
+    font-weight: 300;
+   text-transform: lowercase;
+}
+.pregunta p:first-letter {
+    text-transform: uppercase;
+  }
+
+/* MEDIA QUERY TABLET */
+@media screen and (max-width: 900px) {
+    .preguntas-container-desktop{
+        display: none;
+    }
+    .preguntas-container-mobile{
+        display:flex;
+        flex-direction: column;
+        font-family: Montserrat;
+
+    }   
+    
+
+    
+    details div {
+        border-left: 1px solid #111111;
+        border-right: 1px solid #111111;
+        border-bottom: 1px solid #111111;
+        padding: 1rem 2em;
+        width: 90%;
+        margin: 0 auto;
+        color: #000;
+        background: #eee;
+        font-weight: 400;
+        font-size: 15px;
+        text-align: start;
+        text-transform: lowercase;
+    }
+    details div:first-letter {
+        text-transform: uppercase;
+      }
+    
+    details div > * + * {
+        margin-top: 1.5em;
+    }
+    
+    details + details {
+        margin-top: .5rem;
+    }
+    
+    summary {
+        list-style: none;
+    }
+    
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    
+    summary {
+        border: 1px solid #111111;
+        padding: .75em 1em;
+        cursor: pointer;
+        position: relative;
+        padding-right: calc(1.75rem + .75rem + .75rem);
+        width: 90%;
+        margin: 0 auto;
+        color: #000;
+        background: #eee;
+        font-size: 18px;
+        font-weight: 600;
+        }
+    
+    summary:before {
+        position: absolute;
+        top: 25%;
+        transform: translateY(-50%);
+        right: 1rem;
+        content: "˅";
+        width: 1.75rem;
+        height: 1.75rem;
+        background-color: transparent;
+        color: #000000;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        transform:scaleX(2);
+
+    }
+    
+    details[open] summary {
+        background-color: #eee;
+        cursor: pointer;
+
+    }
+    
+    details[open] summary:before {
+        content: "˄";
+    }
+    
+    summary:hover {
+        background-color: #eee;
+        cursor: pointer;
+
+    }
+    
+
+}

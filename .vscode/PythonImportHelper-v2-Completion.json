@@ -1,0 +1,3456 @@
+[
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "django.db.models.deletion",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.db.models.deletion",
+        "description": "django.db.models.deletion",
+        "detail": "django.db.models.deletion",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "forms",
+        "importPath": "django",
+        "description": "django",
+        "isExtraImport": true,
+        "detail": "django",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "reverse_lazy",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "ObjectDoesNotExist",
+        "importPath": "django.core.exceptions",
+        "description": "django.core.exceptions",
+        "isExtraImport": true,
+        "detail": "django.core.exceptions",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "HttpResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "JsonResponse",
+        "importPath": "django.http",
+        "description": "django.http",
+        "isExtraImport": true,
+        "detail": "django.http",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "csrf_exempt",
+        "importPath": "django.views.decorators.csrf",
+        "description": "django.views.decorators.csrf",
+        "isExtraImport": true,
+        "detail": "django.views.decorators.csrf",
+        "documentation": {}
+    },
+    {
+        "label": "TELEGRAM_BOT_TOKEN",
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "isExtraImport": true,
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CHAT_ID_BOT",
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "isExtraImport": true,
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "telegram",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "telegram",
+        "description": "telegram",
+        "detail": "telegram",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "sync_to_async",
+        "importPath": "asgiref.sync",
+        "description": "asgiref.sync",
+        "isExtraImport": true,
+        "detail": "asgiref.sync",
+        "documentation": {}
+    },
+    {
+        "label": "Q",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Q",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Q",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "Q",
+        "importPath": "django.db.models",
+        "description": "django.db.models",
+        "isExtraImport": true,
+        "detail": "django.db.models",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "Decimal",
+        "importPath": "decimal",
+        "description": "decimal",
+        "isExtraImport": true,
+        "detail": "decimal",
+        "documentation": {}
+    },
+    {
+        "label": "Decimal",
+        "importPath": "decimal",
+        "description": "decimal",
+        "isExtraImport": true,
+        "detail": "decimal",
+        "documentation": {}
+    },
+    {
+        "label": "Decimal",
+        "importPath": "decimal",
+        "description": "decimal",
+        "isExtraImport": true,
+        "detail": "decimal",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "make_password",
+        "importPath": "django.contrib.auth.hashers",
+        "description": "django.contrib.auth.hashers",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.hashers",
+        "documentation": {}
+    },
+    {
+        "label": "make_password",
+        "importPath": "django.contrib.auth.hashers",
+        "description": "django.contrib.auth.hashers",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.hashers",
+        "documentation": {}
+    },
+    {
+        "label": "make_password",
+        "importPath": "django.contrib.auth.hashers",
+        "description": "django.contrib.auth.hashers",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.hashers",
+        "documentation": {}
+    },
+    {
+        "label": "django.contrib.auth.models",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "AbstractUser",
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "django.contrib.auth.validators",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.contrib.auth.validators",
+        "description": "django.contrib.auth.validators",
+        "detail": "django.contrib.auth.validators",
+        "documentation": {}
+    },
+    {
+        "label": "django.utils.timezone",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "django.utils.timezone",
+        "description": "django.utils.timezone",
+        "detail": "django.utils.timezone",
+        "documentation": {}
+    },
+    {
+        "label": "get_asgi_application",
+        "importPath": "django.core.asgi",
+        "description": "django.core.asgi",
+        "isExtraImport": true,
+        "detail": "django.core.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Afiliado",
+        "importPath": "apps.afiliado.models ",
+        "description": "apps.afiliado.models ",
+        "isExtraImport": true,
+        "detail": "apps.afiliado.models ",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0001_initial",
+        "description": "apps.afiliado.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Cliente',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('idCliente', models.TextField(max_length=50)),",
+        "detail": "apps.afiliado.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0002_rename_cliente_afiliado_and_more",
+        "description": "apps.afiliado.migrations.0002_rename_cliente_afiliado_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('afiliado', '0001_initial'),\n    ]\n    operations = [\n        migrations.RenameModel(\n            old_name='Cliente',\n            new_name='Afiliado',\n        ),\n        migrations.RenameField(",
+        "detail": "apps.afiliado.migrations.0002_rename_cliente_afiliado_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0003_cliente_alter_afiliado_idafiliado_and_more",
+        "description": "apps.afiliado.migrations.0003_cliente_alter_afiliado_idafiliado_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('afiliado', '0002_rename_cliente_afiliado_and_more'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Cliente',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('nombre', models.CharField(max_length=200)),",
+        "detail": "apps.afiliado.migrations.0003_cliente_alter_afiliado_idafiliado_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0004_cliente_usertelegram",
+        "description": "apps.afiliado.migrations.0004_cliente_usertelegram",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('afiliado', '0003_cliente_alter_afiliado_idafiliado_and_more'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='cliente',\n            name='userTelegram',\n            field=models.CharField(default='--', max_length=200),\n            preserve_default=False,",
+        "detail": "apps.afiliado.migrations.0004_cliente_usertelegram",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0005_remove_cliente_comprobante",
+        "description": "apps.afiliado.migrations.0005_remove_cliente_comprobante",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('afiliado', '0004_cliente_usertelegram'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='cliente',\n            name='comprobante',\n        ),\n    ]",
+        "detail": "apps.afiliado.migrations.0005_remove_cliente_comprobante",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0006_afiliado_telefono",
+        "description": "apps.afiliado.migrations.0006_afiliado_telefono",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('afiliado', '0005_remove_cliente_comprobante'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='afiliado',\n            name='telefono',\n            field=models.BigIntegerField(default='0'),\n            preserve_default=False,",
+        "detail": "apps.afiliado.migrations.0006_afiliado_telefono",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0007_afiliado_referenciaafiliado_cliente_idcliente",
+        "description": "apps.afiliado.migrations.0007_afiliado_referenciaafiliado_cliente_idcliente",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('afiliado', '0006_afiliado_telefono'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='afiliado',\n            name='referenciaAfiliado',\n            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='afiliado.afiliado'),\n        ),",
+        "detail": "apps.afiliado.migrations.0007_afiliado_referenciaafiliado_cliente_idcliente",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0008_alter_cliente_telefono",
+        "description": "apps.afiliado.migrations.0008_alter_cliente_telefono",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('afiliado', '0007_afiliado_referenciaafiliado_cliente_idcliente'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='cliente',\n            name='telefono',\n            field=models.BigIntegerField(),\n        ),",
+        "detail": "apps.afiliado.migrations.0008_alter_cliente_telefono",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0009_rename_idafiliado_afiliado_fpa_and_more",
+        "description": "apps.afiliado.migrations.0009_rename_idafiliado_afiliado_fpa_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('afiliado', '0008_alter_cliente_telefono'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='afiliado',\n            old_name='idAfiliado',\n            new_name='fpa',\n        ),",
+        "detail": "apps.afiliado.migrations.0009_rename_idafiliado_afiliado_fpa_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0010_afiliado_url_video",
+        "description": "apps.afiliado.migrations.0010_afiliado_url_video",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('afiliado', '0009_rename_idafiliado_afiliado_fpa_and_more'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='afiliado',\n            name='url_video',\n            field=models.URLField(default=0),\n            preserve_default=False,",
+        "detail": "apps.afiliado.migrations.0010_afiliado_url_video",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.afiliado.migrations.0011_alter_afiliado_url_video",
+        "description": "apps.afiliado.migrations.0011_alter_afiliado_url_video",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('afiliado', '0010_afiliado_url_video'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='afiliado',\n            name='url_video',\n            field=models.URLField(default='https://www.youtube.com/watch?v=HgKjhFEguy'),\n        ),",
+        "detail": "apps.afiliado.migrations.0011_alter_afiliado_url_video",
+        "documentation": {}
+    },
+    {
+        "label": "ClienteConfig",
+        "kind": 6,
+        "importPath": "apps.afiliado.apps",
+        "description": "apps.afiliado.apps",
+        "peekOfCode": "class ClienteConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'apps.afiliado'",
+        "detail": "apps.afiliado.apps",
+        "documentation": {}
+    },
+    {
+        "label": "ClienteForm",
+        "kind": 6,
+        "importPath": "apps.afiliado.forms",
+        "description": "apps.afiliado.forms",
+        "peekOfCode": "class ClienteForm(forms.ModelForm):\n    class Meta:\n        model = Cliente\n        fields = (\n            \"nombre\",\n            \"apellido\",\n            'correo',\n            'telefono',\n            'idAfiliado',\n            'userTelegram'",
+        "detail": "apps.afiliado.forms",
+        "documentation": {}
+    },
+    {
+        "label": "Afiliado",
+        "kind": 6,
+        "importPath": "apps.afiliado.models",
+        "description": "apps.afiliado.models",
+        "peekOfCode": "class Afiliado(models.Model):\n    fpa = models.CharField(max_length=50)\n    url = models.URLField()\n    url_video = models.URLField(default=\"https://www.youtube.com/watch?v=HgKjhFEguy\")\n    upline = models.CharField(max_length=50)\n    def __str__(self):\n        return self.fpa\nclass Cliente(models.Model):\n    nombre = models.CharField(max_length=200)\n    apellido = models.CharField(max_length=200)",
+        "detail": "apps.afiliado.models",
+        "documentation": {}
+    },
+    {
+        "label": "Cliente",
+        "kind": 6,
+        "importPath": "apps.afiliado.models",
+        "description": "apps.afiliado.models",
+        "peekOfCode": "class Cliente(models.Model):\n    nombre = models.CharField(max_length=200)\n    apellido = models.CharField(max_length=200)\n    correo = models.EmailField()\n    telefono = models.BigIntegerField()\n    idAfiliado = models.CharField(max_length=50)\n    userTelegram = models.CharField(max_length=200)\n    idCliente = models.CharField(max_length=50) #Recibir parametro por input\n    def __str__(self):\n        return self.nombre",
+        "detail": "apps.afiliado.models",
+        "documentation": {}
+    },
+    {
+        "label": "app_name",
+        "kind": 5,
+        "importPath": "apps.afiliado.urls",
+        "description": "apps.afiliado.urls",
+        "peekOfCode": "app_name = 'afiliado'\nurlpatterns = [\n      path('<str:idAfiliado>', views.afiliado, name = 'afiliado'),\n      path('clienteForm/', views.clienteform, name='clienteform'),\n      # Ruta para enviar los datos en formato Json hacia JS\n]",
+        "detail": "apps.afiliado.urls",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "apps.afiliado.urls",
+        "description": "apps.afiliado.urls",
+        "peekOfCode": "urlpatterns = [\n      path('<str:idAfiliado>', views.afiliado, name = 'afiliado'),\n      path('clienteForm/', views.clienteform, name='clienteform'),\n      # Ruta para enviar los datos en formato Json hacia JS\n]",
+        "detail": "apps.afiliado.urls",
+        "documentation": {}
+    },
+    {
+        "label": "afiliado",
+        "kind": 2,
+        "importPath": "apps.afiliado.views",
+        "description": "apps.afiliado.views",
+        "peekOfCode": "def afiliado(request, idAfiliado):\n    afiliado = False\n    try:\n        afiliado = Afiliado.objects.get(fpa=idAfiliado)\n        form = ClienteForm()\n        context = {'afiliado': afiliado, 'idAfiliado': idAfiliado, 'form': form}\n        return render(request, 'afiliado.html', context)\n    except ObjectDoesNotExist:\n        afiliado = False\n        context = {'errorIdNoExiste':'El Socio Existe, por favor comuniquese con liveCommunity para mas informacion'}",
+        "detail": "apps.afiliado.views",
+        "documentation": {}
+    },
+    {
+        "label": "existe",
+        "kind": 2,
+        "importPath": "apps.afiliado.views",
+        "description": "apps.afiliado.views",
+        "peekOfCode": "def existe(clientes,idCliente):\n    for client in clientes:\n        if client.idCliente == idCliente:\n            return True\n#Envio de mensaje a hacia telegram\ndef enviar_mensaje_sync(msj, id, token):\n    bot = telegram.Bot(token=token)\n    bot.send_message(chat_id=id, text=msj)\n#Obtiene los datos del form del front y los guarda en base de datos\n#Tambien lo envia a telegram",
+        "detail": "apps.afiliado.views",
+        "documentation": {}
+    },
+    {
+        "label": "enviar_mensaje_sync",
+        "kind": 2,
+        "importPath": "apps.afiliado.views",
+        "description": "apps.afiliado.views",
+        "peekOfCode": "def enviar_mensaje_sync(msj, id, token):\n    bot = telegram.Bot(token=token)\n    bot.send_message(chat_id=id, text=msj)\n#Obtiene los datos del form del front y los guarda en base de datos\n#Tambien lo envia a telegram\n#\ndef clienteform(request):\n    clientes = Cliente.objects.all()\n    if request.method == 'POST':\n        # Obtener los demás datos del formulario",
+        "detail": "apps.afiliado.views",
+        "documentation": {}
+    },
+    {
+        "label": "clienteform",
+        "kind": 2,
+        "importPath": "apps.afiliado.views",
+        "description": "apps.afiliado.views",
+        "peekOfCode": "def clienteform(request):\n    clientes = Cliente.objects.all()\n    if request.method == 'POST':\n        # Obtener los demás datos del formulario\n        nombre = request.POST.get('nombre').strip()\n        apellido = request.POST.get('apellido').strip()\n        correo = request.POST.get('correo').strip()\n        telefono = request.POST.get('telefono').strip()\n        idAfiliado2 = request.POST.get('idAfiliado').strip()\n        userTelegram = request.POST.get('userTelegram').strip()",
+        "detail": "apps.afiliado.views",
+        "documentation": {}
+    },
+    {
+        "label": "chat_id",
+        "kind": 5,
+        "importPath": "apps.afiliado.views",
+        "description": "apps.afiliado.views",
+        "peekOfCode": "chat_id = CHAT_ID_BOT\ntoken = TELEGRAM_BOT_TOKEN\n#Obtener afiliado por id y enviarlo a la vista afiliado.html\ndef afiliado(request, idAfiliado):\n    afiliado = False\n    try:\n        afiliado = Afiliado.objects.get(fpa=idAfiliado)\n        form = ClienteForm()\n        context = {'afiliado': afiliado, 'idAfiliado': idAfiliado, 'form': form}\n        return render(request, 'afiliado.html', context)",
+        "detail": "apps.afiliado.views",
+        "documentation": {}
+    },
+    {
+        "label": "token",
+        "kind": 5,
+        "importPath": "apps.afiliado.views",
+        "description": "apps.afiliado.views",
+        "peekOfCode": "token = TELEGRAM_BOT_TOKEN\n#Obtener afiliado por id y enviarlo a la vista afiliado.html\ndef afiliado(request, idAfiliado):\n    afiliado = False\n    try:\n        afiliado = Afiliado.objects.get(fpa=idAfiliado)\n        form = ClienteForm()\n        context = {'afiliado': afiliado, 'idAfiliado': idAfiliado, 'form': form}\n        return render(request, 'afiliado.html', context)\n    except ObjectDoesNotExist:",
+        "detail": "apps.afiliado.views",
+        "documentation": {}
+    },
+    {
+        "label": "reseteo_bonos",
+        "kind": 2,
+        "importPath": "apps.api.controller.bonos",
+        "description": "apps.api.controller.bonos",
+        "peekOfCode": "def reseteo_bonos(request):\n    if request.method == 'GET':\n        try:\n            cuentas = Cuenta.objects.all()\n            data= []\n            for cuenta in cuentas:\n                bonos_a_pagar = BonoAPagar(\n                    fpa = cuenta.fpa,\n                    monto_total = cuenta.monto_bono_directo+ cuenta.monto_bono_indirecto,\n                    monto_bono_indirecto =cuenta.monto_bono_indirecto ,",
+        "detail": "apps.api.controller.bonos",
+        "documentation": {}
+    },
+    {
+        "label": "get_bono_cpa",
+        "kind": 2,
+        "importPath": "apps.api.controller.bonos",
+        "description": "apps.api.controller.bonos",
+        "peekOfCode": "def get_bono_cpa(request):\n    if request.method == 'GET':\n        try:\n            bonoCpas = BonoCpa.objects.all()\n            data = []\n            for bonoCpa in bonoCpas:\n                data.append({\n                    'valor':bonoCpa.valor,\n                    'bono':bonoCpa.bono\n                })",
+        "detail": "apps.api.controller.bonos",
+        "documentation": {}
+    },
+    {
+        "label": "put_bono_cpa",
+        "kind": 2,
+        "importPath": "apps.api.controller.bonos",
+        "description": "apps.api.controller.bonos",
+        "peekOfCode": "def put_bono_cpa(request):\n    if request.method == 'PUT':\n        try:\n            body = json.loads(request.body)\n            datos = body['data']\n            for dato in datos:\n                bono = BonoCpa.objects.filter(bono=dato['bono']).first()\n                bono.valor = dato['valor']\n                bono.save()\n            data={",
+        "detail": "apps.api.controller.bonos",
+        "documentation": {}
+    },
+    {
+        "label": "get_bono_cpa_indirecto",
+        "kind": 2,
+        "importPath": "apps.api.controller.bonos",
+        "description": "apps.api.controller.bonos",
+        "peekOfCode": "def get_bono_cpa_indirecto(request):\n    if request.method == 'GET':\n        try:\n            bonoCpas = BonoCpaIndirecto.objects.all()\n            data = []\n            for bonoCpa in bonoCpas:\n                data.append({\n                    'valor':bonoCpa.valor,\n                    'bono':bonoCpa.bono\n                })",
+        "detail": "apps.api.controller.bonos",
+        "documentation": {}
+    },
+    {
+        "label": "put_bono_cpa_indirecto",
+        "kind": 2,
+        "importPath": "apps.api.controller.bonos",
+        "description": "apps.api.controller.bonos",
+        "peekOfCode": "def put_bono_cpa_indirecto(request):\n    if request.method == 'PUT':\n        try:\n            body = json.loads(request.body)\n            datos = body['data']\n            print(datos)\n            for dato in datos:\n                bono = BonoCpaIndirecto.objects.filter(bono=dato['bono']).first()\n                bono.valor = dato['valor']\n                bono.save()",
+        "detail": "apps.api.controller.bonos",
+        "documentation": {}
+    },
+    {
+        "label": "get_spread",
+        "kind": 2,
+        "importPath": "apps.api.controller.bonos",
+        "description": "apps.api.controller.bonos",
+        "peekOfCode": "def get_spread(request):\n    if request.method == 'GET':\n        try:\n            spreads = Spread.objects.all()\n            data = []\n            for spread in spreads:\n                data.append({\n                    'porcentaje':spread.porcentaje,\n                    'spread':spread.spread\n                })",
+        "detail": "apps.api.controller.bonos",
+        "documentation": {}
+    },
+    {
+        "label": "put_spread",
+        "kind": 2,
+        "importPath": "apps.api.controller.bonos",
+        "description": "apps.api.controller.bonos",
+        "peekOfCode": "def put_spread(request):\n    if request.method == 'PUT':\n        try:\n            body = json.loads(request.body)\n            datos = body['data']    \n            # print(datos)\n            for dato in datos:\n                spread = Spread.objects.filter(spread=dato['spread']).first()\n                spread.porcentaje = dato['porcentaje']\n                spread.save()",
+        "detail": "apps.api.controller.bonos",
+        "documentation": {}
+    },
+    {
+        "label": "montosGet",
+        "kind": 2,
+        "importPath": "apps.api.controller.cuenta",
+        "description": "apps.api.controller.cuenta",
+        "peekOfCode": "def montosGet(request,pk):\n    if request.method == 'GET':\n        try:\n            usuario = Cuenta.objects.get(fpa=pk)\n            data = [{\n                \"monto_total\":usuario.monto_total,\n                \"monto_a_pagar\":usuario.monto_a_pagar,\n                \"monto_cpa\":usuario.monto_cpa,\n                \"monto_directo\":usuario.spread_directo,\n                \"monto_indirecto\":usuario.spread_indirecto,",
+        "detail": "apps.api.controller.cuenta",
+        "documentation": {}
+    },
+    {
+        "label": "convertir_fecha",
+        "kind": 2,
+        "importPath": "apps.api.controller.files",
+        "description": "apps.api.controller.files",
+        "peekOfCode": "def convertir_fecha(fecha_string):\n    if str(fecha_string) == \"nan\":\n        return None\n    else:\n        return datetime.strptime(fecha_string, \"%Y-%m-%d\").date()\n@csrf_exempt\ndef upload_fpa(request):\n    if request.method == \"POST\" and request.FILES.get(\"csvFileFpa\"):\n        try:\n            csv_file = request.FILES[\"csvFileFpa\"]",
+        "detail": "apps.api.controller.files",
+        "documentation": {}
+    },
+    {
+        "label": "upload_fpa",
+        "kind": 2,
+        "importPath": "apps.api.controller.files",
+        "description": "apps.api.controller.files",
+        "peekOfCode": "def upload_fpa(request):\n    if request.method == \"POST\" and request.FILES.get(\"csvFileFpa\"):\n        try:\n            csv_file = request.FILES[\"csvFileFpa\"]\n            file_name = csv_file.name\n            file_extension = os.path.splitext(file_name)[1]\n            if file_extension == \".csv\":\n                file_data = pd.read_csv(csv_file, encoding=\"utf-8\")\n                data_limpia = limpiar_datos_fpa(file_data)\n                for data in data_limpia:",
+        "detail": "apps.api.controller.files",
+        "documentation": {}
+    },
+    {
+        "label": "upload_registros",
+        "kind": 2,
+        "importPath": "apps.api.controller.files",
+        "description": "apps.api.controller.files",
+        "peekOfCode": "def upload_registros(request):\n    if request.method == \"POST\" and request.FILES.get(\"csvFileRegistro\"):\n        try:\n            fpas = Relation_fpa_client.objects.all()\n            registros=Registro_archivo.objects.all()\n            excel_file = request.FILES[\"csvFileRegistro\"]\n            file_name = excel_file.name  # Obtengon el nombre del archivo\n            file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo\n            if file_extension == \".xlsx\":\n                file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo",
+        "detail": "apps.api.controller.files",
+        "documentation": {}
+    },
+    {
+        "label": "upload_cpa",
+        "kind": 2,
+        "importPath": "apps.api.controller.files",
+        "description": "apps.api.controller.files",
+        "peekOfCode": "def upload_cpa(request):\n    if request.method == \"POST\" and request.FILES.get(\"csvFileCpa\"):\n        try:\n            fpas = Relation_fpa_client.objects.all()\n            cpas = Registros_cpa.objects.all()\n            cpa_value = CPA.objects.filter(id=1).first()\n            excel_file = request.FILES[\"csvFileCpa\"]\n            file_name = excel_file.name  # Obtengon el nombre del archivo\n            file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo\n            if file_extension == \".xlsx\":",
+        "detail": "apps.api.controller.files",
+        "documentation": {}
+    },
+    {
+        "label": "upload_ganancias",
+        "kind": 2,
+        "importPath": "apps.api.controller.files",
+        "description": "apps.api.controller.files",
+        "peekOfCode": "def upload_ganancias(request):\n    if request.method == \"POST\" and request.FILES.get(\"csvFileGanancias\"):\n        try:\n            fpas = Relation_fpa_client.objects.all()\n            ganancias = Registros_ganancias.objects.all()\n            usuarios = Usuario.objects.all()\n            cuentas = Cuenta.objects.all()\n            spred = Spread.objects.all()\n            excel_file = request.FILES[\"csvFileGanancias\"] #Obtengo el archivo\n            file_name = excel_file.name  # Obtengo el nombre del archivo",
+        "detail": "apps.api.controller.files",
+        "documentation": {}
+    },
+    {
+        "label": "ganancia_get_all",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def ganancia_get_all(request):\n    if request.method == 'GET':\n        try:\n            ganancias = Registros_ganancias.objects.all()\n            cpas = Registros_cpa.objects.all()\n            spred = Spread.objects.all()\n            data=[]\n            for r in ganancias:\n                if r.pagado == False:\n                    if r.partner_earning != 0:",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "ganancia_only_more_cero",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def ganancia_only_more_cero(request):\n    if request.method == 'GET':\n        try:\n            ganancias = Registros_ganancias.objects.all()\n            spred = Spread.objects.all()\n            # cpas = Registros_cpa.objects.all()\n            data=[]\n            for r in ganancias:\n                if r.pagado == False and r.partner_earning != 0:\n                    if r.partner_earning != 0:",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "ganancia_by_id",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def ganancia_by_id(request,pk):\n    if request.method == 'GET':\n        try:\n            ganancias = Registros_ganancias.objects.filter(fpa=pk)\n            cpas = Registros_cpa.objects.filter(fpa=pk)\n            spred = Spread.objects.all()\n            data=[]\n            for r in ganancias:\n                # if r.pagado == False and r.fecha_operacion != None:\n                if r.fecha_operacion != None:",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "retiros_totales",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def retiros_totales(request):\n    if request.method == 'GET':\n        try:\n            ganancias = Registros_ganancias.objects.all()\n            data=[]\n            for m in ganancias:\n                data.append({\n                    'fpa':m.fpa,\n                    'fecha':m.fecha_operacion,\n                })",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "ganancias_total",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def ganancias_total(request):\n    if request.method == 'GET':\n        try:\n            ganancias = Registros_ganancias.objects.all()\n            total = 0\n            for m in ganancias:\n                if m.pagado == False:\n                    total += m.partner_earning\n            response = JsonResponse({'monto':total})\n            return response",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "ganancias_total_user",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def ganancias_total_user(request,pk):\n    if request.method == 'GET':\n        try:\n            ganancias = Registros_ganancias.objects.filter(fpa=pk)\n            total = 0\n            for m in ganancias:\n                if m.pagado == False:\n                    total += m.partner_earning\n            response = JsonResponse({'monto':total})\n            return response",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "ganancias_total_con_porcentaje",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def ganancias_total_con_porcentaje(request):\n    if request.method == 'GET':\n        try:\n            ganancias = Registros_ganancias.objects.all()\n            spred = Spread.objects.all()\n            total = 0\n            for m in ganancias:\n                if m.pagado == False:\n                    total += round(calcula_porcentaje_directo(float(m.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)\n            response = JsonResponse({'monto':total})",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "ganancias_cpa",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def ganancias_cpa(request):\n    if request.method == 'GET':\n        try:\n            cpas = Registros_cpa.objects.filter()\n            data = []\n            for r in cpas:\n                data.append( \n                    {\n                        'client':r.client,\n                        'fpa':r.fpa",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "ganancias_cpa_by_id",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def ganancias_cpa_by_id(request,pk):\n    if request.method == 'GET':\n        try:\n            cpas = Registros_cpa.objects.filter(fpa=pk)\n            data = []\n            for r in cpas:\n                data.append( \n                    {\n                        'client':r.client,\n                        'fpa':r.fpa,",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "filtarGananciasCpa",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def filtarGananciasCpa(request):\n    if request.method == \"GET\":    \n        try:\n            ganancias = Registros_cpa.objects.all()\n            data=[]\n            for r in ganancias:\n                data.append( \n                    {\n                        'creacion':r.fecha_creacion,\n                        'monto':r.monto,",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "filtarGananciasCpaById",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def filtarGananciasCpaById(request,pk):\n    if request.method == \"GET\":    \n        try:\n            ganancias = Registros_cpa.objects.filter(fpa=pk)\n            data=[]\n            for r in ganancias:\n                data.append( \n                    {\n                        'creacion':r.fecha_creacion,\n                        'monto':r.monto,",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "filtradoGananciasRevshare",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def filtradoGananciasRevshare(request):\n    if request.method == 'GET':\n        try:\n            ganancias = Registros_ganancias.objects.all()\n            data = []\n            for r in ganancias:\n                monto_spread= round(calcula_porcentaje_directo(float(r.partner_earning,20,10)),2)\n                data.append( \n                    {\n                        'creacion':r.fecha_operacion,",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "filtrar_ganancias_by_revshare_By_Id",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def filtrar_ganancias_by_revshare_By_Id(request,pk):\n    if request.method == 'GET':\n        try:\n            ganancias = Registros_ganancias.objects.filter(fpa=pk)\n            spred = Spread.objects.all()\n            data = []\n            for r in ganancias:\n                monto_spread= round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)\n                if r.pagado == False and r.fecha_operacion != None:\n                    data.append( ",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "filterGananciasFecha",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def filterGananciasFecha(request,desde,hasta):\n    # fecha_desde = datetime.strptime(desde, \"%Y-%m-%d\").date\n    # fecha_hasta = datetime.strptime(hasta, \"%Y-%m-%d\").date\n    try:\n        if request.method == 'GET':\n            ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta))\n            cpas = Registros_cpa.objects.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta))\n            spred = Spread.objects.all()\n            data= []\n            for r in ganancias:",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "filterGananciasFechaById",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def filterGananciasFechaById(request,pk,desde,hasta):\n    # fecha_desde = datetime.strptime(desde, \"%Y-%m-%d\").date\n    # fecha_hasta = datetime.strptime(hasta, \"%Y-%m-%d\").date\n    if request.method == 'GET':\n        try:\n            ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde,fpa=pk) & Q(fecha_operacion__lte=hasta,fpa=pk))\n            cpas = Registros_cpa.objects.filter(Q(fecha_creacion__gte=desde,fpa=pk) & Q(fecha_creacion__lte=hasta,fpa=pk))\n            spred = Spread.objects.all()\n            data=[]\n            for r in ganancias:",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "filter_ganancia_to_date_by_id",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def filter_ganancia_to_date_by_id(request,pk,desde,hasta):\n    # fecha_desde = datetime.strptime(desde, \"%Y-%m-%d\").date\n    # fecha_hasta = datetime.strptime(hasta, \"%Y-%m-%d\").date\n    spread = Spread.objects.all()\n    try:\n        if request.method == 'GET':\n            cpa = Registros_cpa.objects.filter(Q(fecha_creacion__gte=desde,fpa=pk) & Q(fecha_creacion__lte=hasta,fpa=pk))\n            ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta),fpa=pk)\n            spread_indirecto = SpreadIndirecto.objects.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta),fpa=pk)\n            cuenta = Cuenta.objects.filter(fpa=pk).first()",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "ganancias_all_for_id",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def ganancias_all_for_id(request,desde,hasta):\n    \"\"\"\n    This function retrieves all the earnings data for a given time period and FPA (Fixed Payment Agreement) ID.\n    It returns a JSON response with the data organized by FPA ID, and each FPA ID has a list of earnings data associated with it.\n    The earnings data includes information about spread, CPA, bonuses, and reversals.\n    \"\"\"\n    if request.method == 'GET':\n        try:\n            ganancias = Registros_ganancias.objects.all()\n            cpas = Registros_cpa.objects.all()",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "ganancia_a_pagar",
+        "kind": 2,
+        "importPath": "apps.api.controller.ganancias",
+        "description": "apps.api.controller.ganancias",
+        "peekOfCode": "def ganancia_a_pagar(request):\n    if request.method == 'PUT':\n        try:\n            datos = json.loads(request.body)\n            ganancias = Registros_ganancias.objects.all()\n            cpas = Registros_cpa.objects.all()\n            cuentas = Cuenta.objects.all()\n            bonos = BonoAPagar.objects.all()\n            spreads = SpreadIndirecto.objects.all()\n            for d in datos.get('body'):",
+        "detail": "apps.api.controller.ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "verificar",
+        "kind": 2,
+        "importPath": "apps.api.controller.registros",
+        "description": "apps.api.controller.registros",
+        "peekOfCode": "def verificar(request):\n    if request.method=='GET':\n        try:\n            registros = Registro_archivo.objects.all()\n            data = []\n            for r in registros:\n                fpa = Relation_fpa_client.objects.filter(client=r.client)\n                dep = 0\n                if r.primer_deposito>0:\n                    dep = 1",
+        "detail": "apps.api.controller.registros",
+        "documentation": {}
+    },
+    {
+        "label": "registrosGetAll",
+        "kind": 2,
+        "importPath": "apps.api.controller.registros",
+        "description": "apps.api.controller.registros",
+        "peekOfCode": "def registrosGetAll(request):\n    if request.method == 'GET':\n        try:\n            registros = Registro_archivo.objects.all()\n            data=[]\n            for r in registros:\n                nombres = Registros_ganancias.objects.filter(client=r.client)\n                if nombres.exists():\n                    nombre = nombres[0].full_name\n                else:",
+        "detail": "apps.api.controller.registros",
+        "documentation": {}
+    },
+    {
+        "label": "getRegistroById",
+        "kind": 2,
+        "importPath": "apps.api.controller.registros",
+        "description": "apps.api.controller.registros",
+        "peekOfCode": "def getRegistroById(request,pk):\n    if request.method == 'GET':\n        try:\n            customer = Relation_fpa_client.objects.filter(fpa=pk)\n            data=[]\n            for r in customer:\n                registros= Registro_archivo.objects.filter(client=r.client)\n                registro = registros.first()\n                if customer.exists():\n                    nombre = nombres[0].full_name",
+        "detail": "apps.api.controller.registros",
+        "documentation": {}
+    },
+    {
+        "label": "filter_registros_fecha_by_id",
+        "kind": 2,
+        "importPath": "apps.api.controller.registros",
+        "description": "apps.api.controller.registros",
+        "peekOfCode": "def filter_registros_fecha_by_id(request,pk,desde,hasta):\n    # fecha_desde = datetime.strptime(desde, \"%Y-%m-%d\").date\n    # fecha_hasta = datetime.strptime(hasta, \"%Y-%m-%d\").date\n    try:\n        if request.method == 'GET':\n            registros = Registro_archivo.objects.filter(Q(fecha_registro__gte=desde) & Q(fecha_registro__lte=hasta),fpa=pk)\n            data= []\n            for r in registros:\n                nombres = Relation_fpa_client.objects.filter(client=r.client)\n                if nombres.exists():",
+        "detail": "apps.api.controller.registros",
+        "documentation": {}
+    },
+    {
+        "label": "postNewAfiliado",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def postNewAfiliado(request):\n    if request.method == 'POST':\n        # if 'application/json' in request.content_type:\n            try:\n                afiliados = Afiliado.objects.all()\n                # Decodificar el cuerpo de la solicitud como JSON\n                fpa = request.POST.get('fpa').upper()\n                url = request.POST.get('url')\n                upline = request.POST.get('up_line').upper()\n                cuenta = Cuenta.objects.filter(fpa=fpa)",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "postNewUser",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def postNewUser(request):\n    if request.method == 'POST':\n        if 'application/json' in request.content_type:\n            try:\n                # Decodificar el cuerpo de la solicitud como JSON\n                data = json.loads(request.body)\n                usuario = Usuario.objects.all()\n                afiliados = Afiliado.objects.filter(fpa=data.get('fpa'))\n                if afiliados.exists():\n                    print(afiliados[0].fpa)",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "getUser",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def getUser(request,email):\n    if request.method == 'GET':\n        # Asegúrate de que la solicitud tenga el tipo de contenido adecuado (application/json)\n            try:\n                usuarios = Usuario.objects.all()\n                data = []\n                for u in usuarios:\n                    if u.email.upper() == email.upper():\n                        data.append({\n                            'fpa':u.fpa,",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "getUserById",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def getUserById(request, pk):\n    if request.method == 'GET':\n        try:\n            usuario = Usuario.objects.get(fpa=pk)  # Corrige el nombre del campo fpa\n            data = {\n                'fpa': usuario.fpa,\n                'email': usuario.email,\n                'first_name': usuario.first_name,\n                'password': usuario.password,\n                'telephone': usuario.telephone,",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "updateUserById",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def updateUserById(request, pk):\n    try:\n        if request.method == 'POST' or request.method == 'PUT':\n            try:\n                body_data = json.loads(request.body)  # Decodifica el cuerpo como JSON\n            except json.JSONDecodeError:\n                # Si hay un error al decodificar JSON, devuelve una respuesta de error\n                return JsonResponse({'message': 'Datos inválidos en el cuerpo (body)'}, status=400)\n            # Aquí puedes acceder a los datos enviados en el cuerpo (body)\n            name = body_data.get('name')",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "updatePerfilUser",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def updatePerfilUser(request, pk):\n    if request.method == 'POST' or request.method == 'PUT':\n        try:\n            try:\n                body_data = json.loads(request.body)  # Decodifica el cuerpo como JSON\n            except json.JSONDecodeError:\n                return JsonResponse({'error': 'Datos inválidos en el cuerpo (body)'}, status=400)\n            users = Usuario.objects.get(fpa=pk)\n            users.telephone=body_data.get('telephone')\n            users.wallet=body_data.get('wallet')",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "users",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def users(request):\n    if request.method == 'GET':\n        try:\n            usuarios = Usuario.objects.all()\n            data = []\n            for u in usuarios:\n                if u.eliminado is False:\n                    data.append({\n                        'fpa':u.fpa,\n                        'email':     u.email,",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "usuarioValido",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def usuarioValido(request,email,password):\n    users = Usuario.objects.all()\n    data= False\n    for user in users:\n        if user.email == email and user.password == password:\n            data= True\n    response = JsonResponse({'data': data})\n    # response['Access-Control-Allow-Origin'] = '*' \n    return response\n@csrf_exempt    ",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "eliminarUser",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def eliminarUser(request,pk):\n    if request.method == 'DELETE':\n        user = Usuario.objects.get(fpa=pk)\n        user.eliminado = True\n        user.save()\n        response = JsonResponse({'data': 'User eliminado'})\n    else:\n        response = JsonResponse({'Error':'Metodo invalido'})\n    return response\n@csrf_exempt   ",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "users_pendientes",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def users_pendientes(request):\n    try:\n        usuarios = Usuario.objects.all()\n        data = []\n        for u in usuarios:\n            if u.aceptado is False and u.eliminado is False:\n                data.append({\n                    'fpa':u.fpa,\n                    'email':     u.email,\n                    'first_name':u.first_name,",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "users_eliminados",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def users_eliminados(request):\n    try:\n        usuarios = Usuario.objects.all()\n        data = []\n        for u in usuarios:\n            if u.eliminado is True:\n                data.append({\n                    'fpa':u.fpa,\n                    'email':     u.email,\n                    'first_name':u.first_name,",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "updatePassword",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def updatePassword(request,pk):\n    if request.method == 'PUT':\n        try:\n            body = json.loads(request.body)\n            usuario = Usuario.objects.get(fpa=pk)\n            usuario.password= body.get('password')\n            usuario.save()\n            return JsonResponse({'data':'password modificado con exito'})\n        except Exception as e:\n            return JsonResponse({'Error':e})",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "deleteUser",
+        "kind": 2,
+        "importPath": "apps.api.controller.users",
+        "description": "apps.api.controller.users",
+        "peekOfCode": "def deleteUser(request,pk):\n    try:\n        if request.method == 'POST':\n            user = Usuario.objects.get(fpa=pk)\n            user.delete()\n            return JsonResponse({'data':'Usuario eliminado'})\n        else:\n            return JsonResponse({'Error':'Metodo invalido'})\n    except Exception as e:\n        print(e.__str__())",
+        "detail": "apps.api.controller.users",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0001_initial",
+        "description": "apps.api.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Relation_fpa_client',\n            fields=[\n                ('id', models.AutoField(primary_key=True, serialize=False)),\n                ('fpa', models.CharField(max_length=50)),",
+        "detail": "apps.api.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0002_registro_archivo",
+        "description": "apps.api.migrations.0002_registro_archivo",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0001_initial'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='registro_archivo',\n            fields=[\n                ('id', models.AutoField(primary_key=True, serialize=False)),\n                ('client', models.CharField(max_length=50)),",
+        "detail": "apps.api.migrations.0002_registro_archivo",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0003_alter_registro_archivo_fpa",
+        "description": "apps.api.migrations.0003_alter_registro_archivo_fpa",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0002_registro_archivo'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='registro_archivo',\n            name='fpa',\n            field=models.CharField(max_length=50, null=True),\n        ),",
+        "detail": "apps.api.migrations.0003_alter_registro_archivo_fpa",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0004_registros_cpa",
+        "description": "apps.api.migrations.0004_registros_cpa",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0003_alter_registro_archivo_fpa'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Registros_cpa',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('fecha_creacion', models.DateField(null=True)),",
+        "detail": "apps.api.migrations.0004_registros_cpa",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0005_registros_cpa_pagado",
+        "description": "apps.api.migrations.0005_registros_cpa_pagado",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0004_registros_cpa'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='registros_cpa',\n            name='pagado',\n            field=models.BooleanField(default=False),\n        ),",
+        "detail": "apps.api.migrations.0005_registros_cpa_pagado",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0006_registros_ganancias",
+        "description": "apps.api.migrations.0006_registros_ganancias",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0005_registros_cpa_pagado'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Registros_ganancias',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('client', models.CharField(max_length=100)),",
+        "detail": "apps.api.migrations.0006_registros_ganancias",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0007_registros_ganancias_fpa",
+        "description": "apps.api.migrations.0007_registros_ganancias_fpa",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0006_registros_ganancias'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='registros_ganancias',\n            name='fpa',\n            field=models.CharField(default=0, max_length=200),\n            preserve_default=False,",
+        "detail": "apps.api.migrations.0007_registros_ganancias_fpa",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0008_alter_registros_ganancias_deposito",
+        "description": "apps.api.migrations.0008_alter_registros_ganancias_deposito",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0007_registros_ganancias_fpa'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='registros_ganancias',\n            name='deposito',\n            field=models.CharField(max_length=50),\n        ),",
+        "detail": "apps.api.migrations.0008_alter_registros_ganancias_deposito",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0009_alter_registros_ganancias_withdrawals",
+        "description": "apps.api.migrations.0009_alter_registros_ganancias_withdrawals",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0008_alter_registros_ganancias_deposito'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='registros_ganancias',\n            name='withdrawals',\n            field=models.CharField(max_length=50),\n        ),",
+        "detail": "apps.api.migrations.0009_alter_registros_ganancias_withdrawals",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0010_alter_registros_ganancias_fecha_first_trade_and_more",
+        "description": "apps.api.migrations.0010_alter_registros_ganancias_fecha_first_trade_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0009_alter_registros_ganancias_withdrawals'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='registros_ganancias',\n            name='fecha_first_trade',\n            field=models.DateField(null=True),\n        ),",
+        "detail": "apps.api.migrations.0010_alter_registros_ganancias_fecha_first_trade_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0011_alter_registros_ganancias_fpa",
+        "description": "apps.api.migrations.0011_alter_registros_ganancias_fpa",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0010_alter_registros_ganancias_fecha_first_trade_and_more'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='registros_ganancias',\n            name='fpa',\n            field=models.CharField(max_length=200, null=True),\n        ),",
+        "detail": "apps.api.migrations.0011_alter_registros_ganancias_fpa",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0012_registros_ganancias_pagado",
+        "description": "apps.api.migrations.0012_registros_ganancias_pagado",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0011_alter_registros_ganancias_fpa'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='registros_ganancias',\n            name='pagado',\n            field=models.BooleanField(default=False),\n        ),",
+        "detail": "apps.api.migrations.0012_registros_ganancias_pagado",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0013_registros_ganancias_spreak_direct_and_more",
+        "description": "apps.api.migrations.0013_registros_ganancias_spreak_direct_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0012_registros_ganancias_pagado'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='registros_ganancias',\n            name='spreak_direct',\n            field=models.FloatField(default=0),\n        ),",
+        "detail": "apps.api.migrations.0013_registros_ganancias_spreak_direct_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0014_registros_ganancias_monto_a_pagar",
+        "description": "apps.api.migrations.0014_registros_ganancias_monto_a_pagar",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0013_registros_ganancias_spreak_direct_and_more'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='registros_ganancias',\n            name='monto_a_pagar',\n            field=models.DecimalField(decimal_places=2, default=0, max_digits=10),\n            preserve_default=False,",
+        "detail": "apps.api.migrations.0014_registros_ganancias_monto_a_pagar",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0015_alter_registros_ganancias_id",
+        "description": "apps.api.migrations.0015_alter_registros_ganancias_id",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0014_registros_ganancias_monto_a_pagar'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='registros_ganancias',\n            name='id',\n            field=models.AutoField(primary_key=True, serialize=False),\n        ),",
+        "detail": "apps.api.migrations.0015_alter_registros_ganancias_id",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0016_cpa_a_pagar_alter_registros_cpa_id",
+        "description": "apps.api.migrations.0016_cpa_a_pagar_alter_registros_cpa_id",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0015_alter_registros_ganancias_id'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Cpa_a_pagar',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('fecha_creacion', models.DateField(auto_created=True)),",
+        "detail": "apps.api.migrations.0016_cpa_a_pagar_alter_registros_cpa_id",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0017_rename_fecha_first_trade_registros_ganancias_fecha_operacion_and_more",
+        "description": "apps.api.migrations.0017_rename_fecha_first_trade_registros_ganancias_fecha_operacion_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0016_cpa_a_pagar_alter_registros_cpa_id'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='registros_ganancias',\n            old_name='fecha_first_trade',\n            new_name='fecha_operacion',\n        ),",
+        "detail": "apps.api.migrations.0017_rename_fecha_first_trade_registros_ganancias_fecha_operacion_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0018_spreadindirecto",
+        "description": "apps.api.migrations.0018_spreadindirecto",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0017_rename_fecha_first_trade_registros_ganancias_fecha_operacion_and_more'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='SpreadIndirecto',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('fecha_creacion', models.DateField(auto_created=True)),",
+        "detail": "apps.api.migrations.0018_spreadindirecto",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0019_rename_client_spreadindirecto_fpa_child",
+        "description": "apps.api.migrations.0019_rename_client_spreadindirecto_fpa_child",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0018_spreadindirecto'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='spreadindirecto',\n            old_name='client',\n            new_name='fpa_child',\n        ),",
+        "detail": "apps.api.migrations.0019_rename_client_spreadindirecto_fpa_child",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0020_alter_cpa_a_pagar_id_alter_spreadindirecto_id",
+        "description": "apps.api.migrations.0020_alter_cpa_a_pagar_id_alter_spreadindirecto_id",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0019_rename_client_spreadindirecto_fpa_child'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='cpa_a_pagar',\n            name='id',\n            field=models.AutoField(primary_key=True, serialize=False),\n        ),",
+        "detail": "apps.api.migrations.0020_alter_cpa_a_pagar_id_alter_spreadindirecto_id",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0021_registros_cpa_monto_real",
+        "description": "apps.api.migrations.0021_registros_cpa_monto_real",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0020_alter_cpa_a_pagar_id_alter_spreadindirecto_id'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='registros_cpa',\n            name='monto_real',\n            field=models.FloatField(default=0),\n            preserve_default=False,",
+        "detail": "apps.api.migrations.0021_registros_cpa_monto_real",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.api.migrations.0022_remove_registros_ganancias_skilling_commission_and_more",
+        "description": "apps.api.migrations.0022_remove_registros_ganancias_skilling_commission_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('api', '0021_registros_cpa_monto_real'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='registros_ganancias',\n            name='skilling_commission',\n        ),\n        migrations.RemoveField(",
+        "detail": "apps.api.migrations.0022_remove_registros_ganancias_skilling_commission_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "ApiConfig",
+        "kind": 6,
+        "importPath": "apps.api.apps",
+        "description": "apps.api.apps",
+        "peekOfCode": "class ApiConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'apps.api'",
+        "detail": "apps.api.apps",
+        "documentation": {}
+    },
+    {
+        "label": "Relation_fpa_client",
+        "kind": 6,
+        "importPath": "apps.api.models",
+        "description": "apps.api.models",
+        "peekOfCode": "class Relation_fpa_client(models.Model):\n    id = models.AutoField(primary_key=True)\n    fpa = models.CharField(max_length=50)\n    client = models.CharField(max_length=100)\n    full_name= models.CharField(max_length=200)\n    country= models.CharField(max_length=50)    \n    fecha_registro=models.DateField(null=True)\n    fecha_creacion=models.DateField(null=True)\n    fecha_verificacion= models.DateField(null=True)\n    status = models.CharField(max_length=100,null=True)",
+        "detail": "apps.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "Registro_archivo",
+        "kind": 6,
+        "importPath": "apps.api.models",
+        "description": "apps.api.models",
+        "peekOfCode": "class Registro_archivo(models.Model):\n    id= models.AutoField(primary_key=True)\n    client= models.CharField(max_length=50)\n    fecha_registro= models.DateField(null=True)\n    fpa= models.CharField(max_length=50,null=True)\n    status= models.CharField(max_length=100,null=True)\n    fecha_calif= models.DateField(null=True)\n    country= models.CharField(max_length=30)\n    posicion_cuenta= models.FloatField(default=0)\n    volumen= models.FloatField(default=0)",
+        "detail": "apps.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "Registros_cpa",
+        "kind": 6,
+        "importPath": "apps.api.models",
+        "description": "apps.api.models",
+        "peekOfCode": "class Registros_cpa(models.Model):\n    id = models.AutoField(primary_key=True)\n    fecha_creacion= models.DateField(null=True)\n    monto_real= models.FloatField()\n    monto= models.FloatField()\n    cpa= models.CharField(max_length=50)\n    client= models.CharField(max_length=50)\n    fpa= models.CharField(max_length=50)\n    pagado= models.BooleanField(default=False)\n    def __str__(self):",
+        "detail": "apps.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "Registros_ganancias",
+        "kind": 6,
+        "importPath": "apps.api.models",
+        "description": "apps.api.models",
+        "peekOfCode": "class Registros_ganancias(models.Model):\n    id= models.AutoField(primary_key=True)\n    client = models.CharField(max_length=100)\n    symbol=models.CharField(max_length=100)\n    deal_id=models.CharField(max_length=100)\n    fpa=models.CharField(max_length=200,null=True)\n    full_name = models.CharField(max_length=200)\n    partner_earning = models.DecimalField(max_digits=10, decimal_places=2)\n    monto_a_pagar= models.DecimalField(max_digits=10, decimal_places=2)\n    fecha_operacion = models.DateField(null=True)",
+        "detail": "apps.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "Cpa_a_pagar",
+        "kind": 6,
+        "importPath": "apps.api.models",
+        "description": "apps.api.models",
+        "peekOfCode": "class Cpa_a_pagar(models.Model):\n    id= models.AutoField(primary_key=True)\n    monto= models.FloatField()\n    client= models.CharField(max_length=50)\n    fpa= models.CharField(max_length=50)\n    fecha_creacion= models.DateField(auto_created=True)\n    pagado = models.BooleanField(default=False)\n    def __str__(self):\n        return self.client\nclass SpreadIndirecto(models.Model):",
+        "detail": "apps.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "SpreadIndirecto",
+        "kind": 6,
+        "importPath": "apps.api.models",
+        "description": "apps.api.models",
+        "peekOfCode": "class SpreadIndirecto(models.Model):\n    id= models.AutoField(primary_key=True)\n    monto= models.FloatField()\n    fpa_child= models.CharField(max_length=50)\n    fpa= models.CharField(max_length=50)\n    fecha_creacion= models.DateField(auto_created=True)\n    pagado = models.BooleanField(default=False)\n    def __str__(self):\n        return self.fpa",
+        "detail": "apps.api.models",
+        "documentation": {}
+    },
+    {
+        "label": "app_name",
+        "kind": 5,
+        "importPath": "apps.api.urls",
+        "description": "apps.api.urls",
+        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n      #Todos los registros de todos para Admin\n      #############################################################################################\n      ########################             Registros                ###############################\n      #############################################################################################\n      #return array de Registros\n      path('verificar/',verificar,name='verificar'),\n      path('registros/',registrosGetAll,name='registros'),\n      path('registrosbyid/<pk>/',getRegistroById,name='registrosById'),",
+        "detail": "apps.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "apps.api.urls",
+        "description": "apps.api.urls",
+        "peekOfCode": "urlpatterns = [\n      #Todos los registros de todos para Admin\n      #############################################################################################\n      ########################             Registros                ###############################\n      #############################################################################################\n      #return array de Registros\n      path('verificar/',verificar,name='verificar'),\n      path('registros/',registrosGetAll,name='registros'),\n      path('registrosbyid/<pk>/',getRegistroById,name='registrosById'),\n      path('filtrarregistrosfecha/<pk>/<desde>/<hasta>/', filter_registros_fecha_by_id, name = 'registrosFiltradoFecha'),",
+        "detail": "apps.api.urls",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0001_initial",
+        "description": "apps.usuarios.migrations.0001_initial",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n        ('auth', '0012_alter_user_first_name_max_length'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Usuario',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),",
+        "detail": "apps.usuarios.migrations.0001_initial",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0002_usuario_afiliadoid_usuario_link_usuario_telephone_and_more",
+        "description": "apps.usuarios.migrations.0002_usuario_afiliadoid_usuario_link_usuario_telephone_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0001_initial'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='usuario',\n            name='afiliadoid',\n            field=models.CharField(default=0, max_length=50),\n            preserve_default=False,",
+        "detail": "apps.usuarios.migrations.0002_usuario_afiliadoid_usuario_link_usuario_telephone_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0003_usuario_cpa_usuario_monto_usuario_retiros",
+        "description": "apps.usuarios.migrations.0003_usuario_cpa_usuario_monto_usuario_retiros",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0002_usuario_afiliadoid_usuario_link_usuario_telephone_and_more'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='usuario',\n            name='cpa',\n            field=models.IntegerField(default=0),\n            preserve_default=False,",
+        "detail": "apps.usuarios.migrations.0003_usuario_cpa_usuario_monto_usuario_retiros",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0004_alter_usuario_cpa_alter_usuario_monto_and_more",
+        "description": "apps.usuarios.migrations.0004_alter_usuario_cpa_alter_usuario_monto_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0003_usuario_cpa_usuario_monto_usuario_retiros'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='usuario',\n            name='cpa',\n            field=models.IntegerField(default=0),\n        ),",
+        "detail": "apps.usuarios.migrations.0004_alter_usuario_cpa_alter_usuario_monto_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0005_usuario_roles",
+        "description": "apps.usuarios.migrations.0005_usuario_roles",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0004_alter_usuario_cpa_alter_usuario_monto_and_more'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='usuario',\n            name='roles',\n            field=models.CharField(default='user', max_length=50),\n        ),",
+        "detail": "apps.usuarios.migrations.0005_usuario_roles",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0006_usuario_aceptado",
+        "description": "apps.usuarios.migrations.0006_usuario_aceptado",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0005_usuario_roles'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='usuario',\n            name='aceptado',\n            field=models.BooleanField(default=False),\n        ),",
+        "detail": "apps.usuarios.migrations.0006_usuario_aceptado",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0007_usuario_eliminado",
+        "description": "apps.usuarios.migrations.0007_usuario_eliminado",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0006_usuario_aceptado'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='usuario',\n            name='eliminado',\n            field=models.BooleanField(default=False),\n        ),",
+        "detail": "apps.usuarios.migrations.0007_usuario_eliminado",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0008_bonocpa_usuario_havebono",
+        "description": "apps.usuarios.migrations.0008_bonocpa_usuario_havebono",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0007_usuario_eliminado'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='BonoCpa',\n            fields=[\n                ('idBonoCPA', models.AutoField(primary_key=True, serialize=False, verbose_name='id')),\n                ('bono', models.CharField(max_length=50)),",
+        "detail": "apps.usuarios.migrations.0008_bonocpa_usuario_havebono",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0009_usuario_cpaindirecto",
+        "description": "apps.usuarios.migrations.0009_usuario_cpaindirecto",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0008_bonocpa_usuario_havebono'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='usuario',\n            name='cpaIndirecto',\n            field=models.IntegerField(default=0),\n        ),",
+        "detail": "apps.usuarios.migrations.0009_usuario_cpaindirecto",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0010_bonocpaindirecto_usuario_indirectobono",
+        "description": "apps.usuarios.migrations.0010_bonocpaindirecto_usuario_indirectobono",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0009_usuario_cpaindirecto'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='BonoCpaIndirecto',\n            fields=[\n                ('idBonoCPA', models.AutoField(primary_key=True, serialize=False, verbose_name='id')),\n                ('bono', models.CharField(max_length=50)),",
+        "detail": "apps.usuarios.migrations.0010_bonocpaindirecto_usuario_indirectobono",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0011_rename_indirectobono_usuario_bonoindirecto_1_and_more",
+        "description": "apps.usuarios.migrations.0011_rename_indirectobono_usuario_bonoindirecto_1_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0010_bonocpaindirecto_usuario_indirectobono'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='usuario',\n            old_name='indirectoBono',\n            new_name='bonoIndirecto_1',\n        ),",
+        "detail": "apps.usuarios.migrations.0011_rename_indirectobono_usuario_bonoindirecto_1_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0012_spread",
+        "description": "apps.usuarios.migrations.0012_spread",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0011_rename_indirectobono_usuario_bonoindirecto_1_and_more'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Spread',\n            fields=[\n                ('idSpread', models.AutoField(primary_key=True, serialize=False, verbose_name='id')),\n                ('spread', models.CharField(max_length=50)),",
+        "detail": "apps.usuarios.migrations.0012_spread",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0013_alter_usuario_uplink",
+        "description": "apps.usuarios.migrations.0013_alter_usuario_uplink",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0012_spread'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='usuario',\n            name='uplink',\n            field=models.CharField(max_length=50, null=True),\n        ),",
+        "detail": "apps.usuarios.migrations.0013_alter_usuario_uplink",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0014_rename_monto_usuario_montobonodirecto_and_more",
+        "description": "apps.usuarios.migrations.0014_rename_monto_usuario_montobonodirecto_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0013_alter_usuario_uplink'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='usuario',\n            old_name='monto',\n            new_name='montoBonoDirecto',\n        ),",
+        "detail": "apps.usuarios.migrations.0014_rename_monto_usuario_montobonodirecto_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0015_usuario_montopagar",
+        "description": "apps.usuarios.migrations.0015_usuario_montopagar",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0014_rename_monto_usuario_montobonodirecto_and_more'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='usuario',\n            name='montoPagar',\n            field=models.FloatField(default=0.0),\n        ),",
+        "detail": "apps.usuarios.migrations.0015_usuario_montopagar",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0016_usuario_montobonoindirecto",
+        "description": "apps.usuarios.migrations.0016_usuario_montobonoindirecto",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0015_usuario_montopagar'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='usuario',\n            name='montoBonoIndirecto',\n            field=models.FloatField(default=0.0),\n        ),",
+        "detail": "apps.usuarios.migrations.0016_usuario_montobonoindirecto",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0017_pagorealizado",
+        "description": "apps.usuarios.migrations.0017_pagorealizado",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0016_usuario_montobonoindirecto'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='PagoRealizado',\n            fields=[\n                ('id_pagos', models.AutoField(primary_key=True, serialize=False, verbose_name='id')),\n                ('afiliadoid', models.CharField(max_length=50)),",
+        "detail": "apps.usuarios.migrations.0017_pagorealizado",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0018_rename_montobonodirecto_usuario_monto_a_pagar_and_more",
+        "description": "apps.usuarios.migrations.0018_rename_montobonodirecto_usuario_monto_a_pagar_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0017_pagorealizado'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='usuario',\n            old_name='montoBonoDirecto',\n            new_name='monto_a_pagar',\n        ),",
+        "detail": "apps.usuarios.migrations.0018_rename_montobonodirecto_usuario_monto_a_pagar_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0019_remove_usuario_bonoindirecto_1_and_more",
+        "description": "apps.usuarios.migrations.0019_remove_usuario_bonoindirecto_1_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0018_rename_montobonodirecto_usuario_monto_a_pagar_and_more'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='usuario',\n            name='bonoIndirecto_1',\n        ),\n        migrations.RemoveField(",
+        "detail": "apps.usuarios.migrations.0019_remove_usuario_bonoindirecto_1_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0020_rename_level_bono_usuario_level_bono_directo_and_more",
+        "description": "apps.usuarios.migrations.0020_rename_level_bono_usuario_level_bono_directo_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0019_remove_usuario_bonoindirecto_1_and_more'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='usuario',\n            old_name='level_bono',\n            new_name='level_bono_directo',\n        ),",
+        "detail": "apps.usuarios.migrations.0020_rename_level_bono_usuario_level_bono_directo_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0021_usuario_monto_directo",
+        "description": "apps.usuarios.migrations.0021_usuario_monto_directo",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0020_rename_level_bono_usuario_level_bono_directo_and_more'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='usuario',\n            name='monto_directo',\n            field=models.FloatField(default=0.0),\n        ),",
+        "detail": "apps.usuarios.migrations.0021_usuario_monto_directo",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0022_usuario_registrado",
+        "description": "apps.usuarios.migrations.0022_usuario_registrado",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0021_usuario_monto_directo'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='usuario',\n            name='registrado',\n            field=models.BooleanField(default=False),\n        ),",
+        "detail": "apps.usuarios.migrations.0022_usuario_registrado",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0023_rename_afiliadoid_usuario_fpa_and_more",
+        "description": "apps.usuarios.migrations.0023_rename_afiliadoid_usuario_fpa_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0022_usuario_registrado'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='usuario',\n            old_name='afiliadoid',\n            new_name='fpa',\n        ),",
+        "detail": "apps.usuarios.migrations.0023_rename_afiliadoid_usuario_fpa_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0024_montos_rename_afiliadoid_pagorealizado_fpa_and_more",
+        "description": "apps.usuarios.migrations.0024_montos_rename_afiliadoid_pagorealizado_fpa_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0023_rename_afiliadoid_usuario_fpa_and_more'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Montos',\n            fields=[\n                ('id_monto', models.AutoField(primary_key=True, serialize=False, verbose_name='id')),\n                ('fpa', models.CharField(max_length=50)),",
+        "detail": "apps.usuarios.migrations.0024_montos_rename_afiliadoid_pagorealizado_fpa_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0025_remove_usuario_cpa_remove_usuario_cpaindirecto_and_more",
+        "description": "apps.usuarios.migrations.0025_remove_usuario_cpa_remove_usuario_cpaindirecto_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0024_montos_rename_afiliadoid_pagorealizado_fpa_and_more'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='usuario',\n            name='cpa',\n        ),\n        migrations.RemoveField(",
+        "detail": "apps.usuarios.migrations.0025_remove_usuario_cpa_remove_usuario_cpaindirecto_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0026_rename_montos_cuenta",
+        "description": "apps.usuarios.migrations.0026_rename_montos_cuenta",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0025_remove_usuario_cpa_remove_usuario_cpaindirecto_and_more'),\n    ]\n    operations = [\n        migrations.RenameModel(\n            old_name='Montos',\n            new_name='Cuenta',\n        ),\n    ]",
+        "detail": "apps.usuarios.migrations.0026_rename_montos_cuenta",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0027_remove_usuario_havebono_cuenta_havebono",
+        "description": "apps.usuarios.migrations.0027_remove_usuario_havebono_cuenta_havebono",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0026_rename_montos_cuenta'),\n    ]\n    operations = [\n        migrations.RemoveField(\n            model_name='usuario',\n            name='haveBono',\n        ),\n        migrations.AddField(",
+        "detail": "apps.usuarios.migrations.0027_remove_usuario_havebono_cuenta_havebono",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0028_cuenta_havebonoindirecto",
+        "description": "apps.usuarios.migrations.0028_cuenta_havebonoindirecto",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0027_remove_usuario_havebono_cuenta_havebono'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='cuenta',\n            name='haveBonoIndirecto',\n            field=models.BooleanField(default=False),\n        ),",
+        "detail": "apps.usuarios.migrations.0028_cuenta_havebonoindirecto",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0029_rename_havebono_cuenta_have_bono_and_more",
+        "description": "apps.usuarios.migrations.0029_rename_havebono_cuenta_have_bono_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0028_cuenta_havebonoindirecto'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='cuenta',\n            old_name='haveBono',\n            new_name='have_bono',\n        ),",
+        "detail": "apps.usuarios.migrations.0029_rename_havebono_cuenta_have_bono_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0030_rename_monto_directo_cuenta_cpa_directo_and_more",
+        "description": "apps.usuarios.migrations.0030_rename_monto_directo_cuenta_cpa_directo_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0029_rename_havebono_cuenta_have_bono_and_more'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='cuenta',\n            old_name='monto_directo',\n            new_name='cpa_directo',\n        ),",
+        "detail": "apps.usuarios.migrations.0030_rename_monto_directo_cuenta_cpa_directo_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0031_alter_cuenta_cpa_directo_alter_cuenta_cpa_indirecto_and_more",
+        "description": "apps.usuarios.migrations.0031_alter_cuenta_cpa_directo_alter_cuenta_cpa_indirecto_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0030_rename_monto_directo_cuenta_cpa_directo_and_more'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='cuenta',\n            name='cpa_directo',\n            field=models.DecimalField(decimal_places=3, default=0.0, max_digits=10),\n        ),",
+        "detail": "apps.usuarios.migrations.0031_alter_cuenta_cpa_directo_alter_cuenta_cpa_indirecto_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0032_bonoapagar",
+        "description": "apps.usuarios.migrations.0032_bonoapagar",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0031_alter_cuenta_cpa_directo_alter_cuenta_cpa_indirecto_and_more'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='BonoAPagar',\n            fields=[\n                ('id_bono', models.AutoField(primary_key=True, serialize=False, verbose_name='ID')),\n                ('fpa', models.CharField(max_length=50)),",
+        "detail": "apps.usuarios.migrations.0032_bonoapagar",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0033_rename_cpa_directo_cuenta_spread_directo_and_more",
+        "description": "apps.usuarios.migrations.0033_rename_cpa_directo_cuenta_spread_directo_and_more",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0032_bonoapagar'),\n    ]\n    operations = [\n        migrations.RenameField(\n            model_name='cuenta',\n            old_name='cpa_directo',\n            new_name='spread_directo',\n        ),",
+        "detail": "apps.usuarios.migrations.0033_rename_cpa_directo_cuenta_spread_directo_and_more",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0034_cpa",
+        "description": "apps.usuarios.migrations.0034_cpa",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0033_rename_cpa_directo_cuenta_spread_directo_and_more'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='CPA',\n            fields=[\n                ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='id')),\n                ('cpa', models.FloatField(max_length=50)),",
+        "detail": "apps.usuarios.migrations.0034_cpa",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "apps.usuarios.migrations.0035_alter_cpa_cpa",
+        "description": "apps.usuarios.migrations.0035_alter_cpa_cpa",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('usuarios', '0034_cpa'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='cpa',\n            name='cpa',\n            field=models.FloatField(),\n        ),",
+        "detail": "apps.usuarios.migrations.0035_alter_cpa_cpa",
+        "documentation": {}
+    },
+    {
+        "label": "UsuariosConfig",
+        "kind": 6,
+        "importPath": "apps.usuarios.apps",
+        "description": "apps.usuarios.apps",
+        "peekOfCode": "class UsuariosConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'apps.usuarios'",
+        "detail": "apps.usuarios.apps",
+        "documentation": {}
+    },
+    {
+        "label": "BonoCpa",
+        "kind": 6,
+        "importPath": "apps.usuarios.models",
+        "description": "apps.usuarios.models",
+        "peekOfCode": "class BonoCpa(models.Model):\n    idBonoCPA=  models.AutoField('id', primary_key=True)\n    bono= models.CharField(max_length=50)\n    valor= models.IntegerField() \n    def __str__(self):\n        return self.bono\nclass BonoCpaIndirecto(models.Model):\n    idBonoCPA=  models.AutoField('id', primary_key=True)\n    bono= models.CharField(max_length=50)\n    valor= models.IntegerField() ",
+        "detail": "apps.usuarios.models",
+        "documentation": {}
+    },
+    {
+        "label": "BonoCpaIndirecto",
+        "kind": 6,
+        "importPath": "apps.usuarios.models",
+        "description": "apps.usuarios.models",
+        "peekOfCode": "class BonoCpaIndirecto(models.Model):\n    idBonoCPA=  models.AutoField('id', primary_key=True)\n    bono= models.CharField(max_length=50)\n    valor= models.IntegerField() \n    def __str__(self):\n        return self.bono\nclass Spread(models.Model):\n    idSpread=  models.AutoField('id', primary_key=True)\n    spread= models.CharField(max_length=50)\n    porcentaje= models.FloatField() ",
+        "detail": "apps.usuarios.models",
+        "documentation": {}
+    },
+    {
+        "label": "Spread",
+        "kind": 6,
+        "importPath": "apps.usuarios.models",
+        "description": "apps.usuarios.models",
+        "peekOfCode": "class Spread(models.Model):\n    idSpread=  models.AutoField('id', primary_key=True)\n    spread= models.CharField(max_length=50)\n    porcentaje= models.FloatField() \n    def __str__(self):\n        return self.spread\nclass CPA(models.Model):\n    id=  models.AutoField('id', primary_key=True)\n    cpa= models.FloatField()\n    def __str__(self):",
+        "detail": "apps.usuarios.models",
+        "documentation": {}
+    },
+    {
+        "label": "CPA",
+        "kind": 6,
+        "importPath": "apps.usuarios.models",
+        "description": "apps.usuarios.models",
+        "peekOfCode": "class CPA(models.Model):\n    id=  models.AutoField('id', primary_key=True)\n    cpa= models.FloatField()\n    def __str__(self):\n        return str(self.id)\nclass Usuario(AbstractUser):\n    # Agrega campos adicionales personalizados para tu modelo de usuario, por ejemplo:\n    fpa = models.CharField(max_length=50)\n    telephone = models.CharField(max_length=15,null=True)\n    wallet = models.CharField(max_length=100,null=True)",
+        "detail": "apps.usuarios.models",
+        "documentation": {}
+    },
+    {
+        "label": "Usuario",
+        "kind": 6,
+        "importPath": "apps.usuarios.models",
+        "description": "apps.usuarios.models",
+        "peekOfCode": "class Usuario(AbstractUser):\n    # Agrega campos adicionales personalizados para tu modelo de usuario, por ejemplo:\n    fpa = models.CharField(max_length=50)\n    telephone = models.CharField(max_length=15,null=True)\n    wallet = models.CharField(max_length=100,null=True)\n    uplink = models.CharField(max_length=50,null=True)\n    link = models.CharField(max_length=100)\n    roles= models.CharField(max_length=50,default=\"user\")\n    registrado = models.BooleanField(default=False)\n    aceptado= models.BooleanField(default=False)",
+        "detail": "apps.usuarios.models",
+        "documentation": {}
+    },
+    {
+        "label": "Cuenta",
+        "kind": 6,
+        "importPath": "apps.usuarios.models",
+        "description": "apps.usuarios.models",
+        "peekOfCode": "class Cuenta(models.Model):\n    id_monto = models.AutoField(primary_key=True, verbose_name='ID')\n    fpa = models.CharField(max_length=50)\n    monto_total = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    monto_a_pagar = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    spread_directo = models.DecimalField(max_digits=10, decimal_places=3, default=0.0) \n    spread_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    monto_cpa = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    monto_bono_directo = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    monto_bono_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)",
+        "detail": "apps.usuarios.models",
+        "documentation": {}
+    },
+    {
+        "label": "PagoRealizado",
+        "kind": 6,
+        "importPath": "apps.usuarios.models",
+        "description": "apps.usuarios.models",
+        "peekOfCode": "class PagoRealizado(models.Model):\n    id_pagos = models.AutoField(primary_key=True, verbose_name='ID')\n    fpa = models.CharField(max_length=50)\n    date = models.DateField(auto_now_add=True)\n    monto_total = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    monto_pagado = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    monto_cpa = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    monto_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    monto_bono_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    monto_bono_directo = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)",
+        "detail": "apps.usuarios.models",
+        "documentation": {}
+    },
+    {
+        "label": "BonoAPagar",
+        "kind": 6,
+        "importPath": "apps.usuarios.models",
+        "description": "apps.usuarios.models",
+        "peekOfCode": "class BonoAPagar(models.Model):\n    id_bono = models.AutoField(primary_key=True, verbose_name='ID')\n    fpa = models.CharField(max_length=50)\n    date = models.DateField(auto_now_add=True)\n    monto_total = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    monto_bono_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    monto_bono_directo = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)\n    pagado = models.BooleanField(default=False)\n    def __str__(self):\n        return self.fpa",
+        "detail": "apps.usuarios.models",
+        "documentation": {}
+    },
+    {
+        "label": {
+            "name": "",
+            "kind": 2,
+            "peekOfCode": "def  bonoIndirecto(up_link,cpa):\n    print(up_link.fpa,up_link.cpaIndirecto,up_link.cpa,up_link.level_bono_indirecto)\n    if up_link.cpaIndirecto >= 5 and up_link.cpa >=2 and up_link.level_bono_indirecto == 0:\n        up_link.monto_bono_indirecto = int(cpa.objects.get(bono='level1').valor)\n        up_link.level_bono_indirecto += 1\n    if up_link.cpaIndirecto >= 10 and up_link.cpa >=3 and up_link.level_bono_indirecto == 1:\n        up_link.monto_bono_indirecto = int(cpa.objects.get(bono='level2').valor)\n        up_link.level_bono_indirecto += 1\n    if up_link.cpaIndirecto >= 20 and up_link.cpa >=4 and up_link.level_bono_indirecto == 2:\n        up_link.monto_bono_indirecto = int(cpa.objects.get(bono='level3').valor)"
+        },
+        "kind": 2,
+        "importPath": "apps.utils.bonos",
+        "description": "apps.utils.bonos",
+        "peekOfCode": "def  bonoIndirecto(up_link,cpa):\n    print(up_link.fpa,up_link.cpaIndirecto,up_link.cpa,up_link.level_bono_indirecto)\n    if up_link.cpaIndirecto >= 5 and up_link.cpa >=2 and up_link.level_bono_indirecto == 0:\n        up_link.monto_bono_indirecto = int(cpa.objects.get(bono='level1').valor)\n        up_link.level_bono_indirecto += 1\n    if up_link.cpaIndirecto >= 10 and up_link.cpa >=3 and up_link.level_bono_indirecto == 1:\n        up_link.monto_bono_indirecto = int(cpa.objects.get(bono='level2').valor)\n        up_link.level_bono_indirecto += 1\n    if up_link.cpaIndirecto >= 20 and up_link.cpa >=4 and up_link.level_bono_indirecto == 2:\n        up_link.monto_bono_indirecto = int(cpa.objects.get(bono='level3').valor)",
+        "detail": "apps.utils.bonos",
+        "documentation": {}
+    },
+    {
+        "label": "bonoDirecto",
+        "kind": 2,
+        "importPath": "apps.utils.bonos",
+        "description": "apps.utils.bonos",
+        "peekOfCode": "def bonoDirecto(usuario,cpa):\n    if usuario.cpa== 5  and usuario.level_bono_directo == 0:\n        usuario.monto_bono_directo =int(cpa.objects.get(bono='level1').valor)\n        usuario.level_bono_directo += 1\n    if usuario.cpa== 10  and usuario.level_bono_directo== 1:\n        usuario.monto_bono_directo =int(cpa.objects.get(bono='level2').valor )\n        usuario.level_bono_directo += 1\n    if usuario.cpa== 15  and usuario.level_bono_directo== 2:\n        usuario.monto_bono_directo =int(cpa.objects.get(bono='level3').valor )\n        usuario.level_bono_directo += 1",
+        "detail": "apps.utils.bonos",
+        "documentation": {}
+    },
+    {
+        "label": "calcula_porcentaje_directo",
+        "kind": 2,
+        "importPath": "apps.utils.formulas",
+        "description": "apps.utils.formulas",
+        "peekOfCode": "def calcula_porcentaje_directo(valor,porcentaje,porcentaje_socio):\n    return ((valor*100/porcentaje)*(porcentaje_socio/100))\ndef calcular_porcentaje_indirecto(valor,porcentaje_socio):\n    return (valor*(porcentaje_socio/100))",
+        "detail": "apps.utils.formulas",
+        "documentation": {}
+    },
+    {
+        "label": "calcular_porcentaje_indirecto",
+        "kind": 2,
+        "importPath": "apps.utils.formulas",
+        "description": "apps.utils.formulas",
+        "peekOfCode": "def calcular_porcentaje_indirecto(valor,porcentaje_socio):\n    return (valor*(porcentaje_socio/100))",
+        "detail": "apps.utils.formulas",
+        "documentation": {}
+    },
+    {
+        "label": "existe",
+        "kind": 2,
+        "importPath": "apps.utils.funciones",
+        "description": "apps.utils.funciones",
+        "peekOfCode": "def existe(client,fecha_registro,fpa,status,fecha_calif,country,posicion_cuenta,fecha_primer_deposito,neto_deposito,numeros_depositos,registros):\n    for r in registros:\n        if(client==r.client and fecha_registro == r.fecha_registro and fpa == r.fpa and status ==  r.status and fecha_calif == r.fecha_calif and country == r.country and posicion_cuenta == r.posicion_cuenta and fecha_primer_deposito == r.fecha_primer_deposito and neto_deposito == r.neto_deposito and numeros_depositos == r.numeros_depositos):\n            return True\n    return False\ndef existe_cpa(fecha,monto,client,fpa,cpas):\n    for c in cpas:\n        if (fecha==c.fecha_creacion and monto == c.monto and client == c.client and fpa == c.fpa):\n            return True\n    return False",
+        "detail": "apps.utils.funciones",
+        "documentation": {}
+    },
+    {
+        "label": "existe_cpa",
+        "kind": 2,
+        "importPath": "apps.utils.funciones",
+        "description": "apps.utils.funciones",
+        "peekOfCode": "def existe_cpa(fecha,monto,client,fpa,cpas):\n    for c in cpas:\n        if (fecha==c.fecha_creacion and monto == c.monto and client == c.client and fpa == c.fpa):\n            return True\n    return False\ndef existe_ganancia(ganancia: Registros_ganancias, ganancias: list) -> bool:\n    g = ganancias.filter(\n        client=ganancia.client,\n        fpa=ganancia.fpa,\n        partner_earning=ganancia.partner_earning,",
+        "detail": "apps.utils.funciones",
+        "documentation": {}
+    },
+    {
+        "label": "existe_ganancia",
+        "kind": 2,
+        "importPath": "apps.utils.funciones",
+        "description": "apps.utils.funciones",
+        "peekOfCode": "def existe_ganancia(ganancia: Registros_ganancias, ganancias: list) -> bool:\n    g = ganancias.filter(\n        client=ganancia.client,\n        fpa=ganancia.fpa,\n        partner_earning=ganancia.partner_earning,\n        fecha_operacion=ganancia.fecha_operacion,\n        deal_id=ganancia.deal_id,\n        position=ganancia.position\n    )\n    if g.exists():",
+        "detail": "apps.utils.funciones",
+        "documentation": {}
+    },
+    {
+        "label": "formatera_retiro",
+        "kind": 2,
+        "importPath": "apps.utils.funciones",
+        "description": "apps.utils.funciones",
+        "peekOfCode": "def formatera_retiro(valor):\n    retiro = valor.replace('(','').strip()\n    retiro = retiro.replace(')','').strip()\n    retiro = retiro.split(' ')\n    return retiro",
+        "detail": "apps.utils.funciones",
+        "documentation": {}
+    },
+    {
+        "label": "limpiar_datos_fpa",
+        "kind": 2,
+        "importPath": "apps.utils.limpiarTablas",
+        "description": "apps.utils.limpiarTablas",
+        "peekOfCode": "def limpiar_datos_fpa(dataFrame):\n    column_mapping = {\n        'reporting.onboarding.customerId': 'id_client',\n        'reporting.onboarding.customerFullName': 'full_name',\n        'reporting.onboarding.country': 'country',\n        'reporting.onboarding.registrationDate': 'fecha_registro',\n        'reporting.onboarding.realAccountCreationDate': 'fecha_creacion_cuenta',\n        'reporting.onboarding.verificationDate': 'verificacion',\n        'reporting.onboarding.onboardingStatus': 'status',\n        'reporting.onboarding.utmCampaign': 'fpa',",
+        "detail": "apps.utils.limpiarTablas",
+        "documentation": {}
+    },
+    {
+        "label": "limpiar_registros",
+        "kind": 2,
+        "importPath": "apps.utils.limpiarTablas",
+        "description": "apps.utils.limpiarTablas",
+        "peekOfCode": "def limpiar_registros(dataframe):\n    new_columns = {\n        'User ID':'client',\n        'Registration Date':'fecha_registro',\n        'afp':'fpa',\n        'Status':'status',\n        'Qualification Date':'fecha_calif',\n        'Country':'country',\n        'Position Count':'posicion_cuenta',\n        'Volume':'volumen',",
+        "detail": "apps.utils.limpiarTablas",
+        "documentation": {}
+    },
+    {
+        "label": "limpiar_cpa",
+        "kind": 2,
+        "importPath": "apps.utils.limpiarTablas",
+        "description": "apps.utils.limpiarTablas",
+        "peekOfCode": "def limpiar_cpa(dataframe):\n    new_columns = {\n        'created':'fecha_creacion',\n        'amount':'monto', \n        'Commission_Type':'cpa', \n        'User_Id':'client', \n        'AFP':'fpa'\n    }\n    dataframe.rename(columns=new_columns, inplace=True)\n    # Filtrar las filas con el valor \"TOTAL\"",
+        "detail": "apps.utils.limpiarTablas",
+        "documentation": {}
+    },
+    {
+        "label": "limpiar_ganacias",
+        "kind": 2,
+        "importPath": "apps.utils.limpiarTablas",
+        "description": "apps.utils.limpiarTablas",
+        "peekOfCode": "def limpiar_ganacias(dataFrame):\n    column_mapping = {\n        'Customer ID':'client',\n        'Position ID':'position',\n        'Symbol':'symbol',\n        'Direction':'direccion',\n        'Volume Traded (units)':'volumen_trader',\n        'Volume (USD)':'volumne',\n        'Trade date':'fecha_operacion',\n        'Trade Time (GMT)':'hora_operacion',",
+        "detail": "apps.utils.limpiarTablas",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "livecommunity.asgi",
+        "description": "livecommunity.asgi",
+        "peekOfCode": "application = get_asgi_application()",
+        "detail": "livecommunity.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'django-insecure-r@_8j0dwk$2pvk2k)uo5na4htig-uy)sdvic3p&3i*2gj-(alh'\nAUTH_USER_MODEL = 'usuarios.Usuario'\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "SECRET_KEY = 'django-insecure-r@_8j0dwk$2pvk2k)uo5na4htig-uy)sdvic3p&3i*2gj-(alh'\nAUTH_USER_MODEL = 'usuarios.Usuario'\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_USER_MODEL",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "AUTH_USER_MODEL = 'usuarios.Usuario'\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'corsheaders',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'corsheaders',\n    'apps.usuarios',\n    'apps.afiliado',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n    'corsheaders.middleware.CorsMiddleware',\n]",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "ROOT_URLCONF = 'livecommunity.urls'\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [os.path.join(BASE_DIR,'templates')],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [os.path.join(BASE_DIR,'templates')],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',\n                'django.contrib.auth.context_processors.auth',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "WSGI_APPLICATION = 'livecommunity.wsgi.application'\n# Password validation\n# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "LANGUAGE_CODE = 'es-ES'\nTIME_ZONE = 'America/Argentina/Buenos_Aires'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "TIME_ZONE = 'America/Argentina/Buenos_Aires'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nCORS_ALLOW_ALL_ORIGINS = True",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "STATIC_URL = 'static/'\nMEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nCORS_ALLOW_ALL_ORIGINS = True\n# CORS_ALLOWED_ORIGINS = [\n#     'http://localhost:3000',\n# ]",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_URL",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "MEDIA_URL = '/media/'\nMEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nCORS_ALLOW_ALL_ORIGINS = True\n# CORS_ALLOWED_ORIGINS = [\n#     'http://localhost:3000',\n# ]\nCORS_ALLOW_CREDENTIALS = True",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MEDIA_ROOT",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "MEDIA_ROOT = os.path.join(BASE_DIR, 'media')\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nCORS_ALLOW_ALL_ORIGINS = True\n# CORS_ALLOWED_ORIGINS = [\n#     'http://localhost:3000',\n# ]\nCORS_ALLOW_CREDENTIALS = True\nCORS_ALLOW_HEADERS = [",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_AUTO_FIELD",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nCORS_ALLOW_ALL_ORIGINS = True\n# CORS_ALLOWED_ORIGINS = [\n#     'http://localhost:3000',\n# ]\nCORS_ALLOW_CREDENTIALS = True\nCORS_ALLOW_HEADERS = [\n    'accept',\n    'accept-encoding',\n    'authorization',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_ALL_ORIGINS",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "CORS_ALLOW_ALL_ORIGINS = True\n# CORS_ALLOWED_ORIGINS = [\n#     'http://localhost:3000',\n# ]\nCORS_ALLOW_CREDENTIALS = True\nCORS_ALLOW_HEADERS = [\n    'accept',\n    'accept-encoding',\n    'authorization',\n    'content-type',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_CREDENTIALS",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "CORS_ALLOW_CREDENTIALS = True\nCORS_ALLOW_HEADERS = [\n    'accept',\n    'accept-encoding',\n    'authorization',\n    'content-type',\n    'dnt',\n    'origin',\n    'user-agent',\n    'x-csrftoken',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_HEADERS",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "CORS_ALLOW_HEADERS = [\n    'accept',\n    'accept-encoding',\n    'authorization',\n    'content-type',\n    'dnt',\n    'origin',\n    'user-agent',\n    'x-csrftoken',\n    'x-requested-with',",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CORS_ALLOW_METHODS",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "CORS_ALLOW_METHODS = [\n    'DELETE',\n    'GET',\n    'OPTIONS',\n    'PATCH',\n    'POST',\n    'PUT',\n]\n# Tokken de telegram\n# CHAT_ID_BOT = '@+csPs8XoRyX4yMjBh'",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TELEGRAM_BOT_TOKEN",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'\nCHAT_ID_BOT = '@pruebapas'\nDEBUG = True\nSTATICFILES_DIRS = (os.path.join(BASE_DIR,\"static\"),)\nALLOWED_HOSTS = []\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CHAT_ID_BOT",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "CHAT_ID_BOT = '@pruebapas'\nDEBUG = True\nSTATICFILES_DIRS = (os.path.join(BASE_DIR,\"static\"),)\nALLOWED_HOSTS = []\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "DEBUG = True\nSTATICFILES_DIRS = (os.path.join(BASE_DIR,\"static\"),)\nALLOWED_HOSTS = []\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n####################################################",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_DIRS",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "STATICFILES_DIRS = (os.path.join(BASE_DIR,\"static\"),)\nALLOWED_HOSTS = []\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n####################################################\n#",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "ALLOWED_HOSTS = []\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n####################################################\n#\n#########          PRODUCCION            ###########",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "livecommunity.settings",
+        "description": "livecommunity.settings",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n####################################################\n#\n#########          PRODUCCION            ###########\n#",
+        "detail": "livecommunity.settings",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "livecommunity.urls",
+        "description": "livecommunity.urls",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    path('',views.home, name = 'home'),\n    path('broker/skilling/',views.broker_skilling, name = 'broker_skilling'),\n    path('presenciales/',views.presenciales, name = 'presenciales'),\n    path('servicios/',views.servicios, name = 'servicios'),\n    path('Afiliado/',include('apps.afiliado.urls')),\n    path('api/',include('apps.api.urls')),\n    path('<pk>',views.home_pk, name = 'home_pk'),\n    #path('broker/<pk>',views.broker_pk, name = 'broker_pk'),",
+        "detail": "livecommunity.urls",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def home(request):\n    url_video_insercion =convertir_url_youtube (\"https://www.youtube.com/watch?v=HgKjhFEguyU\")\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context = {\n        \"afiliado\": None,\n        \"url_video\": url_video_insercion,\n        \"url_register\": url_register\n    }\n    return render(request, \"index.html\",context)\n# PRIMER SPRIG",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "broker_skilling",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def broker_skilling(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={\n        \"afiliado\": None,\n        \"url_register\": url_register\n    }\n    return render(request,'broker.html',context)\ndef presenciales(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "presenciales",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def presenciales(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={\n        \"afiliado\": None,\n        \"url_register\": url_register\n    }\n    return render(request, \"presenciales.html\",context)\ndef servicios(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "servicios",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def servicios(request):\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context ={\n        \"afiliado\": None,\n        \"url_register\": url_register\n    }\n    return render(request, \"servicios.html\",context)\ndef convertir_url_youtube(url_original):\n    if 'youtu.be/' in url_original:\n        # URL corta de YouTube (youtu.be)",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "convertir_url_youtube",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def convertir_url_youtube(url_original):\n    if 'youtu.be/' in url_original:\n        # URL corta de YouTube (youtu.be)\n        video_id = url_original.split('youtu.be/')[-1]\n    elif 'youtube.com/' in url_original and 'v=' in url_original:\n        # URL normal de YouTube\n        video_id = url_original.split('v=')[-1].split('&')[0]\n    else:\n        # Si no es una URL de YouTube reconocida, devuelve la URL original\n        return url_original",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "home_pk",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def home_pk(request, pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n        if afiliado:\n        # url_video_insercion = \"https://www.youtube.com/watch?v=HgKjhFEguyU\" if afiliado.url_video==0 or afiliado.url_video==''  else  convertir_url_youtube(afiliado.url_video) \n            url_video_insercion =convertir_url_youtube (\"https://www.youtube.com/watch?v=HgKjhFEguyU\")\n            url_register = afiliado.url\n            context = {\n            \"afiliado\": afiliado,\n            \"id\":afiliado.fpa,",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "broker_pk",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def broker_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n        url_register = afiliado.url\n        context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register\n        }\n        return render(request,'broker.html',context)",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "presenciales_pk",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def presenciales_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n        url_register = afiliado.url\n        context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register\n        }\n        return render(request, \"presenciales.html\",context)",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "servicios_pk",
+        "kind": 2,
+        "importPath": "livecommunity.views",
+        "description": "livecommunity.views",
+        "peekOfCode": "def servicios_pk(request,pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n        url_register = afiliado.url\n        context = {\n        \"afiliado\": afiliado,\n        \"id\":afiliado.fpa,\n        \"url_register\": url_register\n        }\n        return render(request, \"servicios.html\",context)",
+        "detail": "livecommunity.views",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "livecommunity.wsgi",
+        "description": "livecommunity.wsgi",
+        "peekOfCode": "application = get_wsgi_application()",
+        "detail": "livecommunity.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'livecommunity.settings')\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
+        "detail": "manage",
+        "documentation": {}
+    }
+]

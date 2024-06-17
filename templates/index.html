@@ -4,34 +4,299 @@
 {% block title %} Home{% endblock %} 
 
 {% block content %}
+
+
+<!-- HEADER -->
 <header>
     <div class="main-contain-home">
         <div class="hero-contain">
-            <div class="header">
-                <div class="img-container">
-                    <img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
-                </div>
-            </div>
+            
             
             <div class="hero">
                 
-                    <h1>LIVE COMMUNITY</h1>
-                    <p>SOMOS Live Community, te brindamos la vacante para que puedas
-                        acceder GRATIS a todos los servicios.
-                    </p>
-                    <div class="button-contain">
-                        
-                    <button class="button-17" role="button">Contactanos</button>
-                    </div>
+                    <h1>Bienvenido a</h1>
+                    <img class="logo-live" src="{% static 'img/LogoLive.png' %}" alt="Logo livecommunity">
+                    <iframe class="hero-video" src="{{ url_video }}" frameborder="0" allowfullscreen></iframe>
+
+                    <a class="btn" href="{{ url_register }}">COMENZAR</a>
+                    
+                    
             </div>
                 
-            </div>
 
         </div>
     </div>
 </header> 
+<!-- FIN DEL HEADER -->
+
+
+<!-- 2do Background -->
+<div class="bg-2">
+
+<!-- ABOUT US -->
+
+<section class="about-us">
+    <h2>¿Quiénes somos?</h2>
+
+    <p class="text">Somos una academia de trading dedicada al desarrollo de traders, tanto principiantes como experimentados. Nuestro objetivo es brindarte todos los conocimientos necesarios para que puedas profesionalizarte y convertirte en un trader rentable.</p>
+    
+    <div class="wrapper">
+        <i id="left" class="fa-solid fa-angle-left"></i>
+        <ul class="carousel">
+            <li class="card">
+                <img class="ceo-1" loading="lazy" src="{% static 'img/ceos/AgusGentile.png' %}" alt="CEO 1">
+                <h4>Agustin Gentile</h4>
+                <ul>
+                    <li>Buenos Aires - Argentina</li>
+                    <li>Scalping - Intraday</li>
+                    <li>4 años de Trading</li>
+                    <li>Trader, Educador y Analista</li>
+                </ul>
+            </li>
+            <li class="card">
+                <img class="ceo-3" loading="lazy" src="{% static 'img/ceos/DarioRosero.png' %}" alt="CEO 3">
+                <h4>Dario Rosero</h4>
+                <ul>
+                
+                    <li>Pasto  - Colombia</li>
+                    <li>Scalping - Intraday - Swing</li>
+                    <li>Cryptolover</li>
+                    <li>7 años de Trading</li>
+                    <li>Trader - Sistema Educativo</li>
+                    
+                </ul>
+            </li>
+            <li class="card">
+                <img class="ceo-2" loading="lazy" src="{% static 'img/ceos/DiegoRodriguez.png' %}" alt="CEO 4">
+                <h4>Diego Rodriguez</h4>
+                <ul>
+                    <li>Buenos Aires - Argentina</li>
+                    <li>Scalping - Intraday - Swing</li>
+                    <li>+4 años de Trading</li>
+                    <li>Trader - Sistema y finanzas</li>
+                </ul>
+            </li>
+            
+            <li class="card">
+                <img class="ceo-4" loading="lazy" src="{% static 'img/ceos/CrisEscobar.png' %}" alt="CEO 2">
+                <h4>Cristian Escobar</h4>
+                <ul>
+                    <li>Córdoba - Argentina</li>
+                    <li>Scalping - Intraday - Swing</li>
+                    <li>4 años de Trading</li>
+                    <li>Sistema Educativo</li>
+                </ul>
+            </li>
+            
+            <!-- <li class="card">
+                <img class="ceo-5" loading="lazy" src="{% static 'img/ceos/JoaquinPugliese.png' %}" alt="CEO 4">
+                <h4>Joaquin Pugliese</h4>
+                <ul>
+                    <li>Buenos Aires - Argentina</li>
+                    <li>Scalping / Intraday / Spot</li>
+                    <li>Trading + 3 años operando en mercados de Forex,
+                     Criptomonedas, Materias Primas y Índices. </li>
+                    <li>+4 años de experiencia en Negocios Digitales</li>
+                </ul>
+            </li> -->
+            <li class="card">
+                <img class="ceo-6" loading="lazy" src="{% static 'img/ceos/CarlosCorvalan.png' %}" alt="CEO 4">
+                <h4>Carlos Corvalan</h4>
+                <ul>
+                    <li>Sgo. del Estero - Argentina</li>
+                    <li>Scalping - Intraday - Swing</li>
+                    <li>2 años de Trading</li>
+                    <li>Formador de alto impacto y network</li>
+                </ul>
+            </li>
+            
+            <li class="card">
+                <img class="ceo-7" loading="lazy" src="{% static 'img/ceos/AndreaGonzalez.png' %}" alt="CEO 4">
+                <h4>Andrea Gonzalez Ibañez</h4>
+                <ul>
+                    <li>Tucumán - Argentina</li>
+                    <li>Intraday - SmartMoney</li>
+                    <li>+6 años en Criptomonedas, blockchain,
+                    negocios digitales y 2 años en trading</li>
+                    <li>Legales, eventos, redes sociales y marca</li>
+
+                </ul>
+            </li>
+            <li class="card">
+                <img class="ceo-8" loading="lazy" src="{% static 'img/ceos/AleOrieta.png' %}" alt="CEO 4">
+                <h4>Alejandro Orieta</h4>
+                <ul>
+                    <li>Sgo. del Estero - Argentina</li>
+                    <li>Scalper Crypto- Intraday Trading</li>
+                    <li>Trader (8 años) - Conferencista y Negocios Digitales</li>
+                    <li>Marketing - Network y Expansión</li>
+                </ul>
+            </li>
+        </ul>
+        <i id="right" class="fa-solid fa-angle-right"></i>
+      </div>
+</section>
+
+<!-- FIN DEL ABOUT US -->
+
+<!-- STAFF -->
+<section class="staff">
+    <h2>Staff de Live Community</h2>
+
+        <div class="wrapperStaff">
+            <i id="left" class="fa-solid fa-angle-left"></i>
+            <ul class="carouselStaff">
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/MaxiLujan.png' %}" alt="persona del staff">
+                    <h4>Maximiliano Lujan</h4>
+                    <ul>
+                        <li>Cordoba - Argentina</li>
+                        <li>Day trader</li>
+                        <li>4 años de Trading</li>
+                    </ul>
+                </li>
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/AnthonyRosero.png' %}" alt="persona del staff">
+                    <h4>Anthony Rosero</h4>
+                    <ul>
+                        <li>Pasto - Colombia</li>
+                        <li>Day trader - Scalping</li>
+                        <li>4 años de Trading</li>
+                    </ul>
+                </li>
+                <!-- <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/OttoSalgado.png' %}" alt="persona del staff">
+                    <h4>OTTO SALGADO</h4>
+                    <ul>
+                        <li>Bs.As. - Argentina</li>
+                        <li>Intraday - Swing</li>
+                        <li>4 años de Trading</li>
+                    </ul>
+                </li> -->
+
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/MaxiFarias.png' %}" alt="persona del staff">
+                    <h4>Maximiliano Farias</h4>
+                    <ul>
+                        <li>Cordoba - Argentina </li>
+                        <li>Day trader - Scalping</li>
+                        <li>2 años de trading</li>
+                    </ul>
+                </li>
+                
+                <!-- <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/MauroAlvarez.png' %}" alt="persona del staff">
+                    <h4>Mauro Alvarez</h4>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li> -->
+                <!-- <li class="cardStaff">
+                    <img class="staff-1" loading="lazy" src="{% static 'img/staff/MatiasPiedra.png' %}" alt="persona del staff">
+                    <h4>Matias Piedra</h4>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li> -->
+                <!-- <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/DiegoCeron.png' %}" alt="persona del staff">
+                    <h4>Diego Ceron</h4>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li> -->
+                <!-- <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/AylenHeredia.png' %}" alt="persona del staff">
+                    <h4>Aylen Heredia</h4>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li> -->
+                <!-- <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/RodrigoEquis.png' %}" alt="persona del staff">
+                    <h4>Rodrigo Equis</h4>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li> -->
+                <!-- <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/JoseLinares.png' %}" alt="persona del staff">
+                    <h4>Jose Linares</h4>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li> -->
+                <!-- <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/ErnestoRaez.png' %}" alt="persona del staff">
+                    <h4>Ernesto Raez</h4>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li> -->
+
+                <!-- <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/AlexCamacho.png' %}" alt="persona del staff">
+                    <h4>Alexander Camacho</h4>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li> -->
+                <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/staff/LucasBassini.png' %}" alt="persona del staff">
+                    <h4>Lucas Bassini</h4>
+                    <ul>
+                        <li>Bs.As. - Argentina</li>
+                        <li>Scalping - Daytrader</li>
+                        <li>3 años de Trading</li>
+                    </ul>
+                </li>
+                <!-- <li class="cardStaff">
+                    <img loading="lazy" src="{% static 'img/user.webp' %}" alt="persona del staff">
+                    <h4>CRHISTIAN SANTANDER</h4>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </li> -->
+
+            </ul>
+            <i id="right" class="fa-solid fa-angle-right"></i>
+        </div>
+</section>
 
 
     
+
+<!-- FIN DEL STAFF -->
+
+
+</div>
+<!-- FIN BG2 -->
+<div class="bg-3">
+    {% block faq %}
+        {% include './faq.html' %}
+    {% endblock faq %}
+</div>
+
+{% block footer %}
+            {% include './footer.html' %}
+{% endblock footer %}
 
 {% endblock content %}

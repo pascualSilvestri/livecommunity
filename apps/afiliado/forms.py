@@ -13,3 +13,5 @@ class ClienteForm(forms.ModelForm):
             'idAfiliado',
             'userTelegram'
             )
+
+

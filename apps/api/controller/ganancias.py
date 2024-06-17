@@ -31,7 +31,6 @@ def ganancia_get_all(request):
                             'monto_spread':monto_spread,
                             'tipo_comision':'Reverashe',
                             'client':r.client,
-                            
                             'isPago':r.pagado
                         }
                     )
@@ -352,7 +351,7 @@ def filtradoGananciasRevshare(request):
                         'creacion':r.fecha_operacion,
                         'monto':r.partner_earning,
                         'monto_spread':monto_spread,
-                        'tipo_comision':'Reverash',
+                        'tipo_comision':r.symbol,
                         'client':r.client,
                         'codigo':r.fpa,
                         'isPago':r.pagado
@@ -521,6 +520,7 @@ def filter_ganancia_to_date_by_id(request,pk,desde,hasta):
             monto_cpa = 0
             monto_directo = 0
             monto_indirecto = 0
+            
             if cuenta != None:
                 monto_bono_directo = cuenta.monto_bono_directo
                 monto_bono_indirecto = cuenta.monto_bono_indirecto

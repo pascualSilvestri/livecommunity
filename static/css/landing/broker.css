@@ -44,17 +44,37 @@
 }
 
 .broker-presentation .broker-enlace {
-    font-size: 20px;
+    background-color: #00bc9c;
+    font-size: 18px;
     font-weight: 900;
     text-decoration: none;
+    padding: 10px 20px;
     color: white;
+    border-radius: 10px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
 }
-.broker-presentation .broker-enlace::before {
+.broker-presentation .broker-enlace:hover{
+    background-color: #18cfb1;
+
+}
+
+.botones-broker{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    width: 82%;
+}
+
+/* .broker-presentation .broker-enlace::before {
     position: absolute;
     margin-left: 205px;
     margin-top: 0px;
     content: url("../../img/Flecha.png");
-}
+} */
 
 /* BROKER VIDEOS */
 .broker-videos{
@@ -116,6 +136,9 @@
     font-weight:800;
     font-size: 18px;
     text-decoration: none;
+}
+.btn-registrate:hover{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
 .footer-broker{
@@ -231,7 +254,7 @@
         background-position: bottom;
     }
     .broker-presentation .broker-enlace {
-        font-size: 25px;
+        font-size: 20px;
     }
     .broker-presentation .broker-enlace::before {
         margin-left: 255px;

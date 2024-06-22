@@ -3446,7 +3446,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def home(request):\n    url_video_insercion =convertir_url_youtube (\"https://www.youtube.com/watch?v=HgKjhFEguyU\")\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context = {\n        \"afiliado\": None,\n        \"url_video\": url_video_insercion,\n        \"url_register\": url_register\n    }\n    return render(request, \"index.html\",context)\n# PRIMER SPRIG",
+        "peekOfCode": "def home(request):\n    url_video_insercion =convertir_url_youtube (\"https://www.youtube.com/embed/k88AjonUhMw\")\n    url_register = \"https://livecommunity.info/Afiliado/LM500S\"\n    context = {\n        \"afiliado\": None,\n        \"url_video\": url_video_insercion,\n        \"url_register\": url_register\n    }\n    return render(request, \"index.html\",context)\n# PRIMER SPRIG",
         "detail": "livecommunity.views",
         "documentation": {}
     },
@@ -3491,7 +3491,7 @@
         "kind": 2,
         "importPath": "livecommunity.views",
         "description": "livecommunity.views",
-        "peekOfCode": "def home_pk(request, pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n        if afiliado:\n        # url_video_insercion = \"https://www.youtube.com/watch?v=HgKjhFEguyU\" if afiliado.url_video==0 or afiliado.url_video==''  else  convertir_url_youtube(afiliado.url_video) \n            url_video_insercion =convertir_url_youtube (\"https://www.youtube.com/watch?v=HgKjhFEguyU\")\n            url_register = afiliado.url\n            context = {\n            \"afiliado\": afiliado,\n            \"id\":afiliado.fpa,",
+        "peekOfCode": "def home_pk(request, pk):\n    try:\n        afiliado = Afiliado.objects.get(fpa=pk)\n        if afiliado:\n        # url_video_insercion = \"https://www.youtube.com/watch?v=HgKjhFEguyU\" if afiliado.url_video==0 or afiliado.url_video==''  else  convertir_url_youtube(afiliado.url_video) \n            url_video_insercion =convertir_url_youtube (\"https://www.youtube.com/embed/k88AjonUhMw\")\n            url_register = afiliado.url\n            context = {\n            \"afiliado\": afiliado,\n            \"id\":afiliado.fpa,",
         "detail": "livecommunity.views",
         "documentation": {}
     },

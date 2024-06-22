@@ -9,7 +9,7 @@ import json
 
 def home(request):
 
-    url_video_insercion =convertir_url_youtube ("https://www.youtube.com/watch?v=HgKjhFEguyU")
+    url_video_insercion =convertir_url_youtube ("https://www.youtube.com/embed/k88AjonUhMw")
     url_register = "https://livecommunity.info/Afiliado/LM500S"
     context = {
         "afiliado": None,
@@ -69,7 +69,7 @@ def home_pk(request, pk):
         afiliado = Afiliado.objects.get(fpa=pk)
         if afiliado:
         # url_video_insercion = "https://www.youtube.com/watch?v=HgKjhFEguyU" if afiliado.url_video==0 or afiliado.url_video==''  else  convertir_url_youtube(afiliado.url_video) 
-            url_video_insercion =convertir_url_youtube ("https://www.youtube.com/watch?v=HgKjhFEguyU")
+            url_video_insercion =convertir_url_youtube ("https://www.youtube.com/embed/k88AjonUhMw")
             url_register = afiliado.url
             context = {
             "afiliado": afiliado,
@@ -78,7 +78,7 @@ def home_pk(request, pk):
             "url_register": url_register
             }
         else:
-            url_video_insercion = "https://www.youtube.com/watch?v=HgKjhFEguyU"
+            url_video_insercion = "https://www.youtube.com/embed/k88AjonUhMw"
             url_register = "livecommunity.info"
             context = {
             "afiliado": None,

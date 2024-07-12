@@ -17,17 +17,14 @@
     <link rel="stylesheet" href="{% static 'css/landing/broker.css' %}">
     <link rel="stylesheet" href="{% static 'css/landing/presenciales.css' %}">
     <link rel="stylesheet" href="{% static 'css/landing/servicios.css' %}">
-
-
-
-    
+    <link rel="stylesheet" href="{% static 'css/landing/styleLoading.css' %}">
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
 
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 <body id="scrollbar">
 
-    <nav>
+    <nav id="navBar">
         <div class="img-container">
             <img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
         </div>
@@ -52,7 +49,7 @@
     {% endblock content %}
 
  
-
+    <script src="{% static 'js/animations/headerAnimationLanding.js' %}" type="module"></script>
     <script src="{% static 'js/app.js' %}" type="module"></script>
     <script src="{% static 'js/validacion_form.js' %}" type="module"></script>
     <script src="{% static 'js/validarBtn.js' %}" type="module"></script>

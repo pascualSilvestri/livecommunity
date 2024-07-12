@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load static %} 
+{% load static %}
 
-{% block title %} Home{% endblock %} 
+{% block title %} Home{% endblock %}
 
 {% block content %}
 
@@ -10,85 +10,95 @@
 <header>
     <div class="main-contain-home">
         <div class="hero-contain">
-            
-            
-            <div class="hero">
-                
-                    <h1>Bienvenido a</h1>
-                    <img class="logo-live" src="{% static 'img/LogoLive.png' %}" alt="Logo livecommunity">
-                    <iframe class="hero-video" src="{{ url_video }}" frameborder="0" allowfullscreen></iframe>
 
-                    <a class="btn" href="{{ url_register }}">COMENZAR</a>
-                    
-                    
+
+            <div class="hero">
+
+                <h1>¿Estas preparado para convertirte en un trader rentable?</h1>
+                <!-- <img class="logo-live" src="{% static 'img/LogoLive.png' %}" alt="Logo livecommunity"> -->
+                <!-- <iframe class="hero-video" src="{{ url_video }}" frameborder="0" allowfullscreen></iframe> -->
+
+                <a class="btn" href="{{ url_register }}">EMPEZA AHORA</a>
+
+
             </div>
-                
+
 
         </div>
     </div>
-</header> 
+</header>
 <!-- FIN DEL HEADER -->
 
 
 <!-- 2do Background -->
 <div class="bg-2">
 
-<!-- ABOUT US -->
+    <!-- ABOUT US -->
 
-<section class="about-us">
-    <h2>¿Quiénes somos?</h2>
+    <section class="about-us">
+        <h2>¿Quiénes somos?</h2>
 
-    <p class="text">Somos una academia de trading dedicada al desarrollo de traders, tanto principiantes como experimentados. Nuestro objetivo es brindarte todos los conocimientos necesarios para que puedas profesionalizarte y convertirte en un trader rentable.</p>
-    
-    <div class="wrapper">
-        <i id="left" class="fa-solid fa-angle-left"></i>
-        <ul class="carousel">
-            <li class="card">
-                <img class="ceo-1" loading="lazy" src="{% static 'img/ceos/AgusGentile.png' %}" alt="CEO 1">
-                <h4>Agustin Gentile</h4>
-                <ul>
-                    <li>Buenos Aires - Argentina</li>
-                    <li>Scalping - Intraday</li>
-                    <li>4 años de Trading</li>
-                    <li>Trader, Educador y Analista</li>
-                </ul>
-            </li>
-            <li class="card">
-                <img class="ceo-3" loading="lazy" src="{% static 'img/ceos/DarioRosero.png' %}" alt="CEO 3">
-                <h4>Dario Rosero</h4>
-                <ul>
-                
-                    <li>Pasto  - Colombia</li>
-                    <li>Scalping - Intraday - Swing</li>
-                    <li>Cryptolover</li>
-                    <li>7 años de Trading</li>
-                    <li>Trader - Sistema Educativo</li>
-                    
-                </ul>
-            </li>
-            <li class="card">
-                <img class="ceo-2" loading="lazy" src="{% static 'img/ceos/DiegoRodriguez.png' %}" alt="CEO 4">
-                <h4>Diego Rodriguez</h4>
-                <ul>
-                    <li>Buenos Aires - Argentina</li>
-                    <li>Scalping - Intraday - Swing</li>
-                    <li>+4 años de Trading</li>
-                    <li>Trader - Sistema y finanzas</li>
-                </ul>
-            </li>
-            
-            <li class="card">
-                <img class="ceo-4" loading="lazy" src="{% static 'img/ceos/CrisEscobar.png' %}" alt="CEO 2">
-                <h4>Cristian Escobar</h4>
-                <ul>
-                    <li>Córdoba - Argentina</li>
-                    <li>Scalping - Intraday - Swing</li>
-                    <li>4 años de Trading</li>
-                    <li>Sistema Educativo</li>
-                </ul>
-            </li>
-            
-            <!-- <li class="card">
+        <p class="text">Somos una academia de trading dedicada al desarrollo de traders, tanto principiantes como
+            experimentados. Nuestro objetivo es brindarte todos los conocimientos necesarios para que puedas
+            profesionalizarte y convertirte en un trader rentable.</p>
+
+
+    </section>
+
+    <!-- FIN DEL ABOUT US -->
+
+    <!--INICIO TRADING MASTER -->
+
+    <section class="staff">
+        <div class="wrapper">
+            <i id="left" class="fa-solid fa-angle-left"></i>
+            <ul class="carousel">
+                <li class="card">
+                    <img class="ceo-1" loading="lazy" src="{% static 'img/ceos/AgusGentile.png' %}" alt="CEO 1">
+                    <h4>Agustin Gentile</h4>
+                    <ul>
+                        <li>Buenos Aires - Argentina</li>
+                        <li>Scalping - Intraday</li>
+                        <li>4 años de Trading</li>
+                        <li>Trader, Educador y Analista</li>
+                    </ul>
+                </li>
+                <li class="card">
+                    <img class="ceo-3" loading="lazy" src="{% static 'img/ceos/DarioRosero.png' %}" alt="CEO 3">
+                    <h4>Dario Rosero</h4>
+                    <ul>
+
+                        <li>Pasto - Colombia</li>
+                        <li>Scalping - Intraday - Swing</li>
+                        <li>Cryptolover</li>
+                        <li>7 años de Trading</li>
+                        <li>Trader - Sistema Educativo</li>
+
+                    </ul>
+                </li>
+                <li class="card">
+                    <img class="ceo-2" loading="lazy" src="{% static 'img/ceos/DiegoRodriguez.png' %}" alt="CEO 4">
+                    <h4>Diego Rodriguez</h4>
+                    <ul>
+                        <li>Buenos Aires - Argentina</li>
+                        <li>Scalping - Intraday - Swing</li>
+                        <li>+4 años de Trading</li>
+                        <li>Trader - Sistema y finanzas</li>
+                    </ul>
+                </li>
+
+                <li class="card">
+                    <img class="ceo-4" loading="lazy" src="{% static 'img/ceos/CrisEscobar.png' %}" alt="CEO 2">
+                    <h4>Cristian Escobar</h4>
+                    <ul>
+                        <li>Córdoba - Argentina</li>
+                        <li>Scalping - Intraday - Swing</li>
+                        <li>4 años de Trading</li>
+                        <li>Sistema Educativo</li>
+                    </ul>
+                </li>
+
+                <!-- <li class="card">
                 <img class="ceo-5" loading="lazy" src="{% static 'img/ceos/JoaquinPugliese.png' %}" alt="CEO 4">
                 <h4>Joaquin Pugliese</h4>
                 <ul>
@@ -99,49 +109,48 @@
                     <li>+4 años de experiencia en Negocios Digitales</li>
                 </ul>
             </li> -->
-            <li class="card">
-                <img class="ceo-6" loading="lazy" src="{% static 'img/ceos/CarlosCorvalan.png' %}" alt="CEO 4">
-                <h4>Carlos Corvalan</h4>
-                <ul>
-                    <li>Sgo. del Estero - Argentina</li>
-                    <li>Scalping - Intraday - Swing</li>
-                    <li>2 años de Trading</li>
-                    <li>Formador de alto impacto y network</li>
-                </ul>
-            </li>
-            
-            <li class="card">
-                <img class="ceo-7" loading="lazy" src="{% static 'img/ceos/AndreaGonzalez.png' %}" alt="CEO 4">
-                <h4>Andrea Gonzalez Ibañez</h4>
-                <ul>
-                    <li>Tucumán - Argentina</li>
-                    <li>Intraday - SmartMoney</li>
-                    <li>+6 años en Criptomonedas, blockchain,
-                    negocios digitales y 2 años en trading</li>
-                    <li>Legales, eventos, redes sociales y marca</li>
+                <li class="card">
+                    <img class="ceo-6" loading="lazy" src="{% static 'img/ceos/CarlosCorvalan.png' %}" alt="CEO 4">
+                    <h4>Carlos Corvalan</h4>
+                    <ul>
+                        <li>Sgo. del Estero - Argentina</li>
+                        <li>Scalping - Intraday - Swing</li>
+                        <li>2 años de Trading</li>
+                        <li>Formador de alto impacto y network</li>
+                    </ul>
+                </li>
 
-                </ul>
-            </li>
-            <li class="card">
-                <img class="ceo-8" loading="lazy" src="{% static 'img/ceos/AleOrieta.png' %}" alt="CEO 4">
-                <h4>Alejandro Orieta</h4>
-                <ul>
-                    <li>Sgo. del Estero - Argentina</li>
-                    <li>Scalper Crypto- Intraday Trading</li>
-                    <li>Trader (8 años) - Conferencista y Negocios Digitales</li>
-                    <li>Marketing - Network y Expansión</li>
-                </ul>
-            </li>
-        </ul>
-        <i id="right" class="fa-solid fa-angle-right"></i>
-      </div>
-</section>
+                <li class="card">
+                    <img class="ceo-7" loading="lazy" src="{% static 'img/ceos/AndreaGonzalez.png' %}" alt="CEO 4">
+                    <h4>Andrea Gonzalez Ibañez</h4>
+                    <ul>
+                        <li>Tucumán - Argentina</li>
+                        <li>Intraday - SmartMoney</li>
+                        <li>+6 años en Criptomonedas, blockchain,
+                            negocios digitales y 2 años en trading</li>
+                        <li>Legales, eventos, redes sociales y marca</li>
 
-<!-- FIN DEL ABOUT US -->
+                    </ul>
+                </li>
+                <li class="card">
+                    <img class="ceo-8" loading="lazy" src="{% static 'img/ceos/AleOrieta.png' %}" alt="CEO 4">
+                    <h4>Alejandro Orieta</h4>
+                    <ul>
+                        <li>Sgo. del Estero - Argentina</li>
+                        <li>Scalper Crypto- Intraday Trading</li>
+                        <li>Trader (8 años) - Conferencista y Negocios Digitales</li>
+                        <li>Marketing - Network y Expansión</li>
+                    </ul>
+                </li>
+            </ul>
+            <i id="right" class="fa-solid fa-angle-right"></i>
+        </div>
+    </section>
+    <!-- FIN DEL TRADING MASTER -->
 
-<!-- STAFF -->
-<section class="staff">
-    <h2>Staff de Live Community</h2>
+    <!-- STAFF -->
+    <section class="staff">
+        <h2>Staff de Live Community</h2>
 
         <div class="wrapperStaff">
             <i id="left" class="fa-solid fa-angle-left"></i>
@@ -183,7 +192,7 @@
                         <li>2 años de trading</li>
                     </ul>
                 </li>
-                
+
                 <!-- <li class="cardStaff">
                     <img loading="lazy" src="{% static 'img/staff/MauroAlvarez.png' %}" alt="persona del staff">
                     <h4>Mauro Alvarez</h4>
@@ -279,26 +288,26 @@
             </ul>
             <i id="right" class="fa-solid fa-angle-right"></i>
         </div>
-</section>
+    </section>
 
 
-    
 
-<!-- FIN DEL STAFF -->
+
+    <!-- FIN DEL STAFF -->
 
 
 </div>
 <!-- FIN BG2 -->
 <div class="bg-3">
     {% block faq %}
-        {% include './faq.html' %}
+    {% include './faq.html' %}
     {% endblock faq %}
 </div>
 
 {% block footer %}
-            {% include './footer.html' %}
+{% include './footer.html' %}
 {% endblock footer %}
 
-<script src="{% static 'js/animations/headerAnimationLanding.js' %}" type="module"></script>
+
 
 {% endblock content %}

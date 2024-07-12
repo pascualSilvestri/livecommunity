@@ -8,26 +8,28 @@
 
 <!-- HEADER -->
 <header>
-    <div class="main-contain-home">
-        <div class="hero-contain">
-
-
-            <div class="hero">
-
-                <h1>¿Estas preparado para convertirte en un trader rentable?</h1>
-                <!-- LOGO DE LIVECOMMUNITY HERO -->
-                <!-- <img class="logo-live" src="{% static 'img/LogoLive.png' %}" alt="Logo livecommunity"> -->
-                <!-- VIDEO DE PRESENTACION NO ES FONDO -->
-                <!-- <iframe class="hero-video" src="{{ url_video }}" frameborder="0" allowfullscreen></iframe> -->
-
-                <a class="btn" href="{{ url_register }}">EMPEZA AHORA</a>
-
-
+    <div class="overlay">
+        <div class="main-contain-home">
+            <div class="hero-contain">
+                <div class="hero">
+                    <h1>¿Estas preparado para convertirte en un trader rentable?</h1>
+                    <!-- LOGO DE LIVECOMMUNITY HERO -->
+                    <!-- <img class="logo-live" src="{% static 'img/LogoLive.png' %}" alt="Logo livecommunity"> -->
+                    <!-- VIDEO DE PRESENTACION NO ES FONDO -->
+                    <!-- <iframe class="hero-video" src="{{ url_video }}" frameborder="0" allowfullscreen></iframe> -->
+    
+                    <a class="btn" href="{{ url_register }}">EMPEZA AHORA</a>
+    
+                </div>
             </div>
-
-
         </div>
     </div>
+    
+    <video controls="" autoplay="" muted="" loop="">
+        <source src="../static/video/video_hero.mp4" type="video/mp4">
+        <source src="video.ogg" type="video/ogg">
+        <source src="videowebm" type="video/webm">
+    </video>
 </header>
 <!-- FIN DEL HEADER -->
 

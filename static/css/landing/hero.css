@@ -91,7 +91,7 @@ header {
 
 .hero .btn:hover {
   background-color: #e42283;
-  transform: scale(1.2); /* Escalar el botón en un 20% */
+  transform: scale(1.2) ; /* Escalar el botón en un 20% */
   /* border-radius: 10px; */
 }
 

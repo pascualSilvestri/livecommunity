@@ -12,17 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             loading.style.display = 'none'
 
-            // Animación del título y el botón
+            // Animación del navbar, título y el botón
             const title = document.querySelector('.hero h1')
             const button = document.querySelector('.hero .btn')
 
+            // Navbar animación
+            setTimeout(() => {
+                navbar.classList.add('animate')
+            }, 500) // 500 ms de retardo para el navbar
+
+            // Título animación
             setTimeout(() => {
                 title.classList.add('animate')
-            }, 500) // 500 ms de retardo para el título
+            }, 1000) // 1000 ms de retardo para el título
 
+            // Botón animación
             setTimeout(() => {
                 button.classList.add('animate')
-            }, 1000) // 1000 ms de retardo para el botón
+            }, 1500) // 1500 ms de retardo para el botón
         }, 1000)
     })
 })

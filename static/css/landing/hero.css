@@ -16,10 +16,10 @@ body {
   width: 100%;
   height: 100%;
   /* Gradient in grayscale */
-  background: -moz-linear-gradient(0deg,  rgba(0,0,0,0.8) 0%, rgba(128,128,128,0.6) 55%, rgba(255,255,255,0.5) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(0deg,  rgba(0,0,0,0.8) 0%,rgba(128,128,128,0.6) 55%,rgba(255,255,255,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: -moz-linear-gradient(270deg,  #9fa5b477 0%,#19264673 55%,  #01050f  100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(270deg,  #9fa5b477 0%,#19264673 55%,  #01050f  100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(180deg,  #9fa5b477 0%,#19264673 55%,  #01050f  100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  #01050F
+  
 }
 
 

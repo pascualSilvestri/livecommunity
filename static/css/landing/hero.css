@@ -35,12 +35,12 @@ body {
 
 header {
   width: 100%;
-  background-image: url("../../img/FondoLiveMobile.png");
+  /* background-image: url("../../img/FondoLiveMobile.png"); */
   height: 100vh;
   position: relative;
-  background-position: center;
+  /* background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
   overflow: hidden;
   mask-image: linear-gradient(black 70%, transparent);
 }
@@ -61,12 +61,12 @@ header video{
 }
 @media (min-width: 1000px) {
   header {
-    background-image: url("../../img/FondoLiveDsktp.png");
+    /* background-image: url("../../img/FondoLiveDsktp.png");
     background: linear-gradient(to bottom, transparent, #081a48),
       url("../../img/FondoLiveDsktp.png");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
   }
 }
 

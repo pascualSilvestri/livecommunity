@@ -49,16 +49,6 @@ header {
   max-width: 100%;
   align-items: center;
 }
-
-.hero h1 {
-  font-family: Montserrat;
-  font-size: 50px;
-  font-weight: 900;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  padding: 20px 0 0 0;
-  line-height: 55px;
-}
 .hero .logo-live {
   width: 260px;
   margin-bottom: 1.8rem;
@@ -68,6 +58,20 @@ header {
   margin: 20px 0 20px 0;
   width: 70vw;
   height: 620px;
+}
+
+.hero h1 {
+  font-family: Montserrat;
+  font-size: 50px;
+  font-weight: 900;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 20px 0 0 0;
+  line-height: 55px;
+
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.5s ease;
 }
 
 .hero .btn {
@@ -80,15 +84,22 @@ header {
   font-weight: 700;
   font-size: 16px;
   text-decoration: none;
-  transition: background 0.15s ease-in-out 0.2s;
-  transition: transform 0.3s ease; /* Transición suave */
-
+  opacity: 0;
+  transform: translateY(50px);
+  transition: transform 0.3s ease, background 0.15s ease-in-out 0.2s, opacity 0.5s ease; /* Consolidación de transiciones */
 }
+
 .hero .btn:hover {
   background-color: #e42283;
-    transform: scale(1.2); /* Escalar el botón en un 20% */
-    border-radius: 10px;
+  transform: scale(1.2); /* Escalar el botón en un 20% */
+  /* border-radius: 10px; */
 }
+
+.hero h1.animate, .hero .btn.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 @media (max-width: 900px) {
   .hero-video {

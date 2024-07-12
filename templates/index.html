@@ -17,7 +17,7 @@
                 <h1>¿Estas preparado para convertirte en un trader rentable?</h1>
                 <!-- LOGO DE LIVECOMMUNITY HERO -->
                 <!-- <img class="logo-live" src="{% static 'img/LogoLive.png' %}" alt="Logo livecommunity"> -->
-                 <!-- VIDEO DE PRESENTACION NO ES FONDO -->
+                <!-- VIDEO DE PRESENTACION NO ES FONDO -->
                 <!-- <iframe class="hero-video" src="{{ url_video }}" frameborder="0" allowfullscreen></iframe> -->
 
                 <a class="btn" href="{{ url_register }}">EMPEZA AHORA</a>
@@ -38,11 +38,19 @@
     <!-- ABOUT US -->
 
     <section class="about-us">
-        <h2>¿Quiénes somos?</h2>
+        <div class="about_us_img">
+            <img loading="lazy" src="{% static 'img/logo.png' %}" alt="About us" width="300px">
+            <img loading="lazy" src="{% static 'img/logo.png' %}" alt="About us 2" width="300px">
 
-        <p class="text">Somos una academia de trading dedicada al desarrollo de traders, tanto principiantes como
-            experimentados. Nuestro objetivo es brindarte todos los conocimientos necesarios para que puedas
-            profesionalizarte y convertirte en un trader rentable.</p>
+            
+        </div>
+        <div class="about_us_text">
+            <h2>Acerca de nosotros</h2>
+
+            <p class="text">Somos una academia de trading dedicada al desarrollo de traders, tanto principiantes como
+                experimentados. Nuestro objetivo es brindarte todos los conocimientos necesarios para que puedas
+                profesionalizarte y convertirte en un trader rentable.</p>
+        </div>
 
 
     </section>

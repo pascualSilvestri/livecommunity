@@ -1,7 +1,8 @@
 .bg-3{
     padding-bottom:3rem;
     width: 100%;
-    background-image: url("../../img/Desktop3.png");
+    /* background-image: url("../../img/Desktop3.png"); */
+    background-color: #01050f;
     height: 100%;
     background-position: top;
     background-repeat: no-repeat;
@@ -9,7 +10,8 @@
 }
 @media screen and (max-width: 900px) {
   .bg-3{
-    background-image: url("../../img/Desktop3.png");
+    /* background-image: url("../../img/Desktop3.png"); */
+    background-color: #01050f;
     height: 100%;
     padding-bottom: 3rem;
     padding-top: 0rem;

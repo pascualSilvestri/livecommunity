@@ -2,7 +2,8 @@ footer{
     display: flex;
     width: 100%;
     justify-content: space-between;
-    background: #071435;
+    /* background: #071435; */
+    background-color: #000000;
     padding: 20px 60px;
 }
 footer .img-container-footer{

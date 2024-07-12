@@ -22,21 +22,41 @@
 .about-us {
   margin: 1em auto;
   width: 80%;
+  height: 80vh;
   font-family: Montserrat;
   color: white;
   display: flex;
+  
 }
 
 .about_us_img {
   width: 50%;
+  position: relative;
+  padding: auto;
+}
+
+.about_us_img_1{
+  position: absolute;
+  top: 10%;
+  
+}
+
+.about_us_img_2{
+  position: absolute;
+  top: 60%;
+  left: 40%;
 }
 
 .about_us_text {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
 }
 
 .about-us h2 {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 900;
   padding: 18px;
   text-align: start;
@@ -48,10 +68,11 @@
 
 .about-us .text {
   font-weight: 700;
-  font-size: 17px;
+  font-size: 20px;
   text-align: start;
   margin: 1rem auto 2rem auto;
   width: 90%;
+  line-height: 30px;
 }
 
 .wrapper {

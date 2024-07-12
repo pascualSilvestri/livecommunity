@@ -9,7 +9,19 @@ body {
   max-width: 80vw;
   margin: 0 auto;
   height: 100%;
+    
 }
+.overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* Gradient in grayscale */
+  background: -moz-linear-gradient(270deg,  #9fa5b477 0%,#19264673 55%,  #01050f  100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(270deg,  #9fa5b477 0%,#19264673 55%,  #01050f  100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(180deg,  #9fa5b477 0%,#19264673 55%,  #01050f  100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  
+}
+
 
 .hero-contain {
   width: 100%;
@@ -24,12 +36,18 @@ body {
 header {
   width: 100%;
   background-image: url("../../img/FondoLiveMobile.png");
-  height: 130vh;
+  height: 100vh;
+  position: relative;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
+  overflow: hidden;
 
+}
+header video{
+  display: block;
+  width: 100%;
+}
 @media (min-width: 1000px) {
   header {
     background-image: url("../../img/FondoLiveDsktp.png");
@@ -48,6 +66,8 @@ header {
   justify-content: center;
   max-width: 100%;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 .hero .logo-live {
   width: 260px;

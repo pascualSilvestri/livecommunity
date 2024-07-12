@@ -6,7 +6,7 @@ const navbarDisplay = navbar.getBoundingClientRect().height
 window.addEventListener('scroll', () => {})
 
 document.addEventListener('DOMContentLoaded', () => {
-    const loading = document.querySelector('.loading')
+    // const loading = document.querySelector('.loading')
 
     window.addEventListener('load', () => {
         setTimeout(() => {

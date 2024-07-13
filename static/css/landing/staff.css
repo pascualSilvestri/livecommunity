@@ -1,4 +1,37 @@
-.staff{
+/* Animaciones */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Aplicar animaciones */
+.tus_maestros h2.animate {
+  animation: slideInFromLeft 1.3s ease-out forwards;
+}
+
+.tus_maestros p.animate {
+  animation: slideInFromRight 1.5s ease-out forwards;
+}
+
+/* Estilos existentes */
+.staff {
   padding: 4rem;
   width: 100%;
   font-family: Montserrat;
@@ -8,7 +41,7 @@
   align-items: center;
   margin: 0 auto;
 }
-.staff h2{
+.staff h2 {
   text-align: center;
   font-size: 40px;
   font-weight: 900;
@@ -17,10 +50,9 @@
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-
 }
 
-.tus_maestros{
+.tus_maestros {
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -28,7 +60,7 @@
   align-items: center;
   justify-content: center;
 }
-.tus_maestros h2{
+.tus_maestros h2 {
   font-size: 40px;
   font-weight: 900;
   padding: 18px;
@@ -39,7 +71,7 @@
   -webkit-background-clip: text;
 }
 
-.tus_maestros p{
+.tus_maestros p {
   font-weight: 700;
   font-size: 22px;
   text-align: center;
@@ -47,47 +79,47 @@
   width: 70%;
   line-height: 40px;
 }
+
+/* Media queries */
 @media (min-width: 1100px) and (max-width: 1500px) {
-  .staff h2{
+  .staff h2 {
     font-size: 30px;
   }
-  .tus_maestros h2{
+  .tus_maestros h2 {
     font-size: 30px;
   }
   .tus_maestros p {
     font-size: 20px;
     width: 90%;
-
   }
 }
 
 @media (min-width: 1000px) and (max-width: 1100px) {
-  .tus_maestros h2{
+  .tus_maestros h2 {
     font-size: 30px;
   }
-  .staff h2{
+  .staff h2 {
     font-size: 30px;
   }
   .tus_maestros p {
     font-size: 16px;
     width: 90%;
-
   }
 }
 
 @media (min-width: 300px) and (max-width: 1000px) {
-  .tus_maestros h2{
+  .tus_maestros h2 {
     font-size: 30px;
   }
-  .staff h2{
+  .staff h2 {
     font-size: 30px;
   }
   .tus_maestros p {
     font-size: 16px;
     width: 90%;
-
   }
 }
+
 
 .wrapperStaff {
     max-width: 1100px;
@@ -238,78 +270,7 @@
     grid-auto-columns: calc((100% / 4) - 12px);
     gap: 16px;
 }
-  /* .wrapperStaff .carouselStaff {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      grid-column-gap: 10px;
-      grid-row-gap: 80px;
-      padding-top: 75px;
-  }
-  .carouselStaff.dragging .cardStaff {
-      cursor:default;
-      user-select: none;
-    }
-  .carouselStaff .cardStaff {
-      cursor: default;
-      height: 155px;
-
-    }
-    .wrapperStaff i{
-      display: none;
-    }
-    .infinite-cardStaff{
-      display: none;
-    } */
-}
 
 
 
 
-
-
-
-
-
-
-
-
-
-/* STAFF OLD */
-/* .grid-staff {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 70px;
-    margin-top: 60px;
-}
-
-.card-staff{
-    border-radius: 18px;
-    background-color: rgba(255, 255, 255, 0.158);
-    text-align: center;
-    padding-bottom: 15px;
-}
-.card-staff img{
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin-top: -50px;
-}
-
-.card-staff h4{
-    padding: 5px 0 10px 0;
-    text-transform: uppercase;
-    font-size: 17px;
-
-}
-
-.card-staff p{
-    font-size: 12px;
-    font-weight: 700;
-}
-.card-staff p span{
-    font-size: 12px;
-    font-weight: 500;
-} */

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const title = document.querySelector(".staff_h2");
-    const text = document.querySelector(".staff p");
+    const text = document.querySelector(".staff_p");
     const section = document.querySelector(".staff");
     const cardStaff = document.querySelectorAll(".cardStaff");
     const carousel = document.querySelector('.carouselStaff');

@@ -282,6 +282,7 @@
   border-radius: 8px;
   scroll-behavior: smooth;
   scrollbar-width: none;
+  opacity: 0;
 }
 
 .carousel::-webkit-scrollbar {

@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const title = document.querySelector(".tus_maestros h2");
   const text = document.querySelector(".tus_maestros p");
   const section = document.querySelector(".staff");
-  const cardStaff = document.querySelectorAll(".cardStaff");
+  const cardStaff = document.querySelectorAll(".cardStaff")
+  const carousel = document.querySelector('.carousel');
   
 
   // Verificar que los elementos existan
@@ -18,7 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (entry.isIntersecting) {
           title.classList.add("animate");
           text.classList.add("animate");
+          carousel.classList.add('animate');
           observer.disconnect(); // Deja de observar una vez que la animación se ha activado
+        }else {
+            title.classList.remove("animate");
+            text.classList.remove("animate");
+            carousel.classList.remove('animate');
+          
         }
       });
     }, observerOptions);

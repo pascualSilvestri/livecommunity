@@ -20,6 +20,23 @@
     opacity: 1;
   }
 }
+@keyframes carouselShow {
+  0% {
+    
+    opacity: 0;
+  }
+  50%{
+
+    opacity: 0.5;
+  }
+  100% {
+    
+    opacity: 1;
+  }
+}
+
+
+
 
 /* Aplicar animaciones */
 .tus_maestros h2.animate {
@@ -28,6 +45,25 @@
 
 .tus_maestros p.animate {
   animation: slideInFromRight 1.5s ease-out forwards;
+}
+
+
+.carousel.animate {
+  animation: carouselShow 3s linear forwards;
+}
+
+/* Aplicar animaciones */
+.staff_h2.animate {
+  animation: slideInFromLeft 2s ease-out forwards;
+}
+
+.staff_p.animate {
+  animation: slideInFromRight 1.5s ease-out forwards;
+}
+
+
+.carouselStaff.animate {
+  animation: carouselShow 3s linear forwards;
 }
 
 /* Estilos existentes */
@@ -69,6 +105,7 @@
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
+  opacity: 0;
 }
 
 .tus_maestros p {
@@ -78,6 +115,7 @@
   margin: 1rem auto 2rem auto;
   width: 70%;
   line-height: 40px;
+  opacity: 0;
 }
 
 /* Media queries */

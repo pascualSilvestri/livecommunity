@@ -5,23 +5,20 @@ body {
   background: #01050f;
   overflow-x: hidden;
 }
+
 .main-contain-home {
   max-width: 80vw;
   margin: 0 auto;
   height: 100%;
-    
 }
-.overlay{
+
+.overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  /* Gradient in grayscale */
-  background: -moz-linear-gradient(270deg,  #9fa5b477 0%,#19264673 55%,  #01050f  100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(270deg,  #9fa5b477 0%,#19264673 55%,  #01050f  100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(180deg,  #9fa5b477 0%,#19264673 55%,  #01050f  100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  
+  background: linear-gradient(180deg, #9fa5b477 0%, #19264673 55%, #01050f 100%);
+  z-index: 1;
 }
-
 
 .hero-contain {
   width: 100%;
@@ -35,39 +32,20 @@ body {
 
 header {
   width: 100%;
-  /* background-image: url("../../img/FondoLiveMobile.png"); */
-  height: 100vh;
+  height: 90vh;
   position: relative;
-  /* background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
   overflow: hidden;
-  mask-image: linear-gradient(black 70%, transparent);
 }
-header::after{
-  content: '';
+
+header video {
+  display: block;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
-  mask-image: linear-gradient(black 70%, transparent);
-}
-header video{
-  display: block;
-  width: 100%;
-
-}
-@media (min-width: 1000px) {
-  header {
-    /* background-image: url("../../img/FondoLiveDsktp.png");
-    background: linear-gradient(to bottom, transparent, #081a48),
-      url("../../img/FondoLiveDsktp.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; */
-  }
+  z-index: 0;
 }
 
 .hero {
@@ -78,28 +56,22 @@ header video{
   max-width: 100%;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  color: white;
+  text-align: center;
 }
+
 .hero .logo-live {
   width: 260px;
   margin-bottom: 1.8rem;
 }
-.hero-video {
-  border-radius: 20px;
-  margin: 20px 0 20px 0;
-  width: 70vw;
-  height: 620px;
-}
 
 .hero h1 {
   font-family: Montserrat;
-  font-size: 50px;
+  font-size: 3rem; /* Ajusta el tamaño según sea necesario */
   font-weight: 900;
   color: rgb(255, 255, 255);
-  text-align: center;
-  padding: 20px 0 0 0;
-  line-height: 55px;
-
+  margin-bottom: 1rem;
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.5s ease;
@@ -110,19 +82,18 @@ header video{
   padding: 10px 20px;
   color: white;
   background: #be1e6d;
-  margin-top: 4rem;
   border-radius: 7px;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1rem;
   text-decoration: none;
   opacity: 0;
   transform: translateY(50px);
-  transition: transform 0.3s ease, background 0.15s ease-in-out 0.2s, opacity 0.5s ease; /* Consolidación de transiciones */
+  transition: transform 0.3s ease, background 0.15s ease-in-out 0.2s, opacity 0.5s ease;
 }
 
 .hero .btn:hover {
   background-color: #e42283;
-  transform: scale(1.2)!important; /* Escalar el botón en un 20% */
+  transform: scale(1.2)!important;
   border-radius: 10px;
 }
 
@@ -131,46 +102,39 @@ header video{
   transform: translateY(0);
 }
 
-
-@media (max-width: 900px) {
-  .hero-video {
-    width: 85vw;
+@media (max-width: 1000px) {
+  header {
+    height: 100vh;
+  }
+  header video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
   }
   .hero {
-    padding-top: 10px;
-    height: 105vh;
+    height: 100vh;
+    justify-content: center;
+    text-align: center;
   }
   .hero h1 {
-    font-size: 40px;
-    margin-top: 4.5rem;
+    font-size: 2.5rem; /* Ajusta el tamaño según sea necesario */
+    margin-top: 1rem;
   }
-  header {
-    height: 100%;
-    margin-bottom: 3rem;
+  .hero .btn {
+    font-size: 1rem;
+    margin-top: 1rem;
   }
 }
 
 @media (max-width: 600px) {
   .hero h1 {
-    font-size: 40px;
-    margin-top: 2.5rem;
-    padding-bottom: 0;
+    font-size: 2rem;
   }
-  .hero {
-    padding-top: 10px;
-    height: 80vh;
-  }
-
-  header {
-    height: 100%;
-    margin-bottom: 3rem;
-  }
-  .hero-video {
-    width: 90vw;
-    height: 360px;
-  }
-  .hero .logo-live {
-    width: 200px;
-    margin-bottom: 1.8rem;
+  .hero .btn {
+    font-size: 0.8rem;
   }
 }

@@ -1,6 +1,6 @@
 .staff{
   padding: 4rem;
-  width: 85%;
+  width: 100%;
   font-family: Montserrat;
   color: white;
   display: flex;
@@ -120,7 +120,7 @@
       text-align: center;
   
   }
-  .cardStaff ul{
+  /* .cardStaff ul{
     list-style-position: outside;
     padding-left: 27px;
     list-style-type: disclosure-closed;
@@ -129,7 +129,7 @@
     align-items: start;
     height: 70%;
     justify-content: space-evenly;
-  }
+  } */
 
   .cardStaff ul li{
     font-size: 13px;

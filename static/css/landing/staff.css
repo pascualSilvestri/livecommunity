@@ -184,8 +184,8 @@
     align-items: center;
   }
   .carouselStaff .cardStaff {
-    scroll-snap-align: start;
-    height: 220px;
+    /* scroll-snap-align: start; */
+    height: auto;
     list-style: none;
     cursor: pointer;
     flex-direction: column;
@@ -194,15 +194,18 @@
     /* background-color: rgba(255, 255, 255, 0.158); */
     text-align: center;
     padding-bottom: 15px;
+    background: linear-gradient(180deg, #01050f00 50%, #030e2bc0 75%, #233155);
+
   }
   
   .cardStaff img{
-    width: 125px;
-    height: 125px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    margin-top: -60px;
+    /* margin-top: -60px; */
     object-fit: cover;
     object-position: right top;
+    
   }
   
   .cardStaff h4{
@@ -227,7 +230,7 @@
       text-align: center;
   
   }
-  /* .cardStaff ul{
+  .cardStaff ul{
     list-style-position: outside;
     padding-left: 27px;
     list-style-type: disclosure-closed;
@@ -236,7 +239,19 @@
     align-items: start;
     height: 70%;
     justify-content: space-evenly;
-  } */
+    transition: all 0.5s linear;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .cardStaff ul.show {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .cardStaff:hover ul{
+    /* opacity: 1; */
+  }
 
   .cardStaff ul li{
     font-size: 13px;
@@ -271,6 +286,6 @@
     gap: 16px;
 }
 
-
+}
 
 

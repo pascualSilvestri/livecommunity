@@ -235,7 +235,7 @@
 /* MEDIA QUERY DESKTOP */
 @media screen and (min-width: 900px) {
   .wrapperStaff .carouselStaff {
-    grid-auto-columns: calc((100% / 5) - 12px);
+    grid-auto-columns: calc((100% / 4) - 12px);
     gap: 16px;
 }
   /* .wrapperStaff .carouselStaff {

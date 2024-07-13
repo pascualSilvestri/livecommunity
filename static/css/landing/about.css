@@ -221,17 +221,18 @@
 
 
 .wrapper {
-  max-width: 100%;
+  max-width: 90%;
   width: 100%;
-  min-height: 50vh;
+  min-height:40vh;
   position: relative;
   margin-top: 2rem;
+  padding-left: 3rem;
 }
 
 
 .wrapper i {
   top: 50%;
-  height: 100%;
+  height: 50%;
   width: 50px;
   cursor: pointer;
   font-size: 1.25rem;
@@ -269,6 +270,7 @@
 .wrapper i:last-child {
   right: -22px;
 }
+
 .wrapper .carousel {
   display: grid;
   grid-auto-flow: column;
@@ -281,6 +283,7 @@
   scroll-behavior: smooth;
   scrollbar-width: none;
 }
+
 .carousel::-webkit-scrollbar {
   display: none;
 }
@@ -346,17 +349,18 @@
   list-style-position: outside;
   padding-left: 27px;
   list-style-type: disclosure-closed;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: start;
   height: 70%;
   justify-content: space-evenly;
-  transition: all 1s ease-in;
+  transition: all .5s ease-in;
+  opacity: 0;
 }
 
 .card:hover ul{
-  transition: all 1s ease-in;
-  display: flex ;
+  /* transition: all 1s ease-in; */
+  opacity: 1;
 }
 
 

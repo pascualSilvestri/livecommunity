@@ -223,7 +223,7 @@
 .wrapper {
   max-width: 90%;
   width: 100%;
-  min-height:40vh;
+  min-height: 20vh;
   position: relative;
   margin-top: 2rem;
   padding-left: 3rem;

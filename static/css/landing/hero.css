@@ -71,7 +71,7 @@ header video {
   font-size: 3rem; /* Ajusta el tamaño según sea necesario */
   font-weight: 900;
   color: rgb(255, 255, 255);
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   opacity: 0;
   transform: translateY(50px);
   transition: all 0.5s ease;
@@ -79,12 +79,12 @@ header video {
 
 .hero .btn {
   font-family: Montserrat;
-  padding: 10px 20px;
+  padding: 13px 25px;
   color: white;
   background: #be1e6d;
   border-radius: 7px;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.3rem;
   text-decoration: none;
   opacity: 0;
   transform: translateY(50px);

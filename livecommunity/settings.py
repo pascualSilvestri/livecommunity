@@ -190,7 +190,7 @@ EMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum'
 TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
 CHAT_ID_BOT = '@pruebapas'
 
-DEBUG = True
+DEBUG = False
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 

@@ -15,18 +15,28 @@ section.mision_vision {
     background-color: rgba(28, 28, 28, 0.336);
     backdrop-filter: blur(20px);
     border-radius: 30px;
-    padding: 40px;
+    padding: 5rem 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.26);
     margin: 2rem 4rem;
     text-align: left;
+    height: 50vh;
+    justify-content: space-evenly;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; 
+    position: relative;
+    top:-150px;
 }
+
+
 
 .mision, .vision {
     color: #ffffff;
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 60px;
+    
 }
+
 
 .mision h3, .vision h3 {
     margin-top: 0;
@@ -34,13 +44,17 @@ section.mision_vision {
     font-size: 2rem;
     color: #ffffff;
     letter-spacing: 1px;
+    background-image: linear-gradient(to left, #4838d8, #bd1e6e);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
 }
 
 .mision p, .vision p {
     margin-top: 10px;
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: #ffffff;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: #d3d3d3;
     line-height: 1.7;
 }
 
@@ -52,7 +66,16 @@ section.mision_vision {
     gap: 40px;
     padding: 0 17px;
     position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; 
+    position: relative;
+    top:-150px;
 }
+
+.mision_vision_container.animate, .stats_container.animate {
+    opacity: 1;
+  }
+  
 
 .stats_container::before {
     content: '';
@@ -93,7 +116,7 @@ section.mision_vision {
 .stat span {
     display: block;
     font-size: 16px;
-    color: #ffffff;
+    color: #d3d3d3;
     padding-left: 10px;
 }
 

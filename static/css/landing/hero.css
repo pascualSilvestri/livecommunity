@@ -57,7 +57,7 @@ header video {
   align-items: center;
   position: relative;
   z-index: 2;
-  color: white;
+  color: #d3d3d3;
   text-align: center;
 }
 
@@ -70,7 +70,7 @@ header video {
   font-family: Montserrat;
   font-size: 3rem; /* Ajusta el tamaño según sea necesario */
   font-weight: 900;
-  color: rgb(255, 255, 255);
+  color: #d3d3d3;
   margin-bottom: 2rem;
   opacity: 0;
   transform: translateY(50px);

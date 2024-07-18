@@ -6,6 +6,8 @@ section.mision_vision {
     padding: 20px;
     width: 80%;
     margin: 6rem auto 4rem auto;
+    /* min-height: 80vh; */
+    /* align-items: center; */
 }
 
 .mision_vision_container {

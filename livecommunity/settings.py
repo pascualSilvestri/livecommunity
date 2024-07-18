@@ -199,7 +199,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
-ALLOWED_HOSTS = ['https://livecommunity-production.up.railway.app']
+ALLOWED_HOSTS = ['livecommunity-production.up.railway.app']
 
 DATABASES = {
     'default': {

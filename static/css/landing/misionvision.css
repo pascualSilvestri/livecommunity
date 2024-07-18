@@ -98,6 +98,7 @@ section.mision_vision {
     -webkit-background-clip: text;
     position: relative;
     padding-left: 40px;
+    width: 100%;
 }
 
 .stat::before {
@@ -115,9 +116,10 @@ section.mision_vision {
 
 .stat span {
     display: block;
-    font-size: 16px;
+    font-size: 10px;
     color: #d3d3d3;
-    padding-left: 10px;
+    padding-left: 5px;
+    width: 100%;
 }
 
 /* Ajustes para pantalla más pequeña */
@@ -125,6 +127,10 @@ section.mision_vision {
     section.mision_vision {
         flex-direction: column;
         align-items: center;
+    }
+
+    .mision .vision{
+
     }
 
     .stats_container {

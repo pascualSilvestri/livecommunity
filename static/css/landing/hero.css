@@ -17,7 +17,6 @@ body {
   width: 100%;
   height: 100%;
   background: linear-gradient(180deg, #9fa5b477 0%, #19264673 10%, #01050f 100%);
-  /* background: #000000a2; */
   z-index: 1;
 }
 

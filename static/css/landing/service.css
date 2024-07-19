@@ -59,3 +59,12 @@
         transform: translateX(-100%);
     }
 }
+
+
+@media (max-width: 768px) {
+    .service {
+        min-width: 50%; /* Ajusta el ancho según sea necesario para mostrar 4 imágenes a la vez */
+    }    
+
+
+}

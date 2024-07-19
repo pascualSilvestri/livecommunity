@@ -1,0 +1,70 @@
+.services {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Para que las imágenes que se desplazan fuera de la vista no aparezcan */
+    position: relative;
+    z-index: 100;
+    padding: 5rem 0;
+    flex-direction: column;
+}
+
+.services h2{
+    font-size: 40px;
+    font-weight: 900;
+    padding: 18px;
+    text-align: start;
+    background-image: linear-gradient(to left, #4838d8, #bd1e6e);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    margin-bottom: 3rem;
+}
+
+.service_container {
+    display: flex;
+    gap: 20px;
+    animation: scroll 20s linear infinite; /* Ajusta el tiempo (20s) para que la animación sea más rápida o más lenta */
+}
+
+.service {
+    min-width: 25%; /* Ajusta el ancho según sea necesario para mostrar 4 imágenes a la vez */
+}
+
+.service img {
+    width: 100%;
+    height: auto;
+    transition: all .5s linear;
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 30%,
+        black 70%,
+        transparent
+      );
+}
+
+
+.service img:hover {
+    transform: scale(1.1);
+    mask-image: none;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+@media (max-width: 768px) {
+    .service {
+        min-width: 50%; /* Ajusta el ancho según sea necesario para mostrar 4 imágenes a la vez */
+    }    
+
+
+}

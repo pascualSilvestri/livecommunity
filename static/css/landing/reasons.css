@@ -1,6 +1,10 @@
 .reasons {
     text-align: center;
     padding: 60px 20px 50px 20px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .reasons h2 {
@@ -27,6 +31,14 @@
     padding: 20px;
     width: 260px;
     text-align: center;
+    box-shadow: 0px 0px 20px rgba(202, 202, 202, 0.2);
+    opacity: 0;
+    transition: all 2s linear;
+}
+
+.reason.animate {
+    animation: rotate 2s linear;
+    opacity: 1;
 }
 
 .reason img {
@@ -50,6 +62,16 @@
     width: 90%;
     margin: 0 auto;
     text-align: center;
+}
+
+
+@keyframes rotate {
+    0%{
+        transform: rotateY(0deg)
+    }
+    100%{
+        transform: rotateY(360deg);
+    }
 }
 
 /* Ajustes para pantalla más pequeña */

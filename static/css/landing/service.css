@@ -25,7 +25,7 @@
 .service_container {
     display: flex;
     gap: 35px;
-    animation: scroll 17s linear infinite; /* Ajusta el tiempo (20s) para que la animación sea más rápida o más lenta */
+    animation: scroll 20s linear infinite; /* Ajusta el tiempo (20s) para que la animación sea más rápida o más lenta */
 }
 
 .service {

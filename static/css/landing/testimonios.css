@@ -1,0 +1,75 @@
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+} */
+
+.testimonios {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    height: 40vh;
+
+}
+
+.testimonios h2 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 900;
+    padding: 20px 0;
+    background-image: linear-gradient(to left, #4838d8, #bd1e6e);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    margin-bottom: 20px;
+}
+
+.slider {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.slide {
+    min-width: 400px; /* Ajustar el tamaño de las cards según sea necesario */
+    margin: 0 20px;
+    box-sizing: border-box;
+    padding: 30px 50px;
+    background-color: rgba(6, 16, 43, 0.726);
+    border-radius: 10px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.2rem;
+    transition: all .25s linear;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.slide:hover {
+    transform: scale(1.1);
+    mask-image: none;
+}
+.slide p{
+    text-align: center;
+    font-size: 18px;
+}
+.slide img{
+    width: 60px;
+    filter: invert(0.6);
+    margin-bottom: 25px;
+}
+
+
+@keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.slider {
+    display: flex;
+    animation: slide 20s linear infinite;
+}
+

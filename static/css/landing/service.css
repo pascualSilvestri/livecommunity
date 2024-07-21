@@ -24,8 +24,8 @@
 
 .service_container {
     display: flex;
-    gap: 20px;
-    animation: scroll 20s linear infinite; /* Ajusta el tiempo (20s) para que la animación sea más rápida o más lenta */
+    gap: 35px;
+    animation: scroll 17s linear infinite; /* Ajusta el tiempo (20s) para que la animación sea más rápida o más lenta */
 }
 
 .service {
@@ -35,7 +35,7 @@
 .service img {
     width: 100%;
     height: auto;
-    transition: all .5s linear;
+    transition: all .25s linear;
     mask-image: linear-gradient(
         to bottom,
         transparent,

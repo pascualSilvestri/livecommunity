@@ -22,19 +22,25 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
+    gap: 45px;
     margin: 40px 0;
 }
 
 .reason {
     border-radius: 10px;
     padding: 20px;
-    width: 260px;
+    width: 300px;
     text-align: center;
     box-shadow: 0px 0px 20px rgba(202, 202, 202, 0.2);
     opacity: 0;
     transition: all 2s linear;
 }
+.reason:hover {
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.925);
+    cursor: pointer;
+}
+
+
 
 .reason.animate {
     animation: rotate 2s linear;

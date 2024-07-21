@@ -115,10 +115,10 @@ section.mision_vision {
 
 .stat span {
   display: block;
-  font-size: 10px;
+  font-size: 12px;
   color: #d3d3d3;
-  padding-left: 5px;
-  width: 100%;
+  /* padding-left: 5px; */
+  width: 150px;
 }
 
 /* Ajustes para pantalla más pequeña */

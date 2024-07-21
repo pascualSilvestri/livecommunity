@@ -130,10 +130,10 @@
 /* Media queries */
 @media (min-width: 1100px) and (max-width: 1500px) {
   .staff h2 {
-    font-size: 30px;
+    font-size: 40px;
   }
   .tus_maestros h2 {
-    font-size: 30px;
+    font-size: 40px;
   }
   .tus_maestros p {
     font-size: 20px;
@@ -147,10 +147,10 @@
 
 @media (min-width: 1000px) and (max-width: 1100px) {
   .tus_maestros h2 {
-    font-size: 30px;
+    font-size: 40px;
   }
   .staff h2 {
-    font-size: 30px;
+    font-size: 40px;
   }
   .tus_maestros p {
     font-size: 16px;

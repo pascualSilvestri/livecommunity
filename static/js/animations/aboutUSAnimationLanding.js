@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY
 
-        console.log('Posición de scroll:', scrollPosition)
-        console.log('Posición superior del contenedor:', containerTop)
 
         if (scrollPosition >= containerTop - 250) {
             about_us_img_1.classList.add('animate')

@@ -24,7 +24,11 @@
     justify-content: center;
     gap: 45px;
     margin: 40px 0;
+    background: linear-gradient(to bottom, #01050f 0%, #030a1d75 25%, #040e29ee 50%, #030a1d75 75%, #01050f 100%);
+    background-color: #030a1db9;
 }
+
+
 
 .reason {
     border-radius: 10px;
@@ -34,6 +38,7 @@
     box-shadow: 0px 0px 20px rgba(202, 202, 202, 0.2);
     opacity: 0;
     transition: all 2s linear;
+    background: transparent;
 }
 .reason:hover {
     box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.925);

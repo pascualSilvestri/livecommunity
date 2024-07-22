@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY
 
-        console.log('Posición de scroll:', scrollPosition)
-        console.log('Posición superior del contenedor:', containerTop)
 
         if (scrollPosition >= containerTop - 300) {
             mision_vision_container.classList.add('animate')

@@ -24,8 +24,11 @@
     justify-content: center;
     gap: 45px;
     margin: 40px 0;
-    background: linear-gradient(to bottom, #01050f 0%, #23234b7a 25%, #23234b 50%, #23234b7a 75%, #01050f 100%);
+    background: linear-gradient(to bottom, #01050f 0%, #030a1d75 25%, #040e29ee 50%, #030a1d75 75%, #01050f 100%);
+    background-color: #030a1db9;
 }
+
+
 
 .reason {
     border-radius: 10px;

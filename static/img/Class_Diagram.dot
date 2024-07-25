@@ -1,0 +1,146 @@
+// Class Diagram
+digraph {
+	Provincia [label="Provincia
++ id: int
++ provincia: string
++ isActive: boolean"]
+	Domicilio [label="Domicilio
++ id: int
++ localidad: string
++ barrio: string
++ calle: string
++ numero: string
++ provinciaId: int"]
+	Institucion [label="Institucion
++ id: int
++ cue: string
++ logo: string
++ nombre: string
++ descripcion: string
++ email: string
++ contacto: string
++ isActive: boolean
++ domicilioId: int"]
+	Usuario [label="Usuario
++ id: int
++ nombre: string
++ apellido: string
++ dni: string
++ generoId: int
++ estadoId: int
++ domicilioId: int
++ cursoId: int"]
+	Rols [label="Rols
++ id: int
++ name: string"]
+	EstadoUsuario [label="EstadoUsuario
++ id: int
++ estado: string"]
+	Genero [label="Genero
++ id: int
++ nombre: string"]
+	Curso [label="Curso
++ id: int
++ nombre: string
++ nominacion: string
++ division: string
++ isActive: boolean
++ institucionId: int"]
+	CicloLectivo [label="CicloLectivo
++ id: int
++ nombre: string
++ fechaInicio: Date
++ fechaFin: Date
++ estadoCl: string
++ isActive: boolean
++ institucionId: int"]
+	Asignatura [label="Asignatura
++ id: int
++ nombre: string
++ isActive: boolean
++ institucionId: int"]
+	Periodo [label="Periodo
++ id: int
++ nombre: string
++ fechaInicio: Date
++ fechaFin: Date
++ isActive: boolean
++ cicloId: int"]
+	Coloquio [label="Coloquio
++ id: int
++ fechaColoqio: Date
++ horaColoqio: string
++ estadoColoqio: string
++ asignaturaId: int"]
+	Nota [label="Nota
++ id: int
++ usuarioId: int
++ asignaturaId: int
++ periodoId: int
++ cicloLectivoId: int
++ nota: int
++ tipoNotaId: int"]
+	TipoNota [label="TipoNota
++ id: int
++ tipo: string"]
+	Tutor [label="Tutor
++ id: int
++ nombre: string
++ apellido: string
++ dni: string
++ telefono: string
++ telefono_alternativo: string
++ relacion_con_alumno: string
++ domicilioId: int"]
+	UsuarioRolInstitucion [label="UsuarioRolInstitucion
++ id: int
++ usuarioId: int
++ institucionId: int
++ rolId: int"]
+	PasswordReset [label="PasswordReset
++ id: int
++ email: string
++ token: string
++ createdAt: Date
++ updatedAt: Date
++ expiresAt: Date
++ isActive: boolean"]
+	CursoAsignaturaProfesorCicloLectivo [label="CursoAsignaturaProfesorCicloLectivo
++ id: int
++ cursoId: int
++ asignaturaId: int
++ cicloLectivoId: int
++ usuarioId: int"]
+	AlumnoCursoCicloLectivo [label="AlumnoCursoCicloLectivo
++ id: int
++ cursoId: int
++ usuarioId: int
++ cicloLectivoId: int"]
+	Domicilio -> Provincia
+	Institucion -> Domicilio
+	Usuario -> Domicilio
+	Usuario -> Genero
+	Usuario -> EstadoUsuario
+	Usuario -> Curso
+	Curso -> Institucion
+	CicloLectivo -> Institucion
+	Asignatura -> Institucion
+	Periodo -> CicloLectivo
+	Coloquio -> Asignatura
+	Nota -> Usuario
+	Nota -> Asignatura
+	Nota -> Periodo
+	Nota -> CicloLectivo
+	Nota -> TipoNota
+	Tutor -> Domicilio
+	UsuarioRolInstitucion -> Usuario
+	UsuarioRolInstitucion -> Institucion
+	UsuarioRolInstitucion -> Rols
+	CursoAsignaturaProfesorCicloLectivo -> Curso
+	CursoAsignaturaProfesorCicloLectivo -> Asignatura
+	CursoAsignaturaProfesorCicloLectivo -> CicloLectivo
+	CursoAsignaturaProfesorCicloLectivo -> Usuario
+	AlumnoCursoCicloLectivo -> Curso
+	AlumnoCursoCicloLectivo -> Usuario
+	AlumnoCursoCicloLectivo -> CicloLectivo
+}

@@ -2,20 +2,60 @@
   font-family: Montserrat;
   background-color: #000000;
 }
+
 .broker-container-header {
   width: 100%;
   min-height: 100vh;
   padding-bottom: 5rem;
   background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 100%
+    ),
+    /* Degradado de arriba hacia abajo */
+      linear-gradient(to right, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%),
+    /* Degradado de izquierda a derecha */
+      url("../../img/fondoBrokerHeader.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-attachment: fixed; */
+  background-clip: padding-box;
+}
+
+.broker_about_us_container {
+  width: 100vw;
+  background-color: #020a1e;
+  margin: 10rem 0 5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 0;
+  mask-image: linear-gradient(
     to bottom,
-    #ffffff 0%,
-    #e6e6e6 10%,
-    #cccccc 20%,
-    #999999 40%,
-    #666666 60%,
-    #333333 80%,
-    #000000 100%
+    transparent,
+    black 20%,
+    black 80%,
+    transparent
   );
+}
+
+.broker_about_us_text {
+  width: 65%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color_green {
+  color: #18cfb1;
+}
+.broker_about_us_text p {
+  color: #d3d3d3;
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 800;
+  text-align: center;
 }
 
 .broker-presentation {
@@ -143,7 +183,7 @@
   font-family: Montserrat;
   padding: 10px 40px;
   color: white;
-  background: linear-gradient(90deg, #112afb 0%, #1bcbb7 100%);
+  background: linear-gradient(90deg, #31323380 0%, #1bcbb7 100%);
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; /* margin-top: 5px; */
   border-radius: 7px;
   font-weight: 800;
@@ -156,7 +196,7 @@
 }
 
 .footer-broker {
-  background: rgb(9, 27, 71);
+  background: #01050f;
   background: linear-gradient(
     180deg,
     #ffffff 0%,
@@ -195,7 +235,7 @@
     display: block;
   }
   .footer-broker {
-    background: rgb(9, 27, 71);
+    background: #01050f;
     justify-content: space-between;
     align-items: center;
     margin-top: 2rem;
@@ -233,7 +273,7 @@
     padding-top: 15vh;
   }
   .broker-presentation .broker-logo {
-    width: 280px;
+    width: 350px;
     filter: drop-shadow(1px 4px 4px #1d1d1d);
   }
   .broker-presentation .broker-text {
@@ -263,7 +303,7 @@
     display: block;
   }
   .footer-broker {
-    background: rgb(9, 27, 71);
+    background: #01050f;
     justify-content: space-between;
     align-items: center;
     margin-top: 2rem;

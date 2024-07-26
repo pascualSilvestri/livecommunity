@@ -21,6 +21,21 @@
   padding-bottom: 5rem;
 }
 
+.servicio_section_container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 0;
+}
+
+.servicio_section_container h2{
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 2.5rem;
+  font-weight: 700;
+  color: #d3d3d3;
+  margin:10rem 0 15rem 0;
+}
 .serv-presentation {
   padding-top: 10vh;
   width: 85%;
@@ -121,7 +136,7 @@
 .serv-video img {
   position: relative;
   display: block;
-  width: 100%;
+  width: 500px;
   height: auto;
   border-radius: 40%;
   /* box-shadow: 0 0 15px 15px rgba(255, 255, 255, 1); */

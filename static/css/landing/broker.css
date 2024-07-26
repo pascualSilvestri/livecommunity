@@ -26,11 +26,11 @@
 .broker_about_us_container {
   width: 100vw;
   background-color: #020a1e;
-  margin: 10rem 0 5rem 0;
+  margin: 0rem 0 5rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5rem 0;
+  padding: 10rem 0;
   mask-image: linear-gradient(
     to bottom,
     transparent,
@@ -252,20 +252,7 @@
     line-height: 25px;
   }
 
-  .broker .preguntas-container-desktop {
-    color: #091b47;
-  }
-  .broker .inicio-preguntas h2 {
-    font-size: 38px;
-    font-weight: 900;
-  }
-  .broker .pregunta h5 {
-    font-size: 20px;
-  }
-  .pregunta p {
-    font-size: 15px;
-    font-weight: 400;
-  }
+ 
 }
 
 @media screen and (min-width: 900px) {

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load static %} 
+{% load static %}
 
-{% block title %}Servicios{% endblock %} 
+{% block title %}Servicios{% endblock %}
 
 {% block content %}
 
@@ -26,75 +26,97 @@
 
         <!-- VIDEO -->
         <div class="serv-video">
-            <h3 class="free puntito-azul-1">ACCESOS FREE</h3>
 
-            <iframe  src="https://www.youtube.com/embed/1Yeo4Tjg7lY?si=5n8LY_QfPqh-eIDY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+
+            <iframe src="https://www.youtube.com/embed/1Yeo4Tjg7lY?si=5n8LY_QfPqh-eIDY" title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen class='video'></iframe>
 
         </div>
         <!-- FIN VIDEO -->
 
-         <!-- VIDEO -->
-         <div class="serv-video">
-            <h3 class="puntito-azul-2 free">SEÑALES FREE</h3>
+        <div class="serv-video">
+            <h3 class="free">CANAL DE ACCESOS</h3>
 
-            <iframe  src="https://www.youtube.com/embed/k88AjonUhMw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+            <p style="color: #d3d3d3;">Obtén acceso a todas las capacitaciones en vivo de Live Community para disfrutar de una amplia gama de oportunidades de aprendizaje en tiempo real.
+            </p>
+        </div>
+
+    </div>
+    
+    <!-- FIN VIDEOS -->
+       <div class="serv-videos-free">
+
+        <div class="serv-video">
+            <h3 class="free">CANAL DE SEÑALES</h3>
+
+            <p style="color: #d3d3d3;">Obtén acceso al canal de señales, donde recibirás operaciones en varios activos en tiempo real, realizadas por nuestros traders profesionales y presentadas de manera detallada.</p>
+        </div>
+        <!-- FIN VIDEO -->
+
+        <!-- VIDEO -->
+        <div class="serv-video">
+
+
+            <iframe src="https://www.youtube.com/embed/k88AjonUhMw" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen class='video'></iframe>
 
         </div>
         <!-- FIN VIDEO -->
 
     </div>
-    <!-- FIN VIDEOS -->
-
     <section class="serv-free-container">
-        <p>Accediendo a los <span class="free">SERVICIOS FREE</span> de Live Community obtendras educación para que puedas formarte como trader profesional</p>
+        <p>Accediendo a los <span class="free">SERVICIOS FREE</span> de Live Community obtendras educación para que
+            puedas formarte como trader profesional</p>
     </section>
 
     <div class="btn-registrate-container-serv">
         <a class="btn-registrate-serv" href="{{ url_register }}">REGISTRATE</a>
     </div>
-    <h2 class="premium-tittle">RECORRIDO LIVE</h2>
-
+    <!-- 
     <div class="serv-videos-premium">
 
-         <!-- VIDEO -->
+
          <div class="serv-video-pro">
-            <!-- <h3 class="puntito-amarillo-1 premium">CANAL PRO</h3> -->
+
 
             <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
 
         </div>
-        <!-- FIN VIDEO -->
+
 
 
          
-    </div>
+    </div> -->
 
-    <div class="recorda">
-        <h3>RECORDÁ</h3>
-        <p>Accediendo a los servicios <b>FREE</b> con el capital que quieras multiplicar obtendras la educación para que puedas profesionalizarte</p>
+    <div class="service_recorda_container">
+        <img src="{% static 'img/IlustracionServiciosLive.png' %}" alt="illustracion">
+
+        <div class="recorda">
+            <h3>RECORDÁ</h3>
+            <p>Accediendo a los servicios <b>FREE</b> con el capital que quieras multiplicar obtendras la educación para
+                que puedas profesionalizarte</p>
+        </div>
     </div>
 
     <div class="decision-container">
-        <img src="{% static 'img/IlustracionServiciosLive.png' %}" alt="illustracion">
+
         <p>¿Estas listo para convertirte</br> en un trader rentable?</p>
         <div class="decision">
-            <!-- <div class="opcion1">
-                <h3>Servicio PRO</h3>  
-                <div class="btn-contratar-decision-container">
-                    <a class="btn-vacio contratar" href="https://api.whatsapp.com/send?phone=1138658887&text=Hola, quiero contratar los servicio PRO de Live Community." target="_blank">Contratar</a>
-                </div>        
-            </div> -->
             <div class="opcion2">
-                <h3>Servicios Free</h3>  
+                <h3>Servicios Free</h3>
                 <div class="btn-registrate-decision-container">
                     <a class="btn-vacio registrate" href="{{ url_register }}">Registrate</a>
-                </div>        
+                </div>
             </div>
         </div>
     </div>
 
+
     {% block faqServicios %}
-        {% include './faqServicios.html' %}    
+    {% include './faqServicios.html' %}
     {% endblock faqServicios %}
 
     <footer class="footer-serv">
@@ -110,7 +132,7 @@
             </a>
         </div>
 
-    
+
     </footer>
 
 

@@ -65,6 +65,71 @@
   align-items: center;
 }
 
+.left {
+  position: relative;
+}
+
+.left:before {
+  content: "";
+  background-color: #bd1e6e;
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  z-index: 100;
+}
+
+.left:after {
+  content: "";
+  background-color: #bd1e6e;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px 0 30px 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 100;
+}
+
+.right {
+  position: relative;
+}
+
+
+.right:before {
+  content: "";
+  background-color: #bd1e6e;
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  z-index: 100;
+}
+
+.right:after {
+  content: "";
+  background-color: #bd1e6e;
+  width: 30px;
+  height: 30px;
+  border-radius: 0 30px 0px 30px;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  z-index: 100;
+}
+
+.serv-video img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 40%;
+  /* box-shadow: 0 0 15px 15px rgba(255, 255, 255, 1); */
+  mask-image: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%, transparent);
+  
+}
+
+
 /* .puntito-azul-1::before {
   position: absolute;
   margin-left: -50px;

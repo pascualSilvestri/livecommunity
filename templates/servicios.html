@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load static %} 
+{% load static %}
 
-{% block title %}Servicios{% endblock %} 
+{% block title %}Servicios{% endblock %}
 
 {% block content %}
 
@@ -21,80 +21,209 @@
     </div>
 
 
-    <!-- INICIO VIDEOS -->
-    <div class="serv-videos-free">
 
-        <!-- VIDEO -->
-        <div class="serv-video">
-            <h3 class="free puntito-azul-1">ACCESOS FREE</h3>
 
-            <iframe  src="https://www.youtube.com/embed/1Yeo4Tjg7lY?si=5n8LY_QfPqh-eIDY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+    <div class="servicio_section_container">
+
+        <div id="analisisEnvivo"  class="serv-videos-free right fondo">
+
+            <!-- VIDEO -->
+            <div class="serv-video">
+
+                <img src="{% static 'img/analisiService.jpeg' %}" alt="" srcset="" width="500px">
+
+            </div>
+            <!-- FIN VIDEO -->
+
+            <div class="serv-video">
+                <h3  class="free">Análisis en Vivo + Operativas</h3>
+
+                <p style="color: #d3d3d3;">Realizamos análisis detallado en tiempo real con proyecciones diarias y a
+                    largo plazo de divisas, metales, índices y criptomonedas, operando en vivo para una experiencia
+                    interactiva y efectiva en el trading.
+                </p>
+            </div>
 
         </div>
-        <!-- FIN VIDEO -->
 
-         <!-- VIDEO -->
-         <div class="serv-video">
-            <h3 class="puntito-azul-2 free">SEÑALES FREE</h3>
+        <!-- FIN VIDEOS -->
+        <div  id="tradingtime"  class="serv-videos-free left fondo">
 
-            <iframe  src="https://www.youtube.com/embed/k88AjonUhMw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
+            <div class="serv-video">
+                <h3 id="tradingtime" class="free">Trading Time</h3>
+
+                <p style="color: #d3d3d3;">
+                    Únete a nuestra sesión de 2 horas con Traders Profesionales para recibir alertas en tiempo real
+                    sobre oportunidades de compra y venta en el mercado.
+                </p>
+            </div>
+            <!-- FIN VIDEO -->
+
+            <!-- VIDEO -->
+            <div class="serv-video">
+
+
+                <img src="{% static 'img/timeService.jpg' %}" alt="" srcset="" width="300px">
+
+            </div>
+            <!-- FIN VIDEO -->
 
         </div>
-        <!-- FIN VIDEO -->
+
+        <div id="comunidad" class="serv-videos-free right fondo">
+
+            <!-- VIDEO -->
+            <div class="serv-video">W
+
+                <img src="{% static 'img/comunidadService.jpg' %}" alt="" srcset="" width="500px">
+
+            </div>
+            <!-- FIN VIDEO -->
+
+            <div class="serv-video">
+                <h3 id="comunidad" class="free">Canal de Comunidad</h3>
+
+                <p style="color: #d3d3d3;">
+                    Obtén acceso a nuestro canal de comunidad, donde podrás participar en chats en tiempo real con
+                    expertos y otros traders para intercambiar ideas y estrategias de trading.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- FIN VIDEOS -->
+        <div  id="discord" class="serv-videos-free left fondo">
+
+            <div class="serv-video">
+                <h3 class="free">Discord</h3>
+
+                <p style="color: #d3d3d3;">
+                    Únete a nuestro servidor en Discord para acceder a información detallada sobre proyecciones de
+                    diversos activos a corto y largo plazo, actualizadas constantemente. Además, disfrutarás de un
+                    servicio exclusivo diseñado para potenciar tu experiencia en el trading.
+                </p>
+            </div>
+            <!-- FIN VIDEO -->
+
+            <!-- VIDEO -->
+            <div class="serv-video">
+
+
+                <img src="{% static 'img/discordServicio2.png' %}" alt="" srcset="" width="300px">
+
+            </div>
+            <!-- FIN VIDEO -->
+             
+
+        </div>
+          <!-- INICIO VIDEOS -->
+          <div id="accesos" class="serv-videos-free right fondo">
+
+            <!-- VIDEO -->
+            <div class="serv-video">
+
+
+                <iframe src="https://www.youtube.com/embed/1Yeo4Tjg7lY?controls=0&modestbranding=1&rel=0&autohide=1"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen class='video'></iframe>
+
+
+            </div>
+            <!-- FIN VIDEO -->
+
+            <div class="serv-video">
+                <h3  class="free">CANAL DE ACCESOS</h3>
+
+                <p style="color: #d3d3d3;">Obtén acceso a todas las capacitaciones en vivo de Live Community para
+                    disfrutar
+                    de una amplia gama de oportunidades de aprendizaje en tiempo real.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- FIN VIDEOS -->
+        <div id="senales" class="serv-videos-free left fondo">
+
+            <div class="serv-video">
+                <h3  class="free">CANAL DE SEÑALES</h3>
+
+                <p style="color: #d3d3d3;">Obtén acceso al canal de señales, donde recibirás operaciones en varios
+                    activos
+                    en tiempo real, realizadas por nuestros traders profesionales y presentadas de manera detallada.</p>
+            </div>
+            <!-- FIN VIDEO -->
+
+            <!-- VIDEO -->
+            <div class="serv-video">
+
+                <iframe
+                    src="https://www.youtube.com/embed/k88AjonUhMw?controls=0&modestbranding=1&rel=0&showinfo=0&autohide=1"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen class='video'></iframe>
+
+            </div>
+            <!-- FIN VIDEO -->
+
+        </div>
+
 
     </div>
-    <!-- FIN VIDEOS -->
+
+
 
     <section class="serv-free-container">
-        <p>Accediendo a los <span class="free">SERVICIOS FREE</span> de Live Community obtendras educación para que puedas formarte como trader profesional</p>
+        <p>Accediendo a los <span class="free">SERVICIOS FREE</span> de Live Community obtendras educación para que
+            puedas formarte como trader profesional</p>
     </section>
 
     <div class="btn-registrate-container-serv">
         <a class="btn-registrate-serv" href="{{ url_register }}">REGISTRATE</a>
     </div>
-    <h2 class="premium-tittle">RECORRIDO LIVE</h2>
-
+    <!-- 
     <div class="serv-videos-premium">
 
-         <!-- VIDEO -->
+
          <div class="serv-video-pro">
-            <!-- <h3 class="puntito-amarillo-1 premium">CANAL PRO</h3> -->
+
 
             <iframe  src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='video'></iframe>
 
         </div>
-        <!-- FIN VIDEO -->
+
 
 
          
-    </div>
+    </div> -->
 
-    <div class="recorda">
-        <h3>RECORDÁ</h3>
-        <p>Accediendo a los servicios <b>FREE</b> con el capital que quieras multiplicar obtendras la educación para que puedas profesionalizarte</p>
+    <div class="service_recorda_container">
+        <img src="{% static 'img/IlustracionServiciosLive.png' %}" alt="illustracion">
+
+        <div class="recorda">
+            <h3>RECORDÁ</h3>
+            <p>Accediendo a los servicios <b>FREE</b> con el capital que quieras multiplicar obtendras la educación para
+                que puedas profesionalizarte</p>
+        </div>
     </div>
 
     <div class="decision-container">
-        <img src="{% static 'img/IlustracionServiciosLive.png' %}" alt="illustracion">
+
         <p>¿Estas listo para convertirte</br> en un trader rentable?</p>
         <div class="decision">
-            <!-- <div class="opcion1">
-                <h3>Servicio PRO</h3>  
-                <div class="btn-contratar-decision-container">
-                    <a class="btn-vacio contratar" href="https://api.whatsapp.com/send?phone=1138658887&text=Hola, quiero contratar los servicio PRO de Live Community." target="_blank">Contratar</a>
-                </div>        
-            </div> -->
             <div class="opcion2">
-                <h3>Servicios Free</h3>  
+                <h3>Servicios Free</h3>
                 <div class="btn-registrate-decision-container">
                     <a class="btn-vacio registrate" href="{{ url_register }}">Registrate</a>
-                </div>        
+                </div>
             </div>
         </div>
     </div>
 
+
     {% block faqServicios %}
-        {% include './faqServicios.html' %}    
+    {% include './faqServicios.html' %}
     {% endblock faqServicios %}
 
     <footer class="footer-serv">
@@ -110,7 +239,7 @@
             </a>
         </div>
 
-    
+
     </footer>
 
 

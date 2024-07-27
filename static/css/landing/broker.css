@@ -22,15 +22,90 @@
   /* background-attachment: fixed; */
   background-clip: padding-box;
 }
+/* ANIMACIONES BROKER */
+/* LOGO */
+.broker-logo {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.broker-logo.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* TEXTO ABOUT US BROKER */
+.broker_about_us_text {
+  position: relative;
+}
+
+.broker_about_us_text p {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.broker_about_us_text p.visible {
+  opacity: 1;
+}
+
+.typing {
+  border-right: 2px solid;
+  display: inline-block;
+  overflow: hidden;
+  white-space: pre-wrap; /* permite que el texto se envuelva */
+  animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: black; }
+}
+
+/* bROKER INFO */
+.broker_info_card_big,
+.broker_info_card_small {
+  opacity: 0;
+  transition: transform .5s ease-out, opacity .5s ease-out;
+}
+
+/* Animaciones específicas */
+.broker_info_card_big.appear-from-top {
+  transform: translateY(-100px);
+}
+
+.broker_info_card_big.appear-from-bottom {
+  transform: translateY(100px);
+}
+
+.broker_info_card_small.appear-from-left {
+  transform: translateX(-100px);
+}
+
+.broker_info_card_small.appear-from-right {
+  transform: translateX(100px);
+}
+
+/* Animaciones activadas */
+.broker_info_card_big.visible,
+.broker_info_card_small.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
 
 .broker_about_us_container {
   width: 100vw;
   background-color: #020a1e;
-  margin: 10rem 0 5rem 0;
+  margin: 0rem 0 5rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5rem 0;
+  padding: 10rem 0;
   mask-image: linear-gradient(
     to bottom,
     transparent,
@@ -252,20 +327,7 @@
     line-height: 25px;
   }
 
-  .broker .preguntas-container-desktop {
-    color: #091b47;
-  }
-  .broker .inicio-preguntas h2 {
-    font-size: 38px;
-    font-weight: 900;
-  }
-  .broker .pregunta h5 {
-    font-size: 20px;
-  }
-  .pregunta p {
-    font-size: 15px;
-    font-weight: 400;
-  }
+ 
 }
 
 @media screen and (min-width: 900px) {

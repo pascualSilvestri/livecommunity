@@ -140,12 +140,16 @@
   margin-top: 2rem;
 }
 
-
 .fondo {
-background: linear-gradient(to bottom, #01050f 0%, #bd1e6d1e 25%, #bd1e6d33 50%, #bd1e6d1e 75%, #01050f 100%);
-
+  background: linear-gradient(
+    to bottom,
+    #01050f 0%,
+    #bd1e6d1e 25%,
+    #bd1e6d33 50%,
+    #bd1e6d1e 75%,
+    #01050f 100%
+  );
 }
-
 
 .serv-video img {
   position: relative;
@@ -161,8 +165,6 @@ background: linear-gradient(to bottom, #01050f 0%, #bd1e6d1e 25%, #bd1e6d33 50%,
     transparent
   );
 }
-
-
 
 /* .puntito-azul-1::before {
   position: absolute;
@@ -438,7 +440,6 @@ background: linear-gradient(to bottom, #01050f 0%, #bd1e6d1e 25%, #bd1e6d33 50%,
     grid-row-gap: 20px;
     width: 100%;
     height: 70vh;
-    
   }
 
   .puntito-azul-2::before {

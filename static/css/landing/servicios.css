@@ -15,7 +15,7 @@
         rgba(0, 0, 0, 1) 100%
       ),
     url("../../img/fondoService3.jpg");
-  height: 100%;
+  height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -524,4 +524,66 @@
   }
 
 
+}
+/* Animaciones*/
+/* Archivo CSS */
+
+.serv-container {
+  opacity: 0;
+  transform: translateY(0px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.serv-container.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.serv_h1 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.serv_h1.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.serv_p {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  transition-delay: 1s; /* Retardo de 1 segundo */
+}
+
+.serv_p.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Archivo CSS */
+
+.lado_izq {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.lado_der {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.serv-videos-free.right:before {
+  content: '';
+  position: absolute;
+  /* Aquí define los estilos que necesitas para el pseudoelemento */
+  /* Asegúrate de que no se vea afectado por las animaciones de los elementos */
+  transform: none;
 }

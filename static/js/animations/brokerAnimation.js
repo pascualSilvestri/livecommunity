@@ -32,7 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (i < text.length) {
                 element.textContent += text.charAt(i)
                 i++
-                setTimeout(type, 40)
+                setTimeout(type, 95)
+            } else {
+                // Remover la clase typing después de que el texto se haya escrito completamente
+                element.classList.remove('typing')
             }
         }
 

@@ -50,10 +50,10 @@
 
 .typing {
   border-right: 2px solid;
-  display: inline-block;
+  display: inline; /* Cambia inline-block a inline */
   overflow: hidden;
   white-space: pre-wrap; /* permite que el texto se envuelva */
-  animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+  animation: typing 1s steps(10, end), blink-caret 1s step-end infinite;
 }
 
 @keyframes typing {
@@ -63,8 +63,9 @@
 
 @keyframes blink-caret {
   from, to { border-color: transparent; }
-  50% { border-color: black; }
+  50% { border-color: rgba(236, 236, 236, 0.61); }
 }
+
 
 /* bROKER INFO */
 .broker_info_card_big,

@@ -164,7 +164,7 @@
     -ms-overflow-style: none;  /* Oculta las barras de desplazamiento en IE y Edge */
     scrollbar-width: none;  /* Oculta las barras de desplazamiento en Firefox */
 }
-
+/* 
 .video_testimonios_slider::before {
     content: '';
     position: absolute;
@@ -172,29 +172,46 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* Fondo negro con 50% de opacidad */
+    background-color: rgba(0, 0, 0, 0.3); 
     border-radius: 10px;
-    z-index: 1; /* Asegura que la capa de opacidad esté detrás del contenido */
-}
+    z-index: 1; 
+} */
 
-.video_card_container{
+.video_card_container {
     display: flex;
     height: 100%;
-    overflow: auto;
+    overflow-x: scroll; /* Mantén el desplazamiento horizontal */
+    overflow-y: hidden; /* Oculta el desplazamiento vertical si es necesario */
     padding: 10px;
     border-radius: 10px;
     position: relative;
 }
 
+.video_card_container::-webkit-scrollbar {
+    display: none; /* Oculta las barras de desplazamiento en navegadores basados en WebKit */
+}
+
+.video_card_container {
+    -ms-overflow-style: none;  /* Oculta las barras de desplazamiento en IE y Edge */
+    scrollbar-width: none;  /* Oculta las barras de desplazamiento en Firefox */
+}
+
+
 .next_video{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 20px;
+    right: 0;
     font-size: 2rem;
     cursor: pointer;
     color: #ffffff;
     z-index: 1;
+    background-color: #042ea141;
+    width: 3%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -202,11 +219,18 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 20px;
+    left: 0;
     font-size: 2rem;
     cursor: pointer;
     color: #ffffff;
     z-index: 1;
+    background-color: #042ea141;
+    width: 3%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 
 }
 
@@ -238,13 +262,12 @@
     height: 90%;
     width: 100%;
     object-fit: cover;
-    object-position: center; 
+    object-position: top center; 
     border-radius: 10px 10px 0 0; 
 }
 
 .video_info {
     padding: 10px;
-    background-color: #15202b; /* Color de fondo oscuro */
     text-align: center;
     border-radius: 0 0 10px 10px; /* Redondear solo la parte inferior */
 }

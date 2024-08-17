@@ -33,7 +33,7 @@ const testimonios = [
     {
         id: 1,
         nombre: 'María Stefanie',
-        descripcion: '"Estoy muy contenta con Live Community. Sus cursos de trading son claros y bien estructurados, y el apoyo que brindan es excelente. He aprendido mucho y ahora opero en los mercados con confianza. ¡Totalmente recomendados!"',
+        descripcion: '',
         imagen: './static/img/staff/AylenHeredia.png',
         video: './static/video/video_hero.mp4'
     },

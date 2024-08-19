@@ -32,38 +32,52 @@ document.addEventListener('DOMContentLoaded', function() {
 const testimonios = [
     {
         id: 1,
-        nombre: 'María Stefanie',
-        descripcion: '"Estoy muy contenta con Live Community. Sus cursos de trading son claros y bien estructurados, y el apoyo que brindan es excelente. He aprendido mucho y ahora opero en los mercados con confianza. ¡Totalmente recomendados!"',
-        imagen: './static/img/staff/AylenHeredia.png',
-        video: './static/video/video_hero.mp4'
+        nombre: 'Agustín Gómez',
+        descripcion: '',
+        imagen: './static/img/testimonios/AgustinGomez.png',
+        video: './static/video/testimonios/Agustín Gómez.mp4'
     },
     {
         id: 2,
-        nombre: 'Carlos Mendoza',
-        descripcion: '"Live Community ha cambiado mi vida. Gracias a sus cursos, ahora entiendo mejor cómo funciona el mercado y puedo tomar decisiones más informadas. ¡Recomendado al 100%!"',
-        imagen: './static/img/staff/AlexCamacho.png',
-        video: './static/video/video_hero_testing.mp4'
+        nombre: 'Franco Gómez ',
+        descripcion:'',
+        imagen: './static/img/testimonios/FrancoGomez.png',
+        video: './static/video/testimonios/Franco Gómez.mp4'
     },
     {
         id: 3,
-        nombre: 'Ana Fernández',
-        descripcion: '"Los cursos de Live Community son simplemente geniales. El material es claro y el soporte es increíble. Estoy muy agradecida por todo lo que he aprendido."',
-        imagen: './static/img/staff/DiegoCeron.png',
-        video: './static/video/video_hero.mp4'
+        nombre: 'Francisco Vallejo',
+        descripcion: '',
+        imagen: './static/img/testimonios/FranciscoVallejo.png',
+        video: './static/video/testimonios/testimonio francisco EDIT.mp4'
     },
     {
         id: 4,
-        nombre: 'Jorge Pérez',
-        descripcion: '"La experiencia con Live Community ha sido fenomenal. Los instructores son expertos en el tema y el contenido es muy accesible. He mejorado mis habilidades de trading enormemente."',
-        imagen: './static/img/staff/JoseLinares.png',
-        video: './static/video/video_hero_testing.mp4'
+        nombre: 'Mabel Otalora',
+        descripcion: '',
+        imagen: './static/img/testimonios/MABELOTALORA.png',
+        video: './static/video/testimonios/MABEL OTALORA EDIT.mp4'
     },
     {
         id: 5,
-        nombre: 'Manuel Turisons',
-        descripcion: '"Los cursos de Live Community son simplemente geniales. El material es claro y el soporte es increíble. Estoy muy agradecida por todo lo que he aprendido."',
-        imagen: './static/img/staff/MauroAlvarez.png',
-        video: './static/video/video_hero_testing.mp4'
+        nombre: 'Ricarod Molano',
+        descripcion: '',
+        imagen: './static/img/testimonios/RicardoMolano.png',
+        video: './static/video/testimonios/RICARDO MOLANO EDIT.mp4'
+    },
+    {
+        id: 6,
+        nombre: 'Cecilia',
+        descripcion: '',
+        imagen: './static/img/testimonios/cecilia.png',
+        video: './static/video/testimonios/cecilia.mp4'
+    },
+    {
+        id: 7,
+        nombre: '',
+        descripcion: '',
+        imagen: './static/img/testimonios/anonimo.png',
+        video: './static/video/testimonios/testimonioAnomimo1.mp4'
     },
 ];
 

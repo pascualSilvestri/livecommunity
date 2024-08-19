@@ -43,7 +43,7 @@
     width: 22px;
     height: 22px;
     border-radius: 22px;
-    background-color: #ced;
+    background-color: #f21b7f67;
 }
 
 .block:after {
@@ -53,7 +53,7 @@
     position: absolute;
     top: 6px;
     left: -5px;
-    background-color: #29b672;
+    background-color: #F21B7F;
     width: 10px;
     height: 10px;
     border-radius: 10px;
@@ -70,5 +70,5 @@
     color: #4f566b;
     font-size: 16px;
     line-height: 1.6;
-    
 }
+

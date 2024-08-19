@@ -14,7 +14,7 @@ async function obtenerDatos() {
       
         //http://127.0.0.1:8000/api/verificar/
         //https://livecommunity.info/api/verificar/
-      const response = await fetch('https://livecommunity.info/api/verificar/'); // cambiar a localhost para local
+      const response = await fetch('http://127.0.0.1:8000/api/verificar/'); // cambiar a localhost para local
       if (!response.ok) {
         throw new Error('Error en la respuesta del servidor');
       }

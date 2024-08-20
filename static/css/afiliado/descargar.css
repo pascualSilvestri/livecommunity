@@ -30,7 +30,7 @@
 
 .card{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    border-radius: 20px;
+    border-radius:50px;
     text-align: center;
     padding: 40px;
     background-color: #f1efef ;
@@ -75,6 +75,8 @@
 .descargar-app{
     margin-top: 20px;
     font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .dispositivos{

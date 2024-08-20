@@ -13,6 +13,12 @@
     margin: 20px 0;
     color:rgb(56, 56, 56);
     line-height: 1.5;
+    font-weight: bold;
+    font-size: 1.7rem;
+}
+
+.background_linear{
+  background:  linear-gradient(to left, #4838d862, #bd1e6e62);;
 }
 
 .mensaje-verificar-cliente {
@@ -65,10 +71,10 @@
 .button-verificar-cliente {
   align-items: center;
   appearance: none;
-  background-color: #3EB2FD;
-  background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+  background-color: #F21B7F;
+  background-image: linear-gradient(1deg, #F21B7F, #F21B7F 99%);
   background-size: calc(100% + 20px) calc(100% + 20px);
-  border-radius: 100px;
+  border-radius: 20px;
   border-width: 0;
   box-shadow: none;
   box-sizing: border-box;
@@ -76,11 +82,12 @@
   cursor: pointer;
   display: inline-flex;
   font-family: CircularStd,sans-serif;
-  font-size: 1rem;
+  font-size: 2rem;
+  font-weight: bolder;
   height: auto;
   justify-content: center;
-  line-height: 1.5;
-  padding: 6px 20px;
+  line-height: 1;
+  padding: 1rem 5rem;
   position: relative;
   text-align: center;
   text-decoration: none;
@@ -112,7 +119,7 @@
     border: none;
     width: 15ch;
     background: repeating-linear-gradient(90deg, dimgrey 0, dimgrey 1.3ch, transparent 0, transparent 2.5ch) 0 100%/ 14.5ch 2px no-repeat;
-    font: 3ch droid sans mono, consolas, monospace;
+    font: 6ch droid sans mono, consolas, monospace;
     letter-spacing: 1.5ch;
 }
     

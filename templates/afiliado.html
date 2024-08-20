@@ -1,7 +1,7 @@
 {% extends 'baseafiliado.html' %}
-{% load static %} 
+{% load static %}
 
-{% block title %} Live Community{% endblock %} 
+{% block title %} Live Community{% endblock %}
 {% block content %}
 
 
@@ -13,19 +13,22 @@
                     <img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
                 </div>
             </div>
-            
+
             <div class="hero">
                 <div class="hero-left">
                     <h1>LIVE COMMUNITY</h1>
                     <p>SOMOS Live Community, te brindamos la vacante para que puedas
                         acceder GRATIS a todos los servicios.
                     </p>
-                    <div class="button-contain"> 
-                            <a href='{{afiliado.url}}' class="button-17" role="button" target='_blank'>REGISTRATE</a>
+                    <div class="button-contain">
+                        <a href='{{afiliado.url}}' class="button-17" role="button" target='_blank'>REGISTRATE</a>
                     </div>
                 </div>
                 <div class="hero-right">
-                    <iframe width="560" height="405" src="https://www.youtube.com/embed/D8Qvm21h-Kw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe width="560" height="405" src="https://www.youtube.com/embed/D8Qvm21h-Kw"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
                 </div>
             </div>
 
@@ -36,48 +39,51 @@
                         <label for="example-1"></label>
                     </div>
 
-                    <p>Una vez REGISTRADO, podés aceptar los <a target="_blank" class="link" href="{% static 'pdf/terminos-y-condiciones.pdf' %}">Terminos y condiciones</a> y las <a target="_blank" class="link" href="{% static 'pdf/politica-y-privacidad.pdf' %}">Politicas de privacidad</a> para continuar con el fondeo de tu cuenta.</p>
+                    <p>Una vez REGISTRADO, podés aceptar los <a target="_blank" class="link"
+                            href="{% static 'pdf/terminos-y-condiciones.pdf' %}">Terminos y condiciones</a> y las <a
+                            target="_blank" class="link" href="{% static 'pdf/politica-y-privacidad.pdf' %}">Politicas
+                            de privacidad</a> para continuar con el fondeo de tu cuenta.</p>
                 </div>
                 <div class="button-continuar">
                     <a href="#continuar" class="cta" hidden>
                         <span>Continuar</span>
                         <svg width="13px" height="10px" viewBox="0 0 13 10">
-                          <path d="M1,5 L11,5"></path>
-                          <polyline points="8 1 12 5 8 9"></polyline>
+                            <path d="M1,5 L11,5"></path>
+                            <polyline points="8 1 12 5 8 9"></polyline>
                         </svg>
-                      </a>
+                    </a>
                 </div>
-                
+
             </div>
 
         </div>
     </div>
-</header> 
+</header>
 
 
 <main class="main-afiliado" hidden>
 
 
-    <section class="descargar-section" >
+    <section class="descargar-section">
         <div class="main-contain text-center" id="continuar">
             <h2 class="section-tittle text-center">Descarga las siguentes Aplicaciones</h2>
             <div class="responsive-three-column-grid">
                 <div class="card">
                     <div class="card-top">
-                        <h3 class="card-tittle">Skilling</h3>
-                    <a href="#">
-                        <img class="skilling" src="{% static 'img/Skilling.webp' %}" alt="libertex">
-        
-                    </a>
-                    <p class="card-text">Descarga la app de
-                        SKILLING, una vez que
-                        abras la app tocar iniciar
-                        sesión e ingresa el mail y la
-                        clave que creaste.</p>
-                        {% comment %} <p class="important"><span>IMPORTANTE !!! 
-                            No te
-                            vuelvas a registrar desde la
-                            app</span></p> {% endcomment %}
+                        <!-- <h3 class="card-tittle">Skilling</h3> -->
+                        <a href="#">
+                            <img class="skilling" src="{% static 'img/Skilling.webp' %}" alt="libertex">
+
+                        </a>
+                        <p class="card-text">Descarga la app de
+                            SKILLING, una vez que
+                            abras la app tocar iniciar
+                            sesión e ingresa el mail y la
+                            clave que creaste.</p>
+                        {% comment %} <p class="important"><span>IMPORTANTE !!!
+                                No te
+                                vuelvas a registrar desde la
+                                app</span></p> {% endcomment %}
                     </div>
 
 
@@ -85,52 +91,57 @@
                         <div class="descargar text-center">
                             <p class="descargar-app">Descargar App</p>
                             <div class="dispositivos">
-                            <a class="ios" href="https://apps.apple.com/ar/app/skilling-comercio-forex-y-cfd/id1441386723">
-                            iOS
-                            </a>
-                            <a class="android" href="https://play.google.com/store/apps/details?id=com.FinovelCyprusLimited.Skilling">
-                            Android
-                            </a>
+                                <a class="ios"
+                                    href="https://apps.apple.com/ar/app/skilling-comercio-forex-y-cfd/id1441386723">
+                                    iOS
+                                </a>
+                                <a class="android"
+                                    href="https://play.google.com/store/apps/details?id=com.FinovelCyprusLimited.Skilling">
+                                    Android
+                                </a>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="card">
                     <div class="card-top">
-                        <h3 class="card-tittle">Telegram</h3>
-                    <a href="#">
-                        <img class="telegram" src="{% static 'img/telegram.png' %}" alt="telegram">
-        
-                    </a>
-                    <p class="card-text">Descarga la app de Telegram,
-                        Aca tendras acceso a todos los
-                        servicios de Live Community.
+                        <!-- <h3 class="card-tittle">Telegram</h3> -->
+                        <a href="#">
+                            <img class="telegram" src="{% static 'img/telegram.png' %}" alt="telegram">
+
+                        </a>
+                        <p class="card-text">Descarga la app de Telegram,
+                            Aca tendras acceso a todos los
+                            servicios de Live Community.
                         </p>
-                        <p class="card-text">CANALES:
-                            Comunidad Live, Accesos y
-                            Señales.</p>
+                        <p class="card-text text_canales">
+                            <span class="text_backgrond">CANALES</span>
+                        <p>Comunidad Live </p>
+                        <p>Accesos y Señales</p>
+                        </p>
                     </div>
                     <div class="card-bottom">
                         <div class="descargar text-center">
                             <p class="descargar-app">Descargar App</p>
                             <div class="dispositivos">
-                            <a class="ios" href="https://apps.apple.com/ar/app/telegram-messenger/id686449807">
-                            iOS
-                            </a>
-                            <a class="android" href="https://play.google.com/store/apps/details?id=org.telegram.messenger">
-                            Android
-                            </a>
+                                <a class="ios" href="https://apps.apple.com/ar/app/telegram-messenger/id686449807">
+                                    iOS
+                                </a>
+                                <a class="android"
+                                    href="https://play.google.com/store/apps/details?id=org.telegram.messenger">
+                                    Android
+                                </a>
                             </div>
                         </div>
-                    </div>      
+                    </div>
                 </div>
                 <div class="card">
                     <div class="card-top">
-                        <h3 class="card-tittle">Binance</h3>
+                        <!-- <h3 class="card-tittle">Binance</h3> -->
                         <a class="binance" href="#">
                             <img class="binance" src="{% static 'img/binance.png' %}" alt="binance">
-            
+
                         </a>
                         <p class="card-text">Descarga la app de Binance
                             donde podras tener tu Billetera
@@ -142,187 +153,227 @@
                         <div class="descargar text-center">
                             <p class="descargar-app">Descargar App</p>
                             <div class="dispositivos">
-                            <a class="ios" href="https://apps.apple.com/ar/app/binance-buy-bitcoin-crypto/id1436799971">
-                            iOS
-                            </a>
-                            <a class="android" href="https://play.google.com/store/apps/details?id=com.binance.dev">
-                            Android
-                            </a>
+                                <a class="ios"
+                                    href="https://apps.apple.com/ar/app/binance-buy-bitcoin-crypto/id1436799971">
+                                    iOS
+                                </a>
+                                <a class="android" href="https://play.google.com/store/apps/details?id=com.binance.dev">
+                                    Android
+                                </a>
                             </div>
                         </div>
                     </div>
 
-                        
+
                 </div>
             </div>
-            
+
         </div>
-        
+
     </section>
 
 
-{% comment %} Input para verificar al cliente {% endcomment %}
+    {% comment %} Input para verificar al cliente {% endcomment %}
     <section class="text-center verificar-nuevo-cliente" id='nuevo_id_cliente'>
-            <h4 class="text-verificar-cliente">
-                El registro puede tardar 4 horas aproximadamente. Una vez que esté verificada su cuenta, podrá continuar.
+        <h4 class="text-verificar-cliente">
+            El registro puede tardar <span class="background_linear">4 horas aproximadamente.</span> <br /> Una vez que
+            esté verificada su cuenta, podrá continuar.
 
-            </h4>
-            <a id='link-id-cliente' class="link-video-verificacion">(Ver Video)</a>
+        </h4>
+        <a id='link-id-cliente' class="link-video-verificacion">Ver Video</a>
 
-            <div class="form-verificar-cliente">
-                <label for="id_socio">Ingrese el código de verificación de su cuenta. En caso de no poder continuar, luego de haber transcurrido las 4 horas, tendra que registrarse nuevamente.</label>
-                <input type="text" value="" name="idNuevoCliente" id="id_nuevo_cliente">
-                {% comment %} <label for="id_socio">Ingrese su nombre completo tal como está registrado en Skilling</label>
-                <input type="text" value="" name="nombreNuevoCliente" id="nombre_nuevo_cliente"> {% endcomment %}
-                <button class="button-verificar-cliente" role="button">Verificar</button>
-            </div>
-            
-
-
-            <p class="error-verificar-cliente" id="error-verificar-cliente" hidden>❌ Su cuenta no esta verificada correctamente</p> 
-
+        <h2 class="codigo_verificacion">Código De Verificación</h2>
+        <div class="form-verificar-cliente">
+            <label class="text_codigo_label" for="id_socio">Ingrese el código de verificación de su cuenta. En caso de
+                no poder continuar, luego de haber transcurrido las 4 horas, tendra que registrarse nuevamente.</label>
+            <input type="text" value="" name="idNuevoCliente" id="id_nuevo_cliente">
+            {% comment %} <label for="id_socio">Ingrese su nombre completo tal como está registrado en Skilling</label>
+            <input type="text" value="" name="nombreNuevoCliente" id="nombre_nuevo_cliente"> {% endcomment %}
+            <button class="button-verificar-cliente" role="button">VERIFICAR</button>
+        </div>
 
 
-            
+
+        <p class="error-verificar-cliente" id="error-verificar-cliente" hidden>❌ Su cuenta no esta verificada
+            correctamente</p>
+
+
+
+
     </section>
     <div class="main-contain text-center">
-        <a class="text-center" href="#pasos">            
+        <a class="text-center" href="#pasos">
             <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
         </a>
     </div>
-    
-{% comment %} Dentro de esta section estan las otra dos que van abajo  {% endcomment %}
+
+    {% comment %} Dentro de esta section estan las otra dos que van abajo {% endcomment %}
     <section class="validacion-2" hidden>
         <section class="pasos-section text-center">
-            <div class="pasos-contain" id="pasos" >
+            <div class="pasos-contain" id="pasos">
                 <h2 class="section-tittle text-center">Pasos para cargar tu cuenta</h2>
-        
+
                 <div class="pasos">
                     <div class="paso">
                         <div class="block">
                             <div class="title-paso">Paso 1 : VIDEO DE COMO CONFIGURAR BINANCE
-                            </div> 
+                            </div>
                             <div class="text-paso">Video explicativo de como configurar tu cuenta de binance</div>
-                            {% comment %} <video preload="none" class='modal-video' src="{% static 'video/como_configurar_binance.mp4' %}" controls='true' width='400px'></video> {% endcomment %}
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/z4iWfjMS5v4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class='modal-video'></iframe>
+                            {% comment %} <video preload="none" class='modal-video'
+                                src="{% static 'video/como_configurar_binance.mp4' %}" controls='true'
+                                width='400px'></video> {% endcomment %}
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/z4iWfjMS5v4"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen class='modal-video'></iframe>
                         </div>
                     </div>
                     <div class="paso">
                         <div class="block">
-                            <div class="title-paso">Paso 2 : COMPRAR USDT</div> 
+                            <div class="title-paso">Paso 2 : COMPRAR USDT</div>
                             <div class="text-paso">Video tutorial de como comprar USDT</div>
-                            {% comment %} <video preload="none" class='modal-video' src="{% static 'video/comprar_usdt_binance.mp4' %}" controls='true' width='400px'></video> {% endcomment %}
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/Lt_fgJh0Ldw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class='modal-video'></iframe>
+                            {% comment %} <video preload="none" class='modal-video'
+                                src="{% static 'video/comprar_usdt_binance.mp4' %}" controls='true'
+                                width='400px'></video> {% endcomment %}
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/Lt_fgJh0Ldw"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen class='modal-video'></iframe>
                         </div>
                     </div>
                     <div class="paso">
                         <div class="block">
                             <div class="title-paso">Paso 3 : ENVIAR USDT A TU CUENTA DE
-                                SKILLING</div> 
+                                SKILLING</div>
                             <div class="text-paso">Explicación de como enviar USDT a tu cuenta en Skilling</div>
-                            {% comment %} <video preload="none" class='modal-video' src="{% static 'video/como_depositar_libertex.mp4' %}" controls='true' width='400px'></video> {% endcomment %}
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/urtZcVofok8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            {% comment %} <video preload="none" class='modal-video'
+                                src="{% static 'video/como_depositar_libertex.mp4' %}" controls='true'
+                                width='400px'></video> {% endcomment %}
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/urtZcVofok8"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="paso">
                         <div class="block">
                             <div class="title-paso">YA TENES TU CUENTA CARGADA, ESTAS UN
                                 PASO DE ACCEDER A TODOS LOS SERVICIOS
-                                DE LIVE COMMUNITY</div> 
+                                DE LIVE COMMUNITY</div>
                             <div class="text-paso">Empezar a aprender</div>
                         </div>
                     </div>
                 </div>
-        
-        
+
+
             </div>
-            <a href="#formulario">            
-    
-            <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
+            <a href="#formulario">
+
+                <img class="flecha-abajo" src="{% static 'img/scrolldownblack.gif' %}" alt="flechita">
             </a>
         </section>
-        
+
         <section class="form-section text-center" id="formulario">
-            <h2 class="title-form text-center">INGRESA TUS DATOS PARA ACCEDER A LOS SERVICIOS
-            </h2>
+
             <div class="section-form-container">
-        
-                
+
+
                 <div class="logo-gif-container">
-                    <img class="logo-gif"  src="{% static 'img/logogif.gif' %}" alt="logo gif">
+                    <!-- <img class="logo-gif"  src="{% static 'img/logogif.gif' %}" alt="logo gif"> -->
+                    <h2 class="title-form text-center">Ingresa tus datos para<br/> <span>acceder a los servicios</span> 
+                    </h2>
                 </div>
                 <div class="form-container">
+                    <h2>REGISTRATE</h2>
                     <form method="post" enctype="multipart/form-data" action="clienteForm/" class="form-send">
                         {% csrf_token %}
-        
+
                         <div class="inputbox">
-                            <input type="text" name="nombre" id="id_nombre" required="required" data-nombre class="input-default">
+                            <input type="text" name="nombre" id="id_nombre" required="required" data-nombre
+                                class="input-default">
                             <span>Nombre</span>
                         </div>
-        
+
                         <div class="inputbox">
-                            <input type="text" name="apellido" id="id_apellido" required="required" data-apellido class="input-default">
+                            <input type="text" name="apellido" id="id_apellido" required="required" data-apellido
+                                class="input-default">
                             <span>Apellido</span>
                         </div>
-        
+
                         <div class="inputbox">
-                            <input placeholder="usuario@correo.com" type="email" name="correo" id="id_correo" required="required" data-correo class="input-default">
-                            <span>Correo</span>                
+                            <input placeholder="usuario@correo.com" type="email" name="correo" id="id_correo"
+                                required="required" data-correo class="input-default">
+                            <span>Correo</span>
                         </div>
-        
+
                         <div class="inputbox">
-                            <input type="tel" name="telefono" id="id_telefono" required="required" data-telefono class="input-default">
+                            <input type="tel" name="telefono" id="id_telefono" required="required" data-telefono
+                                class="input-default">
                             <span>Teléfono</span>
                         </div>
-    
+
                         <div class="inputbox">
-                            <input type="text" name="idcliente" id="id_cliente" required="required" data-cliente class="input-default" required='required'>
+                            <input type="text" name="idcliente" id="id_cliente" required="required" data-cliente
+                                class="input-default" required='required'>
                             <span>Ingresar código de 6 dígitos (verificación)</span>
                         </div>
-        
+
                         <div class="inputbox telegram-form">
-                            <input placeholder="@usuario"  type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
-                            <span>Usuario Telegram</span>        
+                            <input placeholder="@usuario" type="text" name="userTelegram" id="id_userTelegram"
+                                required="required" data-userTelegram class="input-default">
+                            <span>Usuario Telegram</span>
                         </div>
-                        <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo <a id='link-telegram' class="link-video-telegram">Click Aqui</a></p>
-                
-        
+                        <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo
+                            <a id='link-telegram' class="link-video-telegram">Click Aqui</a></p>
+
+
                         <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.fpa}}">
-                        <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
-        
+                        <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado"
+                            value="{{afiliado.telefono}}">
+
                         <div class="input-button">
-                            <input type="submit" value="Enviar" id='btn-send' data-btnSend class="button-32 input-default">
-                          </div>
+                            <input type="submit" value="Enviar" id='btn-send' data-btnSend
+                                class="button-32 input-default">
+                        </div>
                         {% comment %} <button onclick="send_handle()">send</button> {% endcomment %}
-                      </form>
-        
+                    </form>
+
                 </div>
             </div>
-            
+
         </section>
     </section>
 
 </main>
 
 {% comment %} mensaje que aparece 3 segundos cuando se verifica la cuenta {% endcomment %}
-<p class="mensaje-verificar-cliente" id="mensaje-verificar-cliente" hidden>✔️ Su cuenta fue verificada correctamente</p> 
+<p class="mensaje-verificar-cliente" id="mensaje-verificar-cliente" hidden>✔️ Su cuenta fue verificada correctamente</p>
 
 
 {% comment %} Modal para video de usuario de telegram {% endcomment %}
 <div class="modal-telegram" hidden>
-        <span class="btn-salir">X</span>
-        {% comment %} <video preload="none" width="400" class='modal-video' src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video> {% endcomment %}
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen  class='modal-video'></iframe>
+    <span class="btn-salir">X</span>
+    {% comment %} <video preload="none" width="400" class='modal-video'
+        src="{% static 'video/agregar_usuario_telegram.mp4' %}" controls='true'></video> {% endcomment %}
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen class='modal-video'></iframe>
 </div>
 
 <div class="modal-id-cliente" hidden>
     <span class="salir-cliente">X</span>
-    {% comment %} <video preload="none" width="400" class='modal-video' src="{% static 'video/verificar_cuenta_id.mp4' %}" controls='true'></video> {% endcomment %}
-    <iframe width="560" height="315" src="https://youtube.com/embed/_RzXDpfsIyo?si=OkfgpGAcOCta3Q7H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class='modal-video'></iframe>
-    
+    {% comment %} <video preload="none" width="400" class='modal-video'
+        src="{% static 'video/verificar_cuenta_id.mp4' %}" controls='true'></video> {% endcomment %}
+    <iframe width="560" height="315" src="https://youtube.com/embed/_RzXDpfsIyo?si=OkfgpGAcOCta3Q7H"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen class='modal-video'></iframe>
+
 </div>
 
-<a href="https://api.whatsapp.com/send?phone=54{{afiliado.telefono}}&text=Hola, quiero comunicarme con el soporte de Live Community." id="wsp"class="btn-wsp" target="_blank">
+<a href="https://api.whatsapp.com/send?phone=54{{afiliado.telefono}}&text=Hola, quiero comunicarme con el soporte de Live Community."
+    id="wsp" class="btn-wsp" target="_blank">
     <i class="fa fa-whatsapp icono"></i>
 </a>
 

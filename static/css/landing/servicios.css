@@ -78,7 +78,7 @@
 }
 .serv-video {
   margin: 0 auto;
-  height: 450px;
+  height: 560px;
   width: 90%;
   display: flex;
   justify-content: center;
@@ -184,11 +184,12 @@
 }
 
 .serv-video .video {
-  width: 80%;
+  width: 70%;
   height: 100%;
   border-radius: 30px;
   margin-bottom: 2rem;
 }
+
 .free {
   color: #bd1e6e;
 }

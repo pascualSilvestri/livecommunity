@@ -67,14 +67,14 @@ const testimonios = [
     },
     {
         id: 6,
-        nombre: 'Cecilia',
+        nombre: 'Cecilia Gonzales',
         descripcion: '',
         imagen: './static/img/testimonios/cecilia.png',
         video: './static/video/testimonios/cecilia.mp4'
     },
     {
         id: 7,
-        nombre: '',
+        nombre: 'Javier nou',
         descripcion: '',
         imagen: './static/img/testimonios/anonimo.png',
         video: './static/video/testimonios/testimonioAnomimo1.mp4'

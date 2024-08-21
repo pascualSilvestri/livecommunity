@@ -1,70 +1,87 @@
 {% extends 'base.html' %}
-{% load static %} 
+{% load static %}
 
-{% block title %}Broker{% endblock %} 
+{% block title %}Broker{% endblock %}
 
 {% block content %}
 
 
 <div class="broker">
-    <!-- INICIO PRESENTATION -->
-    <div class="broker-container">
+    <!-- INICIO HEADER -->
+    <header class="broker-container-header">
         <div class="broker-presentation">
+
             <img class="broker-logo" src="{% static 'img/SkillingLogo.png' %}" alt="logo de skilling">
-            <div class="presentation-container">
-                <p class="broker-text">Un Broker fundado en el año 2016, regulado por la
-                    CySEC de Chipre y la FSA de Seychelles. Las
-                    cuentas standar de Skilling requieren un deposito
-                    minimo de 200 USD. Esta plataforma confiable nos
-                    brinda todas las herramientas para que podamos
-                    desarrollarnos como Traders Profesionales</p>
-                <img class="broker-mobile" src="{% static 'img/CelularSkilling.png' %}" alt="skilling">
-                <img class="broker-desktop" src="{% static 'img/DesktopSkilling.png' %}" alt="skilling">
 
-            </div>
-            
-            <div class="botones-broker"> 
-                <a class="broker-enlace" href="https://linkfly.to/LIVE-SKILLING" target="_blank">Mas sobre Skilling ➜</a>
-                <a class="btn-registrate" href="{{ url_register }}">REGISTRATE</a>
-            </div>
-            
-            
         </div>
-    </div>
-    
-    
-    <!-- FIN PRESENTATION -->
-    
-    
-    <div class="btn-registrate-container-mobile">
-        <a class="btn-registrate" href="{{ url_register }}">REGISTRATE</a>
+    </header>
+    <!-- FIN HEADER -->
 
-    </div>
+    <!-- INICIO SKILLING ABOUT US -->
+     <section class="broker_about_us_container">
+        <div class="broker_about_us_text">
+            <p>Skilling es un broker de confianza fundado en 2016, regulado por la CySEC de Chipre y la FSA de Seychelles. Con una cuenta estándar que requiere un depósito mínimo de 200 USD, <span class="color_green"> Skilling ofrece una plataforma intuitiva y herramientas avanzadas </span>para traders de todos los niveles, permitiéndoles desarrollarse como traders profesionales de manera confiable.</p>
+        </div>
+    </section>
+    <!-- FIN SKILLING ABOUT US -->
 
-        {% block faqBroker %}
-            {% include './faqBroker.html' %}
-        {% endblock faqBroker %}
-    
-    
-        <footer class="footer-broker">
-            <div class="img-container-footer">
-                <img class="logo" src="{% static 'img/LogoLive.png' %}" alt="logo live community">
+    <!-- INICIO CARD SECTION -->
+    <section class="broker_info_container">
+        <div class="broker_info_card_big">
+            <div class="broker_info_card_big_text">
+                <h2>Dedica 2 Horas Diarias para Convertirte en un Trader Exitoso</h2>
+                <p> Dedicando al menos 2 horas diarias a estas actividades, los miembros de la comunidad podrán desarrollar una base sólida de conocimientos y habilidades necesarias para convertirse en traders competentes y exitosos.</p>
             </div>
-            <div class="redes">
-                <a href="https://www.instagram.com/">
-                    <img src="{% static 'img/iconig.png' %}" alt="logo instagram">
-                </a>
-                <a href="https://web.telegram.org/k/">
-                    <img src="{% static 'img/icontelegram.jpg' %}" alt="logo telegram">
-                </a>
+            <div class="broker_info_card_big_img">
+                <img  src="{% static 'img/Educacion.png' %}" alt="educacion">
             </div>
-            
-            
-            <div class="btn-registrate-container-desktop">
-                <a class="btn-registrate" href="{{ url_register }}">REGISTRATE</a>
+               
+        </div>
+        <div class="broker_info_card_container_small">
+            <div class="broker_info_card_small">
+                <h2>Conoce el Broker Skilling para Operar de Manera Eficiente y Segura</h2>
+                <p>Familiarízate con el broker Skilling y su plataforma para operar de manera eficiente y segura, maximizando tus oportunidades de éxito en trading.</p>
             </div>
-        
-        </footer>
+            <div class="broker_info_card_small">
+                <h2>Requisitos Técnicos para Acceder a Plataformas de Trading y Noticias Financieras en Tiempo Real</h2>
+                <p> Necesitas una computadora con Internet y/o un dispositivo móvil para acceder a plataformas de trading, análisis y noticias financieras en tiempo real, permitiéndote aprender y practicar de manera efectiva.</p>
+            </div>
+        </div>
+        <div class="broker_info_card_big">
+            <div class="broker_info_card_big_text">
+                <h2>Regístrate en Skilling para Acceder a los Videos Educativos del Broker</h2>
+                <p>Para acceder a los videos de Skilling, es necesario registrarse y acceder a la plataforma de Skilling donde generarás tus credenciales de inicio de sesión. Estos videos brindarán información y conocimientos fundamentales sobre el broker.</p>
+            </div>
+            <div class="broker_info_card_big_img">
+                <img  src="{% static 'img/dinero.png' %}" alt="dolar">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FIN CARD SECTION -->
+
+
+
+    <footer class="footer-broker">
+        <div class="img-container-footer">
+            <img class="logo" src="{% static 'img/LogoLive.png' %}" alt="logo live community">
+        </div>
+        <div class="redes">
+            <a href="https://www.instagram.com/">
+                <img src="{% static 'img/iconig.png' %}" alt="logo instagram">
+            </a>
+            <a href="https://web.telegram.org/k/">
+                <img src="{% static 'img/icontelegram.jpg' %}" alt="logo telegram">
+            </a>
+        </div>
+
+
+        <div class="btn-registrate-container-desktop">
+            <a class="btn-registrate" href="{{ url_register }}">REGISTRATE</a>
+        </div>
+
+    </footer>
 
 
 </div>

@@ -1,7 +1,8 @@
 .bg-3{
     padding-bottom:3rem;
     width: 100%;
-    background-image: url("../../img/Desktop3.png");
+    /* background-image: url("../../img/Desktop3.png"); */
+    background-color: #01050f;
     height: 100%;
     background-position: top;
     background-repeat: no-repeat;
@@ -9,7 +10,8 @@
 }
 @media screen and (max-width: 900px) {
   .bg-3{
-    background-image: url("../../img/Desktop3.png");
+    /* background-image: url("../../img/Desktop3.png"); */
+    background-color: #01050f;
     height: 100%;
     padding-bottom: 3rem;
     padding-top: 0rem;
@@ -20,10 +22,10 @@
 .inicio-preguntas{
     color: white;
     text-align: center;
-    margin-top: 2rem;
+    margin: 7rem 0 5rem;
 }
 .inicio-preguntas h2{
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
 }
 .preguntas-container-desktop{
     color: white;
@@ -61,11 +63,14 @@
     font-size: 18px;
     width: 80%;
     margin-bottom: 10px;
+    color:#d3d3d3;
 }
+
 .pregunta p{
     font-size: 15px;
     font-weight: 300;
    text-transform: lowercase;
+   color: #d3d3d3;
 }
 .pregunta p:first-letter {
     text-transform: uppercase;

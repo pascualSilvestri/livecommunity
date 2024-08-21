@@ -17,17 +17,19 @@
     <link rel="stylesheet" href="{% static 'css/landing/broker.css' %}">
     <link rel="stylesheet" href="{% static 'css/landing/presenciales.css' %}">
     <link rel="stylesheet" href="{% static 'css/landing/servicios.css' %}">
-
-
-
-    
+    <link rel="stylesheet" href="{% static 'css/landing/reasons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing/styleLoading.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing/misionvision.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing/service.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing/broker_inicio.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing/testimonios.css' %}">
     <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
 
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 <body id="scrollbar">
 
-    <nav>
+    <nav id="navBar">
         <div class="img-container">
             <img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
         </div>
@@ -40,11 +42,17 @@
                     {% comment %} <li><a href="/broker/bingx/{{ id }}" >Bingx</a></li> {% endcomment %}
                 </ul>
             </li>
-            <li id="servicios" ><a href="/servicios/{{ id }}" >Servicios FREE</a></li>
+            <li id="servicios" ><a href="/servicios/{{ id }}" >Servicios Live</a></li>
             {% comment %} <li id="presenciales" ><a href="/presenciales/{{ id }}" >Presenciales</a></li> {% endcomment %}
         </ul>
     
     </nav>
+
+    <!-- INICIO LOADING COMPONENTE -->
+    <div class="loading">
+        <img class="imgLoading" src="{% static 'img/logo.png' %}" alt="logo">
+    </div>
+    <!-- FIN LOADING COMPONENTE -->
 
 
     {% block content %}
@@ -52,7 +60,17 @@
     {% endblock content %}
 
  
-
+    <script src="{% static 'js/animations/brokerInicioAnimate.js' %}" type="module"></script>
+    <script src="{% static 'js/animations/headerAnimationLanding.js' %}" type="module"></script>
+    <script src="{% static 'js/animations/serviceAnimation.js' %}" type="module"></script>
+    <script src="{% static 'js/animations/reasonAnimation.js' %}" type="module"></script>
+    <script src="{% static 'js/animations/aboutUSAnimationLanding.js' %}" type="module"></script>
+    <script src="{% static 'js/animations/misionVisionAnimation.js' %}" type="module"></script>
+    <script src="{% static 'js/animations/staffTeamAnimation.js' %}" type="module"></script>
+    <script src="{% static 'js/animations/staffAnimation.js' %}" type="module"></script>
+    <script src="{% static 'js/animations/testimonioAnimationLanding.js' %}" type="module"></script>
+    <script src="{% static 'js/animations/brokerAnimation.js' %}" type="module"></script>
+    <script src="{% static 'js/animations/serviciosAnimation.js' %}" type="module"></script>
     <script src="{% static 'js/app.js' %}" type="module"></script>
     <script src="{% static 'js/validacion_form.js' %}" type="module"></script>
     <script src="{% static 'js/validarBtn.js' %}" type="module"></script>

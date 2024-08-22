@@ -189,24 +189,52 @@ EMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum'
 
 
 
-TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
-CHAT_ID_BOT = '@pruebapas'
+# TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
+# CHAT_ID_BOT = '@pruebapas'
 
-DEBUG = True
+# DEBUG = True
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
+# STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+# ALLOWED_HOSTS = ['livecommunity-production.up.railway.app']
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+####################################################
+#
+#########          PRODUCCION DB Mysql Railways        ###########
+#
+
+
+TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
+CHAT_ID_BOT = '@liveingresos'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+DEBUG = False
 
 
-ALLOWED_HOSTS = ['livecommunity-production.up.railway.app']
+ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']
+CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'weSizRKgOznekhOIHDsalNaeOGulkTem',
+        'HOST': 'mysql.railway.internal',
+        'PORT': '3306',
     }
 }
 

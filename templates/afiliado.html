@@ -25,10 +25,31 @@
                     </div>
                 </div>
                 <div class="hero-right">
-                    <iframe width="560" height="405" src="https://www.youtube.com/embed/D8Qvm21h-Kw?autoplay=1&mute=1"
+                    <iframe id="youtube-video" width="560" height="405"
+                        src="https://www.youtube.com/embed/D8Qvm21h-Kw?enablejsapi=1&modestbranding=1&showinfo=0&autoplay=1"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
+
+                    <script>
+                        function onYouTubeIframeAPIReady() {
+                            var player = new YT.Player('youtube-video', {
+                                events: {
+                                    'onReady': function (event) {
+                                        event.target.playVideo();
+                                    }
+                                }
+                            });
+                        }
+
+                        // Load the IFrame Player API code asynchronously.
+                        var tag = document.createElement('script');
+                        tag.src = "https://www.youtube.com/iframe_api";
+                        var firstScriptTag = document.getElementsByTagName('script')[0];
+                        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                    </script>
+
+
                 </div>
             </div>
 
@@ -170,9 +191,10 @@
                         <!-- <h3 class="card-tittle">Binance</h3> -->
                         <a class="discord" href="#">
                             <img class="discord" src="{% static 'img/logo_discord.png' %}" alt="discord">
-    
+
                         </a>
-                        <p class="card-text">Descarga la aplicación de Discord para acceder a las sesiones de Trading Time y disfrutar de los servicios exclusivos.</p>
+                        <p class="card-text">Descarga la aplicación de Discord para acceder a las sesiones de Trading
+                            Time y disfrutar de los servicios exclusivos.</p>
                     </div>
                     <div class="card-bottom">
                         <div class="descargar text-center">
@@ -188,8 +210,8 @@
                             </div>
                         </div>
                     </div>
-            </div>
-            
+                </div>
+
 
 
             </div>
@@ -239,7 +261,9 @@
     <section class="validacion-2" hidden>
         <div class="main-contain text-center">
             <a class="text-center" href="#pasos">
-                <p class="text_codigo_label">Ahora puedes ingresar a la seccion de <a href="https://linkfly.to/LIVE-SKILLING" target="_blank"><span class="background_linear" >Educación skilling</span></a></p>
+                <p class="text_codigo_label">Ahora puedes ingresar a la seccion de <a
+                        href="https://linkfly.to/LIVE-SKILLING" target="_blank"><span
+                            class="background_linear">Educación skilling</span></a></p>
             </a>
         </div>
         <section class="pasos-section text-center">
@@ -313,7 +337,7 @@
 
                 <div class="logo-gif-container">
                     <!-- <img class="logo-gif"  src="{% static 'img/logogif.gif' %}" alt="logo gif"> -->
-                    <h2 class="title-form text-center">Ingresa tus datos para<br/> <span>acceder a los servicios</span> 
+                    <h2 class="title-form text-center">Ingresa tus datos para<br /> <span>acceder a los servicios</span>
                     </h2>
                 </div>
                 <div class="form-container">
@@ -357,7 +381,8 @@
                             <span>Usuario Telegram</span>
                         </div>
                         <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo
-                            <a id='link-telegram' class="link-video-telegram">Click Aqui</a></p>
+                            <a id='link-telegram' class="link-video-telegram">Click Aqui</a>
+                        </p>
 
 
                         <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.fpa}}">

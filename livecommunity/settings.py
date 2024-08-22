@@ -210,9 +210,12 @@ EMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum'
 #     }
 # }
 
+
+
+
 ####################################################
 #
-#########          PRODUCCION DB Mysql Railways        ###########
+#########          PRODUCCION DB Postgress Railways        ###########
 #
 
 
@@ -227,21 +230,50 @@ DEBUG = False
 ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']
 CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': 'weSizRKgOznekhOIHDsalNaeOGulkTem',
-        'HOST': 'mysql.railway.internal',
-        'PORT': '3306',
+        'USER': 'postgres',
+        'PASSWORD': 'VOQQZmIqGUJCIiIBLxUUAkrFNBgXZGfV',
+        'HOST': 'postgres.railway.internal',  # o la dirección de tu servidor PostgreSQL
+        'PORT': '5432',  # el puerto por defecto de PostgreSQL
     }
 }
+
+####################################################
+#
+#########          PRODUCCION DB Mysql Railways        ###########
+#
+
+
+# TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
+# CHAT_ID_BOT = '@liveingresos'
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+# DEBUG = False
+
+
+# ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']
+# CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'railway',
+#         'USER': 'root',
+#         'PASSWORD': 'weSizRKgOznekhOIHDsalNaeOGulkTem',
+#         'HOST': 'mysql.railway.internal',
+#         'PORT': '3306',
+#     }
+# }
 
 
 ####################################################
 #
-#########          PRODUCCION            ###########
+#########          PRODUCCION    hostinger         ###########
 #
 
 

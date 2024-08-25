@@ -113,10 +113,53 @@
     box-sizing: border-box;
 }
 
+/* CSS para hacer que los videos se adapten a diferentes dispositivos */
 .video_testimonios_video video {
-    height: 100%;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
     border-radius: 30px;
+    object-fit: cover;
+    object-position: center;
 }
+
+@media (max-width: 1024px) {
+    .video_testimonios {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .video_testimonios_text, .video_testimonios_video {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .video_testimonios_text {
+        margin-bottom: 2rem;
+    }
+
+    .video_testimonios_video video {
+        height: auto;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .video_testimonios_title {
+        font-size: 2rem;
+    }
+
+    .video_testimonios_video video {
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .video_testimonios_video video {
+        border-radius: 15px;
+    }
+}
+
 
 .video_testimonios_title {
     font-size: 3rem;

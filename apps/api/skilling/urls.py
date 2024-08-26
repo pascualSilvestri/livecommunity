@@ -7,7 +7,7 @@ from .controller.cuenta import montosGet
 from .controller.files import upload_fpa,upload_registros,upload_cpa,upload_ganancias
 from .controller.bonos import reseteo_bonos,get_bono_cpa,put_bono_cpa,get_spread,get_bono_cpa_indirecto,put_bono_cpa_indirecto,put_spread
 
-app_name = 'api'
+app_name = 'skilling'
 
 
 urlpatterns = [

@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from ...usuarios.models import Usuario,Cuenta
-from ...afiliado.models import Afiliado
+from ....usuarios.models import Usuario,Cuenta
+from ....afiliado.models import Afiliado
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
 import json 

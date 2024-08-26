@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'apps.usuarios',
     'apps.afiliado',
-    'apps.api'
+    'apps.api.skilling'
 ]
 
 MIDDLEWARE = [

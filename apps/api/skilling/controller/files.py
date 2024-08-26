@@ -1,11 +1,11 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from ...utils.limpiarTablas import limpiar_datos_fpa, limpiar_registros,limpiar_cpa,limpiar_ganacias
-from ...utils.funciones import existe,existe_cpa,existe_ganancia
-from ...utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
-from ...utils.bonos import bonoDirecto,bonoIndirecto
+from ....utils.limpiarTablas import limpiar_datos_fpa, limpiar_registros,limpiar_cpa,limpiar_ganacias
+from ....utils.funciones import existe,existe_cpa,existe_ganancia
+from ....utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
+from ....utils.bonos import bonoDirecto,bonoIndirecto
 from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
-from ...usuarios.models import Cuenta,Usuario,Spread,BonoCpa,BonoCpaIndirecto,CPA
+from ....usuarios.models import Cuenta,Usuario,Spread,BonoCpa,BonoCpaIndirecto,CPA
 from datetime import datetime
 import pandas as pd
 import os

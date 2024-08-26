@@ -26,7 +26,7 @@ urlpatterns = [
     path('presenciales/consulta/',views.consultaForm, name = 'consultaForm'),
     path('servicios/',views.servicios, name = 'servicios'),
     path('Afiliado/',include('apps.afiliado.urls')),
-    path('api/',include('apps.api.urls')),
+    path('api/',include('apps.api.skilling.urls')),
     path('<pk>',views.home_pk, name = 'home_pk'),
     #path('broker/<pk>',views.broker_pk, name = 'broker_pk'),
     path('broker/skilling/<pk>',views.broker_pk, name = 'broker_skilling_pk'),

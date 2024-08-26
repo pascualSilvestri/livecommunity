@@ -44,16 +44,7 @@ class Usuario(AbstractUser):
     registrado = models.BooleanField(default=False)
     aceptado= models.BooleanField(default=False)
     eliminado= models.BooleanField(default=False)
-    # bonoIndirecto_2=models.BooleanField(default=False)
-    # bonoIndirecto_3=models.BooleanField(default=False)
-    # bonoIndirecto_4=models.BooleanField(default=False)
-    # bonoIndirecto_5=models.BooleanField(default=False)
-    # bonoIndirecto_6=models.BooleanField(default=False)
-    # bonoIndirecto_7=models.BooleanField(default=False)
-    # bonoIndirecto_8=models.BooleanField(default=False)
 
-    # Puedes agregar más campos personalizados según tus necesidades
-    # ...
 
     def __str__(self):
         return self.fpa

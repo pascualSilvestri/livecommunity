@@ -1,73 +1,72 @@
-.verificar-nuevo-cliente{
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 40px auto 0 auto;
-    padding: 20px 0;
+.verificar-nuevo-cliente {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto 0 auto;
+  padding: 20px 0;
 }
 
-.text-verificar-cliente{
-    max-width: 800px;
-    margin: 20px 0;
-    color:rgb(56, 56, 56);
-    line-height: 1.5;
-    font-weight: bold;
-    font-size: 1.7rem;
+.text-verificar-cliente {
+  max-width: 800px;
+  margin: 20px 0;
+  color: rgb(56, 56, 56);
+  line-height: 1.5;
+  font-weight: bold;
+  font-size: 1.7rem;
+  text-align: center;
 }
 
-.background_linear{
-  background:  linear-gradient(to left, #4838d862, #bd1e6e62);;
+.background_linear {
+  background: linear-gradient(to left, #4838d862, #bd1e6e62);
 }
 
 .mensaje-verificar-cliente {
-    padding: 15px 20px;
-    background-image: linear-gradient(to left,rgb(37, 165, 37),rgb(102, 204, 102));
-    margin: auto;
-    font-weight: 600;
-    color: azure;
-    border-radius: 5px;
-    position: fixed;
-    z-index: 100;
-    top:250px;
-    left: 450px;
-
-
-  }
-
-  .error-verificar-cliente{
-    padding: 15px 20px;
-    background-color: rgb(197, 47, 47);
-    background-image: linear-gradient(to left,rgb(192, 29, 29),rgb(221, 89, 89));
-    margin: 10px auto;
-    font-weight: 600;
-    color: azure;
-    border-radius: 5px;
-  }
-
-
-.form-verificar-cliente{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  padding: 15px 20px;
+  background-image: linear-gradient(to left, rgb(37, 165, 37), rgb(102, 204, 102));
+  margin: auto;
+  font-weight: 600;
+  color: azure;
+  border-radius: 5px;
+  position: fixed;
+  z-index: 100;
+  top: 250px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-#nombre_nuevo_cliente{
+.error-verificar-cliente {
+  padding: 15px 20px;
+  background-color: rgb(197, 47, 47);
+  background-image: linear-gradient(to left, rgb(192, 29, 29), rgb(221, 89, 89));
+  margin: 10px auto;
+  font-weight: 600;
+  color: azure;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.form-verificar-cliente {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 100%; /* Asegura que el formulario no sobrepase el ancho de la pantalla */
+  padding: 0 20px; /* Añade un padding lateral para evitar que el contenido toque los bordes */
+}
+
+#nombre_nuevo_cliente {
   border: 2px solid #999;
   width: 500px;
   height: 3rem;
   border-radius: 30px;
-  padding: 0 0 0 .7rem;
+  padding: 0 0 0 0.7rem;
   font-family: sans-serif;
   font-weight: 700;
 }
 
-
-
-/* CSS */
 .button-verificar-cliente {
   align-items: center;
   appearance: none;
@@ -81,7 +80,7 @@
   color: #FFFFFF;
   cursor: pointer;
   display: inline-flex;
-  font-family: CircularStd,sans-serif;
+  font-family: CircularStd, sans-serif;
   font-size: 2rem;
   font-weight: bolder;
   height: auto;
@@ -91,7 +90,7 @@
   position: relative;
   text-align: center;
   text-decoration: none;
-  transition: background-color .2s,background-position .2s;
+  transition: background-color .2s, background-position .2s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -111,30 +110,64 @@
 .button-verificar-cliente:focus:not(:active) {
   box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
 }
-
-#id_nuevo_cliente{
-    
-    display: block;
-    margin: 30px auto;
-    border: none;
-    width: 15ch;
-    background: repeating-linear-gradient(90deg, dimgrey 0, dimgrey 1.3ch, transparent 0, transparent 2.5ch) 0 100%/ 14.5ch 2px no-repeat;
-    font: 6ch droid sans mono, consolas, monospace;
-    letter-spacing: 1.5ch;
+.text_codigo_label {
+  font-size: 1.2rem; /* Tamaño de fuente por defecto */
+  text-align: center;
 }
-    
 
+
+#id_nuevo_cliente {
+  display: block;
+  margin: 30px auto;
+  border: none;
+  width: 15ch;
+  background: repeating-linear-gradient(90deg, dimgrey 0, dimgrey 1.3ch, transparent 0, transparent 2.5ch) 0 100%/14.5ch 2px no-repeat;
+  font: 6ch droid sans mono, consolas, monospace;
+  letter-spacing: 1.5ch;
+}
 
 #id_nuevo_cliente:focus {
-    outline: none;
-    color: dodgerblue;
+  outline: none;
+  color: dodgerblue;
 }
 
-
 @media only screen and (max-width: 720px) {
-
-  #nombre_nuevo_cliente{
-    width: 90%;
+  .verificar-nuevo-cliente {
+      width: 95%;
+      padding: 10px;
   }
 
+  .text-verificar-cliente {
+      font-size: 1.2rem;
+      margin: 10px 0;
+  }
+
+  .mensaje-verificar-cliente {
+      width: 90%;
+      top: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+  }
+
+  #nombre_nuevo_cliente {
+      width: 90%;
+      font-size: 1rem;
+  }
+
+  .button-verificar-cliente {
+      width: 100%;
+      padding: 1rem 2rem;
+      font-size: 1.5rem;
+  }
+
+  #id_nuevo_cliente {
+    display: block;
+    margin: 5px auto;
+    border: none;
+    width: 15ch;
+    background: repeating-linear-gradient(90deg, dimgrey 0, dimgrey 1.3ch, transparent 0, transparent 2.5ch) 0 100%/14.5ch 2px no-repeat;
+    font: 3ch droid sans mono, consolas, monospace;
+    letter-spacing: 1.5ch;
+  }
+  
 }

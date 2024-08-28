@@ -1,144 +1,190 @@
-.title-form{
-    margin:30px 0 30px 0;
-    color: #edf2f5;
-    font-size: 3rem;
-    font-weight: 400;
+.title-form {
+  margin: 30px 0;
+  color: #edf2f5;
+  font-size: 3rem;
+  font-weight: 400;
+  text-align: center;
 }
 
-.title-form span{
+.title-form span {
   font-weight: 900;
   font-size: 3rem;
 }
-.form-section{
-      background: url('../../img/FondoAccederRegistro.png');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      padding: 2rem 0 4rem 0 ;
+
+.form-section {
+  background: url('../../img/FondoAccederRegistro.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 2rem 0 4rem 0;
 }
-.section-form-container{
-    display: flex;
-    justify-content: space-between;
-    max-width: 80vw;
-    margin: 0 auto;
+
+.section-form-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 80vw;
+  margin: 0 auto;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
 }
+
 .form-container {
-    background-color: #ffffff;
-    position: relative;
-    border-radius: 50px;
-    padding: 2.5rem 2.5rem;
-    width: 50%;
-  }
-
-  .form-container h2{
-    font-weight: 900;
-    font-family: 'montserrat';
-    font-size: 2rem;
-    margin: 0 0 2.5rem 0;
-  }
-
-  .form-container .inputbox {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    margin-bottom:25px;
-    margin-left: auto; 
-    margin-right: auto;
-    margin-top: 20px;
-  }
-  .form-container .inputbox input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    outline: none;
-    border: none;
-    background: #d9d9d9;
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 1.2em;
-  }
-  .form-container .inputbox input::placeholder {
-    font-size: .8em;
-    text-align: right;
-    color: #d9d9d9;
+  background-color: #ffffff;
+  position: relative;
+  border-radius: 50px;
+  padding: 2.5rem;
+  width: 45%;
+  box-sizing: border-box;
+  margin: 20px auto; /* Añade margen para centrado en pantallas pequeñas */
 }
-  .form-container .inputbox:last-child {
-    margin-bottom: 0;
+
+.form-container h2 {
+  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.form-container .inputbox {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 25px;
+}
+
+.form-container .inputbox input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  outline: none;
+  border: none;
+  background: #d9d9d9;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+
+.form-container .inputbox input::placeholder {
+  font-size: 0.8em;
+  text-align: right;
+  color: #d9d9d9;
+}
+
+.form-container .inputbox:last-child {
+  margin-bottom: 0;
+}
+
+.form-container .inputbox span {
+  position: absolute;
+  top: 19px;
+  left: 20px;
+  font-size: 1em;
+  transition: 0.6s;
+  font-family: 'Montserrat', sans-serif;
+  color: #919191;
+  font-weight: 700;
+}
+
+.form-container .inputbox input:focus ~ span,
+.form-container .inputbox input:valid ~ span {
+  transform: translateX(-13px) translateY(-39px);
+  font-size: 1em;
+}
+
+.logo-gif-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Para centrar el contenido en pantallas pequeñas */
+  margin: 20px auto;
+  width: 45%; /* Ancho similar al formulario */
+  box-sizing: border-box;
+}
+
+.logo-gif {
+  width: 100%;
+  max-width: 472px;
+  height: auto;
+}
+
+.valida {
+  box-shadow: 0 0 2px 2px #0f0;
+}
+
+.sin-validar {
+  box-shadow: 0 0 2px 2px #f33;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .section-form-container {
+      flex-direction: column;
+      align-items: center;
+      max-width: 95vw;
   }
+
+  .form-container {
+      width: 90%; /* Asegura que el formulario ocupe todo el ancho disponible */
+      padding: 2rem;
+  }
+
+  .title-form {
+      font-size: 2rem;
+  }
+
+  .title-form span {
+      font-size: 2rem;
+  }
+
+  .form-container .inputbox input {
+      font-size: 1rem; /* Reduce el tamaño de la fuente en inputs */
+      padding: 12px; /* Reduce el padding */
+  }
+
   .form-container .inputbox span {
     position: absolute;
     top: 19px;
     left: 20px;
-    font-size: 1em;
+    font-size: .5em;
     transition: 0.6s;
-    font-family: 'montserrat';
-    color:#919191;
+    font-family: 'Montserrat', sans-serif;
+    color: #919191;
     font-weight: 700;
   }
-  .form-container .inputbox input:focus ~ span,
-  .form-container .inputbox input:valid ~ span {
-    transform: translateX(-13px) translateY(-39px);
-    font-size: 1em;
+
+  .form-container h2 {
+      font-size: 1.5rem;
   }
 
-.logo-gif-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.logo-gif{
-    width: 472px;
-    height: 318px;
-}
-
-.valida{
-    box-shadow: 0 0 2px 2px #0f0;
-  }
-
-.sin-validar{
-  box-shadow: 0 0 2px 2px #f33;
-  }
-
-
-/* tablet breakpoint */
-@media (max-width:768px) {
-  .section-form-container{
-      display: flex;
-      justify-content: start;
-      margin: 0 auto;
-      flex-direction: column;
-  }
-  .form-container .inputbox {
-      position: relative;
-      width: 90%;
-      height: 50px;
-      margin: 30px auto;
-  }
   .logo-gif {
-      width: 100%;
-      height: 191px;
+      width: 80%; /* Reduce el ancho del logo en pantallas pequeñas */
+      max-width: none;
   }
-  .form-container .input-button{
-      position: relative;
-      height: 50px;
-      margin: 10px auto 30px auto;
-      width: 200px;
+
+  .form-container .input-button {
+      width: 100%; /* Botón ocupa todo el ancho */
+      margin: 20px auto; /* Añade margen superior e inferior */
+  }
+
+  .form-container .inputbox {
+      width: 100%;
+      margin: 15px auto;
   }
 }
 
-.telegram-form{
+.telegram-form {
   margin-bottom: 10px !important;
 }
-.link-video-telegram{
-  color:#000000;
+
+.link-video-telegram {
+  color: #000000;
   text-decoration: underline;
 }
-.text-video-telegram{
+
+.text-video-telegram {
   width: 100%;
   margin-bottom: 20px;
-  font-size: .7rem;
+  font-size: 0.7rem;
   text-align: center;
   font-weight: 600;
 }
@@ -146,40 +192,38 @@
 .form-container .input-button {
   position: relative;
   height: 50px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 10px auto;
   width: 200px;
 }
 
-/* CSS */
 .button-32 {
-background-color: #F21B7F;
-border-radius: 12px;
-color: #FFF;
-cursor: pointer;
-font-weight: bold;
-padding: 10px 15px;
-text-align: center;
-transition: 200ms;
-width: 100%;
-box-sizing: border-box;
-border: 0;
-font-family: 'montserrat';
-font-size: 20px;
-user-select: none;
--webkit-user-select: none;
-touch-action: manipulation;
+  background-color: #F21B7F;
+  border-radius: 12px;
+  color: #FFF;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
 .button-32:not(:disabled):hover,
 .button-32:not(:disabled):focus {
-outline: 0;
-background: #f21b7f59;
-box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+  outline: 0;
+  background: #f21b7f59;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, .2), 0 3px 8px 0 rgba(0, 0, 0, .15);
 }
 
 .button-32:disabled {
-filter: saturate(0.2) opacity(0.5);
--webkit-filter: saturate(0.2) opacity(0.5);
-cursor: not-allowed;
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
 }

@@ -208,6 +208,7 @@
     border-radius: 10px;
     position: relative;
     margin-top: 15px;
+    padding-bottom: 1rem;
 }
 
 .next_video, .after_video {

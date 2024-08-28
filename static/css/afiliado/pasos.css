@@ -1,38 +1,46 @@
-.pasos-contain{
+.pasos-section {
+    padding: 60px 0;
+}
+
+.pasos-contain {
     max-width: 50vw;
     margin: 0 auto;
 }
-@media (max-width:768px) {
-    .pasos-contain{
+
+@media (max-width: 768px) {
+    .pasos-contain {
         max-width: 100vw;
+        padding: 0 15px; /* Agrega padding lateral para evitar que el contenido toque los bordes en pantallas pequeñas */
     }
 }
-.pasos-section{
-    padding: 60px 0;
-}
-.pasos{
+
+.pasos {
     display: flex;
     flex-flow: column;
     margin: 0 35px;
     padding: 0 12px;
     text-align: center;
 }
-.paso{
+
+.paso {
     width: 100%;
     border-style: dotted;
     border-color: #29b672;
     border-width: 0 0 0 1px;
     padding-bottom: 30px;
 }
-.paso:last-child{
+
+.paso:last-child {
     border: none;
 }
+
 .block {
-    padding-left: 40px;
-    padding-right: 15px;
+    padding-left: 0; /* Eliminamos padding lateral para centrar mejor */
+    padding-right: 0;
     padding-bottom: 25px;
     position: relative;
 }
+
 .block:before {
     content: '';
     display: block;
@@ -59,16 +67,39 @@
     border-radius: 10px;
 }
 
-.title-paso{
-        font: 600 18px  Montserrat, Helvetica, Arial, sans-serif;;
-        margin-bottom: 7px;
-        line-height: 1.3;
-        color: #141415;
+.title-paso {
+    font: 600 18px Montserrat, Helvetica, Arial, sans-serif;
+    margin-bottom: 7px;
+    line-height: 1.3;
+    color: #141415;
 }
 
-.text-paso{
+.text-paso {
     color: #4f566b;
     font-size: 16px;
     line-height: 1.6;
 }
 
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000; /* Fallback para evitar mostrar espacio en blanco antes de cargar el video */
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .modal-video {
+        width: 100%;
+        max-width: 100%; /* Asegura que el video no sobresalga del contenedor en pantallas pequeñas */
+    }
+}

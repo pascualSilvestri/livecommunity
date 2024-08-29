@@ -127,6 +127,28 @@
   opacity: 0;
 }
 
+.staff .card img.staff-image-arg {
+  background-image: url("../../img/bandera_arg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 10px; /* Ajusta el padding si es necesario */
+}
+.staff .card img.staff-image-col {
+  background-image: url("../../img/bandera_col.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 10px; /* Ajusta el padding si es necesario */
+}
+.staff .card img.staff-image-cuba {
+  background-image: url("../../img/bandera_cuba.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 10px; /* Ajusta el padding si es necesario */
+}
+
 /* Media queries */
 @media (min-width: 1100px) and (max-width: 1500px) {
   .staff h2 {

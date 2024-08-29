@@ -4,7 +4,7 @@
     flex-wrap: wrap; /* Permitir que los elementos se envuelvan en pantallas pequeñas */
     align-items: center;
     justify-content: space-evenly;
-    background-color: rgba(3, 10, 29, 0.726);
+    background-color: #000000;
     border-radius: 40px;
     margin: 5rem auto 7rem;
     width: 80%;
@@ -70,6 +70,14 @@
 .btn:hover {
     background-color: #ff3385;
 }
+.broker_inicio_container .broker-video {
+    width: 100%; /* Ajustar el ancho del video para que sea responsivo */
+    max-width: 420px; /* Limitar el tamaño máximo del video */
+    border-radius: 10px;
+    display: block;
+    margin: 0; /* Eliminar cualquier margen */
+    background-color: rgba(3, 10, 29, 0.726); /* Mismo color de fondo que el contenedor */
+}
 
 /* Responsividad */
 @media (max-width: 1024px) {
@@ -86,17 +94,22 @@
     }
 }
 
+
+
 @media (max-width: 768px) {
     .broker_inicio_container {
         flex-direction: column;
         padding: 20px; /* Espacio adicional para pantallas pequeñas */
     }
 
-    .broker_inicio_container img {
+    /* .broker_inicio_container img {
+        display: block;
+        margin: 0 auto 20px;
+    } */
+    .broker_inicio_container .broker-video {
         display: block;
         margin: 0 auto 20px;
     }
-
     .broker-content {
         max-width: 90%;
         padding: 20px;

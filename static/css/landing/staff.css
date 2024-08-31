@@ -127,6 +127,7 @@
   opacity: 0;
 }
 
+
 /* Media queries */
 @media (min-width: 1100px) and (max-width: 1500px) {
   .staff h2 {

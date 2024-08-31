@@ -249,7 +249,7 @@
 }
 
 .video_card img {
-    height: 90%;
+    height: 80%;
     width: 100%;
     object-fit: cover;
     object-position: top center;

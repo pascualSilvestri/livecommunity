@@ -433,6 +433,16 @@
     margin-bottom: 1.5rem;
     font-weight: 900;
   }
+
+  .serv-video img {
+
+    width: 300px;
+
+  }
+
+  .serv-presentation p{
+    font-size: 18px;
+  }
   .serv_p {
     font-size: 15px;
   }

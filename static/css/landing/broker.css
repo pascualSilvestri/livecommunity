@@ -153,6 +153,7 @@
   width: 82%;
 }
 
+/* BROKER INFO */
 .broker_info_container {
   display: flex;
   flex-direction: column;
@@ -163,32 +164,31 @@
 }
 
 .broker_info_card_big {
-  width: 80%;
+  width: 90%;
   background-color: transparent;
   border-radius: 30px;
   box-shadow: 0px 0px 8px 0px #a2a4aa;
   padding: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   min-height: 300px;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 .broker_info_card_big_text {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: start;
-  width: 40%;
+  width: 100%;
   color: #d3d3d3;
-  height: 100%;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .broker_info_card_big_text h2 {
   font-size: 2rem;
   font-weight: 900;
   color: #0a7f71;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .broker_info_card_big_text p {
@@ -198,34 +198,28 @@
   line-height: 1.5;
 }
 
-.broker_info_card_big_img {
-  width: 50%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.broker_info_card_big img {
-  width: 400px;
-  position: absolute;
+.broker_info_card_big_img img {
+  width: 250px;
+  margin-top: 1rem;
 }
 
 .broker_info_card_container_small {
-  width: 80%;
+  width: 90%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  gap: 2rem;
   margin: 3rem 0;
 }
 
 .broker_info_card_small {
-  width: 45%;
+  width: 100%;
   min-height: 200px;
   background-color: transparent;
   border-radius: 30px;
   box-shadow: 0px 0px 8px 0px #a2a4aa;
-  padding: 50px 30px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -233,10 +227,10 @@
 }
 
 .broker_info_card_small h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 900;
   color: #0a7f71;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .broker_info_card_small p {
@@ -245,6 +239,33 @@
   color: #d3d3d3;
   line-height: 1.5;
 }
+
+/* Media Queries */
+@media screen and (min-width: 768px) {
+  .broker_info_card_big {
+    flex-direction: row;
+    width: 80%;
+  }
+
+  .broker_info_card_big_text {
+    width: 60%;
+    text-align: left;
+  }
+
+  .broker_info_card_big_img img {
+    width: 350px;
+    margin-top: 0;
+  }
+
+  .broker_info_card_container_small {
+    flex-direction: row;
+  }
+
+  .broker_info_card_small {
+    width: 45%;
+  }
+}
+
 
 .btn-registrate-container-mobile {
   width: 100%;
@@ -331,6 +352,7 @@
  
 }
 
+
 @media screen and (min-width: 900px) {
   .broker-presentation {
     padding-top: 15vh;
@@ -344,6 +366,7 @@
     font-weight: 600;
     line-height: 34px;
   }
+
   .broker-mobile {
     display: none;
   }

@@ -187,22 +187,22 @@ EMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum'
 
 
 
-TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
-CHAT_ID_BOT = '@pruebapas'
+# TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
+# CHAT_ID_BOT = '@pruebapas'
 
-DEBUG = True
+# DEBUG = True
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 ####################################################
@@ -232,3 +232,34 @@ DATABASES = {
 #         'PORT': '3306',
 #     }
 # }
+
+
+
+
+####################################################
+#
+#########          PRODUCCION   Railway          ###########
+#
+
+
+TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
+CHAT_ID_BOT = '@liveingresos'
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+DEBUG = True
+
+
+ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz','127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'weSizRKgOznekhOIHDsalNaeOGulkTem',
+        'HOST': 'autorack.proxy.rlwy.net',
+        'PORT': '19091',
+    }
+}

@@ -113,9 +113,7 @@ urlpatterns = [
     ################## Procesar archivos ganancias ######################################################################################
     path("archivoganancias/", upload_ganancias, name="archivoGanancias"),
     ################## Resetear bonos ###################################################################################################
-    path(
-        "resetBono", reseteo_bonos, name="reset_bonos"
-    ),  # Este endpoint va ser eliminaod cuando se elimine el boton de resetar bonos
+    path("resetBono", reseteo_bonos, name="reset_bonos"),  # Este endpoint va ser eliminaod cuando se elimine el boton de resetar bonos
     ################## Cambio de contraseña basico por el perfil del usuario ############################################################
     path("updatepassword/<pk>/", updatePassword, name="updatePassword"),
     ################## Crear usuario Socio ##############################################################################################
@@ -127,11 +125,7 @@ urlpatterns = [
     ################## Filtrado de todos los registros de ganancias por id ##############################################################
     path("filtrarganaciascpa/<pk>", filtarGananciasCpaById, name="filtradoCpaById"),
     ################## Filtrado de todos los registros de reveshare por id ##############################################################
-    path(
-        "filtrarganaciasrevshare/<pk>/",
-        filtrar_ganancias_by_revshare_By_Id,
-        name="filtradoRevshareById",
-    ),
+    path( "filtrarganaciasrevshare/<pk>/", filtrar_ganancias_by_revshare_By_Id, name="filtradoRevshareById",),
     ################## Filtrado de todos los registros de ganancias por fecha y id ######################################################
     path(
         "gananciasallforid/<desde>/<hasta>/",
@@ -193,11 +187,7 @@ urlpatterns = [
     ################## Obtiene todos los montos de todos los registros y ganancias a pagar ##############################################
     path("montos/<pk>/", montosGet, name="montos"),
     ################## Obtiene todos los montos de todos los registros y ganancia a pagar por fecha #####################################
-    path(
-        "montosbydate/<pk>/<desde>/<hasta>/",
-        filter_ganancia_to_date_by_id,
-        name="montosByDate",
-    ),
+    path( "montosbydate/<pk>/<desde>/<hasta>/", filter_ganancia_to_date_by_id, name="montosByDate",),
     ################## Verifica si el cliente ya fondeo su cuenta y existe si idCliente en la DB para la pagina de registro #############
     path("verificar/", verificar, name="verificar"),
     ################## Elimina un usuario de la base de datos ###########################################################################

@@ -27,6 +27,7 @@ urlpatterns = [
     path('servicios/',views.servicios, name = 'servicios'),
     path('Afiliado/',include('apps.afiliado.urls')),
     path('api/skilling/',include('apps.api.skilling.urls')),
+    path('user/',include('apps.usuarios.urls')),
     path('<pk>',views.home_pk, name = 'home_pk'),
     #path('broker/<pk>',views.broker_pk, name = 'broker_pk'),
     path('broker/skilling/<pk>',views.broker_pk, name = 'broker_skilling_pk'),

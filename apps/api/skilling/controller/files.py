@@ -5,7 +5,8 @@ from ....utils.funciones import existe,existe_cpa,existe_ganancia
 from ....utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ....utils.bonos import bonoDirecto,bonoIndirecto
 from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
-from ....usuarios.models import Cuenta,Usuario,Spread,BonoCpa,BonoCpaIndirecto,CPA
+from apps.api.skilling.models import Cuenta,Spread,BonoCpa,BonoCpaIndirecto,CPA
+from apps.usuarios.models import Usuario
 from datetime import datetime
 import pandas as pd
 import os
@@ -292,7 +293,7 @@ def upload_ganancias(request):
 
             if file_extension == ".csv":
                 file_data = pd.read_csv(excel_file)  # obtengo los datos del archivo
-                new_data= limpiar_ganacias(file_data)
+                new_data = limpiar_ganacias(file_data)
                 
                 for g in new_data:
                     if g['partner_earning'] > 0:

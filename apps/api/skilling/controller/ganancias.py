@@ -2,8 +2,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from ....utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
-from ....usuarios.models import Spread,Usuario,Cuenta,BonoAPagar
-from ...skilling.models import Registros_ganancias,Registros_cpa,SpreadIndirecto
+from ....usuarios.models import Usuario
+from ...skilling.models import Registros_ganancias,Registros_cpa,SpreadIndirecto,Cuenta,BonoAPagar,Spread
 import re
 import json 
 from decimal import Decimal

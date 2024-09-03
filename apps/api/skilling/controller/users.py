@@ -1,12 +1,36 @@
+
+"""
+
+La gestion de Usuario, crear modificar eliminar adminsitar va pasar al archivo userController.py
+ubicado en apps/usuarios/controller
+
+"""
+
+
 from django.http import JsonResponse
 from django.shortcuts import render
-from ....usuarios.models import Usuario,Cuenta
+
+from apps.api.skilling.models import Cuenta
+from ....usuarios.models import Usuario
 from ....afiliado.models import Afiliado
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
 import json 
 
 
+###########################################################################################################################
+############################### Leer comentario de arriba #################################################################
+###########################################################################################################################
+                                                  ##
+                                                ######
+                                              ##########
+                                            ##############
+                                                #####
+                                                #####
+                                                #####
+                                                #####
+                                                #####
+                                                
 @csrf_exempt
 def postNewAfiliado(request):
     if request.method == 'POST':

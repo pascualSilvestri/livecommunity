@@ -1,100 +1,62 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-class BonoCpa(models.Model):
-    idBonoCPA=  models.AutoField('id', primary_key=True)
-    bono= models.CharField(max_length=50)
-    valor= models.IntegerField() 
-    
-    def __str__(self):
-        return self.bono
-    
-class BonoCpaIndirecto(models.Model):
-    idBonoCPA=  models.AutoField('id', primary_key=True)
-    bono= models.CharField(max_length=50)
-    valor= models.IntegerField() 
-    
-    def __str__(self):
-        return self.bono
-
-class Spread(models.Model):
-    idSpread=  models.AutoField('id', primary_key=True)
-    spread= models.CharField(max_length=50)
-    porcentaje= models.FloatField() 
-    
-    def __str__(self):
-        return self.spread
-    
-class CPA(models.Model):
-    id=  models.AutoField('id', primary_key=True)
-    cpa= models.FloatField()
-    
-    def __str__(self):
-        return str(self.id)
-
-
 class Usuario(AbstractUser):
-    # Agrega campos adicionales personalizados para tu modelo de usuario, por ejemplo:
-    fpa = models.CharField(max_length=50)
-    telephone = models.CharField(max_length=15,null=True)
-    wallet = models.CharField(max_length=100,null=True)
-    uplink = models.CharField(max_length=50,null=True)
-    link = models.CharField(max_length=100)
-    roles= models.CharField(max_length=50,default="user")
+    # Campos adicionales personalizados
+    fpa = models.CharField(max_length=50, null=True)
+    idCliente = models.CharField(max_length=50, null=True)
+    uplink = models.CharField(max_length=50, null=True, blank=True)
+    telephone = models.CharField(max_length=15, null=True, blank=True)
+    wallet = models.CharField(max_length=100, null=True, blank=True)
+    userTelegram = models.CharField(max_length=200, default="none", null=True, blank=True)
+    link = models.CharField(max_length=100, null=True, blank=True)
     registrado = models.BooleanField(default=False)
-    aceptado= models.BooleanField(default=False)
-    eliminado= models.BooleanField(default=False)
+    aceptado = models.BooleanField(default=False)
+    fondeado = models.BooleanField(default=False)
+    eliminado = models.BooleanField(default=False)
 
+    # Relaciones con otros usuarios (downLeft y downRight) inicializadas como null
+    downLeft = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='down_left_user')
+    downRight = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='down_right_user')
+
+    # Relación muchos a muchos con Roles y Servicios
+    roles_asignados = models.ManyToManyField('Rol', related_name='usuarios')
+    servicios_asignados = models.ManyToManyField('Servicio', related_name='usuarios')
 
     def __str__(self):
-        return self.fpa
+        return self.username
 
 
-class Cuenta(models.Model):
-    id_monto = models.AutoField(primary_key=True, verbose_name='ID')
-    fpa = models.CharField(max_length=50)
-    monto_total = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_a_pagar = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    spread_directo = models.DecimalField(max_digits=10, decimal_places=3, default=0.0) 
-    spread_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_cpa = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_bono_directo = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_bono_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    cpa = models.IntegerField(default=0)
-    cpaIndirecto = models.IntegerField(default=0)
-    level_bono_directo = models.IntegerField(default=0)
-    level_bono_indirecto = models.IntegerField(default=0)
-    retiros = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    have_bono = models.BooleanField(default=False)
-    have_bono_indirecto = models.BooleanField(default=False)
-    
+class Url(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    url = models.URLField()
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='urls')
+
     def __str__(self):
-        return self.fpa
+        return self.name
 
 
-class PagoRealizado(models.Model):
-    id_pagos = models.AutoField(primary_key=True, verbose_name='ID')
-    fpa = models.CharField(max_length=50)
+class Referido(models.Model):
+    id = models.AutoField(primary_key=True)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='referidos')
     date = models.DateField(auto_now_add=True)
-    monto_total = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_pagado = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_cpa = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_bono_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_bono_directo = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    
+
     def __str__(self):
-        return self.fpa
+        return f"Referido de {self.usuario.username} en {self.date}"
 
 
-class BonoAPagar(models.Model):
-    id_bono = models.AutoField(primary_key=True, verbose_name='ID')
-    fpa = models.CharField(max_length=50)
-    date = models.DateField(auto_now_add=True)
-    monto_total = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_bono_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_bono_directo = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    pagado = models.BooleanField(default=False)
-    
+class Rol(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+
     def __str__(self):
-        return self.fpa
+        return self.name
+
+
+class Servicio(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name

@@ -1,4 +1,12 @@
 
+import json
+from django.http import JsonResponse
+
+from apps.afiliado.models import Afiliado
+from apps.usuarios.models import Usuario
+from django.views.decorators.csrf import csrf_exempt
+
+
 @csrf_exempt
 def postNewUser(request):
     if request.method == 'POST':
@@ -46,3 +54,11 @@ def postNewUser(request):
         
     else:
         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
+
+
+
+
+def users(request):
+    
+    return JsonResponse({
+'users':'funciono'})

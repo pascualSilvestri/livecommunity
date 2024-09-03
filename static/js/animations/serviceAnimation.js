@@ -3,6 +3,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const services = document.querySelectorAll('.service');
     const numServices = services.length;
 
+    if (!serviceContainer) {
+        
+        return;
+    }
+
+    if (numServices === 0) {
+        
+        return;
+    }
+
     // Clonar los primeros 4 elementos y agregarlos al final del contenedor
     for (let i = 0; i < numServices; i++) {
         const clone = services[i].cloneNode(true);

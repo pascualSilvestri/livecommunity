@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector(".broker_inicio_container");
 
   if (!container) {
-    console.error("No se encontró el contenedor con la clase .about-us");
+    
     return;
   }
 

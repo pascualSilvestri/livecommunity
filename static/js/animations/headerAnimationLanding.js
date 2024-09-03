@@ -1,35 +1,53 @@
-const navbar = document.querySelector('#navBar')
-const heightDisplay = window.innerHeight
-const widthDisplay = window.innerWidth
-const navbarDisplay = navbar.getBoundingClientRect().height
+const navbar = document.querySelector('#navBar');
+const heightDisplay = window.innerHeight;
+const widthDisplay = window.innerWidth;
+let navbarDisplay;
 
-window.addEventListener('scroll', () => {})
+if (navbar) {
+    navbarDisplay = navbar.getBoundingClientRect().height;
+} 
+
+window.addEventListener('scroll', () => {
+    // Aquí puedes agregar lógica adicional si es necesario
+});
 
 document.addEventListener('DOMContentLoaded', () => {
-    const loading = document.querySelector('.loading')
+    const loading = document.querySelector('.loading');
+
+    if (!loading) {
+        
+        return;
+    }
 
     window.addEventListener('load', () => {
         setTimeout(() => {
-            loading.style.display = 'none'
+            loading.style.display = 'none';
 
             // Animación del navbar, título y el botón
-            const title = document.querySelector('.hero h1')
-            const button = document.querySelector('.hero .btn')
+            const title = document.querySelector('.hero h1');
+            const button = document.querySelector('.hero .btn');
 
-            // Navbar animación
-            setTimeout(() => {
-                navbar.classList.add('animate')
-            }, 500) // 500 ms de retardo para el navbar
+            // Verificaciones antes de aplicar animaciones
+            if (navbar) {
+                // Navbar animación
+                setTimeout(() => {
+                    navbar.classList.add('animate');
+                }, 500); // 500 ms de retardo para el navbar
+            }
 
-            // Título animación
-            setTimeout(() => {
-                title.classList.add('animate')
-            }, 1000) // 1000 ms de retardo para el título
+            if (title) {
+                // Título animación
+                setTimeout(() => {
+                    title.classList.add('animate');
+                }, 1000); // 1000 ms de retardo para el título
+            } 
 
-            // Botón animación
-            setTimeout(() => {
-                button.classList.add('animate')
-            }, 1500) // 1500 ms de retardo para el botón
-        }, 1000)
-    })
-})
+            if (button) {
+                // Botón animación
+                setTimeout(() => {
+                    button.classList.add('animate');
+                }, 1500); // 1500 ms de retardo para el botón
+            } 
+        }, 1000);
+    });
+});

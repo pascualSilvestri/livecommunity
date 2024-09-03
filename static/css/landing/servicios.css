@@ -4,16 +4,14 @@
   font-family: Montserrat;
 }
 
-
 .serv-container {
   width: 100%;
   background:
-    /* Degradado de arriba hacia abajo */
-      linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 0%, 
-        rgba(0, 0, 0, 1) 100%
-      ),
+    /* Degradado de arriba hacia abajo */ linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 100%
+    ),
     url("../../img/fondoService3.jpg");
   height: 100vh;
   background-position: center;
@@ -21,11 +19,17 @@
   background-size: cover;
   background-attachment: fixed;
   padding-bottom: 5rem;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
-
-
 
 .servicio_section_container {
   width: 100%;
@@ -173,9 +177,7 @@
   );
 }
 
-
-
-.serv-videos-free{
+.serv-videos-free {
   position: relative;
   display: flex;
   height: 70vh;
@@ -236,7 +238,8 @@
   font-weight: 800;
   font-size: 22px;
   text-decoration: none;
-  transition: transform 0.3s ease, background 0.15s ease-in-out 0.2s, opacity 0.5s ease;
+  transition: transform 0.3s ease, background 0.15s ease-in-out 0.2s,
+    opacity 0.5s ease;
 }
 .btn-registrate-serv:hover {
   background-color: #e42283;
@@ -397,63 +400,79 @@
   margin: 1rem 0;
 }
 
-
 @media screen and (max-width: 600px) {
-  .serv-video h3{
+  .serv-video h3 {
     font-size: 20px;
   }
-  .serv-video p{
+  .serv-video p {
     font-size: 18px;
   }
-  .rigth{
+  .rigth {
     flex-direction: column-reverse;
   }
-  .left:before{
+  .left:before {
     display: none;
   }
 
-  .right:before{
+  .right:before {
     display: none;
   }
 
-  .left:after{
+  .left:after {
     display: none;
   }
 
-  .right:after{
+  .right:after {
     display: none;
   }
 }
 
 @media screen and (max-width: 900px) {
+  .serv-presentation h1 {
+    font-size: 25px;
+    margin-bottom: 1.5rem;
+    font-weight: 900;
+  }
 
-  .serv-videos-free{
+  .serv-video img {
+
+    width: 300px;
+
+  }
+
+  .serv-presentation p{
+    font-size: 18px;
+  }
+  .serv_p {
+    font-size: 15px;
+  }
+  .serv-videos-free {
+    height: auto !important;
     flex-direction: column;
     margin-top: 2rem;
   }
-  .service_recorda_container{
+  .service_recorda_container {
     flex-direction: column-reverse;
   }
 
-  .right{
+  .right {
     flex-direction: column-reverse;
   }
-  .left:before{
+  .left:before {
     display: none;
   }
 
-  .right:before{
+  .right:before {
     display: none;
   }
 
-  .left:after{
+  .left:after {
     display: none;
   }
 
-  .right:after{
+  .right:after {
     display: none;
   }
-  
 
   .puntito-azul-2::before {
     display: none;
@@ -505,11 +524,10 @@
   }
   .recorda {
     width: 90%;
-
   }
   .recorda::before {
     position: absolute;
-    margin-left: 170px;
+    margin-left: 120px;
   }
   .decision-container img {
     width: 30%;
@@ -518,7 +536,7 @@
     width: 45%;
     margin: 3.2rem auto;
     text-align: center;
-    font-size: 44px;
+    font-size: 25px;
     font-weight: 600;
   }
   .decision {
@@ -534,8 +552,6 @@
   .serv .preguntas-container-desktop {
     color: rgba(24, 24, 24, 0.925);
   }
-
-
 }
 /* Animaciones*/
 /* Archivo CSS */
@@ -593,7 +609,7 @@
 }
 
 .serv-videos-free.right:before {
-  content: '';
+  content: "";
   position: absolute;
   /* Aquí define los estilos que necesitas para el pseudoelemento */
   /* Asegúrate de que no se vea afectado por las animaciones de los elementos */
@@ -611,9 +627,15 @@
 }
 
 @keyframes emphasis {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .recorda.emphasis {

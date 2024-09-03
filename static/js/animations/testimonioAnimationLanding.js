@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const slider = document.querySelector('.slider');
     const slides = document.querySelectorAll('.slide');
 
+    if (!slider || slides.length === 0) {
+        
+        return;
+    }
+
     // Clonar las slides para efecto infinito
     slides.forEach((slide) => {
         const clone = slide.cloneNode(true);
@@ -26,60 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
-//////////////////////////////Testimonio secction--------------------------------
-const testimonios = [
-    {
-        id: 1,
-        nombre: 'Agustín Gómez',
-        descripcion: '',
-        imagen: './static/img/testimonios/AgustinGomez.png',
-        video: './static/video/testimonios/Agustín Gómez.mp4'
-    },
-    {
-        id: 2,
-        nombre: 'Franco Gómez ',
-        descripcion:'',
-        imagen: './static/img/testimonios/FrancoGomez.png',
-        video: './static/video/testimonios/Franco Gómez.mp4'
-    },
-    {
-        id: 3,
-        nombre: 'Francisco Vallejo',
-        descripcion: '',
-        imagen: './static/img/testimonios/FranciscoVallejo.png',
-        video: './static/video/testimonios/testimonio francisco EDIT.mp4'
-    },
-    {
-        id: 4,
-        nombre: 'Mabel Otalora',
-        descripcion: '',
-        imagen: './static/img/testimonios/MABELOTALORA.png',
-        video: './static/video/testimonios/MABEL OTALORA EDIT.mp4'
-    },
-    {
-        id: 5,
-        nombre: 'Ricarod Molano',
-        descripcion: '',
-        imagen: './static/img/testimonios/RicardoMolano.png',
-        video: './static/video/testimonios/RICARDO MOLANO EDIT.mp4'
-    },
-    {
-        id: 6,
-        nombre: 'Cecilia Gonzales',
-        descripcion: '',
-        imagen: './static/img/testimonios/cecilia.png',
-        video: './static/video/testimonios/cecilia.mp4'
-    },
-    {
-        id: 7,
-        nombre: 'Javier nou',
-        descripcion: '',
-        imagen: './static/img/testimonios/anonimo.png',
-        video: './static/video/testimonios/testimonioAnomimo1.mp4'
-    },
-];
+//////////////////////////////Testimonio section--------------------------------
 
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.querySelector('.video_card_container');
@@ -88,6 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const descripcionElement = document.querySelector('.video_testimonios_descripcion');
     const prevButton = document.querySelector('.after_video');
     const nextButton = document.querySelector('.next_video');
+
+    if (!container || !videoElement || !nombreElement || !descripcionElement || !prevButton || !nextButton) {
+        
+        return;
+    }
 
     let scrollAmount = 0;
     let cardWidth = 0; // Se calculará después de generar las tarjetas
@@ -106,12 +63,16 @@ document.addEventListener('DOMContentLoaded', function() {
             card.addEventListener('click', () => {
                 actualizarTestimonio(testimonio.id);
             });
-            container.appendChild(card, nextButton); // Inserta antes del botón de "next"
+            container.insertBefore(card, nextButton); // Inserta antes del botón de "next"
         });
 
         // Calcular el ancho de las tarjetas una vez que se hayan generado
         const cards = document.querySelectorAll('.video_card');
-        cardWidth = cards[0].offsetWidth + 10; // Tamaño de cada tarjeta más margen
+        if (cards.length > 0) {
+            cardWidth = cards[0].offsetWidth + 10; // Tamaño de cada tarjeta más margen
+        } else {
+            
+        }
     }
 
     // Función para actualizar el testimonio seleccionado
@@ -124,6 +85,8 @@ document.addEventListener('DOMContentLoaded', function() {
             videoElement.load(); // Recarga el video para asegurarse de que se cambie correctamente
             videoElement.pause(); // Pausa el video hasta que se presione el botón de play
             videoElement.controls = false; // Oculta los controles hasta que se haga clic para reproducir
+        } else {
+            
         }
     }
 

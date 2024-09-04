@@ -59,6 +59,22 @@ def postNewUser(request):
 
 
 def users(request):
+    usuarios = Usuario.objects.all()
+    rolesAndUsuario = []
+    for usuario in usuarios:
+        roles = []
+        servicios = []
+        for rol in usuario.roles_asignados.all():
+            roles.append(rol.name)
+        
+        for servicio in usuario.servicios_asignados.all():
+            servicios.append(servicio.name)
+
+        rolesAndUsuario.append({
+            'username': usuario.username,
+            'roles': roles,
+            'servicios':servicios
+        })
+
     
-    return JsonResponse({
-'users':'funciono'})
+    return JsonResponse({'users': rolesAndUsuario})

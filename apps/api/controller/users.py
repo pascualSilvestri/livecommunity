@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from ...usuarios.models import Usuario,Cuenta
-from ...afiliado.models import Afiliado
+from ...afiliado.models import Afiliado, Cliente
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
 import json 
@@ -124,6 +124,7 @@ def getUser(request,email):
     else:
         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
     
+
 @csrf_exempt
 def getUserById(request, pk):
     
@@ -379,3 +380,45 @@ def deleteUser(request,pk):
     except Exception as e:
         print(e.__str__())
         return JsonResponse({'Error':e})
+    
+
+
+@csrf_exempt
+def getUserNewFormat(request):
+    if request.method == 'GET':
+        try:
+            # Obtener todos los usuarios
+            usuarios = Usuario.objects.all()
+            data = []
+            
+            for usuario in usuarios:
+                # Intentar obtener un cliente asociado al usuario
+                try:
+                    cliente = Cliente.objects.get(idAfiliado=usuario.fpa)  # Usa el campo correcto
+                except Cliente.DoesNotExist:
+                    cliente = None
+                
+                # Crear el objeto combinado
+                combined_data = {
+                    'fpa': usuario.fpa,
+                    'nombre': usuario.first_name if usuario.first_name else cliente.nombre if cliente else None,
+                    'apellido': usuario.last_name if usuario.last_name else cliente.apellido if cliente else None,
+                    'email': usuario.email if usuario.email else cliente.correo if cliente else None,
+                    'telefono': usuario.telephone if usuario.telephone else cliente.telefono if cliente else None,
+                    'wallet': usuario.wallet if usuario.wallet else None,
+                    'uplink': usuario.uplink if usuario.uplink else None,
+                    'link': usuario.link if usuario.link else None,
+                    'roles': usuario.roles if usuario.roles else None,
+                    'registrado': usuario.registrado,
+                    'status': usuario.aceptado,
+                    'idCliente': cliente.idCliente if cliente else None,  # Asegúrate de usar el campo correcto
+                    'UserTelegram': cliente.userTelegram if cliente else None,  # Asegúrate de usar el campo correcto
+                }
+                
+                data.append(combined_data)
+            
+            return JsonResponse({'data': data}, status=200)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    else:
+        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)

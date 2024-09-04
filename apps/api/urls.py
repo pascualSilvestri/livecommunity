@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .controller.users import postNewAfiliado,postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,users_eliminados,users_pendientes,updatePassword,deleteUser
+from .controller.users import postNewAfiliado,postNewUser,users,getUser,usuarioValido,eliminarUser,getUserById,updateUserById,updatePerfilUser,users_eliminados,users_pendientes,updatePassword,deleteUser, getUserNewFormat
 from .controller.registros import verificar,registrosGetAll,getRegistroById,filter_registros_fecha_by_id
 from .controller.ganancias import ganancia_get_all,filtrar_ganancias_by_revshare_By_Id,ganancias_total_con_porcentaje,retiros_totales,ganancias_total_user,ganancias_total,ganancia_by_id,filtarGananciasCpa,filtradoGananciasRevshare,filtarGananciasCpaById,filterGananciasFecha,filter_ganancia_to_date_by_id,ganancias_cpa,ganancias_cpa_by_id,ganancias_all_for_id,ganancia_a_pagar,filterGananciasFechaById
 from .controller.cuenta import montosGet
@@ -104,4 +104,11 @@ urlpatterns = [
       path('putbonocpaindirecto',put_bono_cpa_indirecto , name='putbonocpaindirecto'),
       path('putspread',put_spread , name='putSpread'),
       
+
+      #GET USUARIOS NEW FORMAT
+
+      path('userNewFormat/', getUserNewFormat, name = 'getUserNewFormat'),
+
+
 ]     
+

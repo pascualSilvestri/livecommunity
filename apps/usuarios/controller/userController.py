@@ -1,9 +1,9 @@
 
 import json
 from django.http import JsonResponse
-
+import requests
 from apps.afiliado.models import Afiliado
-from apps.usuarios.models import Rol, Servicio, Usuario, UsuarioRol, UsuarioServicio
+from apps.usuarios.models import Rol, Servicio, TipoUrl, Usuario, UsuarioRol, UsuarioServicio, Url 
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -11,61 +11,93 @@ from django.views.decorators.csrf import csrf_exempt
 def postNewUser(request):
     if 'application/json' in request.content_type:
         try:
-            # Decodificar el cuerpo de la solicitud como JSON
-            data = json.loads(request.body)
+            # Hacer la petición a la URL externa para obtener los datos
+            response = requests.get('https://livecommunity.info/api/userNewFormat/')
             
-            # Verificar si ya existe un usuario con el FPA proporcionado
-            if Usuario.objects.filter(fpa=data.get('fpa')).exists():
-                return JsonResponse({'message': 'Usuario ya registrado'}, status=401)
+            # Verificar si la petición fue exitosa (status code 200)
+            if response.status_code == 200:
+                # Decodificar la respuesta JSON
+                external_data = response.json()
 
-            # Buscar afiliado con el FPA proporcionado
-            afiliados = Afiliado.objects.filter(fpa=data.get('fpa'))
-            
-            if afiliados.exists():
-                uplink = afiliados[0].uplink
-                link = afiliados[0].url
+                # Obtener la lista de usuarios desde la respuesta externa
+                usuarios = external_data.get('data', [])
+                
+                for user_data in usuarios:
+                    # Verificar si ya existe un usuario con el FPA proporcionado
+                    if Usuario.objects.filter(fpa=user_data.get('fpa')).exists():
+                        continue  # Saltamos este usuario, ya está registrado
 
-                # Crear el nuevo usuario
-                new_user = Usuario(
-                    username=(data.get('fpa') + "_" + data.get('first_name')).replace(' ', '_'),
-                    fpa=data.get('fpa'),
-                    email=data.get('email'),
-                    first_name=data.get('first_name'),
-                    last_name=data.get('last_name'),
-                    password=make_password(data.get('password')),  # Hashear la contraseña
-                    telephone=data.get('telephone'),
-                    wallet=data.get('wallet'),
-                    uplink=uplink or '',
-                    link=link or ''
-                )
-                new_user.registrado = True
+                    # Buscar afiliado con el FPA proporcionado
+                    afiliados = Afiliado.objects.filter(fpa=user_data.get('fpa'))
 
-                # Guardar el usuario en la base de datos
-                new_user.save()
+                    # Obtener uplink y link del afiliado si existe
+                    uplink = afiliados[0].uplink if afiliados.exists() else user_data.get('uplink')
+                    link = afiliados[0].url if afiliados.exists() else user_data.get('link')
 
-                # Asignar roles al usuario
-                roles = data.get('roles', [])  # Lista de IDs de roles
-                for rol_id in roles:
-                    try:
-                        rol = Rol.objects.get(id=rol_id)
-                        UsuarioRol.objects.create(usuario=new_user, rol=rol)
-                    except Rol.DoesNotExist:
-                        return JsonResponse({'message': f'Rol con ID {rol_id} no existe'}, status=400)
+                    # Crear el nuevo usuario
+                    new_user = Usuario(
+                        username=(user_data.get('apellido') + "_" + user_data.get('nombre')).replace(' ', '_'),
+                        fpa=user_data.get('fpa') or None,
+                        idCliente=user_data.get('idCliente') or None,
+                        email=user_data.get('email'),
+                        first_name=user_data.get('nombre'),
+                        last_name=user_data.get('apellido'),
+                        telephone=user_data.get('telefono'),
+                        wallet=user_data.get('wallet'),
+                        uplink=uplink or '',
+                        link='https://livecommunity.info/Afiliado/' if link is None else link,
+                        registrado=user_data.get('registrado', False),
+                        aceptado=user_data.get('status', False),
+                        userTelegram=user_data.get('userTelegram') or None,
+                    )
 
-                # Asignar servicios al usuario
-                servicios = data.get('servicios', [])  # Lista de IDs de servicios
-                for servicio_id in servicios:
-                    try:
-                        servicio = Servicio.objects.get(id=servicio_id)
-                        UsuarioServicio.objects.create(usuario=new_user, servicio=servicio)
-                    except Servicio.DoesNotExist:
-                        return JsonResponse({'message': f'Servicio con ID {servicio_id} no existe'}, status=400)
+                    # Guardar el usuario en la base de datos
+                    new_user.set_password(user_data.get('password', 'default_password'))  # Asegúrate de usar un hash adecuado
+                    new_user.save()
+                    
+                    # Crear URLs si FPA no es None
+                    if new_user.fpa:
+                        try:
+                            Url.objects.create(
+                                name="Afiliado URL", 
+                                url=f'https://livecommunity.info/Afiliado/{new_user.fpa}', 
+                                usuario=new_user, 
+                                tipoUrl=TipoUrl.objects.get(id=1)
+                            )
+                            Url.objects.create(
+                                name="Skilling Partners URL", 
+                                url=f'https://go.skillingpartners.com/visit/?bta=35881&nci=5846&utm_campaign={new_user.fpa}', 
+                                usuario=new_user, 
+                                tipoUrl=TipoUrl.objects.get(id=2)
+                            )
+                        except Exception as e:
+                            print(f"Error creando URLs para {new_user.username}: {e}")
 
-                return JsonResponse({'message': 'Usuario creado exitosamente'}, status=200)
+                    # Asignar roles al usuario
+                    roles = user_data.get('roles', [])  # Lista de IDs de roles
+                    for rol_id in roles:
+                        try:
+                            rol = Rol.objects.get(id=rol_id)
+                            UsuarioRol.objects.create(usuario=new_user, rol=rol)
+                        except Rol.DoesNotExist:
+                            return JsonResponse({'message': f'Rol con ID {rol_id} no existe'}, status=400)
+
+                    # Asignar servicios al usuario (si existen en los datos)
+                    servicios = user_data.get('servicios', [])  # Lista de IDs de servicios
+                    for servicio_id in servicios:
+                        try:
+                            servicio = Servicio.objects.get(id=servicio_id)
+                            UsuarioServicio.objects.create(usuario=new_user, servicio=servicio)
+                        except Servicio.DoesNotExist:
+                            return JsonResponse({'message': f'Servicio con ID {servicio_id} no existe'}, status=400)
+
+                return JsonResponse({'message': 'Usuarios creados exitosamente'}, status=200)
 
             else:
-                return JsonResponse({'message': 'Usuario no habilitado para registrarse'}, status=402)
-        
+                return JsonResponse({'message': 'Error en la petición a la URL externa'}, status=response.status_code)
+
+        except requests.exceptions.RequestException as e:
+            return JsonResponse({'message': f'Error de conexión: {str(e)}'}, status=500)
         except json.JSONDecodeError:
             return JsonResponse({'message': 'Error al decodificar el JSON'}, status=403)
     
@@ -73,8 +105,6 @@ def postNewUser(request):
         return JsonResponse({'message': 'Tipo de contenido no válido'}, status=404)
 
 
-
-@require_POST
 def createUser(request):
     try:
         # Extraer los datos de la solicitud

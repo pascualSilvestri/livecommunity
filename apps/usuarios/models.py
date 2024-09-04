@@ -7,7 +7,7 @@ class Rol(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} ({self.id})'
     
 class Servicio(models.Model):
     id = models.AutoField(primary_key=True)

@@ -409,7 +409,8 @@ def getUserNewFormat(request):
                     'registrado': usuario.registrado,
                     'status': usuario.aceptado,
                     'idCliente': None,
-                    'userTelegram': None
+                    'userTelegram': None,
+                    'password': usuario.password
                 }
                 data.append(combined_data)
 
@@ -428,7 +429,8 @@ def getUserNewFormat(request):
                     'registrado': None,  # Cliente no tiene campo registrado
                     'status': None,  # Cliente no tiene campo aceptado
                     'idCliente': cliente.idCliente,
-                    'userTelegram': cliente.userTelegram
+                    'userTelegram': cliente.userTelegram,
+                    'password': cliente.idCliente
                 }
                 data.append(combined_data)
 

@@ -383,42 +383,95 @@ def deleteUser(request,pk):
     
 
 
-@csrf_exempt
+
+@csrf_exempt  
 def getUserNewFormat(request):
     if request.method == 'GET':
         try:
-            # Obtener todos los usuarios
+            # Obtener todos los usuarios y clientes
             usuarios = Usuario.objects.all()
+            clientes = Cliente.objects.all()
+
             data = []
-            
+
+            # Combinar los usuarios
             for usuario in usuarios:
-                # Intentar obtener un cliente asociado al usuario
-                try:
-                    cliente = Cliente.objects.get(idAfiliado=usuario.fpa)  # Usa el campo correcto
-                except Cliente.DoesNotExist:
-                    cliente = None
-                
-                # Crear el objeto combinado
                 combined_data = {
                     'fpa': usuario.fpa,
-                    'nombre': usuario.first_name if usuario.first_name else cliente.nombre if cliente else None,
-                    'apellido': usuario.last_name if usuario.last_name else cliente.apellido if cliente else None,
-                    'email': usuario.email if usuario.email else cliente.correo if cliente else None,
-                    'telefono': usuario.telephone if usuario.telephone else cliente.telefono if cliente else None,
-                    'wallet': usuario.wallet if usuario.wallet else None,
-                    'uplink': usuario.uplink if usuario.uplink else None,
-                    'link': usuario.link if usuario.link else None,
-                    'roles': usuario.roles if usuario.roles else None,
+                    'nombre': usuario.first_name,
+                    'apellido': usuario.last_name,
+                    'email': usuario.email,
+                    'telefono': usuario.telephone,
+                    'wallet': usuario.wallet,
+                    'uplink': usuario.uplink,
+                    'link': usuario.link,
+                    'roles': [3],
                     'registrado': usuario.registrado,
                     'status': usuario.aceptado,
-                    'idCliente': cliente.idCliente if cliente else None,  # Asegúrate de usar el campo correcto
-                    'UserTelegram': cliente.userTelegram if cliente else None,  # Asegúrate de usar el campo correcto
+                    'idCliente': None,
+                    'userTelegram': None
                 }
-                
                 data.append(combined_data)
-            
+
+            # Combinar los clientes
+            for cliente in clientes:
+                combined_data = {
+                    'fpa': None,  # Cliente no tiene campo fpa
+                    'nombre': cliente.nombre,
+                    'apellido': cliente.apellido,
+                    'email': cliente.correo,
+                    'telefono': cliente.telefono,
+                    'wallet': None,  # Cliente no tiene campo wallet
+                    'uplink': cliente.idAfiliado,  # Cliente no tiene campo uplink
+                    'link': None,    # Cliente no tiene campo link
+                    'roles': [2],   # Cliente no tiene campo roles
+                    'registrado': None,  # Cliente no tiene campo registrado
+                    'status': None,  # Cliente no tiene campo aceptado
+                    'idCliente': cliente.idCliente,
+                    'userTelegram': cliente.userTelegram
+                }
+                data.append(combined_data)
+
+            # Devolver el array combinado
             return JsonResponse({'data': data}, status=200)
+
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
+
     else:
         return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
+
+# @csrf_exempt
+# def getUserNewFormat(request):
+#     if request.method == 'GET':
+#         try:
+#             # Obtener todos los usuarios
+#             usuarios = Usuario.objects.all()
+#             clientes = Cliente.objects.all()
+#             data = []
+            
+#             for usuario in usuarios:
+#                 # Crear el objeto combinado
+#                 combined_data = {
+#                     'fpa': usuario.fpa,
+#                     'nombre': usuario.first_name ,
+#                     'apellido': usuario.last_name ,
+#                     'email': usuario.email ,
+#                     'telefono': usuario.telephone ,
+#                     'wallet': usuario.wallet ,
+#                     'uplink': usuario.uplink ,
+#                     'link': usuario.link ,
+#                     'roles': usuario.roles ,
+#                     'registrado': usuario.registrado,
+#                     'status': usuario.aceptado,
+#                     'idCliente': None ,
+#                     'UserTelegram': None ,
+#                 }
+                
+#                 data.append(combined_data)
+            
+#             return JsonResponse({'data': data}, status=200)
+#         except Exception as e:
+#             return JsonResponse({'error': str(e)}, status=400)
+#     else:
+#         return JsonResponse({'error': 'Método HTTP no válido'}, status=405)

@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'apps.usuarios',
-    'apps.afiliado',
+    'apps.registroPage',
     'apps.api.skilling'
 ]
 

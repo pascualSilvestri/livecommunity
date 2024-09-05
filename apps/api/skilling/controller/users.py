@@ -12,7 +12,7 @@ from django.shortcuts import render
 
 from apps.api.skilling.models import Cuenta
 from ....usuarios.models import Usuario
-from ....afiliado.models import Afiliado
+from apps.api.skilling.models import Afiliado
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
 import json 

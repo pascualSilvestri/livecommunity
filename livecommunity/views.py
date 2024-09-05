@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from apps.afiliado.models  import Afiliado
+from apps.api.skilling.models import Afiliado
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 import json

@@ -25,7 +25,7 @@ urlpatterns = [
     path('presenciales/',views.presenciales, name = 'presenciales'),
     path('presenciales/consulta/',views.consultaForm, name = 'consultaForm'),
     path('servicios/',views.servicios, name = 'servicios'),
-    path('Afiliado/',include('apps.afiliado.urls')),
+    path('Afiliado/',include('apps.registroPage.urls')),
     path('api/skilling/',include('apps.api.skilling.urls')),
     path('user/',include('apps.usuarios.urls')),
     path('<pk>',views.home_pk, name = 'home_pk'),

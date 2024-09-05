@@ -1,7 +1,7 @@
 import json
 from django.http import JsonResponse
 import requests
-from apps.afiliado.models import Afiliado
+from apps.api.skilling.models import Afiliado
 from apps.usuarios.models import (
     Rol,
     Servicio,

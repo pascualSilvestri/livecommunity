@@ -8,7 +8,7 @@ ubicado en apps/usuarios/controller
 
 
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from apps.api.skilling.models import Cuenta
 from ....usuarios.models import Usuario
@@ -16,6 +16,11 @@ from apps.api.skilling.models import Afiliado
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
 import json 
+from django.contrib.auth import authenticate
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth import get_user_model
+
 
 
 ###########################################################################################################################
@@ -77,77 +82,181 @@ def postNewUser(request):
                 # Decodificar el cuerpo de la solicitud como JSON
                 data = json.loads(request.body)
                 usuario = Usuario.objects.all()
-            
+                
+                # Buscar el afiliado con el FPA proporcionado
                 afiliados = Afiliado.objects.filter(fpa=data.get('fpa'))
                 
                 if afiliados.exists():
-                    print(afiliados[0].fpa)
                     uplink = afiliados[0].upline
-                    link=afiliados[0].url 
-                # Crear un nuevo usuario y guardar los datos en la base de datos
-                
+                    link = afiliados[0].url 
+
+                    # Crear un nuevo usuario y preparar los datos
                     new_user = Usuario(
-                        username = (data.get('fpa') + "_" + data.get('first_name')).replace(' ', '_'),
+                        username=(data.get('fpa') + "_" + data.get('first_name')).replace(' ', '_'),
                         fpa=data.get('fpa'),
                         email=data.get('email'),
                         first_name=data.get('first_name'),
                         last_name=data.get('last_name'),
-                        password=data.get('password'),
                         telephone=data.get('telephone'),
                         wallet=data.get('wallet'),
                         uplink=uplink or '',
                         link=link or ''
                     )
+
+                    # Hashear la contraseña antes de guardarla
+                    new_user.set_password(data.get('password'))
+
                     new_user.registrado = True
+
+                    # Verificar si el usuario ya está registrado por FPA
                     if not usuario.filter(fpa=data.get('fpa')).exists():
-                        new_user.save()
+                        new_user.save()  # Guardar el usuario en la base de datos
+                        return JsonResponse({'message': 'Datos recibidos y guardados con éxito'}, status=200)
                     else:
-                        return JsonResponse({'message':'Usuario ya registrado'},status=401)
+                        return JsonResponse({'message': 'Usuario ya registrado'}, status=401)
                 else:
-                    return JsonResponse({'message':'Usuario no Habilidato para registrarse'},status=402)
-                
-                return JsonResponse({'message': 'Datos recibidos y guardados con éxito'},status=200)
-            
+                    return JsonResponse({'message': 'Usuario no habilitado para registrarse'}, status=402)
+
             except json.JSONDecodeError:
                 return JsonResponse({'message': 'Error al decodificar el JSON'}, status=403)
-            
         else:
             return JsonResponse({'message': 'Tipo de contenido no válido'}, status=404)
-        
     else:
         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
+
+
+
+# def login(request, email):
+#     if request.method == 'GET':
+#         try:
+#             usuario = get_object_or_404(Usuario, email__iexact=email)
+            
+#             # Crear una lista de roles con atributos serializables
+#             roles = []
+#             for rol in usuario.roles.all():
+#                 roles.append({
+#                     'id': rol.rol_id,
+#                     'rol': rol.rol.name,  # Asegúrate de que 'rol' sea un atributo serializable, no un objeto.
+#                     'fecha_asignacion': rol.fecha_asignacion.isoformat()  # Serializar la fecha en formato ISO 8601
+#                 })
+                
+#             servicios = []
+            
+#             for servicio in usuario.serviciosUsuario.all():
+#                 servicios.append({
+#                     'id': servicio.servicio_id,
+#                     'servicio': servicio.servicio.name
+#                 })
+            
+#             urls = []
+            
+#             for url in usuario.urls.all():
+#                 urls.append({
+#                     'id': url.url_id,
+#                     'url': url.url
+#                 })
+
+#             data = {
+#                 'fpa': usuario.fpa,
+#                 'email': usuario.email,
+#                 'first_name': usuario.first_name,
+#                 'password': usuario.password,  # Considera no enviar la contraseña por razones de seguridad
+#                 'telephone': usuario.telephone,
+#                 'wallet': usuario.wallet,
+#                 'uplink': usuario.uplink,
+#                 'link': usuario.link,
+#                 'roles': roles,  # Convertir la relación a lista de roles
+#                 'servicios': servicios,
+#                 'registrado': usuario.registrado,
+#                 'status': usuario.aceptado,
+#                 'idCliente': usuario.idCliente,
+#                 'aceptado': usuario.aceptado,
+#                 'fondeado': usuario.fondeado,
+#                 'eliminado': usuario.eliminado,
+#                 'userTelegram': usuario.userTelegram,
+#                 'urls': urls
+#             }
+
+#             return JsonResponse({'data': data})
+#         except Usuario.DoesNotExist:
+#             return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
+#     else:
+#         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
+
 
 @csrf_exempt
-def getUser(request,email):
-    if request.method == 'GET':
-        # Asegúrate de que la solicitud tenga el tipo de contenido adecuado (application/json)
-            try:
-                usuarios = Usuario.objects.all()
-                data = []
-                for u in usuarios:
-                    
-                    if u.email.upper() == email.upper():
-                
-                        data.append({
-                            'fpa':u.fpa,
-                            'email':     u.email,
-                            'first_name':u.first_name,
-                            'password':  u.password,
-                            'telephone': u.telephone,
-                            'wallet':    u.wallet,
-                            'uplink':    u.uplink,
-                            'link':      u.link,
-                            'roles':     u.roles,
-                            'registrado':u.registrado,
-                            'status':    u.aceptado
-                        })
+def login(request):
+    if request.method == 'POST':
+        body_unicode = request.body.decode('utf-8')
+        body_data = json.loads(body_unicode)
+        email = body_data.get('email')
+        password = body_data.get('password')
 
-                return JsonResponse({'data': data})
-            except json.JSONDecodeError:
-                return JsonResponse({'message': 'Error al decodificar el JSON'}, status=400)
+        try:
+            # Obtener el usuario basado en el email
+            usuario = Usuario.objects.get(email=email)
+
+            # Verificar si la contraseña es correcta usando check_password
+            if check_password(password, usuario.password):
+                # Generar los tokens JWT
+                refresh = RefreshToken.for_user(usuario)
+
+                # Crear una lista de roles con atributos serializables
+                roles = []
+                for rol in usuario.roles.all():
+                    roles.append({
+                        'id': rol.rol_id,
+                        'rol': rol.rol.name,
+                        'fecha_asignacion': rol.fecha_asignacion.isoformat()
+                    })
+                
+                servicios = []
+                for servicio in usuario.serviciosUsuario.all():
+                    servicios.append({
+                        'id': servicio.servicio_id,
+                        'servicio': servicio.servicio.name
+                    })
+
+                urls = []
+                for url in usuario.urls.all():
+                    urls.append({
+                        'id': url.id,
+                        'url': url.url
+                    })
+
+                data = {
+                    'fpa': usuario.fpa,
+                    'email': usuario.email,
+                    'first_name': usuario.first_name,
+                    'telephone': usuario.telephone,
+                    'wallet': usuario.wallet,
+                    'uplink': usuario.uplink,
+                    'link': usuario.link,
+                    'roles': roles,
+                    'servicios': servicios,
+                    'registrado': usuario.registrado,
+                    'status': usuario.aceptado,
+                    'idCliente': usuario.idCliente,
+                    'aceptado': usuario.aceptado,
+                    'fondeado': usuario.fondeado,
+                    'eliminado': usuario.eliminado,
+                    'userTelegram': usuario.userTelegram,
+                    'urls': urls,
+                    'access_token': str(refresh.access_token),
+                    'refresh_token': str(refresh),
+                }
+
+                return JsonResponse({'data': data}, status=200)
+            else:
+                return JsonResponse({'message': 'Credenciales inválidas'}, status=401)
+        except Usuario.DoesNotExist:
+            return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
     else:
         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
-    
+
+
+
+
 @csrf_exempt
 def getUserById(request, pk):
     
@@ -371,23 +480,33 @@ def users_eliminados(request):
         return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
 
 @csrf_exempt  
-def updatePassword(request,pk):
+def updatePassword(request, pk):
     if request.method == 'PUT':
         try:
             body = json.loads(request.body)
             usuario = Usuario.objects.get(fpa=pk)
-            
-            usuario.password= body.get('password')
-            
-            usuario.save()
-            
-            return JsonResponse({'data':'password modificado con exito'})
-            
+
+            # Obtener la nueva contraseña del cuerpo de la solicitud
+            new_password = body.get('password')
+
+            if new_password:
+                # Hashear la contraseña usando set_password
+                usuario.set_password(new_password)
+
+                # Guardar los cambios
+                usuario.save()
+
+                return JsonResponse({'data': 'Contraseña modificada con éxito'}, status=200)
+            else:
+                return JsonResponse({'Error': 'Contraseña no proporcionada'}, status=400)
+        
+        except Usuario.DoesNotExist:
+            return JsonResponse({'Error': 'Usuario no encontrado'}, status=404)
         except Exception as e:
-            return JsonResponse({'Error':e})
+            return JsonResponse({'Error': str(e)}, status=500)
     
     else:
-        return JsonResponse({'Error':'Metodo incorrecto'})
+        return JsonResponse({'Error': 'Método HTTP incorrecto'}, status=405)
 
 
 

@@ -52,6 +52,11 @@ def enviar_mensaje_sync(msj, id, token):
 #Obtiene los datos del form del front y los guarda en base de datos
 #Tambien lo envia a telegram
 #
+"""
+
+Este es el metodo que posiblemente vamos a modificar para crear a los usuarios de rol clientess
+
+"""
 def clienteform(request):
     clientes = Cliente.objects.all()
     

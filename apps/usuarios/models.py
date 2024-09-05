@@ -17,6 +17,16 @@ class Servicio(models.Model):
         return self.name
 
 
+class Url(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    url = models.URLField()
+    
+    def __str__(self):
+        return self.name
+
+
+
 
 class Usuario(AbstractUser):
     # Campos adicionales personalizados
@@ -40,11 +50,20 @@ class Usuario(AbstractUser):
     roles_asignados = models.ManyToManyField(Rol, through='UsuarioRol', related_name='usuarios_con_roles')
 
     servicios_asignados = models.ManyToManyField(Servicio, through='UsuarioServicio', related_name='usuarios_con_servicios')
+    
+    urls_asignados = models.ManyToManyField(Url, through='UsuarioUrl', related_name='usuario_urls')
 
     def __str__(self):
         return self.username
 
+class UsuarioUrl(models.Model):
+    id = models.AutoField(primary_key=True)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='urls')
+    url = models.ForeignKey(Url, on_delete=models.CASCADE, related_name='usuarios')
+    fecha_asignacion = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.url.name} de {self.usuario.username}"
 
 class UsuarioRol(models.Model):
     id = models.AutoField(primary_key=True)
@@ -66,23 +85,6 @@ class UsuarioServicio(models.Model):
         return f"{self.servicio.name} de {self.usuario.username}"
 
 
-class TipoUrl(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
-
-class Url(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    url = models.URLField()
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='urls')
-    tipoUrl = models.ForeignKey(TipoUrl, on_delete=models.CASCADE, related_name='urls')
-
-    def __str__(self):
-        return self.name
 
 class Referido(models.Model):
     id = models.AutoField(primary_key=True)

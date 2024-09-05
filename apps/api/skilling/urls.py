@@ -1,10 +1,10 @@
 from django.urls import path
 from . import views
 from .controller.users import (
+    login,
     postNewAfiliado,
     postNewUser,
     users,
-    getUser,
     usuarioValido,
     eliminarUser,
     getUserById,
@@ -97,9 +97,10 @@ The URLs are divided into the following sections:
 * Elimina un usuario de la base de datos
 
 """
+
 urlpatterns = [
     ################## Login de usuario #################################################################################################
-    path("user/<email>/", getUser, name="userEmail"),
+    path("login/", login, name="userEmail"),
     ################## Registrar nuevo Afiliado #########################################################################################
     path("newafiliado/", postNewAfiliado, name="NewAfiliado"),
     ################## Obtener usuario por el id ########################################################################################
@@ -113,9 +114,7 @@ urlpatterns = [
     ################## Procesar archivos ganancias ######################################################################################
     path("archivoganancias/", upload_ganancias, name="archivoGanancias"),
     ################## Resetear bonos ###################################################################################################
-    path(
-        "resetBono", reseteo_bonos, name="reset_bonos"
-    ),  # Este endpoint va ser eliminaod cuando se elimine el boton de resetar bonos
+    path( "resetBono", reseteo_bonos, name="reset_bonos"),  # Este endpoint va ser eliminaod cuando se elimine el boton de resetar bonos
     ################## Cambio de contraseña basico por el perfil del usuario ############################################################
     path("updatepassword/<pk>/", updatePassword, name="updatePassword"),
     ################## Crear usuario Socio ##############################################################################################

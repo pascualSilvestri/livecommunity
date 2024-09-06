@@ -51,19 +51,10 @@ class Usuario(AbstractUser):
 
     servicios_asignados = models.ManyToManyField(Servicio, through='UsuarioServicio', related_name='usuarios_con_servicios')
     
-    urls_asignados = models.ManyToManyField(Url, through='UsuarioUrl', related_name='usuario_urls')
 
     def __str__(self):
         return self.username
 
-class UsuarioUrl(models.Model):
-    id = models.AutoField(primary_key=True)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='urls')
-    url = models.ForeignKey(Url, on_delete=models.CASCADE, related_name='usuarios')
-    fecha_asignacion = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.url.name} de {self.usuario.username}"
 
 class UsuarioRol(models.Model):
     id = models.AutoField(primary_key=True)

@@ -1,20 +1,5 @@
 from django.urls import path
 from . import views
-from .controller.users import (
-    login,
-    postNewAfiliado,
-    postNewUser,
-    users,
-    usuarioValido,
-    eliminarUser,
-    getUserById,
-    updateUserById,
-    updatePerfilUser,
-    users_eliminados,
-    users_pendientes,
-    updatePassword,
-    deleteUser,
-)
 from .controller.registros import (
     verificar,
     registrosGetAll,
@@ -99,12 +84,7 @@ The URLs are divided into the following sections:
 """
 
 urlpatterns = [
-    ################## Login de usuario #################################################################################################
-    path("login/", login, name="userEmail"),
-    ################## Registrar nuevo Afiliado #########################################################################################
-    path("newafiliado/", postNewAfiliado, name="NewAfiliado"),
-    ################## Obtener usuario por el id ########################################################################################
-    path("userid/<pk>/", getUserById, name="userId"),
+
     ################## Procesar archivos fpa ############################################################################################
     path("archivofpa/", upload_fpa, name="archivoFpa"),
     ################## Procesar archivos registro #######################################################################################
@@ -116,9 +96,7 @@ urlpatterns = [
     ################## Resetear bonos ###################################################################################################
     path( "resetBono", reseteo_bonos, name="reset_bonos"),  # Este endpoint va ser eliminaod cuando se elimine el boton de resetar bonos
     ################## Cambio de contraseña basico por el perfil del usuario ############################################################
-    path("updatepassword/<pk>/", updatePassword, name="updatePassword"),
-    ################## Crear usuario Socio ##############################################################################################
-    path("newuser/", postNewUser, name="NewUser"),
+    
     ################## Obtener todos los registros de ganancias #########################################################################
     path("ganancias/", ganancia_get_all, name="ganancias"),
     ################## Obtener todos los registros de ganancias  por id #################################################################
@@ -138,9 +116,7 @@ urlpatterns = [
         name="gananciasAllForId",
     ),
     ################## Modificar usuario por id #########################################################################################
-    path("updateuser/<pk>/", updateUserById, name="updateUser"),
-    ################## Obtener todos los usuarios #######################################################################################
-    path("users/", users, name="users"),
+    
     ################## Filtrado de todos los registros de ganancias por id y fecha ######################################################
     path(
         "filtrargananciasfechaById/<pk>/<desde>/<hasta>/",
@@ -159,16 +135,13 @@ urlpatterns = [
         filter_registros_fecha_by_id,
         name="registrosFiltradoFecha",
     ),
-    ################## Elimina un usuario logicamente, no de la base de datos ###########################################################
-    path(
-        "eliminaruser/<pk>", eliminarUser, name="eliminarUsuario"
-    ),  # Revisar este endpoint por que no elimina usuario
+    
     ################## Actualiza el perfil del usuario ##################################################################################
-    path("updateperfiluser/<pk>/", updatePerfilUser, name="updatePerfilUser"),
+    
     ################## Obtiene todos los usuarios eliminados ############################################################################
-    path("usereliminados/", users_eliminados, name="userEliminados"),
+    
     ################## Obtiene todos los usuarios pendientes ############################################################################
-    path("userpendientes/", users_pendientes, name="userPendientes"),
+    
     ################## Procesa el pago de ganancias #####################################################################################
     path("pagando/", ganancia_a_pagar, name="pagando"),
     ################## Obtiene el valor de las variables del bono de cpa indirecto ######################################################
@@ -200,7 +173,7 @@ urlpatterns = [
     ################## Verifica si el cliente ya fondeo su cuenta y existe si idCliente en la DB para la pagina de registro #############
     path("verificar/", verificar, name="verificar"),
     ################## Elimina un usuario de la base de datos ###########################################################################
-    path("deleteuser/<pk>/", deleteUser, name="deleteUser"),
+    
     #####################################################################################################################################
     ########################3###### Area de los que no se estan usando y chequear ######################################
     #####################################################################################################################################
@@ -218,6 +191,6 @@ urlpatterns = [
     path("gananciatotaluser/<pk>/", ganancias_total_user, name="ganaciaTotalUser"),
     path("cpas/", ganancias_cpa, name="cpa"),
     path("cpas/<pk>/", ganancias_cpa_by_id, name="cpa"),
-    path("existeuseremail/<email>/<password>", usuarioValido, name="existeUserEmail"),
-    path("updatepassword/<pk>/", updatePassword, name="updatePassword"),
+    
+    
 ]

@@ -100,7 +100,7 @@ The URLs are divided into the following sections:
 
 urlpatterns = [
     ################## Login de usuario #################################################################################################
-    path("login/", login, name="userEmail"),
+    path("login/", login, name="login"),
     ################## Registrar nuevo Afiliado #########################################################################################
     path("newafiliado/", postNewAfiliado, name="NewAfiliado"),
     ################## Obtener usuario por el id ########################################################################################

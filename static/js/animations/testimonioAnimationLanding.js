@@ -1,3 +1,56 @@
+const testimonios = [
+    {
+        id: 1,
+        nombre: 'Agustín Gómez',
+        descripcion: '',
+        imagen: './static/img/testimonios/AgustinGomez.png',
+        video: './static/video/testimonios/Agustín Gómez.mp4'
+    },
+    {
+        id: 2,
+        nombre: 'Franco Gómez ',
+        descripcion:'',
+        imagen: './static/img/testimonios/FrancoGomez.png',
+        video: './static/video/testimonios/Franco Gómez.mp4'
+    },
+    {
+        id: 3,
+        nombre: 'Francisco Vallejo',
+        descripcion: '',
+        imagen: './static/img/testimonios/FranciscoVallejo.png',
+        video: './static/video/testimonios/testimonio francisco EDIT.mp4'
+    },
+    {
+        id: 4,
+        nombre: 'Mabel Otalora',
+        descripcion: '',
+        imagen: './static/img/testimonios/MABELOTALORA.png',
+        video: './static/video/testimonios/MABEL OTALORA EDIT.mp4'
+    },
+    {
+        id: 5,
+        nombre: 'Ricarod Molano',
+        descripcion: '',
+        imagen: './static/img/testimonios/RicardoMolano.png',
+        video: './static/video/testimonios/RICARDO MOLANO EDIT.mp4'
+    },
+    {
+        id: 6,
+        nombre: 'Cecilia Gonzales',
+        descripcion: '',
+        imagen: './static/img/testimonios/cecilia.png',
+        video: './static/video/testimonios/cecilia.mp4'
+    },
+    {
+        id: 7,
+        nombre: 'Javier nou',
+        descripcion: '',
+        imagen: './static/img/testimonios/anonimo.png',
+        video: './static/video/testimonios/testimonioAnomimo1.mp4'
+    },
+];
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const slider = document.querySelector('.slider');
     const slides = document.querySelectorAll('.slide');

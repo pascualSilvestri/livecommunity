@@ -17,6 +17,7 @@ from django.contrib.auth.hashers import check_password
 
 @csrf_exempt
 def login(request):
+    print("login request", request.method, request.body)
     if request.method == 'POST':
         body_unicode = request.body.decode('utf-8')
         body_data = json.loads(body_unicode)
@@ -25,13 +26,17 @@ def login(request):
         urls = Url.objects.all()
 
         try:
+            print("checking user")
             # Obtener el usuario basado en el email
             usuario = Usuario.objects.get(email=email)
+            print("user found", usuario)
 
             # Verificar si la contraseña es correcta usando check_password
             if check_password(password, usuario.password):
+                print("password correct")
                 # Generar los tokens JWT
                 refresh = RefreshToken.for_user(usuario)
+                print("refresh token generated", refresh)
 
                 # Crear una lista de roles con atributos serializables
                 roles = []
@@ -74,10 +79,13 @@ def login(request):
 
                 return JsonResponse({'data': data}, status=200)
             else:
+                print("wrong password")
                 return JsonResponse({'message': 'Credenciales inválidas'}, status=401)
         except Usuario.DoesNotExist:
+            print("user not found")
             return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
     else:
+        print("wrong method")
         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
 
 
@@ -406,28 +414,254 @@ def postNewAfiliado(request):
 
 @csrf_exempt
 def getUserById(request, pk):
-    
     if request.method == 'GET':
+        urls = Url.objects.all()  # Obtenemos las URLs como en el método login
         try:
-            usuario = Usuario.objects.get(fpa=pk)  # Corrige el nombre del campo fpa
+            usuario = Usuario.objects.get(fpa=pk)  # Buscamos al usuario por el campo fpa
+
+            # Creamos la lista de roles serializable
+            roles = []
+            for rol in usuario.roles.all():
+                roles.append({
+                    'id': rol.rol_id,
+                    'rol': rol.rol.name,
+                    'fecha_asignacion': rol.fecha_asignacion.isoformat()
+                })
+
+            # Creamos la lista de servicios serializable
+            servicios = []
+            for servicio in usuario.serviciosUsuario.all():
+                servicios.append({
+                    'id': servicio.servicio_id,
+                    'servicio': servicio.servicio.name
+                })
+
+            # Creamos el diccionario de datos del usuario
             data = {
                 'fpa': usuario.fpa,
                 'email': usuario.email,
                 'first_name': usuario.first_name,
-                'password': usuario.password,
                 'telephone': usuario.telephone,
                 'wallet': usuario.wallet,
                 'uplink': usuario.uplink,
                 'link': usuario.link,
-                'roles': usuario.roles,
-                'registrado':usuario.registrado,
+                'roles': roles,
+                'servicios': servicios,
+                'registrado': usuario.registrado,
                 'status': usuario.aceptado,
+                'idCliente': usuario.idCliente,
+                'aceptado': usuario.aceptado,
+                'fondeado': usuario.fondeado,
+                'eliminado': usuario.eliminado,
+                'userTelegram': usuario.userTelegram,
+                'url_livecommunity': f'{urls[0].url}{usuario.fpa}' if usuario.fpa != None else '',
+                'url_skilling': f'{urls[1].url}{usuario.fpa}' if usuario.fpa != None else '',
             }
-            return JsonResponse({'data': data})
+
+            # Devolvemos la respuesta en formato JSON
+            return JsonResponse({'data': data}, status=200)
         except Usuario.DoesNotExist:
             return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
     else:
-        return JsonResponse({'message':'Metodo invalido'})
+        return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
+
+
+
+@csrf_exempt
+def users(request):
+    if request.method == 'GET':
+        try:
+            usuarios = Usuario.objects.filter(eliminado=False)  # Solo obtener usuarios no eliminados
+            urls = Url.objects.all()  # Obtenemos las URLs como en los otros métodos
+            data = []
+
+            for usuario in usuarios:
+                # Creamos la lista de roles serializable
+                roles = []
+                for rol in usuario.roles.all():
+                    roles.append({
+                        'id': rol.rol_id,
+                        'rol': rol.rol.name,
+                        # 'fecha_asignacion': rol.fecha_asignacion.isoformat()
+                    })
+
+                # Creamos la lista de servicios serializable
+                servicios = []
+                for servicio in usuario.serviciosUsuario.all():
+                    servicios.append({
+                        'id': servicio.servicio_id,
+                        'servicio': servicio.servicio.name
+                    })
+
+                # Creamos el diccionario de datos del usuario sin la contraseña
+                user_data = {
+                    'fpa': usuario.fpa,
+                    'email': usuario.email,
+                    'first_name': usuario.first_name,
+                    'telephone': usuario.telephone,
+                    'wallet': usuario.wallet,
+                    'uplink': usuario.uplink,
+                    'link': usuario.link,
+                    'roles': roles,
+                    'servicios': servicios,
+                    'registrado': usuario.registrado,
+                    'status': usuario.aceptado,
+                    'idCliente': usuario.idCliente,
+                    'aceptado': usuario.aceptado,
+                    'fondeado': usuario.fondeado,
+                    'eliminado': usuario.eliminado,
+                    'userTelegram': usuario.userTelegram,
+                    'url_livecommunity': f'{urls[0].url}{usuario.fpa}' if usuario.fpa != None else '',
+                    'url_skilling': f'{urls[1].url}{usuario.fpa}' if usuario.fpa != None else '',
+                }
+
+                data.append(user_data)
+
+            # Devolvemos la lista de usuarios serializados en un JSON
+            return JsonResponse({'data': data}, status=200)
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
+
+@csrf_exempt   
+def users_pendientes(request):
+    if request.method == 'GET':
+        try:
+            usuarios = Usuario.objects.filter(aceptado=False, eliminado=False)  # Filtrar usuarios no aceptados y no eliminados
+            urls = Url.objects.all()  # Obtenemos las URLs como en los otros métodos
+            data = []
+
+            for usuario in usuarios:
+                # Creamos la lista de roles serializable
+                roles = []
+                for rol in usuario.roles.all():
+                    roles.append({
+                        'id': rol.rol_id,
+                        'rol': rol.rol.name,
+                        # 'fecha_asignacion': rol.fecha_asignacion.isoformat()
+                    })
+
+                # Creamos la lista de servicios serializable
+                servicios = []
+                for servicio in usuario.serviciosUsuario.all():
+                    servicios.append({
+                        'id': servicio.servicio_id,
+                        'servicio': servicio.servicio.name
+                    })
+
+                # Creamos el diccionario de datos del usuario sin la contraseña
+                user_data = {
+                    'fpa': usuario.fpa,
+                    'email': usuario.email,
+                    'first_name': usuario.first_name,
+                    'telephone': usuario.telephone,
+                    'wallet': usuario.wallet,
+                    'uplink': usuario.uplink,
+                    'link': usuario.link,
+                    'roles': roles,
+                    'servicios': servicios,
+                    'registrado': usuario.registrado,
+                    'status': usuario.aceptado,
+                    'idCliente': usuario.idCliente,
+                    'aceptado': usuario.aceptado,
+                    'fondeado': usuario.fondeado,
+                    'eliminado': usuario.eliminado,
+                    'userTelegram': usuario.userTelegram,
+                    'url_livecommunity': f'{urls[0].url}{usuario.fpa}' if usuario.fpa else '',
+                    'url_skilling': f'{urls[1].url}{usuario.fpa}' if usuario.fpa else '',
+                }
+
+                data.append(user_data)
+
+            # Devolvemos la lista de usuarios pendientes
+            return JsonResponse({'data': data}, status=200)
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
+
+@csrf_exempt   
+def users_eliminados(request):
+    if request.method == 'GET':
+        try:
+            usuarios = Usuario.objects.filter(eliminado=True)  # Filtrar usuarios eliminados
+            urls = Url.objects.all()  # Obtenemos las URLs como en los otros métodos
+            data = []
+
+            for usuario in usuarios:
+                # Creamos la lista de roles serializable
+                roles = []
+                for rol in usuario.roles.all():
+                    roles.append({
+                        'id': rol.rol_id,
+                        'rol': rol.rol.name,
+                        # 'fecha_asignacion': rol.fecha_asignacion.isoformat()
+                    })
+
+                # Creamos la lista de servicios serializable
+                servicios = []
+                for servicio in usuario.serviciosUsuario.all():
+                    servicios.append({
+                        'id': servicio.servicio_id,
+                        'servicio': servicio.servicio.name
+                    })
+
+                # Creamos el diccionario de datos del usuario sin la contraseña
+                user_data = {
+                    'fpa': usuario.fpa,
+                    'email': usuario.email,
+                    'first_name': usuario.first_name,
+                    'telephone': usuario.telephone,
+                    'wallet': usuario.wallet,
+                    'uplink': usuario.uplink,
+                    'link': usuario.link,
+                    'roles': roles,
+                    'servicios': servicios,
+                    'registrado': usuario.registrado,
+                    'status': usuario.aceptado,
+                    'idCliente': usuario.idCliente,
+                    'aceptado': usuario.aceptado,
+                    'fondeado': usuario.fondeado,
+                    'eliminado': usuario.eliminado,
+                    'userTelegram': usuario.userTelegram,
+                    'url_livecommunity': f'{urls[0].url}{usuario.fpa}' if usuario.fpa else '',
+                    'url_skilling': f'{urls[1].url}{usuario.fpa}' if usuario.fpa else '',
+                }
+
+                data.append(user_data)
+
+            # Devolvemos la lista de usuarios eliminados
+            return JsonResponse({'data': data}, status=200)
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
+
+@csrf_exempt  
+def usuarioValido(request,email,password):
+    
+    users = Usuario.objects.all()
+    data= False
+    for user in users:
+        if user.email == email and user.password == password:
+            data= True
+        
+    
+    response = JsonResponse({'data': data})
+    # response['Access-Control-Allow-Origin'] = '*' 
+    
+    return response
+
 
 @csrf_exempt
 def updateUserById(request, pk):
@@ -512,51 +746,6 @@ def updatePerfilUser(request, pk):
     else:
         return JsonResponse({'Error':'Metodo Invalido'})
 
-@csrf_exempt   
-def users(request):
-    
-    if request.method == 'GET':
-        try:
-            usuarios = Usuario.objects.all()
-            data = []
-            for u in usuarios:
-                if u.eliminado is False:
-                    data.append({
-                        'fpa':u.fpa,
-                        'email':     u.email,
-                        'first_name':u.first_name,
-                        'password':  u.password,
-                        'telephone': u.telephone,
-                        'wallet':    u.wallet,
-                        'uplink':    u.uplink,
-                        'link':      u.link,
-                        'roles':     u.roles,
-                        'registrado':u.registrado,
-                        'status':    u.aceptado,
-                    })
-            response =  JsonResponse({'data': data})
-            return response
-
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
-    else:
-        return JsonResponse({'Error':'metodo invalido'})
-
-@csrf_exempt  
-def usuarioValido(request,email,password):
-    
-    users = Usuario.objects.all()
-    data= False
-    for user in users:
-        if user.email == email and user.password == password:
-            data= True
-        
-    
-    response = JsonResponse({'data': data})
-    # response['Access-Control-Allow-Origin'] = '*' 
-    
-    return response
-
 @csrf_exempt    
 def eliminarUser(request,pk):
 
@@ -573,58 +762,6 @@ def eliminarUser(request,pk):
     return response
 
 
-@csrf_exempt   
-def users_pendientes(request):
-    try:
-        usuarios = Usuario.objects.all()
-        data = []
-        for u in usuarios:
-            if u.aceptado is False and u.eliminado is False:
-                data.append({
-                    'fpa':u.fpa,
-                    'email':     u.email,
-                    'first_name':u.first_name,
-                    'password':  u.password,
-                    'telephone': u.telephone,
-                    'wallet':    u.wallet,
-                    'uplink':    u.uplink,
-                    'link':      u.link,
-                    'roles':     u.roles,
-                    'registrado':u.registrado,
-                    'status':    u.aceptado,
-                })
-        response =  JsonResponse({'data': data})
-        return response
-
-    except json.JSONDecodeError:
-        return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
-    
-
-@csrf_exempt   
-def users_eliminados(request):
-    try:
-        usuarios = Usuario.objects.all()
-        data = []
-        for u in usuarios:
-            if u.eliminado is True:
-                data.append({
-                    'fpa':u.fpa,
-                    'email':     u.email,
-                    'first_name':u.first_name,
-                    'password':  u.password,
-                    'telephone': u.telephone,
-                    'wallet':    u.wallet,
-                    'uplink':    u.uplink,
-                    'link':      u.link,
-                    'roles':     u.roles,
-                    'registrado':u.registrado,
-                    'status':    u.aceptado,
-                })
-        response =  JsonResponse({'data': data})
-        return response
-
-    except json.JSONDecodeError:
-        return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
 
 @csrf_exempt  
 def updatePassword(request, pk):

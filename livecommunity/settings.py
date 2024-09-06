@@ -24,58 +24,56 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r@_8j0dwk$2pvk2k)uo5na4htig-uy)sdvic3p&3i*2gj-(alh'
+SECRET_KEY = "django-insecure-r@_8j0dwk$2pvk2k)uo5na4htig-uy)sdvic3p&3i*2gj-(alh"
 
-AUTH_USER_MODEL = 'usuarios.Usuario'
+AUTH_USER_MODEL = "usuarios.Usuario"
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'corsheaders',
-    'apps.usuarios',
-    'apps.registroPage',
-    'apps.api.skilling'
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "rest_framework",
+    "corsheaders",
+    "apps.usuarios",
+    "apps.registroPage",
+    "apps.api.skilling",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
-ROOT_URLCONF = 'livecommunity.urls'
+ROOT_URLCONF = "livecommunity.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'livecommunity.wsgi.application'
-
-
-
+WSGI_APPLICATION = "livecommunity.wsgi.application"
 
 
 # Password validation
@@ -83,45 +81,48 @@ WSGI_APPLICATION = 'livecommunity.wsgi.application'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
 
 # Configuraciones de DRF
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.AllowAny",  # Cambia a IsAuthenticated si deseas que las vistas requieran autenticación
     ),
 }
 
 
 # Configuraciones de JWT
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': True,
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
-    'AUTH_HEADER_TYPES': ('Bearer',),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'es-ES'
+LANGUAGE_CODE = "es-ES"
 
-TIME_ZONE = 'America/Argentina/Buenos_Aires'
+TIME_ZONE = "America/Argentina/Buenos_Aires"
 
 USE_I18N = True
 
@@ -131,17 +132,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -154,30 +155,30 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
 ]
 
 CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
 ]
 
 ####################################################################################################################
 #                                                                                                                  #
 ########################################## ZONA DE Envio de correo electronico #####################################
-#                                                                                                                  #         
+#                                                                                                                  #
 ####################################################################################################################
 
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -185,20 +186,22 @@ CORS_ALLOW_METHODS = [
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 # EMAIL_HOST_USER = 'pascualsilvestri14@gmail.com'  # Reemplaza con tu dirección de correo electrónico
-# EMAIL_HOST_PASSWORD = 'wvao vklc wedn atgv' 
+# EMAIL_HOST_PASSWORD = 'wvao vklc wedn atgv'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'livecommunity.adm@gmail.com'  # Reemplaza con tu dirección de correo electrónico
-EMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum' 
+EMAIL_HOST_USER = (
+    "livecommunity.adm@gmail.com"  # Reemplaza con tu dirección de correo electrónico
+)
+EMAIL_HOST_PASSWORD = "mfed pnmb wluy zvum"
 
 
 ####################################################################################################################
 #                                                                                                                  #
 ########################################## ZONA DE CAMBIOS #########################################################
-#                                                                                                                  #         
+#                                                                                                                  #
 ####################################################################################################################
 
 ####################################################
@@ -206,13 +209,12 @@ EMAIL_HOST_PASSWORD = 'mfed pnmb wluy zvum'
 #########          LOCAL            ###########
 
 
-
 # TELEGRAM_BOT_TOKEN = '6154942852:AAGfHB6dNhTOxc0gwg-Qnop4LnnMVf9jr8c'
 # CHAT_ID_BOT = '@pruebapas'
 
 # DEBUG = True
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 
 # ALLOWED_HOSTS = []
@@ -254,32 +256,41 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,"static"),)
 # }
 
 
-
-
 ####################################################
 #
 #########          PRODUCCION   Railway          ###########
 #
 
 
-TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
-CHAT_ID_BOT = '@liveingresos'
+TELEGRAM_BOT_TOKEN = "6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk"
+CHAT_ID_BOT = "@liveingresos"
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz','127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']
+ALLOWED_HOSTS = [
+    "livecommunity.info",
+    "31.220.21.60",
+    "localhost",
+    "livecommunity.xyz",
+    "www.livecommunity.xyz",
+    "127.0.0.1",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://livecommunity.com",
+    "https://www.livecommunity.xyz",
+    "https://livecommunity.xyz",
+]
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': 'weSizRKgOznekhOIHDsalNaeOGulkTem',
-        'HOST': 'autorack.proxy.rlwy.net',
-        'PORT': '19091',
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "railway",
+        "USER": "root",
+        "PASSWORD": "weSizRKgOznekhOIHDsalNaeOGulkTem",
+        "HOST": "autorack.proxy.rlwy.net",
+        "PORT": "19091",
     }
 }

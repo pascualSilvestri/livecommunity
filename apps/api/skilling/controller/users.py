@@ -15,7 +15,7 @@ from ....usuarios.models import Usuario
 from apps.api.skilling.models import Afiliado
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
-import json
+import json 
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.hashers import check_password
@@ -35,14 +35,14 @@ from django.contrib.auth import get_user_model
                                                 #####
                                                 #####
                                                 #####
-
+                                                
 @csrf_exempt
 def postNewAfiliado(request):
     if request.method == 'POST':
         # if 'application/json' in request.content_type:
             try:
                 afiliados = Afiliado.objects.all()
-
+                
                 # Decodificar el cuerpo de la solicitud como JSON
                 fpa = request.POST.get('fpa').upper()
                 url = request.POST.get('url')
@@ -82,13 +82,13 @@ def postNewUser(request):
                 # Decodificar el cuerpo de la solicitud como JSON
                 data = json.loads(request.body)
                 usuario = Usuario.objects.all()
-
+                
                 # Buscar el afiliado con el FPA proporcionado
                 afiliados = Afiliado.objects.filter(fpa=data.get('fpa'))
-
+                
                 if afiliados.exists():
                     uplink = afiliados[0].upline
-                    link = afiliados[0].url
+                    link = afiliados[0].url 
 
                     # Crear un nuevo usuario y preparar los datos
                     new_user = Usuario(
@@ -130,7 +130,7 @@ def postNewUser(request):
 #     if request.method == 'GET':
 #         try:
 #             usuario = get_object_or_404(Usuario, email__iexact=email)
-
+            
 #             # Crear una lista de roles con atributos serializables
 #             roles = []
 #             for rol in usuario.roles.all():
@@ -139,17 +139,17 @@ def postNewUser(request):
 #                     'rol': rol.rol.name,  # Asegúrate de que 'rol' sea un atributo serializable, no un objeto.
 #                     'fecha_asignacion': rol.fecha_asignacion.isoformat()  # Serializar la fecha en formato ISO 8601
 #                 })
-
+                
 #             servicios = []
-
+            
 #             for servicio in usuario.serviciosUsuario.all():
 #                 servicios.append({
 #                     'id': servicio.servicio_id,
 #                     'servicio': servicio.servicio.name
 #                 })
-
+            
 #             urls = []
-
+            
 #             for url in usuario.urls.all():
 #                 urls.append({
 #                     'id': url.url_id,
@@ -184,162 +184,82 @@ def postNewUser(request):
 #         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
 
 
-# @csrf_exempt
-# def login(request):
-#     if request.method == 'POST':
-#         body_unicode = request.body.decode('utf-8')
-#         body_data = json.loads(body_unicode)
-#         email = body_data.get('email')
-#         password = body_data.get('password')
-
-#         try:
-#             # Obtener el usuario basado en el email
-#             usuario = Usuario.objects.get(email=email)
-
-#             # Verificar si la contraseña es correcta usando check_password
-#             if check_password(password, usuario.password):
-#                 # Generar los tokens JWT
-#                 refresh = RefreshToken.for_user(usuario)
-
-#                 # Crear una lista de roles con atributos serializables
-#                 roles = []
-#                 for rol in usuario.roles.all():
-#                     roles.append({
-#                         'id': rol.rol_id,
-#                         'rol': rol.rol.name,
-#                         'fecha_asignacion': rol.fecha_asignacion.isoformat()
-#                     })
-
-#                 servicios = []
-#                 for servicio in usuario.serviciosUsuario.all():
-#                     servicios.append({
-#                         'id': servicio.servicio_id,
-#                         'servicio': servicio.servicio.name
-#                     })
-
-#                 urls = []
-#                 for url in usuario.urls.all():
-#                     urls.append({
-#                         'id': url.id,
-#                         'url': url.url
-#                     })
-
-#                 data = {
-#                     'fpa': usuario.fpa,
-#                     'email': usuario.email,
-#                     'first_name': usuario.first_name,
-#                     'telephone': usuario.telephone,
-#                     'wallet': usuario.wallet,
-#                     'uplink': usuario.uplink,
-#                     'link': usuario.link,
-#                     'roles': roles,
-#                     'servicios': servicios,
-#                     'registrado': usuario.registrado,
-#                     'status': usuario.aceptado,
-#                     'idCliente': usuario.idCliente,
-#                     'aceptado': usuario.aceptado,
-#                     'fondeado': usuario.fondeado,
-#                     'eliminado': usuario.eliminado,
-#                     'userTelegram': usuario.userTelegram,
-#                     'urls': urls,
-#                     'access_token': str(refresh.access_token),
-#                     'refresh_token': str(refresh),
-#                 }
-
-#                 return JsonResponse({'data': data}, status=200)
-#             else:
-#                 return JsonResponse({'message': 'Credenciales inválidas'}, status=401)
-#         except Usuario.DoesNotExist:
-#             return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
-#     else:
-#         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
-
-
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
+        body_unicode = request.body.decode('utf-8')
+        body_data = json.loads(body_unicode)
+        email = body_data.get('email')
+        password = body_data.get('password')
+
         try:
-            # Decodifica el cuerpo de la solicitud
-            body_unicode = request.body.decode('utf-8')
-            body_data = json.loads(body_unicode)
+            # Obtener el usuario basado en el email
+            usuario = Usuario.objects.get(email=email)
 
-            email = body_data.get('email')
-            password = body_data.get('password')
+            # Verificar si la contraseña es correcta usando check_password
+            if check_password(password, usuario.password):
+                # Generar los tokens JWT
+                refresh = RefreshToken.for_user(usuario)
 
-            # Intenta obtener el usuario con el email proporcionado
-            try:
-                usuario = Usuario.objects.get(email=email)
+                # Crear una lista de roles con atributos serializables
+                roles = []
+                for rol in usuario.roles.all():
+                    roles.append({
+                        'id': rol.rol_id,
+                        'rol': rol.rol.name,
+                        'fecha_asignacion': rol.fecha_asignacion.isoformat()
+                    })
+                
+                servicios = []
+                for servicio in usuario.serviciosUsuario.all():
+                    servicios.append({
+                        'id': servicio.servicio_id,
+                        'servicio': servicio.servicio.name
+                    })
 
-                # Verifica si la contraseña es correcta
-                if check_password(password, usuario.password):
-                    # Genera tokens JWT
-                    refresh = RefreshToken.for_user(usuario)
+                urls = []
+                for url in usuario.urls.all():
+                    urls.append({
+                        'id': url.id,
+                        'url': url.url
+                    })
 
-                    # Crear una lista de roles con atributos serializables
-                    roles = []
-                    for rol in usuario.roles.all():
-                        roles.append({
-                            'id': rol.rol_id,
-                            'rol': rol.rol.name,
-                            'fecha_asignacion': rol.fecha_asignacion.isoformat()
-                        })
+                data = {
+                    'fpa': usuario.fpa,
+                    'email': usuario.email,
+                    'first_name': usuario.first_name,
+                    'telephone': usuario.telephone,
+                    'wallet': usuario.wallet,
+                    'uplink': usuario.uplink,
+                    'link': usuario.link,
+                    'roles': roles,
+                    'servicios': servicios,
+                    'registrado': usuario.registrado,
+                    'status': usuario.aceptado,
+                    'idCliente': usuario.idCliente,
+                    'aceptado': usuario.aceptado,
+                    'fondeado': usuario.fondeado,
+                    'eliminado': usuario.eliminado,
+                    'userTelegram': usuario.userTelegram,
+                    'urls': urls,
+                    'access_token': str(refresh.access_token),
+                    'refresh_token': str(refresh),
+                }
 
-                    # Crear una lista de servicios con atributos serializables
-                    servicios = []
-                    for servicio in usuario.serviciosUsuario.all():
-                        servicios.append({
-                            'id': servicio.servicio_id,
-                            'servicio': servicio.servicio.name
-                        })
-
-                    # Crear una lista de URLs con atributos serializables
-                    urls = []
-                    for url in usuario.urls.all():
-                        urls.append({
-                            'id': url.id,
-                            'url': url.url
-                        })
-
-                    # Estructura final de los datos del usuario
-                    data = {
-                        'fpa': usuario.fpa,
-                        'email': usuario.email,
-                        'first_name': usuario.first_name,
-                        'last_name': usuario.last_name,
-                        'refresh_token': str(refresh),
-                        'access_token': str(refresh.access_token),
-                        'wallet': usuario.wallet,
-                        'uplink': usuario.uplink,
-                        'link': usuario.link,
-                        'roles': roles,
-                        'servicios': servicios,
-                        'registrado': usuario.registrado,
-                        'status': usuario.aceptado,
-                        'idCliente': usuario.idCliente,
-                        'aceptado': usuario.aceptado,
-                        'fondeado': usuario.fondeado,
-                        'eliminado': usuario.eliminado,
-                        'userTelegram': usuario.userTelegram,
-                        'urls': urls,
-                        'telephone': usuario.telephone,  # Incluyendo el campo telephone
-                    }
-
-                    return JsonResponse({'data': data}, status=200)
-                else:
-                    return JsonResponse({'message': 'Credenciales inválidas'}, status=401)
-            except Usuario.DoesNotExist:
-                return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
-
-        except json.JSONDecodeError:
-            return JsonResponse({'message': 'Error al decodificar la solicitud'}, status=400)
+                return JsonResponse({'data': data}, status=200)
+            else:
+                return JsonResponse({'message': 'Credenciales inválidas'}, status=401)
+        except Usuario.DoesNotExist:
+            return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
     else:
-        return JsonResponse({'message': 'Método HTTP no permitido'}, status=405)
-    
+        return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
+
+
 
 
 @csrf_exempt
 def getUserById(request, pk):
-
+    
     if request.method == 'GET':
         try:
             usuario = Usuario.objects.get(fpa=pk)  # Corrige el nombre del campo fpa
@@ -366,13 +286,13 @@ def getUserById(request, pk):
 def updateUserById(request, pk):
     try:
         if request.method == 'POST' or request.method == 'PUT':
-
+            
             try:
                 body_data = json.loads(request.body)  # Decodifica el cuerpo como JSON
             except json.JSONDecodeError:
                 # Si hay un error al decodificar JSON, devuelve una respuesta de error
                 return JsonResponse({'message': 'Datos inválidos en el cuerpo (body)'}, status=400)
-
+            
             # Aquí puedes acceder a los datos enviados en el cuerpo (body)
             name = body_data.get('name')
             email = body_data.get('email')
@@ -402,29 +322,29 @@ def updateUserById(request, pk):
                 'registrado':usuario.registrado,
                 'status': usuario.aceptado,
             }
-
+        
         return JsonResponse({'data': data})
     except Usuario.DoesNotExist:
         return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
 
 @csrf_exempt
 def updatePerfilUser(request, pk):
-
+    
     if request.method == 'POST' or request.method == 'PUT':
         try:
             try:
                 body_data = json.loads(request.body)  # Decodifica el cuerpo como JSON
             except json.JSONDecodeError:
                 return JsonResponse({'error': 'Datos inválidos en el cuerpo (body)'}, status=400)
-
+            
             users = Usuario.objects.get(fpa=pk)
             users.telephone=body_data.get('telephone')
             users.wallet=body_data.get('wallet')
             users.email=body_data.get('email')
             users.link=body_data.get('link')
-
+            
             users.save()
-
+            
             data = {
                 'fpa': users.fpa,
                 'email': users.email,
@@ -438,16 +358,16 @@ def updatePerfilUser(request, pk):
                 'registrado':users.registrado,
                 'status': users.aceptado,
             }
-
+            
             return JsonResponse({'data':data})
         except Exception as e:
             return JsonResponse({'Error':e})
     else:
         return JsonResponse({'Error':'Metodo Invalido'})
 
-@csrf_exempt
+@csrf_exempt   
 def users(request):
-
+    
     if request.method == 'GET':
         try:
             usuarios = Usuario.objects.all()
@@ -475,30 +395,30 @@ def users(request):
     else:
         return JsonResponse({'Error':'metodo invalido'})
 
-@csrf_exempt
+@csrf_exempt  
 def usuarioValido(request,email,password):
-
+    
     users = Usuario.objects.all()
     data= False
     for user in users:
         if user.email == email and user.password == password:
             data= True
-
-
+        
+    
     response = JsonResponse({'data': data})
-    # response['Access-Control-Allow-Origin'] = '*'
-
+    # response['Access-Control-Allow-Origin'] = '*' 
+    
     return response
 
-@csrf_exempt
+@csrf_exempt    
 def eliminarUser(request,pk):
 
     if request.method == 'DELETE':
-
+        
         user = Usuario.objects.get(fpa=pk)
         user.eliminado = True
         user.save()
-
+            
         response = JsonResponse({'data': 'User eliminado'})
     else:
         response = JsonResponse({'Error':'Metodo invalido'})
@@ -506,7 +426,7 @@ def eliminarUser(request,pk):
     return response
 
 
-@csrf_exempt
+@csrf_exempt   
 def users_pendientes(request):
     try:
         usuarios = Usuario.objects.all()
@@ -531,9 +451,9 @@ def users_pendientes(request):
 
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
+    
 
-
-@csrf_exempt
+@csrf_exempt   
 def users_eliminados(request):
     try:
         usuarios = Usuario.objects.all()
@@ -559,7 +479,7 @@ def users_eliminados(request):
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
 
-@csrf_exempt
+@csrf_exempt  
 def updatePassword(request, pk):
     if request.method == 'PUT':
         try:
@@ -579,18 +499,18 @@ def updatePassword(request, pk):
                 return JsonResponse({'data': 'Contraseña modificada con éxito'}, status=200)
             else:
                 return JsonResponse({'Error': 'Contraseña no proporcionada'}, status=400)
-
+        
         except Usuario.DoesNotExist:
             return JsonResponse({'Error': 'Usuario no encontrado'}, status=404)
         except Exception as e:
             return JsonResponse({'Error': str(e)}, status=500)
-
+    
     else:
         return JsonResponse({'Error': 'Método HTTP incorrecto'}, status=405)
 
 
 
-@csrf_exempt
+@csrf_exempt  
 def deleteUser(request,pk):
     try:
         if request.method == 'POST':

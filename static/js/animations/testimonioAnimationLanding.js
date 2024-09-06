@@ -1,3 +1,34 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.querySelector('.slider');
+    const slides = document.querySelectorAll('.slide');
+
+    // Clonar las slides para efecto infinito
+    slides.forEach((slide) => {
+        const clone = slide.cloneNode(true);
+        slider.appendChild(clone);
+    });
+
+    slides.forEach((slide) => {
+        slide.addEventListener('mouseenter', () => {
+            slider.style.animationPlayState = 'paused';
+            slide.style.transform = 'scale(1.5)';
+            slide.style.transition = 'transform 0.5s ease';
+            slide.style.backgroundColor = '#031542';
+            slide.style.zIndex = '10';
+        });
+
+        slide.addEventListener('mouseleave', () => {
+            slider.style.animationPlayState = 'running';
+            slide.style.transform = 'scale(1)';
+            slide.style.backgroundColor = '#06102bb9';
+            slide.style.zIndex = '0';
+        });
+    });
+});
+
+
+
+//////////////////////////////Testimonio secction--------------------------------
 const testimonios = [
     {
         id: 1,
@@ -50,42 +81,6 @@ const testimonios = [
     },
 ];
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    const slider = document.querySelector('.slider');
-    const slides = document.querySelectorAll('.slide');
-
-    if (!slider || slides.length === 0) {
-        
-        return;
-    }
-
-    // Clonar las slides para efecto infinito
-    slides.forEach((slide) => {
-        const clone = slide.cloneNode(true);
-        slider.appendChild(clone);
-    });
-
-    slides.forEach((slide) => {
-        slide.addEventListener('mouseenter', () => {
-            slider.style.animationPlayState = 'paused';
-            slide.style.transform = 'scale(1.5)';
-            slide.style.transition = 'transform 0.5s ease';
-            slide.style.backgroundColor = '#031542';
-            slide.style.zIndex = '10';
-        });
-
-        slide.addEventListener('mouseleave', () => {
-            slider.style.animationPlayState = 'running';
-            slide.style.transform = 'scale(1)';
-            slide.style.backgroundColor = '#06102bb9';
-            slide.style.zIndex = '0';
-        });
-    });
-});
-
-//////////////////////////////Testimonio section--------------------------------
-
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.querySelector('.video_card_container');
     const videoElement = document.querySelector('.video_testimonios_video video');
@@ -93,11 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const descripcionElement = document.querySelector('.video_testimonios_descripcion');
     const prevButton = document.querySelector('.after_video');
     const nextButton = document.querySelector('.next_video');
-
-    if (!container || !videoElement || !nombreElement || !descripcionElement || !prevButton || !nextButton) {
-        
-        return;
-    }
 
     let scrollAmount = 0;
     let cardWidth = 0; // Se calculará después de generar las tarjetas
@@ -116,16 +106,12 @@ document.addEventListener('DOMContentLoaded', function() {
             card.addEventListener('click', () => {
                 actualizarTestimonio(testimonio.id);
             });
-            container.insertBefore(card, nextButton); // Inserta antes del botón de "next"
+            container.appendChild(card, nextButton); // Inserta antes del botón de "next"
         });
 
         // Calcular el ancho de las tarjetas una vez que se hayan generado
         const cards = document.querySelectorAll('.video_card');
-        if (cards.length > 0) {
-            cardWidth = cards[0].offsetWidth + 10; // Tamaño de cada tarjeta más margen
-        } else {
-            
-        }
+        cardWidth = cards[0].offsetWidth + 10; // Tamaño de cada tarjeta más margen
     }
 
     // Función para actualizar el testimonio seleccionado
@@ -138,8 +124,6 @@ document.addEventListener('DOMContentLoaded', function() {
             videoElement.load(); // Recarga el video para asegurarse de que se cambie correctamente
             videoElement.pause(); // Pausa el video hasta que se presione el botón de play
             videoElement.controls = false; // Oculta los controles hasta que se haga clic para reproducir
-        } else {
-            
         }
     }
 

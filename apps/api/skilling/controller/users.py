@@ -126,64 +126,6 @@ def postNewUser(request):
 
 
 
-# def login(request, email):
-#     if request.method == 'GET':
-#         try:
-#             usuario = get_object_or_404(Usuario, email__iexact=email)
-            
-#             # Crear una lista de roles con atributos serializables
-#             roles = []
-#             for rol in usuario.roles.all():
-#                 roles.append({
-#                     'id': rol.rol_id,
-#                     'rol': rol.rol.name,  # Asegúrate de que 'rol' sea un atributo serializable, no un objeto.
-#                     'fecha_asignacion': rol.fecha_asignacion.isoformat()  # Serializar la fecha en formato ISO 8601
-#                 })
-                
-#             servicios = []
-            
-#             for servicio in usuario.serviciosUsuario.all():
-#                 servicios.append({
-#                     'id': servicio.servicio_id,
-#                     'servicio': servicio.servicio.name
-#                 })
-            
-#             urls = []
-            
-#             for url in usuario.urls.all():
-#                 urls.append({
-#                     'id': url.url_id,
-#                     'url': url.url
-#                 })
-
-#             data = {
-#                 'fpa': usuario.fpa,
-#                 'email': usuario.email,
-#                 'first_name': usuario.first_name,
-#                 'password': usuario.password,  # Considera no enviar la contraseña por razones de seguridad
-#                 'telephone': usuario.telephone,
-#                 'wallet': usuario.wallet,
-#                 'uplink': usuario.uplink,
-#                 'link': usuario.link,
-#                 'roles': roles,  # Convertir la relación a lista de roles
-#                 'servicios': servicios,
-#                 'registrado': usuario.registrado,
-#                 'status': usuario.aceptado,
-#                 'idCliente': usuario.idCliente,
-#                 'aceptado': usuario.aceptado,
-#                 'fondeado': usuario.fondeado,
-#                 'eliminado': usuario.eliminado,
-#                 'userTelegram': usuario.userTelegram,
-#                 'urls': urls
-#             }
-
-#             return JsonResponse({'data': data})
-#         except Usuario.DoesNotExist:
-#             return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
-#     else:
-#         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
-
-
 @csrf_exempt
 def login(request):
     if request.method == 'POST':

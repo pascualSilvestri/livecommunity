@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             card.addEventListener('click', () => {
                 actualizarTestimonio(testimonio.id);
             });
-            container.insertBefore(card, nextButton); // Inserta antes del botón de "next"
+            container.appendChild(card, nextButton); // Inserta antes del botón de "next"
         });
 
         // Calcular el ancho de las tarjetas una vez que se hayan generado

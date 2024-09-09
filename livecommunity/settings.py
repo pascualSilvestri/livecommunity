@@ -219,16 +219,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz']
+ALLOWED_HOSTS = ['livecommunity.info','31.220.21.60','localhost','livecommunity.xyz','www.livecommunity.xyz','127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.xyz','https://livecommunity.xyz']
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'livecommunity',
-        'USER': 'root',
+        'USER': 'root2',
         'PASSWORD': 'livecommunity01',
-        'HOST': '127.0.0.1',
+        'HOST': '31.220.21.60',
         'PORT': '3306',
     }
 }

@@ -228,7 +228,7 @@ DATABASES = {
         'NAME': 'livecommunity',  # Nombre de la base de datos
         'USER': 'root',  # Usuario de la base de datos
         'PASSWORD': 'livecommunity01',  # Contraseña de la base de datos
-        'HOST': '127.0.0.1',  # Dirección del host MySQL
+        'HOST': 'localhost',  # Dirección del host MySQL
         'PORT': '3306',  # Puerto MySQL
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",

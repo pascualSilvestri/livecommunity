@@ -225,10 +225,13 @@ CSRF_TRUSTED_ORIGINS = ['https://livecommunity.com','https://www.livecommunity.x
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'livecommunity',
-        'USER': 'root2',
-        'PASSWORD': 'livecommunity01',
-        'HOST': '31.220.21.60',
-        'PORT': '3306',
+        'NAME': 'livecommunity',  # Nombre de la base de datos
+        'USER': 'root2',  # Usuario de la base de datos
+        'PASSWORD': 'livecommunity01',  # Contraseña de la base de datos
+        'HOST': '31.220.21.60',  # Dirección del host MySQL
+        'PORT': '3306',  # Puerto MySQL
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }

@@ -9,6 +9,7 @@ from apps.api.skilling.models import (
     BonoAPagar,
     BonoCpa,
     BonoCpaIndirecto,
+    CPA
 )
 from ...skilling.models import Registros_ganancias, Registros_cpa
 import re
@@ -210,6 +211,14 @@ def create_allbonos(request):
                 "level9": 1500,
                 "level10": 2000,
             }
+            
+            
+            spread = {
+                "spread_socio": 25.0,
+                "spread_directo": 12.5,
+                "spread_indirecto":10.0
+                
+            }
 
             # Guardar bonos indirectos en la base de datos
             for i in bono_indirectos.keys():
@@ -223,6 +232,12 @@ def create_allbonos(request):
                 bono = BonoCpa(bono=i, valor=bono_directos[i])
                 bono.save()
             
+            for i in spread.keys():
+            
+                bono = Spread(spread=i, porcentaje=spread[i])
+                bono.save()
+            
+            CPA(cpa=60).save()
             # Respuesta de éxito
             data = {"result": "ok", "status": 200, "data": "bonos creados"}
             response = JsonResponse({"data": data})

@@ -249,7 +249,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'livecommunity',
 #         'USER': 'root',
-#         'PASSWORD': 'live2023community01',
+#         'PASSWORD': 'livecommunity01',
 #         'HOST': '127.0.0.1',
 #         'PORT': '3306',
 #     }

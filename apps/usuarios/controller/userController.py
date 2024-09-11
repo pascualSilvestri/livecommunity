@@ -1,4 +1,5 @@
 import json
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.http import JsonResponse
 import requests
 from apps.api.skilling.models import Afiliado, Cuenta
@@ -13,6 +14,9 @@ from apps.usuarios.models import (
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.hashers import check_password
+
+
+from rest_framework.exceptions import AuthenticationFailed
 
 
 @csrf_exempt
@@ -391,12 +395,22 @@ def postNewAfiliado(request):
 ###########################################################################################################################################################
 
 
+
 @csrf_exempt
 def getUserById(request, pk):
     if request.method == 'GET':
-        urls = Url.objects.all()  # Obtenemos las URLs como en el método login
+        # Autenticación JWT
+        jwt_authenticator = JWTAuthentication()
         try:
-            usuario = Usuario.objects.get(fpa=pk)  # Buscamos al usuario por el campo fpa
+            # Verifica el JWT en la solicitud
+            user, token = jwt_authenticator.authenticate(request)
+        except AuthenticationFailed:
+            return JsonResponse({'message': 'Token inválido o faltante'}, status=401)
+
+        try:
+            # Buscamos al usuario por el campo fpa
+            usuario = Usuario.objects.get(fpa=pk)
+            urls = Url.objects.all()
 
             # Creamos la lista de roles serializable
             roles = []
@@ -433,21 +447,19 @@ def getUserById(request, pk):
                 'fondeado': usuario.fondeado,
                 'eliminado': usuario.eliminado,
                 'userTelegram': usuario.userTelegram,
-                'url_livecommunity': f'{urls[0].url}{usuario.fpa}' if usuario.fpa != None else '',
-                'url_skilling': f'{urls[1].url}{usuario.fpa}' if usuario.fpa != None else '',
+                'url_livecommunity': f'{urls[0].url}{usuario.fpa}' if usuario.fpa is not None else '',
+                'url_skilling': f'{urls[1].url}{usuario.fpa}' if usuario.fpa is not None else '',
             }
 
             # Devolvemos la respuesta en formato JSON
             return JsonResponse({'data': data}, status=200)
+
         except Usuario.DoesNotExist:
             return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
     else:
         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
 
 
-from django.http import JsonResponse
-
-from django.http import JsonResponse
 
 def users(request):
     if request.method == 'GET':

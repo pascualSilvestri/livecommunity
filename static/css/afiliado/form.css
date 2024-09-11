@@ -86,9 +86,15 @@
 }
 
 .form-container .inputbox input:focus ~ span,
-.form-container .inputbox input:valid ~ span {
+.form-container .inputbox input:valid ~ span,
+.form-container .inputbox input:hover ~ span {
   transform: translateX(-13px) translateY(-39px);
-  font-size: 1em;
+  font-size: .5em;
+}
+
+.form-container .inputbox span:hover {
+  transform: translateX(-13px) translateY(-39px);
+  font-size: .5em;
 }
 
 .logo-gif-container {

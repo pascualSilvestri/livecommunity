@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.usuarios.controller.userController import deleteUser, eliminarUser, getUserById, postNewAfiliado, postNewUser, login, postNewUsers, updatePassword, updatePerfilUser, updateUserById, users, users_eliminados, users_pendientes, usuarioValido
+from apps.usuarios.controller.userController import deleteUser, eliminarUser, getRoles, getServicios, getUserById, postNewAfiliado, postNewUser, login, postNewUsers, updatePassword, updatePerfilUser, updateUserById, users, users_eliminados, users_pendientes, usuarioValido
 
 
 app_name = "users"
@@ -20,4 +20,7 @@ urlpatterns = [
     path("userpendientes/", users_pendientes, name="userPendientes"),
     path("updatepassword/<pk>/", updatePassword, name="updatePassword"),
     path("deleteuser/<pk>/", deleteUser, name="deleteUser"),
+    path("roles/", getRoles, name="roles"),
+    path("servicios/",getServicios,name="servicios")
+    
 ]

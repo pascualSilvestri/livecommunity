@@ -629,50 +629,109 @@ def usuarioValido(request,email,password):
     return response
 
 
+
+
 @csrf_exempt
 def updateUserById(request, pk):
+    # Autenticación JWT
+    jwt_authenticator = JWTAuthentication()
     try:
+        # Verifica el JWT en la solicitud
+        user, token = jwt_authenticator.authenticate(request)
+    except AuthenticationFailed:
+        return JsonResponse({'message': 'Token inválido o faltante'}, status=401)
+
+    try:
+        # Verifica si el usuario existe por fpa (ID)
+        usuario = Usuario.objects.get(fpa=pk)
+
         if request.method == 'POST' or request.method == 'PUT':
-            
             try:
                 body_data = json.loads(request.body)  # Decodifica el cuerpo como JSON
             except json.JSONDecodeError:
-                # Si hay un error al decodificar JSON, devuelve una respuesta de error
                 return JsonResponse({'message': 'Datos inválidos en el cuerpo (body)'}, status=400)
-            
-            # Aquí puedes acceder a los datos enviados en el cuerpo (body)
-            name = body_data.get('name')
-            email = body_data.get('email')
-            roles = body_data.get('roles')
-            status = body_data.get('status')
 
-            print(status)
-            # Luego, puedes usar los datos para actualizar el objeto Usuario
-            usuario = Usuario.objects.get(fpa=pk)
-            usuario.first_name = name
-            usuario.email = email
-            usuario.roles = roles
-            usuario.aceptado= status
+            # Extrae los campos que se enviarán para la actualización
+            name = body_data.get('first_name')
+            email = body_data.get('email')
+            telephone = body_data.get('telephone')
+            wallet = body_data.get('wallet')
+            status = body_data.get('status')
+            roles_data = body_data.get('roles')
+            servicios_data = body_data.get('servicios')
+
+            # Actualiza los datos básicos del usuario
+            usuario.first_name = name if name else usuario.first_name
+            usuario.email = email if email else usuario.email
+            usuario.telephone = telephone if telephone else usuario.telephone
+            usuario.wallet = wallet if wallet else usuario.wallet
+            usuario.aceptado = status if status is not None else usuario.aceptado
             usuario.save()
 
-        # Si todo salió bien, devuelve los datos actualizados como respuesta
-        data = {
+            # Actualiza los roles si se proporcionaron
+            if roles_data:
+                # Eliminar los roles actuales en la tabla intermedia UsuarioRol
+                UsuarioRol.objects.filter(usuario=usuario).delete()
+
+                # Asigna los nuevos roles
+                for rol_data in roles_data:
+                    rol = Rol.objects.get(id=rol_data['id'])  # Encuentra el rol por ID
+                    UsuarioRol.objects.create(usuario=usuario, rol=rol)  # Asigna el rol
+
+            # Actualiza los servicios si se proporcionaron
+            if servicios_data:
+                # Eliminar los servicios actuales en la tabla intermedia UsuarioServicio
+                UsuarioServicio.objects.filter(usuario=usuario).delete()
+
+                # Asigna los nuevos servicios
+                for servicio_data in servicios_data:
+                    servicio = Servicio.objects.get(id=servicio_data['id'])  # Encuentra el servicio por ID
+                    UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)  # Asigna el servicio
+
+            # Creamos la lista de roles serializable
+            roles = []
+            for rol in usuario.roles.all():
+                roles.append({
+                    'id': rol.rol_id,
+                    'rol': rol.rol.name,
+                    'fecha_asignacion': rol.fecha_asignacion.isoformat()
+                })
+
+            # Creamos la lista de servicios serializable
+            servicios = []
+            for servicio in usuario.serviciosUsuario.all():
+                servicios.append({
+                    'id': servicio.servicio_id,
+                    'servicio': servicio.servicio.name
+                })
+
+            # Devolvemos los datos actualizados del usuario
+            data = {
                 'fpa': usuario.fpa,
                 'email': usuario.email,
                 'first_name': usuario.first_name,
-                'password': usuario.password,
                 'telephone': usuario.telephone,
                 'wallet': usuario.wallet,
                 'uplink': usuario.uplink,
                 'link': usuario.link,
-                'roles': usuario.roles,
-                'registrado':usuario.registrado,
+                'roles': roles,
+                'servicios': servicios,
+                'registrado': usuario.registrado,
                 'status': usuario.aceptado,
+                'idCliente': usuario.idCliente,
+                'aceptado': usuario.aceptado,
+                'fondeado': usuario.fondeado,
+                'eliminado': usuario.eliminado,
+                'userTelegram': usuario.userTelegram,
             }
-        
-        return JsonResponse({'data': data})
+
+            return JsonResponse({'data': data}, status=200)
+
     except Usuario.DoesNotExist:
         return JsonResponse({'message': 'Usuario no encontrado'}, status=404)
+
+    return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
+
 
 @csrf_exempt
 def updatePerfilUser(request, pk):
@@ -772,3 +831,42 @@ def deleteUser(request,pk):
     except Exception as e:
         print(e.__str__())
         return JsonResponse({'Error':e})
+
+
+def getRoles(request):
+    if request.method == 'GET':
+        # Obtenemos todos los roles
+        roles = Rol.objects.all()
+
+        # Convertimos el queryset a una lista de diccionarios
+        roles_list = [
+            {
+                'id': rol.id,
+                'name': rol.name,
+            }
+            for rol in roles
+        ]
+
+        # Devolvemos la lista serializada en formato JSON
+        return JsonResponse({'data': roles_list}, status=200)
+    else:
+        return JsonResponse({'Error': 'Metodo HTTP incorrecto'}, status=405)
+
+def getServicios(request):
+    if request.method == 'GET':
+        # Obtenemos todos los servicios
+        servicios = Servicio.objects.all()
+
+        # Convertimos el queryset a una lista de diccionarios
+        servicios_list = [
+            {
+                'id': servicio.id,
+                'name': servicio.name,
+            }
+            for servicio in servicios
+        ]
+
+        # Devolvemos la lista serializada en formato JSON
+        return JsonResponse({'data': servicios_list}, status=200)
+    else:
+        return JsonResponse({'Error': 'Metodo HTTP incorrecto'}, status=405)

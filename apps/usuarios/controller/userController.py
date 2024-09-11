@@ -143,7 +143,7 @@ def postNewUsers(request):
                             )
 
                     # Verificar si los servicios ya están asignados
-                    servicios = user_data.get("servicios", [])  # Lista de IDs de servicios
+                    servicios = user_data.get("servicios", [1])  # Lista de IDs de servicios
                     for servicio_id in servicios:
                         try:
                             servicio = Servicio.objects.get(id=servicio_id)
@@ -176,24 +176,6 @@ def postNewUsers(request):
                     try:
                         # Guardar el nuevo usuario en la base de datos
                         new_user.save()
-
-                        # Crear URLs si FPA no es None
-                        if new_user.fpa:
-                            try:
-                                Url.objects.create(
-                                    name="Afiliado URL",
-                                    url=f"https://livecommunity.info/Afiliado/{new_user.fpa}",
-                                    usuario=new_user,
-                                    
-                                )
-                                Url.objects.create(
-                                    name="Skilling Partners URL",
-                                    url=f"https://go.skillingpartners.com/visit/?bta=35881&nci=5846&utm_campaign={new_user.fpa}",
-                                    usuario=new_user,
-                                    
-                                )
-                            except Exception as e:
-                                print(f"Error creando URLs para {new_user.username}: {e}")
 
                         # Asignar roles al nuevo usuario
                         roles = user_data.get("roles", [])  # Lista de IDs de roles
@@ -242,11 +224,21 @@ def postNewUser(request):
                 # Decodificar el cuerpo de la solicitud como JSON
                 user_data = json.loads(request.body)
 
+                print("Recibido user_data:", user_data)
+
                 # Generar el username a partir del apellido y nombre
-                base_username = (user_data.get("apellido") + "_" + user_data.get("nombre")).replace(" ", "_")
+                try:
+                    base_username = (user_data.get("last_name") + "_" + user_data.get("first_name")).replace(" ", "_")
+                except Exception as e:
+                    print(f"Error generando el username: {e}")
+                    return JsonResponse({"message": "Error al crear el usuario"}, status=400)
+
+                print("Username base:", base_username)
 
                 # Verificar si el usuario con ese username ya existe
                 existing_user = Usuario.objects.filter(username=base_username).first()
+
+                print("Usuario existente:", existing_user)
 
                 if existing_user:
                     # El usuario ya existe, actualizar datos si fpa o idCliente son None
@@ -269,6 +261,8 @@ def postNewUser(request):
 
                     # Guardar cambios del usuario existente
                     existing_user.save()
+
+                    print("Usuario existente guardado")
 
                     # Verificar y asignar roles
                     roles = user_data.get("roles", [])
@@ -297,8 +291,8 @@ def postNewUser(request):
                         fpa=user_data.get("fpa") or None,
                         idCliente=user_data.get("idCliente") or None,
                         email=user_data.get("email"),
-                        first_name=user_data.get("nombre"),
-                        last_name=user_data.get("apellido"),
+                        first_name=user_data.get("first_name"),
+                        last_name=user_data.get("last_name"),
                         telephone=user_data.get("telefono"),
                         wallet=user_data.get("wallet"),
                         uplink=user_data.get("uplink") or "",
@@ -307,6 +301,8 @@ def postNewUser(request):
                         aceptado=user_data.get("status", False) if user_data.get("status") is not None else False,
                         userTelegram=user_data.get("userTelegram") or None,
                     )
+
+                    print("Usuario nuevo:", new_user)
 
                     # Hashear y establecer la contraseña del nuevo usuario
                     if user_data.get("password"):
@@ -318,23 +314,6 @@ def postNewUser(request):
                     try:
                         # Guardar el nuevo usuario en la base de datos
                         new_user.save()
-
-                        # Crear URLs si FPA no es None
-                        if new_user.fpa:
-                            try:
-                                Url.objects.create(
-                                    name="Afiliado URL",
-                                    url=f"https://livecommunity.info/Afiliado/{new_user.fpa}",
-                                    usuario=new_user,
-                                )
-                                Url.objects.create(
-                                    name="Skilling Partners URL",
-                                    url=f"https://go.skillingpartners.com/visit/?bta=35881&nci=5846&utm_campaign={new_user.fpa}",
-                                    usuario=new_user,
-                                )
-                            except Exception as e:
-                                print(f"Error creando URLs para {new_user.username}: {e}")
-
                         # Asignar roles al nuevo usuario
                         roles = user_data.get("roles", [])
                         for rol_id in roles:
@@ -466,35 +445,24 @@ def getUserById(request, pk):
         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
 
 
+from django.http import JsonResponse
 
-@csrf_exempt
+from django.http import JsonResponse
+
 def users(request):
     if request.method == 'GET':
         try:
-            usuarios = Usuario.objects.filter(eliminado=False)  # Solo obtener usuarios no eliminados
-            urls = Url.objects.all()  # Obtenemos las URLs como en los otros métodos
-            data = []
-
-            for usuario in usuarios:
-                # Creamos la lista de roles serializable
-                roles = []
-                for rol in usuario.roles.all():
-                    roles.append({
-                        'id': rol.rol_id,
-                        'rol': rol.rol.name,
-                        # 'fecha_asignacion': rol.fecha_asignacion.isoformat()
-                    })
-
-                # Creamos la lista de servicios serializable
-                servicios = []
-                for servicio in usuario.serviciosUsuario.all():
-                    servicios.append({
-                        'id': servicio.servicio_id,
-                        'servicio': servicio.servicio.name
-                    })
-
-                # Creamos el diccionario de datos del usuario sin la contraseña
-                user_data = {
+            # Prefetch para evitar consultas adicionales
+            usuarios = Usuario.objects.filter(eliminado=False).prefetch_related('roles__rol', 'serviciosUsuario')
+            # Solo obtener las URLs necesarias, si son las primeras dos
+            urls = Url.objects.all()[:2]
+            
+            url_livecommunity_base = urls[0].url if len(urls) > 0 else ''
+            url_skilling_base = urls[1].url if len(urls) > 1 else ''
+            
+            # List comprehension para generar la respuesta
+            data = [
+                {
                     'fpa': usuario.fpa,
                     'email': usuario.email,
                     'first_name': usuario.first_name,
@@ -502,8 +470,8 @@ def users(request):
                     'wallet': usuario.wallet,
                     'uplink': usuario.uplink,
                     'link': usuario.link,
-                    'roles': roles,
-                    'servicios': servicios,
+                    'roles': [{'id': rol.rol_id, 'rol': rol.rol.name} for rol in usuario.roles.all()],  # Cambiamos a rol.rol.name
+                    'servicios': [{'id': servicio.servicio_id, 'servicio': servicio.servicio.name} for servicio in usuario.serviciosUsuario.all()],
                     'registrado': usuario.registrado,
                     'status': usuario.aceptado,
                     'idCliente': usuario.idCliente,
@@ -511,13 +479,12 @@ def users(request):
                     'fondeado': usuario.fondeado,
                     'eliminado': usuario.eliminado,
                     'userTelegram': usuario.userTelegram,
-                    'url_livecommunity': f'{urls[0].url}{usuario.fpa}' if usuario.fpa != None else '',
-                    'url_skilling': f'{urls[1].url}{usuario.fpa}' if usuario.fpa != None else '',
+                    'url_livecommunity': f'{url_livecommunity_base}{usuario.fpa}' if usuario.fpa else '',
+                    'url_skilling': f'{url_skilling_base}{usuario.fpa}' if usuario.fpa else '',
                 }
+                for usuario in usuarios
+            ]
 
-                data.append(user_data)
-
-            # Devolvemos la lista de usuarios serializados en un JSON
             return JsonResponse({'data': data}, status=200)
 
         except json.JSONDecodeError:
@@ -531,30 +498,17 @@ def users(request):
 def users_pendientes(request):
     if request.method == 'GET':
         try:
-            usuarios = Usuario.objects.filter(aceptado=False, eliminado=False)  # Filtrar usuarios no aceptados y no eliminados
-            urls = Url.objects.all()  # Obtenemos las URLs como en los otros métodos
-            data = []
-
-            for usuario in usuarios:
-                # Creamos la lista de roles serializable
-                roles = []
-                for rol in usuario.roles.all():
-                    roles.append({
-                        'id': rol.rol_id,
-                        'rol': rol.rol.name,
-                        # 'fecha_asignacion': rol.fecha_asignacion.isoformat()
-                    })
-
-                # Creamos la lista de servicios serializable
-                servicios = []
-                for servicio in usuario.serviciosUsuario.all():
-                    servicios.append({
-                        'id': servicio.servicio_id,
-                        'servicio': servicio.servicio.name
-                    })
-
-                # Creamos el diccionario de datos del usuario sin la contraseña
-                user_data = {
+            # Filtrar usuarios que no están aceptados y no están eliminados
+            usuarios = Usuario.objects.filter(aceptado=False, eliminado=False).prefetch_related('roles__rol', 'serviciosUsuario')
+            # Obtener las primeras dos URLs, si existen
+            urls = Url.objects.all()[:2]
+            
+            url_livecommunity_base = urls[0].url if len(urls) > 0 else ''
+            url_skilling_base = urls[1].url if len(urls) > 1 else ''
+            
+            # List comprehension para generar la respuesta
+            data = [
+                {
                     'fpa': usuario.fpa,
                     'email': usuario.email,
                     'first_name': usuario.first_name,
@@ -562,8 +516,8 @@ def users_pendientes(request):
                     'wallet': usuario.wallet,
                     'uplink': usuario.uplink,
                     'link': usuario.link,
-                    'roles': roles,
-                    'servicios': servicios,
+                    'roles': [{'id': rol.rol_id, 'rol': rol.rol.name} for rol in usuario.roles.all()],  # Cambiamos a rol.rol.name
+                    'servicios': [{'id': servicio.servicio_id, 'servicio': servicio.servicio.name} for servicio in usuario.serviciosUsuario.all()],
                     'registrado': usuario.registrado,
                     'status': usuario.aceptado,
                     'idCliente': usuario.idCliente,
@@ -571,13 +525,12 @@ def users_pendientes(request):
                     'fondeado': usuario.fondeado,
                     'eliminado': usuario.eliminado,
                     'userTelegram': usuario.userTelegram,
-                    'url_livecommunity': f'{urls[0].url}{usuario.fpa}' if usuario.fpa else '',
-                    'url_skilling': f'{urls[1].url}{usuario.fpa}' if usuario.fpa else '',
+                    'url_livecommunity': f'{url_livecommunity_base}{usuario.fpa}' if usuario.fpa else '',
+                    'url_skilling': f'{url_skilling_base}{usuario.fpa}' if usuario.fpa else '',
                 }
+                for usuario in usuarios
+            ]
 
-                data.append(user_data)
-
-            # Devolvemos la lista de usuarios pendientes
             return JsonResponse({'data': data}, status=200)
 
         except json.JSONDecodeError:
@@ -586,6 +539,7 @@ def users_pendientes(request):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
+
 
 @csrf_exempt   
 def users_eliminados(request):

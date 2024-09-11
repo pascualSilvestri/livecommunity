@@ -262,53 +262,13 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 #
 
 
-TELEGRAM_BOT_TOKEN = "6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk"
-CHAT_ID_BOT = "@liveingresos"
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-
-DEBUG = True
-
-
-ALLOWED_HOSTS = [
-    "livecommunity.info",
-    "31.220.21.60",
-    "localhost",
-    "livecommunity.xyz",
-    "www.livecommunity.xyz",
-    "127.0.0.1",
-]
-CSRF_TRUSTED_ORIGINS = [
-    "https://livecommunity.com",
-    "https://www.livecommunity.xyz",
-    "https://livecommunity.xyz",
-]
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "railway",
-        "USER": "root",
-        "PASSWORD": "weSizRKgOznekhOIHDsalNaeOGulkTem",
-        "HOST": "autorack.proxy.rlwy.net",
-        "PORT": "19091",
-    }
-}
-
-
-
-##############################################################
-#
-#########          DESARROLLO HOSTINGER            ###########
-#
-
-
-# TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
-# CHAT_ID_BOT = '@liveingresos'
+# TELEGRAM_BOT_TOKEN = "6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk"
+# CHAT_ID_BOT = "@liveingresos"
 
 # # STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-# DEBUG = False
+# DEBUG = True
+
 
 # ALLOWED_HOSTS = [
 #     "livecommunity.info",
@@ -324,14 +284,54 @@ DATABASES = {
 #     "https://livecommunity.xyz",
 # ]
 
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'livecommunity_devs',
-#         'USER': 'root2',
-#         'PASSWORD': 'livecommunity01',
-#         'HOST': '31.220.21.60',
-#         'PORT': '3306',
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "railway",
+#         "USER": "root",
+#         "PASSWORD": "weSizRKgOznekhOIHDsalNaeOGulkTem",
+#         "HOST": "autorack.proxy.rlwy.net",
+#         "PORT": "19091",
 #     }
 # }
+
+
+
+##############################################################
+#
+#########          DESARROLLO HOSTINGER            ###########
+#
+
+
+TELEGRAM_BOT_TOKEN = '6112305386:AAFFJNJp-mZy-XKT0JACkw0LEhvp3_knxlk'
+CHAT_ID_BOT = '@liveingresos'
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+DEBUG = False
+
+ALLOWED_HOSTS = [
+    "livecommunity.info",
+    "31.220.21.60",
+    "localhost",
+    "livecommunity.xyz",
+    "www.livecommunity.xyz",
+    "127.0.0.1",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://livecommunity.com",
+    "https://www.livecommunity.xyz",
+    "https://livecommunity.xyz",
+]
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'livecommunity_devs',
+        'USER': 'root2',
+        'PASSWORD': 'livecommunity01',
+        'HOST': '31.220.21.60',
+        'PORT': '3306',
+    }
+}

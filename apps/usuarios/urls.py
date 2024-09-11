@@ -1,11 +1,12 @@
 from django.urls import path
-from apps.usuarios.controller.userController import deleteUser, eliminarUser, getUserById, postNewAfiliado, postNewUser, login, updatePassword, updatePerfilUser, updateUserById, users, users_eliminados, users_pendientes, usuarioValido
+from apps.usuarios.controller.userController import deleteUser, eliminarUser, getUserById, postNewAfiliado, postNewUser, login, postNewUsers, updatePassword, updatePerfilUser, updateUserById, users, users_eliminados, users_pendientes, usuarioValido
 
 
 app_name = "users"
 
 urlpatterns = [
-    path("register/", postNewUser, name="users"),
+    path("register/", postNewUser, name="user"),
+    path("registers/", postNewUsers, name="users"),
     path("login/", login, name="userEmail"),
     path("newafiliado/", postNewAfiliado, name="NewAfiliado"),
     path("users/", users, name="users"),

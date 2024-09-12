@@ -465,7 +465,7 @@ def users(request):
     if request.method == 'GET':
         try:
             # Prefetch para evitar consultas adicionales
-            usuarios = Usuario.objects.filter(eliminado=False).prefetch_related('roles__rol', 'serviciosUsuario')
+            usuarios = Usuario.objects.all().prefetch_related('roles__rol', 'serviciosUsuario')
             # Solo obtener las URLs necesarias, si son las primeras dos
             urls = Url.objects.all()[:2]
             
@@ -478,6 +478,7 @@ def users(request):
                     'fpa': usuario.fpa,
                     'email': usuario.email,
                     'first_name': usuario.first_name,
+                    'last_name': usuario.last_name,
                     'telephone': usuario.telephone,
                     'wallet': usuario.wallet,
                     'uplink': usuario.uplink,
@@ -653,6 +654,7 @@ def updateUserById(request, pk):
 
             # Extrae los campos que se enviarán para la actualización
             name = body_data.get('first_name')
+            last_name = body_data.get('last_name')
             email = body_data.get('email')
             telephone = body_data.get('telephone')
             wallet = body_data.get('wallet')
@@ -662,6 +664,7 @@ def updateUserById(request, pk):
 
             # Actualiza los datos básicos del usuario
             usuario.first_name = name if name else usuario.first_name
+            usuario.last_name = last_name if last_name else usuario.last_name
             usuario.email = email if email else usuario.email
             usuario.telephone = telephone if telephone else usuario.telephone
             usuario.wallet = wallet if wallet else usuario.wallet

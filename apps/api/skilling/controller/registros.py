@@ -91,83 +91,92 @@ def registrosGetAll(request):
 
 
 
-
 @csrf_exempt 
-def getRegistroById(request,pk):
-    
+def getRegistroById(request, pk):
     if request.method == 'GET':
-        
         try:
             customer = Relation_fpa_client.objects.filter(fpa=pk)
-            data=[]
+            data = []
+            
             for r in customer:
-                registros= Registro_archivo.objects.filter(client=r.client)
-                registro = registros.first()
-                if customer.exists():
-                    nombre = nombres[0].full_name
-                else:
-                    nombre = 'None'
-                
-                data.append(
-                    {'id_usuario':r.client,
-                    'fecha_registro':registro.fecha_registro,
-                    'codigo':r.fpa,
-                    'pais':registro.country,
-                    'primer_deposito':registro.primer_deposito,
-                    'deposito_neto':registro.neto_deposito,
-                    'cantidad_deposito':registro.numeros_depositos,
-                    'id_broker':registro.client,
-                    'nombre':nombre
-                    }
-                )
-            
-            response = JsonResponse({'data': data})
-            
-            return response
-        
-        except Exception:
-            return JsonResponse({'Error':str(Exception)})
-    else:
-        return JsonResponse({'Error':'Metodo invalido'})
-    
-
-
-    
-@csrf_exempt 
-def filter_registros_fecha_by_id(request,pk,desde,hasta):
-    
-    # fecha_desde = datetime.strptime(desde, "%Y-%m-%d").date
-    # fecha_hasta = datetime.strptime(hasta, "%Y-%m-%d").date
-    
-    try:
-        if request.method == 'GET':
-            registros = Registro_archivo.objects.filter(Q(fecha_registro__gte=desde) & Q(fecha_registro__lte=hasta),fpa=pk)
-            
-            data= []
-            for r in registros:
+                registros = Registro_archivo.objects.filter(client=r.client)
                 nombres = Relation_fpa_client.objects.filter(client=r.client)
+                registro = registros.first()
+                
+                # Si no se encuentra un registro, saltar esta iteración
+                if registro is None:
+                    continue
+                
+                # Verifica si hay nombres asociados
                 if nombres.exists():
                     nombre = nombres[0].full_name
                 else:
                     nombre = 'None'
-                data.append(
-                    {'id_usuario':r.client,
-                    'fecha_registro':r.fecha_registro,
-                    'codigo':r.fpa,
-                    'pais':r.country,
-                    'primer_deposito':r.primer_deposito,
-                    'deposito_neto':r.neto_deposito,
-                    'cantidad_deposito':r.numeros_depositos,
-                    'id_broker':r.client,
-                    'nombre':nombre
-                    }
-                )
+                
+                # Construye el objeto de datos para cada cliente
+                data.append({
+                    'id_usuario': r.client,
+                    'fecha_registro': registro.fecha_registro,
+                    'codigo': r.fpa,
+                    'pais': registro.country,
+                    'primer_deposito': registro.primer_deposito,
+                    'deposito_neto': registro.neto_deposito,
+                    'cantidad_deposito': registro.numeros_depositos,
+                    'id_broker': registro.client,
+                    'nombre': nombre
+                })
             
-            response = JsonResponse({'data':data})
-            return response
+            # Retorna los datos como respuesta JSON
+            return JsonResponse({'data': data})
         
+        except Exception as e:
+            return JsonResponse({'Error': str(e)})
+    
+    else:
+        return JsonResponse({'Error': 'Método inválido'})
+
+@csrf_exempt
+def filter_registros_fecha_by_id(request, pk, desde, hasta):
+    try:
+        if request.method == 'GET':
+            # Filtrar registros por fecha y fpa
+            registros = Registro_archivo.objects.filter(
+                Q(fecha_registro__gte=desde) & Q(fecha_registro__lte=hasta), fpa=pk
+            )
+
+            data = []
+            for r in registros:
+                # Verifica si existen nombres asociados al cliente
+                nombres = Relation_fpa_client.objects.filter(client=r.client)
+                
+                # Si no se encuentra un nombre, asigna 'None'
+                if nombres.exists():
+                    nombre = nombres[0].full_name
+                else:
+                    nombre = 'None'
+
+                # Añade la información del registro a la lista de datos
+                data.append({
+                    'id_usuario': r.client,
+                    'fecha_registro': r.fecha_registro,
+                    'codigo': r.fpa,
+                    'pais': r.country,
+                    'primer_deposito': r.primer_deposito,
+                    'deposito_neto': r.neto_deposito,
+                    'cantidad_deposito': r.numeros_depositos,
+                    'id_broker': r.client,
+                    'nombre': nombre
+                })
+
+            # Retorna la respuesta con los datos
+            return JsonResponse({'data': data})
+
+    except Registro_archivo.DoesNotExist:
+        return JsonResponse({'Error': 'No se encontraron registros para el rango de fechas proporcionado.'}, status=404)
     except ValueError:
-        print(ValueError)
-        return ValueError
+        return JsonResponse({'Error': 'Formato de fecha inválido. Por favor usa el formato YYYY-MM-DD.'}, status=400)
+    except Exception as e:
+        return JsonResponse({'Error': str(e)}, status=500)
 
-
+    # Si el método no es GET, retornar error
+    return JsonResponse({'Error': 'Método HTTP inválido'}, status=405)

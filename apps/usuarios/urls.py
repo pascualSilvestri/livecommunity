@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.usuarios.controller.userController import deleteUser, eliminarUser, getRoles, getServicios, getUserById, postNewAfiliado, postNewUser, login, postNewUsers, updatePassword, updatePerfilUser, updateUserById, users, users_eliminados, users_pendientes, usuarioValido
+from apps.usuarios.controller.userController import deleteUser, eliminarUser, eliminarUserForever, getRoles, getServicios, getUserById, postNewAfiliado, postNewUser, login, postNewUsers, updatePassword, updatePerfilUser, updateUserById, users, users_eliminados, users_pendientes, usuarioValido
 
 
 app_name = "users"
@@ -12,7 +12,8 @@ urlpatterns = [
     path("users/", users, name="users"),
     path("existeuseremail/<email>/<password>", usuarioValido, name="existeUserEmail"),
     ################## Elimina un usuario logicamente, no de la base de datos ###########################################################
-    path("eliminaruser/<pk>", eliminarUser, name="eliminarUsuario"),  # Revisar este endpoint por que no elimina usuario
+    path("eliminaruser/<pk>/", eliminarUser, name="eliminarUsuario"),  # Revisar este endpoint por que no elimina usuario
+    path("eliminaruserforever/<pk>/", eliminarUserForever, name="eliminarUsuarioForever"),
     path("userid/<pk>/", getUserById, name="userId"),
     path("updateuser/<pk>/", updateUserById, name="updateUser"),
     path("updateperfiluser/<pk>/", updatePerfilUser, name="updatePerfilUser"),

@@ -1,4 +1,5 @@
 import json
+from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.http import JsonResponse
 import requests
@@ -789,6 +790,32 @@ def eliminarUser(request,pk):
 
     return response
 
+
+
+@csrf_exempt   
+def eliminarUserForever(request, pk):
+    print('eliminarUserForever: Started')
+    if request.method == 'DELETE':
+        try:
+            print('eliminarUserForever: DELETE method')
+            # Obtener el usuario por su pk (fpa)
+            user = get_object_or_404(Usuario, fpa=pk)
+            print(f'eliminarUserForever: User {user} found')
+            
+            # Eliminar el usuario permanentemente de la base de datos
+            user.delete()
+            print('eliminarUserForever: User deleted')
+            
+            response = JsonResponse({'data': 'Usuario eliminado permanentemente'}, status=200)
+        except Exception as e:
+            print(f'eliminarUserForever: Exception {e}')
+            response = JsonResponse({'error': str(e)}, status=500)
+    else:
+        print('eliminarUserForever: Invalid method')
+        response = JsonResponse({'error':'Método no válido'}, status=405)
+
+    print('eliminarUserForever: Finished')
+    return response
 
 
 @csrf_exempt  

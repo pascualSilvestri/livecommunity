@@ -25,7 +25,7 @@ from .controller.ganancias import (
     ganancia_a_pagar,
     filterGananciasFechaById,
 )
-from .controller.cuenta import montosGet
+# from .controller.cuenta import montosGet
 from .controller.files import upload_fpa, upload_registros, upload_cpa, upload_ganancias
 from .controller.bonos import (
     reseteo_bonos,
@@ -163,7 +163,7 @@ urlpatterns = [
     ################## Obtiene todos los registros de registros #########################################################################
     path("registros/", registrosGetAll, name="registros"),
     ################## Obtiene todos los montos de todos los registros y ganancias a pagar ##############################################
-    path("montos/<pk>/", montosGet, name="montos"),
+    # path("montos/<pk>/", montosGet, name="montos"),
     ################## Obtiene todos los montos de todos los registros y ganancia a pagar por fecha #####################################
     path(
         "montosbydate/<pk>/<desde>/<hasta>/",

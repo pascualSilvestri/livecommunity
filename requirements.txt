@@ -5,3 +5,5 @@ django-cors-headers
 pandas
 openpyxl
 djangorestframework
+djangorestframework-simplejwt
+requests

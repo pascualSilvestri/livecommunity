@@ -86,3 +86,12 @@ class Referido(models.Model):
         return f"Referido de {self.usuario.username} en {self.date}"
 
 
+class TokenPassword(models.Model):
+    id = models.AutoField(primary_key=True)
+    token = models.CharField(max_length=100)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='token_password')
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_expiracion = models.DateTimeField()
+
+    def __str__(self):
+        return self.token

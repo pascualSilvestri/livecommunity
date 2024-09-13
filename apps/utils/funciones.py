@@ -1,4 +1,5 @@
 from ..api.skilling.models import Registros_ganancias
+from django.db.models import Q, QuerySet
 
 def existe(client,fecha_registro,fpa,status,fecha_calif,country,posicion_cuenta,fecha_primer_deposito,neto_deposito,numeros_depositos,registros):
     
@@ -14,20 +15,15 @@ def existe_cpa(fecha,monto,client,fpa,cpas):
             return True
     return False
 
-def existe_ganancia(ganancia: Registros_ganancias, ganancias: list) -> bool:
-    g = ganancias.filter(
-        client=ganancia.client,
-        fpa=ganancia.fpa,
-        partner_earning=ganancia.partner_earning,
-        fecha_operacion=ganancia.fecha_operacion,
-        deal_id=ganancia.deal_id,
-        position=ganancia.position
-    )
-    
-    if g.exists():
-        return True
-    else:
-        return False
+def existe_ganancia(ganancia: Registros_ganancias, ganancias_existentes: QuerySet) -> bool:
+    return ganancias_existentes.filter(
+        Q(client=ganancia.client) &
+        Q(fpa=ganancia.fpa) &
+        Q(partner_earning=ganancia.partner_earning) &
+        Q(fecha_operacion=ganancia.fecha_operacion) &
+        Q(deal_id=ganancia.deal_id) &
+        Q(position=ganancia.position)
+    ).exists()
 
 def formatera_retiro(valor):
     retiro = valor.replace('(','').strip()

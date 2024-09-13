@@ -94,6 +94,17 @@ class SpreadIndirecto(models.Model):
     def __str__(self):
         return self.fpa
 
+class CpaIndirecto(models.Model):
+    id= models.AutoField(primary_key=True)
+    monto= models.FloatField()
+    fpa_child= models.CharField(max_length=50)
+    fpa= models.CharField(max_length=50)
+    fecha_creacion= models.DateField(auto_created=True)
+    pagado = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.fpa
+
 
 
 class BonoCpa(models.Model):

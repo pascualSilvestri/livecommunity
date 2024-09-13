@@ -1,16 +1,16 @@
 from django import forms
-from .models import Cliente
+from apps.usuarios.models import Usuario
 
 class ClienteForm(forms.ModelForm):
         
     class Meta:
-        model = Cliente
+        model = Usuario
         fields = (
-            "nombre",
-            "apellido",
-            'correo',
-            'telefono',
-            'idAfiliado',
+            "first_name",
+            "last_name",
+            'email',
+            'telephone',
+            'fpa',
             'userTelegram'
             )
 

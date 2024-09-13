@@ -3,7 +3,6 @@ from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.http import JsonResponse
 import requests
-from apps.api.skilling.models import Afiliado, Cuenta
 from apps.usuarios.models import (
     Rol,
     Servicio,
@@ -65,7 +64,7 @@ def login(request):
                     'first_name': usuario.first_name,
                     'telephone': usuario.telephone,
                     'wallet': usuario.wallet,
-                    'uplink': usuario.uplink,
+                    'up_line': usuario.up_line,
                     'link': usuario.link,
                     'roles': roles,
                     'servicios': servicios,
@@ -350,42 +349,42 @@ def postNewUser(request):
     else:
         return JsonResponse({"message": "Método HTTP no válido"}, status=405)
     
-@csrf_exempt
-def postNewAfiliado(request):
-    if request.method == 'POST':
-        # if 'application/json' in request.content_type:
-            try:
-                afiliados = Afiliado.objects.all()
+# @csrf_exempt
+# def postNewAfiliado(request):
+#     if request.method == 'POST':
+#         # if 'application/json' in request.content_type:
+#             try:
+#                 afiliados = Afiliado.objects.all()
                 
-                # Decodificar el cuerpo de la solicitud como JSON
-                fpa = request.POST.get('fpa').upper()
-                url = request.POST.get('url')
-                upline = request.POST.get('up_line').upper()
+#                 # Decodificar el cuerpo de la solicitud como JSON
+#                 fpa = request.POST.get('fpa').upper()
+#                 url = request.POST.get('url')
+#                 upline = request.POST.get('up_line').upper()
 
-                cuenta = Cuenta.objects.filter(fpa=fpa)
-                if not cuenta.exists():
-                    c = Cuenta(fpa=fpa)
-                    c.save()
-                # Crear un nuevo usuario y guardar los datos en la base de datos
-                new_afiliado = Afiliado(
-                    fpa = fpa,
-                    url=url,
-                    upline=upline,
-                )
-                print(new_afiliado.fpa)
-                if afiliados.exists():
-                    for a in afiliados:
-                        if not (a.fpa==fpa and a.url==url and a.upline == upline):
-                            new_afiliado.save()
-                else:
-                    new_afiliado.save()
-                return JsonResponse({'message': 'Datos recibidos y guardados con éxito'},status=200)
-            except json.JSONDecodeError:
-                return JsonResponse({'error': 'Error al decodificar el JSON'}, status=402)
-        # else:
-        #     return JsonResponse({'error': 'Tipo de contenido no válido'}, status=406)
-    else:
-        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
+#                 cuenta = Cuenta.objects.filter(fpa=fpa)
+#                 if not cuenta.exists():
+#                     c = Cuenta(fpa=fpa)
+#                     c.save()
+#                 # Crear un nuevo usuario y guardar los datos en la base de datos
+#                 new_afiliado = Afiliado(
+#                     fpa = fpa,
+#                     url=url,
+#                     upline=upline,
+#                 )
+#                 print(new_afiliado.fpa)
+#                 if afiliados.exists():
+#                     for a in afiliados:
+#                         if not (a.fpa==fpa and a.url==url and a.upline == upline):
+#                             new_afiliado.save()
+#                 else:
+#                     new_afiliado.save()
+#                 return JsonResponse({'message': 'Datos recibidos y guardados con éxito'},status=200)
+#             except json.JSONDecodeError:
+#                 return JsonResponse({'error': 'Error al decodificar el JSON'}, status=402)
+#         # else:
+#         #     return JsonResponse({'error': 'Tipo de contenido no válido'}, status=406)
+#     else:
+#         return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
 
 
 

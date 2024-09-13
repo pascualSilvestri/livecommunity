@@ -1,6 +1,6 @@
 from django.urls import path
 from apps.usuarios.controller.passwordController import enviar_token_recuperacion
-from apps.usuarios.controller.userController import deleteUser, eliminarUser, eliminarUserForever, getRoles, getServicios, getUserById, postNewAfiliado, postNewUser, login, postNewUsers, updatePassword, updatePerfilUser, updateUserById, users, users_eliminados, users_pendientes, usuarioValido
+from apps.usuarios.controller.userController import deleteUser, eliminarUser, eliminarUserForever, getRoles, getServicios, getUserById, postNewUser, login, postNewUsers, updatePassword, updatePerfilUser, updateUserById, users, users_eliminados, users_pendientes, usuarioValido
 from .controller import passwordController
 
 app_name = "users"
@@ -9,7 +9,7 @@ urlpatterns = [
     path("register/", postNewUser, name="user"),
     path("registers/", postNewUsers, name="users"),
     path("login/", login, name="userEmail"),
-    path("newafiliado/", postNewAfiliado, name="NewAfiliado"),
+    # path("newafiliado/", postNewAfiliado, name="NewAfiliado"),
     path("users/", users, name="users"),
     path("existeuseremail/<email>/<password>", usuarioValido, name="existeUserEmail"),
     ################## Elimina un usuario logicamente, no de la base de datos ###########################################################
@@ -26,4 +26,5 @@ urlpatterns = [
     path("servicios/",getServicios,name="servicios"),
     path("enviar-token/", enviar_token_recuperacion, name="enviar_token_recuperacion"),
     path('validartoken/', passwordController.validar_token, name='validar_token'),
+    path('verificar-password-actual/', passwordController.verificar_password_actual, name='verificar_password_actual'),
 ]

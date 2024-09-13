@@ -5,6 +5,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.utils import timezone
 from datetime import timedelta
+from django.contrib.auth.hashers import check_password
 from ..models import Usuario, TokenPassword
 from django.views.decorators.csrf import csrf_exempt
 
@@ -87,6 +88,38 @@ def validar_token(request):
                     'email': usuario.email,
                 }
             }, status=200)
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Formato de solicitud inválido'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': f'Error inesperado: {str(e)}'}, status=500)
+
+    return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+@csrf_exempt
+def verificar_password_actual(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body.decode('utf-8'))
+            fpa = data.get('fpa')
+            password_actual = data.get('password_actual')
+            
+            print(fpa,password_actual)
+
+            if not fpa or not password_actual:
+                return JsonResponse({'error': 'FPA y contraseña actual son requeridos'}, status=400)
+
+            try:
+                usuario = Usuario.objects.get(fpa=fpa)
+                print(usuario.password)
+                print(password_actual)
+                print(check_password(password_actual, usuario.password))
+                if check_password(password_actual, usuario.password):
+                    return JsonResponse({'es_correcto': True}, status=200)
+                else:
+                    return JsonResponse({'es_correcto': False}, status=200)
+            except Usuario.DoesNotExist:
+                return JsonResponse({'error': 'Usuario no encontrado'}, status=404)
 
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Formato de solicitud inválido'}, status=400)

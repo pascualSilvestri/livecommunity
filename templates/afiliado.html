@@ -21,7 +21,7 @@
                         acceder GRATIS a todos los servicios.
                     </p>
                     <div class="button-contain">
-                        <a href='{{afiliado.url}}' class="button-17" role="button" target='_blank'>REGISTRATE</a>
+                        <a href='{{url}}' class="button-17" role="button" target='_blank'>REGISTRATE</a>
                     </div>
                 </div>
                 <div class="hero-right">
@@ -353,25 +353,25 @@
                         {% csrf_token %}
 
                         <div class="inputbox">
-                            <input type="text" name="nombre" id="id_nombre" required="required" data-nombre
+                            <input type="text" name="first_name" id="id_nombre" required="required" data-nombre
                                 class="input-default">
                             <span>Nombre</span>
                         </div>
 
                         <div class="inputbox">
-                            <input type="text" name="apellido" id="id_apellido" required="required" data-apellido
+                            <input type="text" name="last_name" id="id_apellido" required="required" data-apellido
                                 class="input-default">
                             <span>Apellido</span>
                         </div>
 
                         <div class="inputbox">
-                            <input placeholder="usuario@correo.com" type="email" name="correo" id="id_correo"
+                            <input placeholder="usuario@correo.com" type="email" name="email" id="id_correo"
                                 required="required" data-correo class="input-default">
                             <span>Correo</span>
                         </div>
 
                         <div class="inputbox">
-                            <input type="tel" name="telefono" id="id_telefono" required="required" data-telefono
+                            <input type="tel" name="telephone" id="id_telefono" required="required" data-telefono
                                 class="input-default">
                             <span>Teléfono</span>
                         </div>
@@ -392,7 +392,7 @@
                         </p>
 
 
-                        <input type="hidden" name="idAfiliado" id="id_idAfiliado" value="{{afiliado.fpa}}">
+                        <input type="hidden" name="fpa" id="id_idAfiliado" value="{{afiliado.fpa}}">
                         <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado"
                             value="{{afiliado.telefono}}">
 

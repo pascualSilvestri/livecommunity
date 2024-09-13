@@ -18,35 +18,35 @@ Codigo que se tiene que verificar en caso de que la api de skilling nos llegue a
 
 @csrf_exempt 
 def verificar(request):
-    if request.method=='GET':
+    if request.method == 'GET':
         try:
             registros = Registro_archivo.objects.all()
-            
-            
+            clients = registros.values_list('client', flat=True)
+
+            # Obtener todos los Relation_fpa_client relacionados en una sola consulta
+            fpa_clients = Relation_fpa_client.objects.filter(client__in=clients)
+
+            # Construir un diccionario para acceso rápido
+            fpa_dict = {f.client: f for f in fpa_clients}
+
             data = []
-            
             for r in registros:
-                fpa = Relation_fpa_client.objects.filter(client=r.client)
-                dep = 0
-                if r.primer_deposito>0:
-                    dep = 1
-                if fpa.exists():
-                    data.append(
-                        {
-                            'client':r.client,
-                            'deposit':str(dep),
-                            'full_name':fpa.first().full_name.strip().lower(),
-                            'fpa':fpa.first().fpa
-                            }
-                        )
-            
-            return JsonResponse({'data':data})
-            
+                fpa = fpa_dict.get(r.client)
+                if fpa:
+                    dep = '1' if r.primer_deposito > 0 else '0'
+                    data.append({
+                        'client': r.client,
+                        'deposit': dep,
+                        'full_name': fpa.full_name.strip().lower(),
+                        'fpa': fpa.fpa
+                    })
+
+            return JsonResponse({'data': data})
         except Exception as e:
             print(e)
+            return JsonResponse({'error': str(e)})
     else:
-        return JsonResponse({'error':'metodo invalido'})
-
+        return JsonResponse({'error': 'Método inválido'})
 """
 
 El codigo de arriba esta enverificacion en caso de que la api de skilling nos llegue a funcionar podriamos facilitar estes proceso

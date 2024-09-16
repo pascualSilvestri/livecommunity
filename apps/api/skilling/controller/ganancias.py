@@ -1,60 +1,66 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q
+from django.db.models import F, Case, When, Value, DecimalField, Q
 from ....utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ....usuarios.models import Usuario
 from ...skilling.models import Registros_ganancias,Registros_cpa,SpreadIndirecto,Cuenta,BonoAPagar,Spread
+from django.db.models.functions import Round
 import re
 import json 
 from decimal import Decimal
 
 
-@csrf_exempt  
+@csrf_exempt
 def ganancia_get_all(request):
-    
-    if request.method == 'GET':
-        try:
-            ganancias = Registros_ganancias.objects.all()
-            cpas = Registros_cpa.objects.all()
-            spred = Spread.objects.all()
-            data=[]
-            for r in ganancias:
-                if r.pagado == False:
-                    if r.partner_earning != 0:
-                        monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
-                    else:
-                        monto_spread = r.partner_earning
-                    data.append( 
-                        {
-                            'creacion':r.fecha_operacion,
-                            'monto':r.partner_earning,
-                            'monto_spread':monto_spread,
-                            'tipo_comision':'Reverashe',
-                            'client':r.client,
-                            'isPago':r.pagado
-                        }
-                    )
-            for c in cpas:
-                data.append( 
-                        {
-                            'creacion':c.fecha_creacion,
-                            'monto':c.monto,
-                            'monto_spread':c.monto,
-                            'tipo_comision':'CPA',
-                            'client':c.client,
-                            'retiro':0,
-                            'isPago':c.pagado
-                        }
-                    )
-            
-            response = JsonResponse({'data': data})
-            
-            return response
-        except Exception as e:
-            return JsonResponse({'Error':e.__str__()})
-    else:
-        return JsonResponse({'Error':'Metodo invalidos'})
+    if request.method != 'GET':
+        return JsonResponse({'Error': 'Método inválido'}, status=405)
 
+    try:
+        spread = Spread.objects.all()
+        if not spread.exists():
+            return JsonResponse({'Error': 'No hay registros de Spread'}, status=404)
+
+        spread_directo = spread[0].porcentaje
+        spread_indirecto = spread[1].porcentaje
+
+        ganancias = Registros_ganancias.objects.filter(pagado=False).annotate(
+            monto_spread=Case(
+                When(partner_earning__gt=0, 
+                     then=Round(F('partner_earning') * (1 - spread_directo/100) * (1 - spread_indirecto/100), 2)),
+                default=F('partner_earning'),
+                output_field=DecimalField()
+            )
+        ).values('fecha_operacion', 'partner_earning', 'monto_spread', 'client', 'pagado')
+
+        cpas = Registros_cpa.objects.values(
+            'fecha_creacion', 'monto', 'client', 'pagado'
+        )
+
+        data = [
+            {
+                'creacion': g['fecha_operacion'],
+                'monto': g['partner_earning'],
+                'monto_spread': g['monto_spread'],
+                'tipo_comision': 'Reverashe',
+                'client': g['client'],
+                'isPago': g['pagado']
+            } for g in ganancias
+        ] + [
+            {
+                'creacion': c['fecha_creacion'],
+                'monto': c['monto'],
+                'monto_spread': c['monto'],
+                'tipo_comision': 'CPA',
+                'client': c['client'],
+                'retiro': 0,
+                'isPago': c['pagado']
+            } for c in cpas
+        ]
+
+        return JsonResponse({'data': data})
+
+    except Exception as e:
+        return JsonResponse({'Error': str(e)}, status=500)
 
 @csrf_exempt  
 def ganancia_only_more_cero(request):
@@ -399,105 +405,113 @@ def filtrar_ganancias_by_revshare_By_Id(request,pk):
 
 
 
-def filterGananciasFecha(request,desde,hasta):
-    
-    # fecha_desde = datetime.strptime(desde, "%Y-%m-%d").date
-    # fecha_hasta = datetime.strptime(hasta, "%Y-%m-%d").date
-    
+
+def filterGananciasFecha(request, desde, hasta):
     try:
-        if request.method == 'GET':
-            ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde) & Q(fecha_operacion__lte=hasta))
-            cpas = Registros_cpa.objects.filter(Q(fecha_creacion__gte=desde) & Q(fecha_creacion__lte=hasta))
-            spred = Spread.objects.all()
-            data= []
-            for r in ganancias:
-                if r.partner_earning != 0:
-                        monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
-                else:
-                    monto_spread = r.partner_earning
-                data.append( 
-                
-                    {
-                        'creacion':r.fecha_operacion,
-                        'monto':r.partner_earning,
-                        'monto_spread':monto_spread,
-                        'tipo_comision':r.symbol,
-                        'client':r.client,
-                        'isPago':r.pagado
-                    }
-                
-                )
-            
-            for c in cpas:
-                data.append( 
-                        {
-                            'creacion':c.fecha_creacion,
-                            'monto':c.monto,
-                            'monto_spread':c.monto,
-                            'tipo_comision':'CPA',
-                            'client':c.client,
-                            'retiro':0,
-                            'isPago':c.pagado
-                        }
-                    )
-            
-            response = JsonResponse({'data':data})
-            return response
-        
-    except ValueError:
-        print(ValueError)
-        return JsonResponse({'error':str(ValueError)})
-        
+        spread = Spread.objects.all()
+        if not spread.exists():
+            return JsonResponse({'error': 'No hay registros de Spread'}, status=404)
+
+        spread_directo = Decimal(spread[0].porcentaje) / 100
+        spread_indirecto = Decimal(spread[1].porcentaje) / 100
+
+        ganancias = Registros_ganancias.objects.filter(
+            fecha_operacion__range=(desde, hasta)
+        ).annotate(
+            monto_spread=Case(
+                When(partner_earning__gt=0, 
+                     then=Round(F('partner_earning') * (1 - spread_directo) * (1 - spread_indirecto), 2)),
+                default=F('partner_earning'),
+                output_field=DecimalField()
+            )
+        ).values('fecha_operacion', 'partner_earning', 'monto_spread', 'symbol', 'client', 'pagado')
+
+        cpas = Registros_cpa.objects.filter(
+            fecha_creacion__range=(desde, hasta)
+        ).values('fecha_creacion', 'monto', 'client', 'pagado')
+
+        data = [
+            {
+                'creacion': g['fecha_operacion'],
+                'monto': g['partner_earning'],
+                'monto_spread': g['monto_spread'],
+                'tipo_comision': g['symbol'],
+                'client': g['client'],
+                'isPago': g['pagado']
+            } for g in ganancias
+        ] + [
+            {
+                'creacion': c['fecha_creacion'],
+                'monto': c['monto'],
+                'monto_spread': c['monto'],
+                'tipo_comision': 'CPA',
+                'client': c['client'],
+                'retiro': 0,
+                'isPago': c['pagado']
+            } for c in cpas
+        ]
+
+        return JsonResponse({'data': data})
+
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
         
 
 def filterGananciasFechaById(request,pk,desde,hasta):
-    
-    # fecha_desde = datetime.strptime(desde, "%Y-%m-%d").date
-    # fecha_hasta = datetime.strptime(hasta, "%Y-%m-%d").date
     if request.method == 'GET':
         try:
-            ganancias = Registros_ganancias.objects.filter(Q(fecha_operacion__gte=desde,fpa=pk) & Q(fecha_operacion__lte=hasta,fpa=pk))
-            cpas = Registros_cpa.objects.filter(Q(fecha_creacion__gte=desde,fpa=pk) & Q(fecha_creacion__lte=hasta,fpa=pk))
-            spred = Spread.objects.all()
-            data=[]
-            for r in ganancias:
-                
-                if r.fecha_operacion != None:
-                    if r.partner_earning != 0:
-                        monto_spread = round(calcula_porcentaje_directo(float(r.partner_earning),spred[0].porcentaje,spred[1].porcentaje),2)
-                    else:
-                        monto_spread = r.partner_earning
-                    data.append( 
-                        {
-                            'creacion':r.fecha_operacion,
-                            'monto':r.partner_earning,
-                            'monto_spread':monto_spread,
-                            'tipo_comision':r.symbol,
-                            'client':r.client,
-                            'isPago':r.pagado
-                        }
-                    )
-            
-            for c in cpas:
-                data.append( 
-                        {
-                            'creacion':c.fecha_creacion,
-                            'monto':c.monto,
-                            'monto_spread':c.monto,
-                            'tipo_comision':'CPA',
-                            'client':c.client,
-                            'retiro':0,
-                            'isPago':c.pagado
-                        }
-                    )
-                
-            response = JsonResponse({'data': data})
-            
-            return response
+            spread = Spread.objects.all()
+            if not spread.exists():
+                return JsonResponse({'error': 'No hay registros de Spread'}, status=404)
+
+            spread_directo = Decimal(spread[0].porcentaje) / 100
+            spread_indirecto = Decimal(spread[1].porcentaje) / 100
+
+            ganancias = Registros_ganancias.objects.filter(
+                fecha_operacion__range=(desde, hasta),
+                fpa=pk,
+                fecha_operacion__isnull=False
+            ).annotate(
+                monto_spread=Case(
+                    When(partner_earning__gt=0, 
+                         then=Round(F('partner_earning') * (1 - spread_directo) * (1 - spread_indirecto), 2)),
+                    default=F('partner_earning'),
+                    output_field=DecimalField()
+                )
+            ).values('fecha_operacion', 'partner_earning', 'monto_spread', 'symbol', 'client', 'pagado')
+
+            cpas = Registros_cpa.objects.filter(
+                fecha_creacion__range=(desde, hasta),
+                fpa=pk
+            ).values('fecha_creacion', 'monto', 'client', 'pagado')
+
+            data = [
+                {
+                    'creacion': g['fecha_operacion'],
+                    'monto': g['partner_earning'],
+                    'monto_spread': g['monto_spread'],
+                    'tipo_comision': g['symbol'],
+                    'client': g['client'],
+                    'isPago': g['pagado']
+                } for g in ganancias
+            ] + [
+                {
+                    'creacion': c['fecha_creacion'],
+                    'monto': c['monto'],
+                    'monto_spread': c['monto'],
+                    'tipo_comision': 'CPA',
+                    'client': c['client'],
+                    'retiro': 0,
+                    'isPago': c['pagado']
+                } for c in cpas
+            ]
+
+            return JsonResponse({'data': data})
+
         except Exception as e:
-            return JsonResponse({'Error':e.__str__()})
+            return JsonResponse({'Error': str(e)}, status=500)
     else:
-        return JsonResponse({'Error':'Metodo invalidos'})
+        return JsonResponse({'Error':'Metodo invalido'})
 
     
 

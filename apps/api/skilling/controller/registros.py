@@ -6,6 +6,8 @@ import json
 from datetime import datetime
 from django.db.models import Q
 from ...skilling.models import Registro_archivo,Registros_ganancias,Relation_fpa_client
+from django.db.models import F, Value, OuterRef, Subquery
+from django.db.models.functions import Coalesce
 
 
 """
@@ -135,48 +137,51 @@ def getRegistroById(request, pk):
     else:
         return JsonResponse({'Error': 'Método inválido'})
 
+
+
 @csrf_exempt
 def filter_registros_fecha_by_id(request, pk, desde, hasta):
     try:
-        if request.method == 'GET':
-            # Filtrar registros por fecha y fpa
-            registros = Registro_archivo.objects.filter(
-                Q(fecha_registro__gte=desde) & Q(fecha_registro__lte=hasta), fpa=pk
-            )
+        # Subconsulta para obtener el nombre completo
+        nombres_subquery = Relation_fpa_client.objects.filter(
+            client=OuterRef('client')
+        ).values('full_name')[:1]
 
-            data = []
-            for r in registros:
-                # Verifica si existen nombres asociados al cliente
-                nombres = Relation_fpa_client.objects.filter(client=r.client)
-                
-                # Si no se encuentra un nombre, asigna 'None'
-                if nombres.exists():
-                    nombre = nombres[0].full_name
-                else:
-                    nombre = 'None'
+        # Consulta principal optimizada
+        registros = Registro_archivo.objects.filter(
+            fecha_registro__range=(desde, hasta),
+            fpa=pk
+        ).annotate(
+            nombre=Coalesce(Subquery(nombres_subquery), Value('None'))
+        ).values(
+            'client',
+            'fecha_registro',
+            'fpa',
+            'country',
+            'primer_deposito',
+            'neto_deposito',
+            'numeros_depositos',
+            'nombre'
+        )
 
-                # Añade la información del registro a la lista de datos
-                data.append({
-                    'id_usuario': r.client,
-                    'fecha_registro': r.fecha_registro,
-                    'codigo': r.fpa,
-                    'pais': r.country,
-                    'primer_deposito': r.primer_deposito,
-                    'deposito_neto': r.neto_deposito,
-                    'cantidad_deposito': r.numeros_depositos,
-                    'id_broker': r.client,
-                    'nombre': nombre
-                })
+        # Formatear los datos
+        data = [
+            {
+                'id_usuario': r['client'],
+                'fecha_registro': r['fecha_registro'],
+                'codigo': r['fpa'],
+                'pais': r['country'],
+                'primer_deposito': r['primer_deposito'],
+                'deposito_neto': r['neto_deposito'],
+                'cantidad_deposito': r['numeros_depositos'],
+                'id_broker': r['client'],
+                'nombre': r['nombre']
+            } for r in registros
+        ]
 
-            # Retorna la respuesta con los datos
-            return JsonResponse({'data': data})
+        return JsonResponse({'data': data})
 
-    except Registro_archivo.DoesNotExist:
-        return JsonResponse({'Error': 'No se encontraron registros para el rango de fechas proporcionado.'}, status=404)
     except ValueError:
         return JsonResponse({'Error': 'Formato de fecha inválido. Por favor usa el formato YYYY-MM-DD.'}, status=400)
     except Exception as e:
         return JsonResponse({'Error': str(e)}, status=500)
-
-    # Si el método no es GET, retornar error
-    return JsonResponse({'Error': 'Método HTTP inválido'}, status=405)

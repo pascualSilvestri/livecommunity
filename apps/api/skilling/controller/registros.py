@@ -1,14 +1,13 @@
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password
 import json 
 from datetime import datetime
-from django.db.models import Q
+from django.db.models import Q, FloatField, IntegerField
 from ...skilling.models import Registro_archivo,Registros_ganancias,Relation_fpa_client
 from django.db.models import F, Value, OuterRef, Subquery
 from django.db.models.functions import Coalesce
-
+from django.views.decorators.http import require_GET
 
 """
 
@@ -95,47 +94,49 @@ def registrosGetAll(request):
 
 @csrf_exempt 
 def getRegistroById(request, pk):
-    if request.method == 'GET':
-        try:
-            customer = Relation_fpa_client.objects.filter(fpa=pk)
-            data = []
-            
-            for r in customer:
-                registros = Registro_archivo.objects.filter(client=r.client)
-                nombres = Relation_fpa_client.objects.filter(client=r.client)
-                registro = registros.first()
-                
-                # Si no se encuentra un registro, saltar esta iteración
-                if registro is None:
-                    continue
-                
-                # Verifica si hay nombres asociados
-                if nombres.exists():
-                    nombre = nombres[0].full_name
-                else:
-                    nombre = 'None'
-                
-                # Construye el objeto de datos para cada cliente
-                data.append({
-                    'id_usuario': r.client,
-                    'fecha_registro': registro.fecha_registro,
-                    'codigo': r.fpa,
-                    'pais': registro.country,
-                    'primer_deposito': registro.primer_deposito,
-                    'deposito_neto': registro.neto_deposito,
-                    'cantidad_deposito': registro.numeros_depositos,
-                    'id_broker': registro.client,
-                    'nombre': nombre
-                })
-            
-            # Retorna los datos como respuesta JSON
-            return JsonResponse({'data': data})
-        
-        except Exception as e:
-            return JsonResponse({'Error': str(e)})
-    
-    else:
-        return JsonResponse({'Error': 'Método inválido'})
+    try:
+        # Subconsulta para obtener los datos del Registro_archivo
+        registro_subquery = Registro_archivo.objects.filter(
+            client=OuterRef('client')
+        ).values('fecha_registro', 'country', 'primer_deposito', 'neto_deposito', 'numeros_depositos')[:1]
+
+        # Consulta principal optimizada
+        customers = Relation_fpa_client.objects.filter(fpa=pk).annotate(
+            registro_fecha=Coalesce(Subquery(registro_subquery.values('fecha_registro')), Value(None)),
+            registro_pais=Coalesce(Subquery(registro_subquery.values('country')), Value('')),
+            registro_primer_deposito=Coalesce(Subquery(registro_subquery.values('primer_deposito')), Value(0.0), output_field=FloatField()),
+            registro_deposito_neto=Coalesce(Subquery(registro_subquery.values('neto_deposito')), Value(0.0), output_field=FloatField()),
+            registro_cantidad_deposito=Coalesce(Subquery(registro_subquery.values('numeros_depositos')), Value(0), output_field=IntegerField()),
+        ).values(
+            'client',
+            'fpa',
+            'full_name',
+            'registro_fecha',
+            'registro_pais',
+            'registro_primer_deposito',
+            'registro_deposito_neto',
+            'registro_cantidad_deposito'
+        )
+
+        # Formatear los datos
+        data = [
+            {
+                'id_usuario': c['client'],
+                'fecha_registro': c['registro_fecha'],
+                'codigo': c['fpa'],
+                'pais': c['registro_pais'],
+                'primer_deposito': c['registro_primer_deposito'],
+                'deposito_neto': c['registro_deposito_neto'],
+                'cantidad_deposito': c['registro_cantidad_deposito'],
+                'id_broker': c['client'],
+                'nombre': c['full_name'] or 'None'
+            } for c in customers if c['registro_fecha'] is not None
+        ]
+
+        return JsonResponse({'data': data})
+
+    except Exception as e:
+        return JsonResponse({'Error': str(e)}, status=500)
 
 
 

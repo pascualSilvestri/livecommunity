@@ -1,6 +1,6 @@
 from django.urls import path
 from apps.usuarios.controller.passwordController import enviar_token_recuperacion
-from apps.usuarios.controller.userController import deleteUser, eliminarUser, eliminarUserForever, getRoles, getServicios, getUserById, postNewUser, login, postNewUsers, updatePassword, updatePerfilUser, updateUserById, users, users_eliminados, users_pendientes, usuarioValido
+from apps.usuarios.controller.userController import deleteUser, eliminarUser, eliminarUserForever, getRoles, getServicios, getUserById, postNewUser, login, postNewUsers, updatePassword, updatePerfilUser, updateUserById, users, usuarioValido
 from .controller import passwordController
 
 app_name = "users"
@@ -18,8 +18,6 @@ urlpatterns = [
     path("userid/<pk>/", getUserById, name="userId"),
     path("updateuser/<pk>/", updateUserById, name="updateUser"),
     path("updateperfiluser/<pk>/", updatePerfilUser, name="updatePerfilUser"),
-    path("usereliminados/", users_eliminados, name="userEliminados"),
-    path("userpendientes/", users_pendientes, name="userPendientes"),
     path("updatepassword/<pk>/", updatePassword, name="updatePassword"),
     path("deleteuser/<pk>/", deleteUser, name="deleteUser"),
     path("roles/", getRoles, name="roles"),

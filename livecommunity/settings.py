@@ -25,6 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-r@_8j0dwk$2pvk2k)uo5na4htig-uy)sdvic3p&3i*2gj-(alh"
+SKILLING_API_KEY ='985718aac52fb7bc9ac44335debf474b48a85dc4371f2b8ce01a658a85a84eada2615a8fd5946106d08e9699a2'
+
 
 AUTH_USER_MODEL = "usuarios.Usuario"
 
@@ -101,14 +103,14 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": (
-        "rest_framework.permissions.AllowAny",  # Cambia a IsAuthenticated si deseas que las vistas requieran autenticación
+        "rest_framework.permissions.IsAuthenticated",  # Cambia a IsAuthenticated si deseas que las vistas requieran autenticación
     ),
 }
 
 
 # Configuraciones de JWT
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": True,
@@ -280,13 +282,13 @@ CHAT_ID_BOT = '@liveingresos'
 DEBUG = True
 
 
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+#     'http://127.0.0.1:3000',
+# ]
 
 
 CORS_ALLOW_CREDENTIALS = True

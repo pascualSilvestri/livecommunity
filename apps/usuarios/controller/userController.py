@@ -1,6 +1,8 @@
 import json
 from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 import requests
 from apps.usuarios.models import (
@@ -125,7 +127,7 @@ def postNewUsers(request):
                     existing_user.email = user_data.get("email")  # Actualiza el correo también
                     existing_user.telephone = user_data.get("telefono")
                     existing_user.wallet = user_data.get("wallet")
-                    existing_user.uplink = user_data.get("uplink") or existing_user.uplink
+                    existing_user.up_line = user_data.get("up_line") or existing_user.up_line
                     existing_user.link = user_data.get("link") or existing_user.link
                     existing_user.registrado = user_data.get("registrado", False) if user_data.get("registrado") is not None else False
                     existing_user.aceptado = user_data.get("status", False) if user_data.get("status") is not None else False
@@ -169,7 +171,7 @@ def postNewUsers(request):
                         last_name=user_data.get("apellido"),
                         telephone=user_data.get("telefono"),
                         wallet=user_data.get("wallet"),
-                        uplink=user_data.get("uplink") or "",
+                        up_line=user_data.get("up_line") or "",
                         link=user_data.get("link") or "https://livecommunity.info/Afiliado/",
                         registrado=user_data.get("registrado", False) if user_data.get("registrado") is not None else False,
                         aceptado=user_data.get("status", False) if user_data.get("status") is not None else False,
@@ -253,7 +255,7 @@ def postNewUser(request):
                     existing_user.email = user_data.get("email")
                     existing_user.telephone = user_data.get("telefono")
                     existing_user.wallet = user_data.get("wallet")
-                    existing_user.uplink = user_data.get("uplink") or existing_user.uplink
+                    existing_user.up_line = user_data.get("up_line") or existing_user.up_line
                     existing_user.link = user_data.get("link") or existing_user.link
                     existing_user.registrado = user_data.get("registrado", False) if user_data.get("registrado") is not None else False
                     existing_user.aceptado = user_data.get("status", False) if user_data.get("status") is not None else False
@@ -299,7 +301,7 @@ def postNewUser(request):
                         last_name=user_data.get("last_name"),
                         telephone=user_data.get("telefono"),
                         wallet=user_data.get("wallet"),
-                        uplink=user_data.get("uplink") or "",
+                        up_line=user_data.get("up_line") or "",
                         link=user_data.get("link") or "https://livecommunity.info/Afiliado/",
                         registrado=user_data.get("registrado", False) if user_data.get("registrado") is not None else False,
                         aceptado=user_data.get("status", False) if user_data.get("status") is not None else False,
@@ -436,7 +438,7 @@ def getUserById(request, pk):
                 'first_name': usuario.first_name,
                 'telephone': usuario.telephone,
                 'wallet': usuario.wallet,
-                'uplink': usuario.uplink,
+                'up_line': usuario.up_line,
                 'link': usuario.link,
                 'roles': roles,
                 'servicios': servicios,
@@ -465,9 +467,9 @@ def users(request):
     if request.method == 'GET':
         try:
             # Prefetch para evitar consultas adicionales
-            usuarios = Usuario.objects.all().prefetch_related('roles__rol', 'serviciosUsuario')
+            usuarios: list[Usuario] = Usuario.objects.all().prefetch_related('roles__rol', 'serviciosUsuario')
             # Solo obtener las URLs necesarias, si son las primeras dos
-            urls = Url.objects.all()[:2]
+            urls: list[Url] = Url.objects.all()[:2]
             
             url_livecommunity_base = urls[0].url if len(urls) > 0 else ''
             url_skilling_base = urls[1].url if len(urls) > 1 else ''
@@ -481,7 +483,7 @@ def users(request):
                     'last_name': usuario.last_name,
                     'telephone': usuario.telephone,
                     'wallet': usuario.wallet,
-                    'uplink': usuario.uplink,
+                    'up_line': usuario.up_line,
                     'link': usuario.link,
                     'roles': [{'id': rol.rol_id, 'rol': rol.rol.name} for rol in usuario.roles.all()],  # Cambiamos a rol.rol.name
                     'servicios': [{'id': servicio.servicio_id, 'servicio': servicio.servicio.name} for servicio in usuario.serviciosUsuario.all()],
@@ -503,116 +505,11 @@ def users(request):
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
         except Exception as e:
+            print(f"Error en users: {e}")
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
 
-@csrf_exempt   
-def users_pendientes(request):
-    if request.method == 'GET':
-        try:
-            # Filtrar usuarios que no están aceptados y no están eliminados
-            usuarios = Usuario.objects.filter(aceptado=False, eliminado=False).prefetch_related('roles__rol', 'serviciosUsuario')
-            # Obtener las primeras dos URLs, si existen
-            urls = Url.objects.all()[:2]
-            
-            url_livecommunity_base = urls[0].url if len(urls) > 0 else ''
-            url_skilling_base = urls[1].url if len(urls) > 1 else ''
-            
-            # List comprehension para generar la respuesta
-            data = [
-                {
-                    'fpa': usuario.fpa,
-                    'email': usuario.email,
-                    'first_name': usuario.first_name,
-                    'telephone': usuario.telephone,
-                    'wallet': usuario.wallet,
-                    'uplink': usuario.uplink,
-                    'link': usuario.link,
-                    'roles': [{'id': rol.rol_id, 'rol': rol.rol.name} for rol in usuario.roles.all()],  # Cambiamos a rol.rol.name
-                    'servicios': [{'id': servicio.servicio_id, 'servicio': servicio.servicio.name} for servicio in usuario.serviciosUsuario.all()],
-                    'registrado': usuario.registrado,
-                    'status': usuario.aceptado,
-                    'idCliente': usuario.idCliente,
-                    'aceptado': usuario.aceptado,
-                    'fondeado': usuario.fondeado,
-                    'eliminado': usuario.eliminado,
-                    'userTelegram': usuario.userTelegram,
-                    'url_livecommunity': f'{url_livecommunity_base}{usuario.fpa}' if usuario.fpa else '',
-                    'url_skilling': f'{url_skilling_base}{usuario.fpa}' if usuario.fpa else '',
-                }
-                for usuario in usuarios
-            ]
-
-            return JsonResponse({'data': data}, status=200)
-
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-    else:
-        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
-
-
-@csrf_exempt   
-def users_eliminados(request):
-    if request.method == 'GET':
-        try:
-            usuarios = Usuario.objects.filter(eliminado=True)  # Filtrar usuarios eliminados
-            urls = Url.objects.all()  # Obtenemos las URLs como en los otros métodos
-            data = []
-
-            for usuario in usuarios:
-                # Creamos la lista de roles serializable
-                roles = []
-                for rol in usuario.roles.all():
-                    roles.append({
-                        'id': rol.rol_id,
-                        'rol': rol.rol.name,
-                        # 'fecha_asignacion': rol.fecha_asignacion.isoformat()
-                    })
-
-                # Creamos la lista de servicios serializable
-                servicios = []
-                for servicio in usuario.serviciosUsuario.all():
-                    servicios.append({
-                        'id': servicio.servicio_id,
-                        'servicio': servicio.servicio.name
-                    })
-
-                # Creamos el diccionario de datos del usuario sin la contraseña
-                user_data = {
-                    'fpa': usuario.fpa,
-                    'email': usuario.email,
-                    'first_name': usuario.first_name,
-                    'telephone': usuario.telephone,
-                    'wallet': usuario.wallet,
-                    'uplink': usuario.uplink,
-                    'link': usuario.link,
-                    'roles': roles,
-                    'servicios': servicios,
-                    'registrado': usuario.registrado,
-                    'status': usuario.aceptado,
-                    'idCliente': usuario.idCliente,
-                    'aceptado': usuario.aceptado,
-                    'fondeado': usuario.fondeado,
-                    'eliminado': usuario.eliminado,
-                    'userTelegram': usuario.userTelegram,
-                    'url_livecommunity': f'{urls[0].url}{usuario.fpa}' if usuario.fpa else '',
-                    'url_skilling': f'{urls[1].url}{usuario.fpa}' if usuario.fpa else '',
-                }
-
-                data.append(user_data)
-
-            # Devolvemos la lista de usuarios eliminados
-            return JsonResponse({'data': data}, status=200)
-
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-    else:
-        return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
 
 @csrf_exempt  
 def usuarioValido(request,email,password):
@@ -633,14 +530,9 @@ def usuarioValido(request,email,password):
 
 
 @csrf_exempt
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
 def updateUserById(request, pk):
-    # Autenticación JWT
-    jwt_authenticator = JWTAuthentication()
-    try:
-        # Verifica el JWT en la solicitud
-        user, token = jwt_authenticator.authenticate(request)
-    except AuthenticationFailed:
-        return JsonResponse({'message': 'Token inválido o faltante'}, status=401)
 
     try:
         # Verifica si el usuario existe por fpa (ID)
@@ -715,7 +607,7 @@ def updateUserById(request, pk):
                 'first_name': usuario.first_name,
                 'telephone': usuario.telephone,
                 'wallet': usuario.wallet,
-                'uplink': usuario.uplink,
+                'up_line': usuario.up_line,
                 'link': usuario.link,
                 'roles': roles,
                 'servicios': servicios,
@@ -737,6 +629,8 @@ def updateUserById(request, pk):
 
 
 @csrf_exempt
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def updatePerfilUser(request, pk):
     
     if request.method == 'POST' or request.method == 'PUT':
@@ -761,7 +655,7 @@ def updatePerfilUser(request, pk):
                 'password': users.password,
                 'telephone': users.telephone,
                 'wallet': users.wallet,
-                'uplink': users.uplink,
+                'up_line': users.up_line,
                 'link': users.link,
                 'roles': users.roles,
                 'registrado':users.registrado,
@@ -775,6 +669,8 @@ def updatePerfilUser(request, pk):
         return JsonResponse({'Error':'Metodo Invalido'})
 
 @csrf_exempt    
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def eliminarUser(request,pk):
 
     if request.method == 'DELETE':
@@ -792,6 +688,8 @@ def eliminarUser(request,pk):
 
 
 @csrf_exempt   
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def eliminarUserForever(request, pk):
     print('eliminarUserForever: Started')
     if request.method == 'DELETE':
@@ -818,6 +716,8 @@ def eliminarUserForever(request, pk):
 
 
 @csrf_exempt  
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
 def updatePassword(request, pk):
     if request.method == 'PUT':
         try:
@@ -849,6 +749,8 @@ def updatePassword(request, pk):
 
 
 @csrf_exempt  
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def deleteUser(request,pk):
     try:
         if request.method == 'POST':

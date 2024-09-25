@@ -4,10 +4,13 @@ from django.contrib.auth.hashers import make_password
 import json 
 from datetime import datetime
 from django.db.models import Q, FloatField, IntegerField
+
+from livecommunity import settings
 from ...skilling.models import Registro_archivo,Registros_ganancias,Relation_fpa_client
 from django.db.models import F, Value, OuterRef, Subquery
 from django.db.models.functions import Coalesce
 from django.views.decorators.http import require_GET
+import requests
 
 """
 
@@ -186,3 +189,35 @@ def filter_registros_fecha_by_id(request, pk, desde, hasta):
         return JsonResponse({'Error': 'Formato de fecha inválido. Por favor usa el formato YYYY-MM-DD.'}, status=400)
     except Exception as e:
         return JsonResponse({'Error': str(e)}, status=500)
+
+
+@csrf_exempt
+def proxy_request(request, pk):
+    url = f"https://go.skillingpartners.com/api/?command=registrations&fromdate=&todate=&daterange=update&userid=skilling-{pk}&json=1"
+    headers = {
+        'x-api-key': settings.SKILLING_API_KEY,
+        'affiliateid': '35881',
+    }
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()  # Esto lanzará una excepción para códigos de estado HTTP no exitosos
+        
+        # Intentar decodificar la respuesta JSON
+        try:
+            json_response = response.json()
+            return JsonResponse(json_response)
+        except requests.exceptions.JSONDecodeError:
+            # Si no se puede decodificar como JSON, devolver el contenido de texto
+            return JsonResponse({
+                'error': 'No se pudo decodificar la respuesta como JSON',
+                'content': response.text,
+                'status_code': response.status_code,
+                'headers': dict(response.headers)
+            })
+    except requests.RequestException as e:
+        return JsonResponse({
+            'error': str(e),
+            'url': url,
+            'status_code': e.response.status_code if e.response else None,
+            'content': e.response.text if e.response else None
+        }, status=500)

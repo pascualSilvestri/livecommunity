@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from .controller.registros import (
+    proxy_request,
     verificar,
     registrosGetAll,
     getRegistroById,
@@ -191,6 +192,7 @@ urlpatterns = [
     path("gananciatotaluser/<pk>/", ganancias_total_user, name="ganaciaTotalUser"),
     path("cpas/", ganancias_cpa, name="cpa"),
     path("cpas/<pk>/", ganancias_cpa_by_id, name="cpa"),
+    path("proxy/<pk>/", proxy_request, name="proxy"),
     
     
 ]

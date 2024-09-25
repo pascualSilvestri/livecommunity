@@ -143,52 +143,154 @@ def getRegistroById(request, pk):
 
 
 
+# @csrf_exempt
+# def filter_registros_fecha_by_id(request, pk, desde, hasta):
+#     try:
+#         # Subconsulta para obtener el nombre completo
+#         nombres_subquery = Relation_fpa_client.objects.filter(
+#             client=OuterRef('client')
+#         ).values('full_name')[:1]
+
+#         # Consulta principal optimizada
+#         registros = Registro_archivo.objects.filter(
+#             fecha_registro__range=(desde, hasta),
+#             fpa=pk
+#         ).annotate(
+#             nombre=Coalesce(Subquery(nombres_subquery), Value('None'))
+#         ).values(
+#             'client',
+#             'fecha_registro',
+#             'fpa',
+#             'country',
+#             'primer_deposito',
+#             'neto_deposito',
+#             'numeros_depositos',
+#             'nombre'
+#         )
+
+#         # Formatear los datos
+#         data = [
+#             {
+#                 'id_usuario': r['client'],
+#                 'fecha_registro': r['fecha_registro'],
+#                 'codigo': r['fpa'],
+#                 'pais': r['country'],
+#                 'primer_deposito': r['primer_deposito'],
+#                 'deposito_neto': r['neto_deposito'],
+#                 'cantidad_deposito': r['numeros_depositos'],
+#                 'id_broker': r['client'],
+#                 'nombre': r['nombre']
+#             } for r in registros
+#         ]
+
+#         return JsonResponse({'data': data})
+
+#     except ValueError:
+#         return JsonResponse({'Error': 'Formato de fecha inválido. Por favor usa el formato YYYY-MM-DD.'}, status=400)
+#     except Exception as e:
+#         return JsonResponse({'Error': str(e)}, status=500)
+
+
+
+# @csrf_exempt
+# def filter_registros_fecha_by_id(request, pk, desde, hasta):
+#     print(desde)
+#     print(hasta)
+#     try:
+#         # Subconsulta para obtener el nombre completo
+#         nombres_subquery = Relation_fpa_client.objects.filter(
+#             client=OuterRef('client')
+#         ).values('full_name')[:1]
+
+#         url = f"https://go.skillingpartners.com/api/?command=registrations&fromdate={desde}&todate={hasta}&daterange=update\fdd&userid=&json=1"
+#         print(url)
+#         headers = {
+#             'x-api-key': settings.SKILLING_API_KEY,
+#             'affiliateid': '35881',
+#         }
+        
+#         response = requests.get(url, headers=headers)
+#         response.raise_for_status()
+        
+#         try:
+#             json_response = response.json()
+#             return JsonResponse(json_response)
+#         except requests.exceptions.JSONDecodeError:
+#             return JsonResponse({
+#                 'error': 'No se pudo decodificar la respuesta como JSON',
+#                 'content': response.text,
+#                 'status_code': response.status_code,
+#                 'headers': dict(response.headers)
+#             })
+#     except requests.RequestException as e:
+#         return JsonResponse({
+#             'error': str(e),
+#             'url': url,
+#             'status_code': e.response.status_code if e.response else None,
+#             'content': e.response.text if e.response else None
+#         }, status=500)
+
+
 @csrf_exempt
 def filter_registros_fecha_by_id(request, pk, desde, hasta):
     try:
-        # Subconsulta para obtener el nombre completo
-        nombres_subquery = Relation_fpa_client.objects.filter(
-            client=OuterRef('client')
-        ).values('full_name')[:1]
+        # Construir la URL
+        url = f"https://go.skillingpartners.com/api/?command=registrations&fromdate={desde}&todate={hasta}&daterange=update\\fdd&userid=&json=1"
+        headers = {
+            'x-api-key': settings.SKILLING_API_KEY,
+            'affiliateid': '35881',
+        }
 
-        # Consulta principal optimizada
-        registros = Registro_archivo.objects.filter(
-            fecha_registro__range=(desde, hasta),
-            fpa=pk
-        ).annotate(
-            nombre=Coalesce(Subquery(nombres_subquery), Value('None'))
-        ).values(
-            'client',
-            'fecha_registro',
-            'fpa',
-            'country',
-            'primer_deposito',
-            'neto_deposito',
-            'numeros_depositos',
-            'nombre'
-        )
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
 
-        # Formatear los datos
+        # Procesar la respuesta JSON
+        registrations = response.json().get('registrations', [])
+
+        # Filtrar registros donde Tracking_Code es igual a pk
+        registrations = [reg for reg in registrations if reg.get('Tracking_Code') == pk]
+
+        # Obtener todos los client_numbers de una vez
+        client_numbers = [
+            reg['User_ID'].split('-')[-1] if '-' in reg['User_ID'] else reg['User_ID']
+            for reg in registrations
+        ]
+
+        # Obtener todos los nombres de una sola consulta
+        nombres = {
+            rc.client: rc.full_name
+            for rc in Relation_fpa_client.objects.filter(client__in=client_numbers)
+        }
+
+        # Procesar los datos
         data = [
             {
-                'id_usuario': r['client'],
-                'fecha_registro': r['fecha_registro'],
-                'codigo': r['fpa'],
-                'pais': r['country'],
-                'primer_deposito': r['primer_deposito'],
-                'deposito_neto': r['neto_deposito'],
-                'cantidad_deposito': r['numeros_depositos'],
-                'id_broker': r['client'],
-                'nombre': r['nombre']
-            } for r in registros
+                'id_usuario': client_number,
+                'fecha_registro': reg.get('Registration_Date', ''),
+                'codigo': reg.get('Tracking_Code', ''),
+                'pais': reg.get('Country', ''),
+                'primer_deposito': reg.get('First_Deposit', 0),
+                'status':reg.get('Status',''),
+                'deposito_neto': reg.get('Net_Deposits', 0),
+                'cantidad_deposito': reg.get('Deposit_Count', 0),
+                'id_broker': client_number,
+                'nombre': nombres.get(client_number, 'None')
+            }
+            for reg, client_number in zip(registrations, client_numbers)
         ]
 
         return JsonResponse({'data': data})
 
-    except ValueError:
-        return JsonResponse({'Error': 'Formato de fecha inválido. Por favor usa el formato YYYY-MM-DD.'}, status=400)
+    except requests.RequestException as e:
+        return JsonResponse({
+            'error': str(e),
+            'url': url,
+            'status_code': e.response.status_code if e.response else None,
+            'content': e.response.text if e.response else None
+        }, status=500)
     except Exception as e:
         return JsonResponse({'Error': str(e)}, status=500)
+
 
 
 @csrf_exempt

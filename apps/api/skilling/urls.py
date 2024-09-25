@@ -2,9 +2,6 @@ from django.urls import path
 from . import views
 from .controller.registros import (
     proxy_request,
-    verificar,
-    registrosGetAll,
-    getRegistroById,
     filter_registros_fecha_by_id,
 )
 from .controller.ganancias import (
@@ -29,6 +26,7 @@ from .controller.ganancias import (
 # from .controller.cuenta import montosGet
 from .controller.files import upload_fpa, upload_registros, upload_cpa, upload_ganancias
 from .controller.bonos import (
+    obtener_comisiones_by_date_by_id,
     reseteo_bonos,
     get_bono_cpa,
     put_bono_cpa,
@@ -159,10 +157,6 @@ urlpatterns = [
     path("putspread", put_spread, name="putSpread"),
     ################## Crea el valor de las variables de los bonos en base de datos #####################################################
     path("createAllbonos", create_allbonos, name="createAllbonos"),
-    ################## Obtiene todos los registros de registros por id ##################################################################
-    path("registrosbyid/<pk>/", getRegistroById, name="registrosById"),
-    ################## Obtiene todos los registros de registros #########################################################################
-    path("registros/", registrosGetAll, name="registros"),
     ################## Obtiene todos los montos de todos los registros y ganancias a pagar ##############################################
     # path("montos/<pk>/", montosGet, name="montos"),
     ################## Obtiene todos los montos de todos los registros y ganancia a pagar por fecha #####################################
@@ -171,8 +165,6 @@ urlpatterns = [
         filter_ganancia_to_date_by_id,
         name="montosByDate",
     ),
-    ################## Verifica si el cliente ya fondeo su cuenta y existe si idCliente en la DB para la pagina de registro #############
-    path("verificar/", verificar, name="verificar"),
     ################## Elimina un usuario de la base de datos ###########################################################################
     
     #####################################################################################################################################
@@ -193,6 +185,7 @@ urlpatterns = [
     path("cpas/", ganancias_cpa, name="cpa"),
     path("cpas/<pk>/", ganancias_cpa_by_id, name="cpa"),
     path("proxy/<pk>/", proxy_request, name="proxy"),
+    path("comisionesbydate/<pk>/<desde>/<hasta>/", obtener_comisiones_by_date_by_id, name="comisionesByDate"),
     
     
 ]

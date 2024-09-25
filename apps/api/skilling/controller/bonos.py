@@ -1,6 +1,9 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
+import requests
+
+from livecommunity import settings
 from ....utils.formulas import calcula_porcentaje_directo, calcular_porcentaje_indirecto
 from ....utils.funciones import formatera_retiro
 from apps.api.skilling.models import (
@@ -11,11 +14,11 @@ from apps.api.skilling.models import (
     BonoCpaIndirecto,
     CPA
 )
-from ...skilling.models import Registros_ganancias, Registros_cpa
+from ...skilling.models import Registros_ganancias, Registros_cpa, Relation_fpa_client
 import re
 import json
 from decimal import Decimal
-
+import xml.etree.ElementTree as ET
 
 def reseteo_bonos(request):
     if request.method == "GET":
@@ -249,3 +252,65 @@ def create_allbonos(request):
     else:
         # Respuesta si el método no es PUT
         return JsonResponse({"Error": "Metodo inválido"})
+
+
+    """
+    Nuevo codigo para la creacion de bonos
+    
+    """
+    
+    
+@csrf_exempt
+def obtener_comisiones_by_date_by_id(request, pk, desde, hasta):
+    try:
+        url = f"https://go.skillingpartners.com/api/?command=commissions&fromdate={desde}&todate={hasta}"
+        headers = {
+            'x-api-key': settings.SKILLING_API_KEY,
+            'affiliateid': '35881',
+        }
+
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+
+        root = ET.fromstring(response.content)
+
+        data = []
+        client_numbers = set()
+
+        for commission in root.findall('Commission'):
+            tracking_code = commission.find('TrackingCode').text
+            if tracking_code != pk:
+                continue
+
+            trader_id = commission.find('TraderId').text
+            client_number = trader_id.split('-')[-1] if '-' in trader_id else trader_id
+            client_numbers.add(client_number)
+
+            data.append({
+                'commission_id': commission.find('id').text,
+                'id_usuario': client_number,
+                'codigo': tracking_code,
+                'tipo_comision': commission.find('CommissionType').text,
+                'comision': commission.find('Commission').text,
+                'fecha_creacion': commission.find('created').text,
+                'nombre': ''
+            })
+
+        nombres = dict(Relation_fpa_client.objects.filter(client__in=client_numbers).values_list('client', 'full_name'))
+
+        for item in data:
+            item['nombre'] = nombres.get(item['id_usuario'], 'None')
+
+        return JsonResponse({'data': data})
+
+    except requests.RequestException as e:
+        return JsonResponse({
+            'error': str(e),
+            'url': url,
+            'status_code': getattr(e.response, 'status_code', None),
+            'content': getattr(e.response, 'text', None)
+        }, status=500)
+    except ET.ParseError:
+        return JsonResponse({'Error': 'Error al analizar el XML recibido'}, status=500)
+    except Exception as e:
+        return JsonResponse({'Error': str(e)}, status=500)

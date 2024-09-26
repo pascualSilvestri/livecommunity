@@ -53,7 +53,7 @@ const verificarNuevoCliente = async () => {
   const data = await obtenerDatos();
   const cliente = data.registrations[0];
 
-  if (cliente.Status == "VERIFIED") {
+  if (cliente) {
     return true;
   }
   return false;

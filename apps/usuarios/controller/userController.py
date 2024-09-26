@@ -260,6 +260,7 @@ def postNewUser(request):
                     existing_user.registrado = user_data.get("registrado", False) if user_data.get("registrado") is not None else False
                     existing_user.aceptado = user_data.get("status", False) if user_data.get("status") is not None else False
                     existing_user.userTelegram = user_data.get("userTelegram") or existing_user.userTelegram
+                    existing_user.userDiscord = user_data.get("userDiscord") or existing_user.userDiscord
 
                     # Hashear y actualizar la contraseña si está presente
                     if user_data.get("password"):
@@ -306,6 +307,7 @@ def postNewUser(request):
                         registrado=user_data.get("registrado", False) if user_data.get("registrado") is not None else False,
                         aceptado=user_data.get("status", False) if user_data.get("status") is not None else False,
                         userTelegram=user_data.get("userTelegram") or None,
+                        userDiscord=user_data.get("userDiscord") or None
                     )
 
                     print("Usuario nuevo:", new_user)

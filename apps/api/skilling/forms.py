@@ -11,7 +11,8 @@ class ClienteForm(forms.ModelForm):
             'email',
             'telephone',
             'fpa',
-            'userTelegram'
+            'userTelegram',
+            'userDiscord'
             )
 
 

@@ -67,6 +67,7 @@ def clienteform(request):
         telefono = request.POST.get('telephone').strip()
         fpa = request.POST.get('fpa').strip()
         userTelegram = request.POST.get('userTelegram').strip()
+        userDiscord = request.POST.get('userDiscord').strip()
         idCliente = request.POST.get('idcliente').strip()
         
         # Buscar el FPA correspondiente
@@ -93,10 +94,12 @@ def clienteform(request):
                 'idCliente': idCliente,
                 'telephone': telefono,
                 'userTelegram': userTelegram,
+                'userDiscord':userDiscord,
                 'up_line': fpa,
                 'link': f"https://livecommunity.info/Afiliado/{fpa}" if fpa else None,
             }
         )
+        print(userDiscord)
         rol = Rol.objects.get(id=3)
         servicio = Servicio.objects.get(id=1)
         if created:
@@ -121,7 +124,7 @@ def clienteform(request):
                 
                 
         # Mensaje formateado para telegram
-        mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Socio1: {fpa}\nID Socio2: {upline}\nID Cliente: {idCliente}"
+        mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Socio1: {fpa}\nID Socio2: {upline}\nID Cliente: {idCliente} \nUser Discord: {userDiscord}"
         
         try:
             enviar_mensaje_sync(mensaje, chat_id, token)

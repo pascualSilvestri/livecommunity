@@ -1,4 +1,3 @@
-
 //Importamos la funcion send:handle de whatsappCOntroller.js
 import { modalError } from "./modal.js"
 
@@ -6,6 +5,7 @@ import { modalError } from "./modal.js"
 const nombre = document.getElementById('id_nombre')
 const apellido = document.getElementById("id_apellido")
 const userTelegram = document.getElementById("id_userTelegram")
+const userDiscord = document.getElementById("id_userDiscord"); // Agregado
 const email = document.getElementById("id_correo")
 const telefono = document.getElementById("id_telefono")
 const idAfiliado = document.getElementById("id_idAfiliado")
@@ -32,6 +32,7 @@ let errorE = false
 let errorU = false
 let errorT = false
 let errorC = false
+let errorD = false
 
 //Expreciones regulares para validar cada tipo de input
 const redex = {
@@ -75,37 +76,34 @@ function valido(cont) {
 //return un Boolean
 
 const enviarDatos = () => {
-    if (errorN && errorA && errorE && errorT && errorU && errorC) {
+    if (errorN && errorA && errorE && errorT && errorU && errorC && errorD) { // errorD agregado
         return true
     }
 }
 
 async function obtenerDatos() {
     try {
-
-        //http://127.0.0.1:8000/api/verificar/
-        //https://livecommunity.info/api/verificar/
-        const response = await fetch('http://127.0.0.1:8000/api/skilling/verificar/'); // cambiar a localhost para local 
-        if (!response.ok) {
-            throw new Error('Error en la respuesta del servidor');
-        }
-        const data = await response.json();
-        data['data'].forEach(element => {
-            idClientes.push(element);
-        });
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/skilling/proxy/${input.value}/`
+      ); // cambiar a localhost para local
+      if (!response.ok) {
+        throw new Error("Error en la respuesta del servidor");
+      }
+      const data = await response.json();
+      return data;
     } catch (error) {
-        console.error(error);
+      return error;
     }
-}
+  }
 
-obtenerDatos()
 
-const deposito = (array) => {
+const deposito = async (array) => {
 
-    const client = array.filter(c => c.client == input_idCliente.value)
-
-    if(client.length>0){
-        if (client[0].deposit == 1) {
+    const datos = await obtenerDatos(); 
+    const cliente = datos.registrations[0];
+    
+    if(cliente){
+        if (cliente.Net_Deposits > 170 ) {
             return true
         } else {
             return false
@@ -113,9 +111,6 @@ const deposito = (array) => {
     }
     
 }
-
-
-
 
 
 //Logica para validar los inputs 
@@ -239,6 +234,26 @@ function validar(input) {
                 }
 
             }
+
+            if (e.target.id == "id_userDiscord") {
+                if (input.value != "" && redex["usuario"].test(input.value)) {
+                    valido(input)
+                    errorD = true
+                    if (input.value == "") {
+                        errorD = false
+                    }
+                } else {
+                    modalError(errorMensaje.usuario)
+                    if (input.value == "") {
+                        errorD = false
+                    }
+                    if (!errorD) {
+                        error(input)
+                        errorD = false
+                    }
+                }
+            }
+
         })
     }
 }
@@ -355,6 +370,4 @@ validar(apellido)
 validar(email)
 validar(telefono)
 validar(userTelegram)
-
-
-
+validar(userDiscord) // Agregado

@@ -36,6 +36,7 @@ class Usuario(AbstractUser):
     telephone = models.CharField(max_length=15, null=True, blank=True)
     wallet = models.CharField(max_length=100, null=True, blank=True)
     userTelegram = models.CharField(max_length=200, default="none", null=True, blank=True)
+    userDiscord = models.CharField(max_length=200, default="none", null=True, blank=True)
     link = models.CharField(max_length=100, null=True, blank=True)
     registrado = models.BooleanField(default=False)
     aceptado = models.BooleanField(default=False)

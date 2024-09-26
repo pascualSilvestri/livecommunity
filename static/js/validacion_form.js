@@ -101,6 +101,7 @@ const deposito = async (array) => {
 
     const datos = await obtenerDatos(); 
     const cliente = datos.registrations[0];
+    console.log(cliente)
     
     if(cliente){
         if (cliente.Net_Deposits > 170 ) {
@@ -116,7 +117,7 @@ const deposito = async (array) => {
 //Logica para validar los inputs 
 //toma un valor input 
 
-function validar(input) {
+async function validar(input) {
     //verificamos que no es null
     if (input != null) {
         //asociamos un event del tipo keyup para verificar cada ves que se suelta una tecla
@@ -258,7 +259,8 @@ function validar(input) {
     }
 }
 
-function validarId() {
+// Cambiamos la función que llama a deposito para que sea async
+const validarId = async () => {
     if (input_idCliente.value == input_validar.value) {
         console.log(input_idCliente.value)
         console.log(input_validar.value)
@@ -270,9 +272,9 @@ function validarId() {
 }
 
 if (input_idCliente != null){
-    input_idCliente.addEventListener('blur', e => {
+    input_idCliente.addEventListener('blur', async e => { // Cambiado a async
 
-        if (input_idCliente.value != "" && redex["telefono"].test(input_idCliente.value) && validarId() && deposito(idClientes)) {
+        if (input_idCliente.value != "" && redex["telefono"].test(input_idCliente.value) && await validarId() && await deposito(idClientes)) { // Agregado await
             valido(input_idCliente)
     
             mensaje_verificado.style.display = 'block'
@@ -288,9 +290,9 @@ if (input_idCliente != null){
             if (input_idCliente.value == "") {
                 errorC = false
             }
-        } else if (deposito(idClientes)==false) {
+        } else if (await deposito(idClientes) == false) { // Agregado await
             modalError(errorMensaje.noDeposito)
-            if (input_idCliente.value == "" || !validar()) {
+            if (input_idCliente.value == "" || !await validar()) { // Agregado await
                 errorC = false
             }
             if (!errorC) {
@@ -306,7 +308,7 @@ if (input_idCliente != null){
                 top: 1200,
                 behavior: "smooth"
             });
-            if (input_idCliente.value == "" || !validar()) {
+            if (input_idCliente.value == "" || !await validar()) { // Agregado await
                 errorC = false
             }
             if (!errorC) {
@@ -346,20 +348,6 @@ if (form != null) {
        
     })
 }
-
-
-
-// btn.addEventListener('click', e => {
-
-//     if (enviarDatos()) {
-//         const confirmar = confirm("Confirma que los datos estan ingresados correctamente")
-//         if (confirmar) {
-//             form.submit()
-//             send_handle()
-//         }
-
-//     }
-// })
 
 
 

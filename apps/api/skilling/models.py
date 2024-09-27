@@ -163,18 +163,44 @@ class Cuenta(models.Model):
 
 
 class PagoRealizado(models.Model):
+
     id_pagos = models.AutoField(primary_key=True, verbose_name='ID')
     fpa = models.CharField(max_length=50)
     date = models.DateField(auto_now_add=True)
     monto_total = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_pagado = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
+    monto_spread_directo = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
+    monto_spread_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
     monto_cpa = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    monto_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
     monto_bono_indirecto = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
     monto_bono_directo = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
-    
+    desde = models.DateField(null=True)
+    hasta = models.DateField(null=True)
+    deal_id = models.CharField(max_length=100, null=True, blank=True)  # Opcional para ganancias
+    commission_id = models.CharField(max_length=100, null=True, blank=True)  # Opcional para CPA
+    id_db = models.IntegerField()  # Siempre obligatorio
+    id_pago = models.CharField(max_length=100)  # Siempre obligatorio
+
     def __str__(self):
-        return self.fpa
+        return f"{self.fpa} - {self.tipo_pago} - {self.date}"
+
+    @classmethod
+    def registrar_pago(cls, fpa, monto_total, tipo_pago, id_db, id_pago, deal_id=None, commission_id=None, monto_cpa=0, monto_indirecto=0, monto_bono_indirecto=0, monto_bono_directo=0):
+        # Crear un nuevo registro de pago
+        pago = cls(
+            fpa=fpa,
+            monto_total=monto_total,
+            monto_cpa=monto_cpa,
+            monto_indirecto=monto_indirecto,
+            monto_bono_indirecto=monto_bono_indirecto,
+            monto_bono_directo=monto_bono_directo,
+            tipo_pago=tipo_pago,
+            deal_id=deal_id,
+            commission_id=commission_id,
+            id_db=id_db,
+            id_pago=id_pago
+        )
+        pago.save()
+        return pago
 
 
 class BonoAPagar(models.Model):

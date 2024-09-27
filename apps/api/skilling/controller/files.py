@@ -76,6 +76,10 @@ def upload_fpa(request):
 
     else:
         return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=405)
+    
+    
+    
+    
 @csrf_exempt
 def upload_ganancias(request):
     if request.method == "POST" and request.FILES.get("csvFileGanancias"):

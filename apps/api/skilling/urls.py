@@ -23,6 +23,7 @@ from .controller.ganancias import (
     ganancia_a_pagar,
     filterGananciasFechaById,
     obtener_ganancias_cpa_spread_bonos,
+    obtener_ganancias_cpa_spread_bonos_todos
 )
 # from .controller.cuenta import montosGet
 from .controller.files import upload_fpa, upload_registros, upload_cpa, upload_ganancias
@@ -187,6 +188,7 @@ urlpatterns = [
     path("cpas/<pk>/", ganancias_cpa_by_id, name="cpa"),
     path("proxy/<pk>/", proxy_request, name="proxy"),
     path("comisionesbydate/<pk>/<desde>/<hasta>/", obtener_ganancias_cpa_spread_bonos, name="comisionesByDate"),
-    
+    path("comisionesbydateAllUsers/<desde>/<hasta>/", obtener_ganancias_cpa_spread_bonos_todos, name="comisionesByDateTodos"),
+
     
 ]

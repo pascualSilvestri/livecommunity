@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from ....utils.limpiarTablas import limpiar_datos_fpa, limpiar_registros,limpiar_cpa,limpiar_ganacias
-from ....utils.funciones import existe,existe_cpa,existe_ganancia
+from ....utils.funciones import existe,existe_cpa,existe_ganancia, parse_date
 from ....utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ....utils.bonos import bonoDirecto,bonoIndirecto
 from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
@@ -76,7 +76,99 @@ def upload_fpa(request):
 
     else:
         return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=405)
+@csrf_exempt
+def upload_ganancias(request):
+    if request.method == "POST" and request.FILES.get("csvFileGanancias"):
+        try:
+            # Cargar datos para búsqueda rápida
+            fpas = {int(fpa['client']): fpa for fpa in Relation_fpa_client.objects.all().values('client', 'fpa', 'full_name')}
+            spred = list(Spread.objects.all())
+            usuarios = {usuario.fpa: usuario for usuario in Usuario.objects.all()}
 
+            excel_file = request.FILES["csvFileGanancias"]
+            file_name = excel_file.name
+            file_extension = os.path.splitext(file_name)[1]
+
+            if file_extension != ".csv":
+                return JsonResponse({"error": "El documento no tiene el formato correcto"}, status=402)
+
+            # Leer y limpiar datos
+            file_data = pd.read_csv(excel_file)
+            new_data = limpiar_ganacias(file_data)
+
+            # Obtener los `deal_id` existentes para evitar duplicados
+            existing_deal_ids = set(Registros_ganancias.objects.values_list('deal_id', flat=True))
+
+            ganancias_a_crear = []
+            spread_indirectos_a_crear = []
+
+            for g in new_data:
+                if g['partner_earning'] <= 0 or pd.isna(g['partner_earning']):
+                    continue
+
+                # Verificar si `deal_id` ya existe
+                if g['deal_id'] in existing_deal_ids:
+                    continue
+
+                # Convertir 'client' a entero antes de buscar en `fpas`
+                client_id = int(g['client'])
+                fpa_info = fpas.get(client_id, None)
+                print(fpa_info)  # Depuración
+
+                fpa = fpa_info['fpa'] if fpa_info else None
+                full_name = fpa_info['full_name'] if fpa_info else ''
+                usuario = usuarios.get(fpa)
+
+                fecha_first_trade = parse_date(str(g["fecha_operacion"]))
+                monto_a_pagar = round(calcula_porcentaje_directo(float(g['partner_earning']), spred[0].porcentaje, spred[1].porcentaje), 2)
+
+                ganancia = Registros_ganancias(
+                    client=str(client_id),
+                    position=str(int(g['position'])),
+                    symbol=g['symbol'],
+                    fpa=fpa,
+                    full_name=full_name,
+                    partner_earning=g['partner_earning'],
+                    monto_a_pagar=monto_a_pagar,
+                    fecha_operacion=fecha_first_trade,
+                    deal_id=g['deal_id'],
+                    spreak_direct=spred[1].porcentaje,
+                    spreak_indirecto=spred[2].porcentaje,
+                    spreak_socio=spred[0].porcentaje
+                )
+                ganancias_a_crear.append(ganancia)
+
+                if usuario and usuario.up_line:
+                    monto_indirecto = round(calcular_porcentaje_indirecto(monto_a_pagar, spred[2].porcentaje), 2)
+                    if monto_indirecto > 0:
+                        spread_indirecto = SpreadIndirecto(
+                            monto=Decimal(monto_indirecto),
+                            fpa_child=fpa,
+                            fpa=usuario.up_line,
+                            fecha_creacion=fecha_first_trade
+                        )
+                        spread_indirectos_a_crear.append(spread_indirecto)
+
+            # Crear registros en lote
+            if ganancias_a_crear:
+                Registros_ganancias.objects.bulk_create(ganancias_a_crear)
+            if spread_indirectos_a_crear:
+                SpreadIndirecto.objects.bulk_create(spread_indirectos_a_crear)
+
+        except Exception as e:
+            print(str(e))
+            return JsonResponse({"Error": str(e)}, status=502)
+
+        return JsonResponse({"message": "Archivo CSV recibido y procesado exitosamente."})
+    else:
+        return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400)
+
+
+    """
+    ##############################################################################################################################################
+    COdigos que vvna a desaparecer 
+    ##############################################################################################################################################
+    """
 
 
 @csrf_exempt
@@ -184,6 +276,7 @@ def upload_registros(request):
         )
 
 
+
     
 @csrf_exempt
 def upload_cpa(request):
@@ -277,96 +370,6 @@ def upload_cpa(request):
         return JsonResponse(
             {"error": "Se esperaba un archivo xlsx en la solicitud POST."}, status=400
         )
-
-@csrf_exempt
-def upload_ganancias(request):
-    if request.method == "POST" and request.FILES.get("csvFileGanancias"):
-        try:
-            fpas = Relation_fpa_client.objects.all()
-            spred = Spread.objects.all()
-            
-            excel_file = request.FILES["csvFileGanancias"]
-            file_name = excel_file.name
-            file_extension = os.path.splitext(file_name)[1]
-
-            if file_extension != ".csv":
-                return JsonResponse({"error": "El documento no tiene el formato correcto"}, status=402)
-
-            file_data = pd.read_csv(excel_file)
-            new_data = limpiar_ganacias(file_data)
-            
-            ganancias_a_crear = []
-            spread_indirectos_a_crear = []
-            
-            # Obtener todas las ganancias existentes de una vez
-            ganancias_existentes = Registros_ganancias.objects.all()
-            
-            for g in new_data:
-                if g['partner_earning'] <= 0 or g['partner_earning'] == 'NaN':
-                    continue
-
-                fpa_id = fpas.filter(client=int(g['client'])).first()
-                if fpa_id:
-                    fpa = fpa_id.fpa
-                    full_name = fpa_id.full_name
-                    usuario = Usuario.objects.filter(fpa=fpa).first()
-                else:
-                    fpa = None
-                    full_name = ''
-                    usuario = None
-
-                fecha_first_trade = parse_date(str(g["fecha_operacion"]))
-                
-                monto_a_pagar = round(calcula_porcentaje_directo(float(g['partner_earning']), spred[0].porcentaje, spred[1].porcentaje), 2)
-                
-                ganancia = Registros_ganancias(
-                    client=str(int(g['client'])),
-                    position=str(int(g['position'])),
-                    symbol=g['symbol'],
-                    fpa=fpa,
-                    full_name=full_name,
-                    partner_earning=g['partner_earning'],
-                    monto_a_pagar=monto_a_pagar,
-                    fecha_operacion=fecha_first_trade,
-                    deal_id=g['deal_id'],
-                    spreak_direct=spred[1].porcentaje,
-                    spreak_indirecto=spred[2].porcentaje,
-                    spreak_socio=spred[0].porcentaje
-                )
-                
-                if not existe_ganancia(ganancia, ganancias_existentes):
-                    ganancias_a_crear.append(ganancia)
-                    
-                    if usuario and usuario.uplink:
-                        monto_indirecto = round(calcular_porcentaje_indirecto(monto_a_pagar, spred[2].porcentaje), 2)
-                        if monto_indirecto > 0:
-                            spread_indirecto = SpreadIndirecto(
-                                monto=Decimal(monto_indirecto),
-                                fpa_child=fpa,
-                                fpa=usuario.uplink,
-                                fecha_creacion=fecha_first_trade
-                            )
-                            spread_indirectos_a_crear.append(spread_indirecto)
-
-            # Crear registros en lote
-            Registros_ganancias.objects.bulk_create(ganancias_a_crear)
-            SpreadIndirecto.objects.bulk_create(spread_indirectos_a_crear)
-
-        except Exception as e:
-            print(str(e))
-            return JsonResponse({"Error": str(e)}, status=502)
-        
-        return JsonResponse({"message": "Archivo CSV recibido y procesado exitosamente."})
-    else:
-        return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400)
-
-def parse_date(date_string):
-    if date_string == "nan":
-        return None
-    return datetime.strptime(date_string, "%Y-%m-%d").date()
-
-
-
 
 
 

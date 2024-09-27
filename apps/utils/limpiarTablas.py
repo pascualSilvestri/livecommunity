@@ -80,24 +80,21 @@ def limpiar_cpa(dataframe):
 
 
 def limpiar_ganacias(dataFrame):
-
     column_mapping = {
-        'Customer ID':'client',
-        'Position ID':'position',
-        'Symbol':'symbol',
-        'Direction':'direccion',
-        'Volume Traded (units)':'volumen_trader',
-        'Volume (USD)':'volumne',
-        'Trade date':'fecha_operacion',
-        'Trade Time (GMT)':'hora_operacion',
-        'Realized PnL':'pnl',
-        'Platform':'plataforma',
-        'Partner Earnings (USD)':'partner_earning',
-        'Deal ID':'deal_id'
+        'Customer ID': 'client',
+        'Position ID': 'position',
+        'Symbol': 'symbol',
+        'Direction': 'direccion',
+        'Volume Traded (units)': 'volumen_trader',
+        'Volume (USD)': 'volumne',
+        'Trade date': 'fecha_operacion',
+        'Trade Time (GMT)': 'hora_operacion',
+        'Realized PnL': 'pnl',
+        'Platform': 'plataforma',
+        'Partner Earnings (USD)': 'partner_earning',
+        'Deal ID': 'deal_id'
     }
 
     dataFrame.rename(columns=column_mapping, inplace=True)
-
     dataFrame = dataFrame[['client', 'position', 'symbol', 'fecha_operacion', 'partner_earning', 'deal_id']]
-
     return dataFrame.to_dict(orient='records')

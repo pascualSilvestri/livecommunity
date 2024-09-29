@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CPA, BonoAPagar, BonoCpa, BonoCpaIndirecto, Cuenta, Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias, Spread,SpreadIndirecto,Cpa_a_pagar, PagoRealizado
+from .models import CPA, BonoAPagar, BonoCpa, BonoCpaIndirecto, Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias, Spread,SpreadIndirecto,Cpa_a_pagar, Bono_directo_pagado, Bono_indirecto_pagado, Cpa_directo_pagado, Cpa_indirecto_pagado, CpaIndirecto, Spread_directo_pagado, Spread_indirecto_pagado
 # Register your models here.
 admin.site.register(Relation_fpa_client)
 admin.site.register(Registro_archivo)
@@ -10,8 +10,13 @@ admin.site.register(Cpa_a_pagar)
 admin.site.register(BonoCpa)
 admin.site.register(BonoCpaIndirecto)
 admin.site.register(Spread)
-admin.site.register(Cuenta)
 admin.site.register(BonoAPagar)
 admin.site.register(CPA)
-admin.site.register(PagoRealizado)
+admin.site.register(Bono_directo_pagado)
+admin.site.register(Bono_indirecto_pagado)
+admin.site.register(Cpa_directo_pagado)
+admin.site.register(Cpa_indirecto_pagado)
+admin.site.register(CpaIndirecto)
+admin.site.register(Spread_directo_pagado)
+admin.site.register(Spread_indirecto_pagado)
 

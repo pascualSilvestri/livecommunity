@@ -5,7 +5,7 @@ from ....utils.funciones import existe,existe_cpa,existe_ganancia, parse_date
 from ....utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ....utils.bonos import bonoDirecto,bonoIndirecto
 from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
-from apps.api.skilling.models import Cuenta,Spread,BonoCpa,BonoCpaIndirecto,CPA
+from apps.api.skilling.models import Spread,BonoCpa,BonoCpaIndirecto,CPA
 from apps.usuarios.models import Usuario
 from datetime import datetime
 import pandas as pd
@@ -60,7 +60,7 @@ def upload_fpa(request):
                         )
 
                         # Crear cuenta si no existe
-                        Cuenta.objects.get_or_create(fpa=data["fpa"])
+                        
 
                     except Exception as e:
                         print(e)
@@ -282,98 +282,98 @@ def upload_registros(request):
 
 
     
-@csrf_exempt
-def upload_cpa(request):
-    if request.method == "POST" and request.FILES.get("csvFileCpa"):
-        try:
-            fpas = Relation_fpa_client.objects.all()
-            cpas = Registros_cpa.objects.all()
-            cpa_value = CPA.objects.filter(id=1).first()
-            excel_file = request.FILES["csvFileCpa"]
-            file_name = excel_file.name  # Obtengon el nombre del archivo
-            file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
+# @csrf_exempt
+# def upload_cpa(request):
+#     if request.method == "POST" and request.FILES.get("csvFileCpa"):
+#         try:
+#             fpas = Relation_fpa_client.objects.all()
+#             cpas = Registros_cpa.objects.all()
+#             cpa_value = CPA.objects.filter(id=1).first()
+#             excel_file = request.FILES["csvFileCpa"]
+#             file_name = excel_file.name  # Obtengon el nombre del archivo
+#             file_extension = os.path.splitext(file_name)[1]  # obtengo la extencion del archivo
 
-            if file_extension == ".xlsx":
-                file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
-                new_data= limpiar_cpa(file_data)
+#             if file_extension == ".xlsx":
+#                 file_data = pd.read_excel(excel_file,engine='openpyxl')  # obtengo los datos de larchivo
+#                 new_data= limpiar_cpa(file_data)
                 
                     
-                for cpa in new_data:
+#                 for cpa in new_data:
 
-                    fecha_creacion_string = str(cpa["fecha_creacion"])
-                    if fecha_creacion_string == "none":
-                        fecha_creacion = None
-                    else:
-                        fecha_creacion = datetime.strptime(
-                            fecha_creacion_string, "%Y-%m-%d"
-                        ).date()
+#                     fecha_creacion_string = str(cpa["fecha_creacion"])
+#                     if fecha_creacion_string == "none":
+#                         fecha_creacion = None
+#                     else:
+#                         fecha_creacion = datetime.strptime(
+#                             fecha_creacion_string, "%Y-%m-%d"
+#                         ).date()
 
-                    cpa_queryset = cpas.filter(client=cpa['client'])
+#                     cpa_queryset = cpas.filter(client=cpa['client'])
                     
-                    if cpa_queryset.exists():
-                        pass
-                    else:
-                        fpa_id = fpas.filter(client=cpa['client']).first()
-                        if fpa_id:
-                            fpa = fpa_id.fpa
-                        else:
-                            fpa = None
+#                     if cpa_queryset.exists():
+#                         pass
+#                     else:
+#                         fpa_id = fpas.filter(client=cpa['client']).first()
+#                         if fpa_id:
+#                             fpa = fpa_id.fpa
+#                         else:
+#                             fpa = None
 
-                        new_cpa = Registros_cpa(
-                            fecha_creacion= fecha_creacion,
-                            monto_real= cpa['monto'],
-                            monto= cpa_value.cpa,
-                            cpa= cpa['cpa'],
-                            client= cpa['client'],
-                            fpa= fpa
-                        )
+#                         new_cpa = Registros_cpa(
+#                             fecha_creacion= fecha_creacion,
+#                             monto_real= cpa['monto'],
+#                             monto= cpa_value.cpa,
+#                             cpa= cpa['cpa'],
+#                             client= cpa['client'],
+#                             fpa= fpa
+#                         )
                         
                         
-                        # if not existe_cpa(fecha_creacion,cpa['monto'],cpa['client'],cpa['fpa'],cpas):
-                        bono_directo = BonoCpa
-                        bono_indirecto = BonoCpaIndirecto
+#                         # if not existe_cpa(fecha_creacion,cpa['monto'],cpa['client'],cpa['fpa'],cpas):
+#                         bono_directo = BonoCpa
+#                         bono_indirecto = BonoCpaIndirecto
 
-                        if fpa != None:
-                            cuenta = Cuenta.objects.filter(fpa=fpa).first()
+#                         if fpa != None:
+#                             cuenta = Cuenta.objects.filter(fpa=fpa).first()
                                 
-                            if cuenta.fpa != 'none':
+#                             if cuenta.fpa != 'none':
                                 
-                                usuario_up_line = Usuario.objects.filter(fpa=fpa)
-                                if usuario_up_line.exists():
-                                    up_line_usuario = usuario_up_line.first().uplink
-                                    cuenta_up_line = Cuenta.objects.filter(fpa=up_line_usuario)
-                                else:
-                                    cuenta_up_line = None
-                                cuenta.monto_cpa += Decimal(cpa_value.cpa)
-                                # cuenta.monto_a_pagar += Decimal(cpa['monto'])
-                                cuenta.cpa += 1
-                                bonoDirecto(cuenta,bono_directo)
-                                bonoIndirecto(cuenta,bono_indirecto)
-                                if cuenta_up_line != None:
-                                    if cuenta_up_line.exists():
-                                        cuenta_up = cuenta_up_line.first()
-                                        cuenta_up.cpaIndirecto += 1
-                                        bonoIndirecto(cuenta_up,bono_indirecto)
-                                        cuenta_up.save()
-                                new_cpa.save()
-                                cuenta.save()
-                                # usuario_up_line[0].save()
+#                                 usuario_up_line = Usuario.objects.filter(fpa=fpa)
+#                                 if usuario_up_line.exists():
+#                                     up_line_usuario = usuario_up_line.first().uplink
+#                                     cuenta_up_line = Cuenta.objects.filter(fpa=up_line_usuario)
+#                                 else:
+#                                     cuenta_up_line = None
+#                                 cuenta.monto_cpa += Decimal(cpa_value.cpa)
+#                                 # cuenta.monto_a_pagar += Decimal(cpa['monto'])
+#                                 cuenta.cpa += 1
+#                                 bonoDirecto(cuenta,bono_directo)
+#                                 bonoIndirecto(cuenta,bono_indirecto)
+#                                 if cuenta_up_line != None:
+#                                     if cuenta_up_line.exists():
+#                                         cuenta_up = cuenta_up_line.first()
+#                                         cuenta_up.cpaIndirecto += 1
+#                                         bonoIndirecto(cuenta_up,bono_indirecto)
+#                                         cuenta_up.save()
+#                                 new_cpa.save()
+#                                 cuenta.save()
+#                                 # usuario_up_line[0].save()
 
-            else:
-                print("ErrorMessege Document is not format")
-                return JsonResponse({"error": "Document is not format"},status=400)
-        except Exception as e:
-            print(str(e))
-            return JsonResponse({"error": str(e)},status=400)
-        print("message Archivo CSV recibido y procesado exitosamente.")
-        return JsonResponse(
-            {"message": "Archivo CSV recibido y procesado exitosamente."}
-        )
-    else:
-        print("error Se esperaba un archivo CSV en la solicitud POST.")
-        return JsonResponse(
-            {"error": "Se esperaba un archivo xlsx en la solicitud POST."}, status=400
-        )
+#             else:
+#                 print("ErrorMessege Document is not format")
+#                 return JsonResponse({"error": "Document is not format"},status=400)
+#         except Exception as e:
+#             print(str(e))
+#             return JsonResponse({"error": str(e)},status=400)
+#         print("message Archivo CSV recibido y procesado exitosamente.")
+#         return JsonResponse(
+#             {"message": "Archivo CSV recibido y procesado exitosamente."}
+#         )
+#     else:
+#         print("error Se esperaba un archivo CSV en la solicitud POST.")
+#         return JsonResponse(
+#             {"error": "Se esperaba un archivo xlsx en la solicitud POST."}, status=400
+#         )
 
 
 

@@ -6,7 +6,6 @@ from .models import (
     Registros_ganancias,
     Registros_cpa,
     SpreadIndirecto,
-    Cuenta,
     BonoAPagar,
     Spread
 )
@@ -41,10 +40,6 @@ class SpreadIndirectoSerializer(serializers.ModelSerializer):
         model = SpreadIndirecto
         fields = '__all__'
 
-class CuentaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Cuenta
-        fields = '__all__'
 
 class BonoAPagarSerializer(serializers.ModelSerializer):
     class Meta:

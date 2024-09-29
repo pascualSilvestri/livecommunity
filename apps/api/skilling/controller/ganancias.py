@@ -13,7 +13,6 @@ from ...skilling.models import (
     Registros_ganancias,
     Registros_cpa,
     SpreadIndirecto,
-    Cuenta,
     BonoAPagar,
     Spread,
 )

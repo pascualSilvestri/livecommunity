@@ -26,10 +26,8 @@ from .controller.ganancias import (
     obtener_ganancias_cpa_spread_bonos_todos
 )
 # from .controller.cuenta import montosGet
-from .controller.files import upload_fpa, upload_registros, upload_cpa, upload_ganancias
+from .controller.files import upload_fpa, upload_ganancias
 from .controller.bonos import (
-    # obtener_comisiones_by_date_by_id,
-    reseteo_bonos,
     get_bono_cpa,
     put_bono_cpa,
     get_spread,
@@ -88,16 +86,9 @@ urlpatterns = [
 
     ################## Procesar archivos fpa ############################################################################################
     path("archivofpa/", upload_fpa, name="archivoFpa"),
-    ################## Procesar archivos registro #######################################################################################
-    path("archivoregistros/", upload_registros, name="archivoRegistros"),
-    ################## Procesar archivos cpa ############################################################################################
-    path("archivocpa/", upload_cpa, name="archivoCpa"),
     ################## Procesar archivos ganancias ######################################################################################
     path("archivoganancias/", upload_ganancias, name="archivoGanancias"),
     ################## Resetear bonos ###################################################################################################
-    path( "resetBono", reseteo_bonos, name="reset_bonos"),  # Este endpoint va ser eliminaod cuando se elimine el boton de resetar bonos
-    ################## Cambio de contraseña basico por el perfil del usuario ############################################################
-    
     ################## Obtener todos los registros de ganancias #########################################################################
     path("ganancias/", ganancia_get_all, name="ganancias"),
     ################## Obtener todos los registros de ganancias  por id #################################################################

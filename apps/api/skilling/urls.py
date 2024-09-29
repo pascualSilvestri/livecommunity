@@ -187,8 +187,8 @@ urlpatterns = [
     path("cpas/", ganancias_cpa, name="cpa"),
     path("cpas/<pk>/", ganancias_cpa_by_id, name="cpa"),
     path("proxy/<pk>/", proxy_request, name="proxy"),
-    path("comisionesbydate/<pk>/<desde>/<hasta>/", obtener_ganancias_cpa_spread_bonos, name="comisionesByDate"),
-    path("comisionesbydateAllUsers/<desde>/<hasta>/", obtener_ganancias_cpa_spread_bonos_todos, name="comisionesByDateTodos"),
+    path("ganancias-cpa-bonos-by-fpa/<pk>/<desde>/<hasta>/", obtener_ganancias_cpa_spread_bonos, name="gananciasCpaBonosByFpa"),
+    path("ganancias-cpa-bonos-all-users/<desde>/<hasta>/", obtener_ganancias_cpa_spread_bonos_todos, name="gananciasCpaBonosAllUsers"),
 
     
 ]

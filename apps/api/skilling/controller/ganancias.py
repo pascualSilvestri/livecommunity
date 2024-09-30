@@ -905,6 +905,85 @@ def ganancia_a_pagar(request):
 ##############  Nueva estructura de calculo de ganancias 
 ##############
 ########################################################################################
+# @csrf_exempt
+# def obtener_ganancias_cpa_spread_bonos(request, pk, desde, hasta):
+#     """
+#     Obtiene las ganancias, comisiones y bonos de un usuario específico en un rango de fechas determinado.
+
+#     Esta función filtra las comisiones directas y de la línea descendente, y calcula los montos
+#     de los bonos directos e indirectos.
+
+#     Args:
+#         request (HttpRequest): Objeto de la solicitud HTTP.
+#         pk (int): ID del usuario para el cual se obtienen las ganancias.
+#         desde (str): Fecha de inicio del rango en formato 'YYYY-MM-DD'.
+#         hasta (str): Fecha de fin del rango en formato 'YYYY-MM-DD'.
+
+#     Returns:
+#         JsonResponse: Un objeto que contiene los montos de spread directo, spread indirecto,
+#                       bonos y comisiones.
+
+#     Raises:
+#         Exception: Si ocurre algún error durante el proceso.
+#     """
+#     try:
+#         # Llamada a la funcion de la libreria utils para obtener las comisiones de la api de skilling por el id del usuaario
+#         comisiones_totales = obtener_comisiones_api_skilling(desde, hasta)
+#         usuario_downline = Usuario.objects.filter(up_line=pk, fpa__isnull=False).values(
+#             "fpa"
+#         )
+#         usuarios_list = list(usuario_downline)
+#         usuarios_list = [usuario["fpa"] for usuario in usuarios_list]
+
+#         comisiones_directas = [
+#             {**comision, "monto_cpa": CPA.objects.first().cpa}  # Agregado monto_cpa
+#             for comision in comisiones_totales
+#             if comision["codigo"] == "LA508S"
+#         ]
+#         comision_total = len(comisiones_directas) * int(CPA.objects.first().cpa)
+
+#         comisiones_downline = [
+#             {**comision, "monto_cpa": CPA.objects.first().cpa}  # Agregado monto_cpa
+#             for comision in comisiones_totales
+#             if comision["codigo"] in usuarios_list
+#         ]
+        
+#         # Obtener bono indirecto
+#         monto_bono_indirecto, level_bono_indirecto = bonoIndirecto(comisiones_downline,comisiones_directas, BonoCpaIndirecto)
+
+#         # Obtener bono directo
+#         monto_bono_directo, level_bono_directo = bonoDirecto(comisiones_directas, BonoCpa)
+
+#         # Obtencion de las ganancias de la base de datos
+#         ganancias = Registros_ganancias.objects.filter(fecha_operacion__range=(desde, hasta), fpa=pk)
+#         spread_indirecto_registros = SpreadIndirecto.objects.filter(fecha_creacion__range=(desde, hasta),fpa=pk)
+#         ganancias_list = list(ganancias.values())
+#         spread_indirecto_list = list(spread_indirecto_registros.values())
+#         spread_directo = sum(g.monto_a_pagar for g in ganancias)
+#         spread_indirecto = sum(s.get('monto') for s in spread_indirecto_list)
+
+#         # Convertir los QuerySets a listas de diccionarios
+        
+#         return JsonResponse(
+#             {
+#                 "spread_directo": spread_directo,
+#                 "comision_cpa_total": comision_total,
+#                 "spread_indirecto": spread_indirecto,
+#                 "monto_bono_indirecto": monto_bono_indirecto,
+#                 "level_bono_indirecto": level_bono_indirecto,
+#                 "monto_bono_directo": monto_bono_directo,
+#                 "level_bono_directo": level_bono_directo,
+#                 "ganancias": ganancias_list,
+#                 "spread_indirecto_list": spread_indirecto_list,
+#                 "comisiones_directas": comisiones_directas,
+#                 "comisiones_downline": comisiones_downline,
+#                 "usuarios_downline": usuarios_list,
+#             }
+#         )
+#     except Exception as e:
+#         return JsonResponse({"Error": e.__str__()})
+
+
 @csrf_exempt
 def obtener_ganancias_cpa_spread_bonos(request, pk, desde, hasta):
     """
@@ -927,43 +1006,67 @@ def obtener_ganancias_cpa_spread_bonos(request, pk, desde, hasta):
         Exception: Si ocurre algún error durante el proceso.
     """
     try:
-        # Llamada a la funcion de la libreria utils para obtener las comisiones de la api de skilling por el id del usuaario
+        # Obtener el usuario y su fpa
+        usuario = Usuario.objects.get(fpa=pk)
+        fpa = usuario.fpa
+
+        # Obtener usuarios downline
+        usuarios_downline = Usuario.objects.filter(up_line=fpa, fpa__isnull=False).values_list('fpa', flat=True)
+
+        # Obtener el valor de CPA
+        cpa_obj = CPA.objects.first()
+        cpa_value = int(cpa_obj.cpa) if cpa_obj else 0
+
+        # Obtener comisiones una sola vez
         comisiones_totales = obtener_comisiones_api_skilling(desde, hasta)
-        usuario_downline = Usuario.objects.filter(up_line=pk, fpa__isnull=False).values(
-            "fpa"
+
+        # Crear un diccionario para acceder rápidamente a comisiones por código
+        comisiones_por_codigo = defaultdict(list)
+        for com in comisiones_totales:
+            comisiones_por_codigo[com['codigo']].append(com)
+
+        # Obtener comisiones directas y actualizar el campo 'comision'
+        comisiones_directas = comisiones_por_codigo.get(fpa, [])
+        for com in comisiones_directas:
+            com['comision'] = cpa_value
+
+        # Obtener comisiones downline y actualizar el campo 'comision'
+        comisiones_downline = []
+        for downline_fpa in usuarios_downline:
+            downline_comisiones = comisiones_por_codigo.get(downline_fpa, [])
+            for com in downline_comisiones:
+                com['comision'] = cpa_value
+            comisiones_downline.extend(downline_comisiones)
+
+        # Calcular la comisión total
+        comision_total = len(comisiones_directas) * cpa_value
+
+        # Obtener bonos
+        monto_bono_indirecto, level_bono_indirecto = bonoIndirecto(
+            comisiones_downline, comisiones_directas, BonoCpaIndirecto
         )
-        usuarios_list = list(usuario_downline)
-        usuarios_list = [usuario["fpa"] for usuario in usuarios_list]
+        monto_bono_directo, level_bono_directo = bonoDirecto(
+            comisiones_directas, BonoCpa
+        )
 
-        comisiones_directas = [
-            {**comision, "monto_cpa": CPA.objects.first().cpa}  # Agregado monto_cpa
-            for comision in comisiones_totales
-            if comision["codigo"] == "LA508S"
-        ]
-        comision_total = len(comisiones_directas) * int(CPA.objects.first().cpa)
+        # Obtener ganancias y spread indirecto del usuario
+        ganancias = Registros_ganancias.objects.filter(
+            fecha_operacion__range=(desde, hasta),
+            fpa=fpa
+        )
+        spread_indirecto_registros = SpreadIndirecto.objects.filter(
+            fecha_creacion__range=(desde, hasta),
+            fpa=fpa
+        )
 
-        comisiones_downline = [
-            {**comision, "monto_cpa": CPA.objects.first().cpa}  # Agregado monto_cpa
-            for comision in comisiones_totales
-            if comision["codigo"] in usuarios_list
-        ]
-        
-        # Obtener bono indirecto
-        monto_bono_indirecto, level_bono_indirecto = bonoIndirecto(comisiones_downline,comisiones_directas, BonoCpaIndirecto)
+        # Calcular spreads
+        spread_directo = ganancias.aggregate(total=Sum('monto_a_pagar'))['total'] or 0
+        spread_indirecto = spread_indirecto_registros.aggregate(total=Sum('monto'))['total'] or 0
 
-        # Obtener bono directo
-        monto_bono_directo, level_bono_directo = bonoDirecto(comisiones_directas, BonoCpa)
+        # Serializar los datos
+        ganancias_list = RegistrosGananciasSerializer(ganancias, many=True).data
+        spread_indirecto_list = SpreadIndirectoSerializer(spread_indirecto_registros, many=True).data
 
-        # Obtencion de las ganancias de la base de datos
-        ganancias = Registros_ganancias.objects.filter(fecha_operacion__range=(desde, hasta), fpa=pk)
-        spread_indirecto_registros = SpreadIndirecto.objects.filter(fecha_creacion__range=(desde, hasta),fpa=pk)
-        ganancias_list = list(ganancias.values())
-        spread_indirecto_list = list(spread_indirecto_registros.values())
-        spread_directo = sum(g.monto_a_pagar for g in ganancias)
-        spread_indirecto = sum(s.get('monto') for s in spread_indirecto_list)
-
-        # Convertir los QuerySets a listas de diccionarios
-        
         return JsonResponse(
             {
                 "spread_directo": spread_directo,
@@ -977,13 +1080,11 @@ def obtener_ganancias_cpa_spread_bonos(request, pk, desde, hasta):
                 "spread_indirecto_list": spread_indirecto_list,
                 "comisiones_directas": comisiones_directas,
                 "comisiones_downline": comisiones_downline,
-                "usuarios_downline": usuarios_list,
+                "usuarios_downline": list(usuarios_downline),
             }
         )
     except Exception as e:
-        return JsonResponse({"Error": e.__str__()})
-
-
+        return JsonResponse({"Error": str(e)})
 
 #########################################################################################################################
 #

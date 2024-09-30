@@ -153,79 +153,102 @@ class BonoAPagar(models.Model):
         return self.fpa
 
 
-
 class Spread_directo_pagado(models.Model):
-    id= models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     client = models.CharField(max_length=100)
-    symbol=models.CharField(max_length=100)
-    deal_id=models.CharField(max_length=100)
-    fpa=models.CharField(max_length=200,null=True)
+    symbol = models.CharField(max_length=100)
+    deal_id = models.CharField(max_length=100)
+    fpa = models.CharField(max_length=200, null=True)
     full_name = models.CharField(max_length=200)
     partner_earning = models.DecimalField(max_digits=10, decimal_places=2)
-    monto_a_pagar= models.DecimalField(max_digits=10, decimal_places=2)
+    monto_a_pagar = models.DecimalField(max_digits=10, decimal_places=2)
     fecha_operacion = models.DateField(null=True)
-    position=models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
     spreak_direct = models.FloatField(default=0)
     spreak_indirecto = models.FloatField(default=0)
     spreak_socio = models.FloatField(default=0)
     pagado = models.BooleanField(default=False)
+    fecha_creacion = models.DateField(auto_now_add=True)
+    fecha_desde = models.DateField(null=True)
+    fecha_hasta = models.DateField(null=True)
+    fecha_pagado = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.client
-
 
 
 class Spread_indirecto_pagado(models.Model):
-    id= models.AutoField(primary_key=True)
-    monto= models.FloatField()
-    fpa_child= models.CharField(max_length=50)
-    fpa= models.CharField(max_length=50)
-    fecha_creacion= models.DateField(auto_created=True)
+    id = models.AutoField(primary_key=True)
+    id_spread_indirecto = models.CharField(max_length=50)
+    monto = models.FloatField()
+    fpa_child = models.CharField(max_length=50)
+    fpa = models.CharField(max_length=50)
+    fecha_creacion = models.DateField(null=True)
     pagado = models.BooleanField(default=False)
-    
+    fecha_pagado = models.DateField(auto_now_add=True)
+    fecha_desde = models.DateField(null=True)
+    fecha_hasta = models.DateField(null=True)
+
     def __str__(self):
         return self.fpa
-    
+
 
 class Cpa_directo_pagado(models.Model):
-    id= models.AutoField(primary_key=True)
-    monto= models.FloatField()
-    client= models.CharField(max_length=50)
-    fpa= models.CharField(max_length=50)
-    fecha_creacion= models.DateField(auto_created=True)
-    
-    
+    id = models.AutoField(primary_key=True)
+    commission_id = models.CharField(max_length=50)
+    monto = models.FloatField()
+    client = models.CharField(max_length=50)
+    fpa = models.CharField(max_length=50)
+    fecha_creacion = models.DateField(null=True)
+    fecha_desde = models.DateField(null=True)
+    fecha_hasta = models.DateField(null=True)
+    tipo_comision = models.CharField(max_length=100)
+    fecha_pagado = models.DateField(auto_now_add=True)
+
     def __str__(self):
         return self.client
 
+
 class Cpa_indirecto_pagado(models.Model):
-    id= models.AutoField(primary_key=True)
-    monto= models.FloatField()
-    fpa_child= models.CharField(max_length=50)
-    fpa= models.CharField(max_length=50)
-    fecha_creacion= models.DateField(auto_created=True)
-    
-    
+    id = models.AutoField(primary_key=True)
+    commission_id = models.CharField(max_length=50)
+    monto = models.FloatField()
+    client = models.CharField(max_length=50)
+    fpa_child = models.CharField(max_length=50)
+    fpa = models.CharField(max_length=50)
+    fecha_creacion = models.DateField(null=True)
+    fecha_desde = models.DateField(null=True)
+    fecha_hasta = models.DateField(null=True)
+    tipo_comision = models.CharField(max_length=100)
+    fecha_pagado = models.DateField(auto_now_add=True)
+
     def __str__(self):
         return self.fpa
 
 
 class Bono_indirecto_pagado(models.Model):
-    id= models.AutoField(primary_key=True)
-    monto= models.FloatField()
-    fpa= models.CharField(max_length=50)
-    fecha_creacion= models.DateField(auto_created=True)
-    nivel= models.IntegerField()
-    
+    id = models.AutoField(primary_key=True)
+    monto = models.FloatField()
+    fpa = models.CharField(max_length=50)
+    nivel = models.IntegerField()
+    fecha_desde = models.DateField(null=True)
+    fecha_hasta = models.DateField(null=True)
+    fecha_pagado = models.DateField(auto_now_add=True)
+    fecha_creacion = models.DateField(auto_now_add=True)
+
     def __str__(self):
         return self.fpa
 
+
 class Bono_directo_pagado(models.Model):
-    id= models.AutoField(primary_key=True)
-    monto= models.FloatField()
-    fpa= models.CharField(max_length=50)
-    fecha_creacion= models.DateField(auto_created=True)
-    nivel= models.IntegerField()
-    
+    id = models.AutoField(primary_key=True)
+    monto = models.FloatField()
+    fpa = models.CharField(max_length=50)
+    nivel = models.IntegerField()
+    fecha_desde = models.DateField(null=True)
+    fecha_hasta = models.DateField(null=True)
+    fecha_pagado = models.DateField(auto_now_add=True)
+    fecha_creacion = models.DateField(auto_now_add=True)
+
     def __str__(self):
         return self.fpa

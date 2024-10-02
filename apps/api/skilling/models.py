@@ -172,6 +172,7 @@ class Spread_directo_pagado(models.Model):
     fecha_desde = models.DateField(null=True)
     fecha_hasta = models.DateField(null=True)
     fecha_pagado = models.DateField(auto_now_add=True)
+    registros_ganancia_pagadas = models.ForeignKey('Registros_ganancia_pagadas', on_delete=models.CASCADE, related_name='spread_directo_pagado')
 
     def __str__(self):
         return self.client
@@ -188,6 +189,7 @@ class Spread_indirecto_pagado(models.Model):
     fecha_pagado = models.DateField(auto_now_add=True)
     fecha_desde = models.DateField(null=True)
     fecha_hasta = models.DateField(null=True)
+    registros_ganancia_pagadas = models.ForeignKey('Registros_ganancia_pagadas', on_delete=models.CASCADE, related_name='spread_indirecto_pagado')
 
     def __str__(self):
         return self.fpa
@@ -204,6 +206,7 @@ class Cpa_directo_pagado(models.Model):
     fecha_hasta = models.DateField(null=True)
     tipo_comision = models.CharField(max_length=100)
     fecha_pagado = models.DateField(auto_now_add=True)
+    registros_ganancia_pagadas = models.ForeignKey('Registros_ganancia_pagadas', on_delete=models.CASCADE, related_name='cpa_directo_pagado')
 
     def __str__(self):
         return self.client
@@ -221,6 +224,7 @@ class Cpa_indirecto_pagado(models.Model):
     fecha_hasta = models.DateField(null=True)
     tipo_comision = models.CharField(max_length=100)
     fecha_pagado = models.DateField(auto_now_add=True)
+    registros_ganancia_pagadas = models.ForeignKey('Registros_ganancia_pagadas', on_delete=models.CASCADE, related_name='cpa_indirecto_pagado')
 
     def __str__(self):
         return self.fpa
@@ -235,6 +239,7 @@ class Bono_indirecto_pagado(models.Model):
     fecha_hasta = models.DateField(null=True)
     fecha_pagado = models.DateField(auto_now_add=True)
     fecha_creacion = models.DateField(auto_now_add=True)
+    registros_ganancia_pagadas = models.ForeignKey('Registros_ganancia_pagadas', on_delete=models.CASCADE, related_name='bono_indirecto_pagado')
 
     def __str__(self):
         return self.fpa
@@ -249,6 +254,26 @@ class Bono_directo_pagado(models.Model):
     fecha_hasta = models.DateField(null=True)
     fecha_pagado = models.DateField(auto_now_add=True)
     fecha_creacion = models.DateField(auto_now_add=True)
+    registros_ganancia_pagadas = models.ForeignKey('Registros_ganancia_pagadas', on_delete=models.CASCADE, related_name='bono_directo_pagado')
+
+    def __str__(self):
+        return self.fpa
+    
+class Registros_ganancia_pagadas(models.Model):
+    id = models.AutoField(primary_key=True)
+    fpa = models.CharField(max_length=50, null=True)
+    fecha_desde = models.DateField(null=True)
+    fecha_hasta = models.DateField(null=True)
+    monto_total = models.FloatField()
+    monto_spread_directo = models.FloatField()
+    monto_spread_indirecto = models.FloatField()
+    monto_cpa_directo = models.FloatField()
+    monto_cpa_indirecto = models.FloatField()
+    monto_bono_directo = models.FloatField()
+    monto_bono_indirecto = models.FloatField()
+    nivel_bono_directo = models.IntegerField()
+    nivel_bono_indirecto = models.IntegerField()
+    fecha = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.fpa

@@ -1,5 +1,7 @@
+from collections import defaultdict
 import json
 from django.shortcuts import get_object_or_404
+from apps.api.skilling.models import Fpas, Relation_fpa_client
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -353,43 +355,6 @@ def postNewUser(request):
     else:
         return JsonResponse({"message": "Método HTTP no válido"}, status=405)
     
-# @csrf_exempt
-# def postNewAfiliado(request):
-#     if request.method == 'POST':
-#         # if 'application/json' in request.content_type:
-#             try:
-#                 afiliados = Afiliado.objects.all()
-                
-#                 # Decodificar el cuerpo de la solicitud como JSON
-#                 fpa = request.POST.get('fpa').upper()
-#                 url = request.POST.get('url')
-#                 upline = request.POST.get('up_line').upper()
-
-#                 cuenta = Cuenta.objects.filter(fpa=fpa)
-#                 if not cuenta.exists():
-#                     c = Cuenta(fpa=fpa)
-#                     c.save()
-#                 # Crear un nuevo usuario y guardar los datos en la base de datos
-#                 new_afiliado = Afiliado(
-#                     fpa = fpa,
-#                     url=url,
-#                     upline=upline,
-#                 )
-#                 print(new_afiliado.fpa)
-#                 if afiliados.exists():
-#                     for a in afiliados:
-#                         if not (a.fpa==fpa and a.url==url and a.upline == upline):
-#                             new_afiliado.save()
-#                 else:
-#                     new_afiliado.save()
-#                 return JsonResponse({'message': 'Datos recibidos y guardados con éxito'},status=200)
-#             except json.JSONDecodeError:
-#                 return JsonResponse({'error': 'Error al decodificar el JSON'}, status=402)
-#         # else:
-#         #     return JsonResponse({'error': 'Tipo de contenido no válido'}, status=406)
-#     else:
-#         return JsonResponse({'error': 'Método HTTP no válido'}, status=405)
-
 
 
 
@@ -803,3 +768,58 @@ def getServicios(request):
         return JsonResponse({'data': servicios_list}, status=200)
     else:
         return JsonResponse({'Error': 'Metodo HTTP incorrecto'}, status=405)
+
+
+
+def getFpasForUser(request, pk):
+    if request.method == 'GET':
+        # Obtenemos todos los fpas
+        fpas = Fpas.objects.all()
+        Url.objects.all()
+        
+        url_skilling_base = Url.objects.get(id=2).url
+        url_livecommunity_base = Url.objects.get(id=1).url
+        
+        pk = pk.split(',')[0][:2]
+        
+        # Agrupamos los FPAs por su letra final
+        fpas_dict = defaultdict(list)
+        for fpa in fpas:
+            if fpa.fpa and fpa.fpa.startswith(pk):
+                fpas_dict[fpa.fpa[-1]].append(fpa.fpa)
+        
+        # Ordenamos cada lista de FPAs
+        for letra in fpas_dict:
+            fpas_dict[letra].sort()
+        
+        def encontrar_siguiente(fpas_list, sufijo):
+            if not fpas_list:
+                return f"{pk}001{sufijo}"
+            for i in range(len(fpas_list) - 1):
+                actual = int(fpas_list[i][2:5])
+                siguiente = int(fpas_list[i+1][2:5])
+                if siguiente - actual > 1:
+                    return f"{pk}{actual+1:03d}{sufijo}"
+            ultimo = int(fpas_list[-1][2:5])
+            return f"{pk}{ultimo+1:03d}{sufijo}"
+
+        siguientes_faltantes = {letra: encontrar_siguiente(fpas, letra) for letra, fpas in fpas_dict.items()}
+        
+        # Encontrar el menor siguiente faltante
+        siguiente_faltante = min(siguientes_faltantes.values())
+
+        # Combinar todas las listas de FPAs
+        todos_fpas = sorted([fpa for fpas in fpas_dict.values() for fpa in fpas])
+        
+        Fpas.objects.get_or_create(
+            fpa=siguiente_faltante
+        )
+
+        return JsonResponse({
+            # 'data': todos_fpas,
+            'fpa_siguiente': siguiente_faltante,
+            'url_skilling': f'{url_skilling_base}{siguiente_faltante}',
+            'url_livecommunity': f'{url_livecommunity_base}{siguiente_faltante}'
+        }, status=200)
+    else:
+        return JsonResponse({'Error': 'Método HTTP incorrecto'}, status=405)

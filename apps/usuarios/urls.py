@@ -1,6 +1,6 @@
 from django.urls import path
 from apps.usuarios.controller.passwordController import enviar_token_recuperacion
-from apps.usuarios.controller.userController import deleteUser, eliminarUser, eliminarUserForever, getRoles, getServicios, getUserById, postNewUser, login, postNewUsers, updatePassword, updatePerfilUser, updateUserById, users, usuarioValido
+from apps.usuarios.controller.userController import deleteUser, eliminarUser, eliminarUserForever, getRoles, getServicios, getUserById, postNewUser, login, postNewUsers, updatePassword, updatePerfilUser, updateUserById, users, usuarioValido, getFpasForUser
 from .controller import passwordController
 
 app_name = "users"
@@ -25,4 +25,6 @@ urlpatterns = [
     path("enviar-token/", enviar_token_recuperacion, name="enviar_token_recuperacion"),
     path('validartoken/', passwordController.validar_token, name='validar_token'),
     path('verificar-password-actual/', passwordController.verificar_password_actual, name='verificar_password_actual'),
+    path('get-fpas/<pk>/', getFpasForUser, name='getFpasForUser')
+    
 ]

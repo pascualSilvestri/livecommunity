@@ -4,7 +4,7 @@ from ....utils.limpiarTablas import limpiar_datos_fpa, limpiar_registros,limpiar
 from ....utils.funciones import existe,existe_cpa,existe_ganancia, parse_date
 from ....utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ....utils.bonos import bonoDirecto,bonoIndirecto
-from ..models import Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
+from ..models import Fpas, Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
 from apps.api.skilling.models import Spread,BonoCpa,BonoCpaIndirecto,CPA
 from apps.usuarios.models import Usuario
 from datetime import datetime
@@ -12,6 +12,7 @@ import pandas as pd
 import os
 from decimal import Decimal
 from django.db.models import Q
+from django.db import transaction
 
 
 def convertir_fecha(fecha_string):
@@ -19,7 +20,6 @@ def convertir_fecha(fecha_string):
         return None
     else:
         return datetime.strptime(fecha_string, "%Y-%m-%d").date()
-    
     
 @csrf_exempt
 def upload_fpa(request):
@@ -29,55 +29,80 @@ def upload_fpa(request):
             file_name = csv_file.name
             file_extension = os.path.splitext(file_name)[1]
 
-            if file_extension == ".csv":
+            if file_extension.lower() == ".csv":
+                # Leer el archivo CSV
                 file_data = pd.read_csv(csv_file, encoding="utf-8")
                 data_limpia = limpiar_datos_fpa(file_data)
 
+                # Extraer los id_client y fpa únicos
+                id_clients = set(data["id_client"] for data in data_limpia)
+                fpa_values = set(data["fpa"] for data in data_limpia)
+
+                # Obtener los clientes y fpas existentes en la base de datos
+                existing_clients = Relation_fpa_client.objects.filter(client__in=id_clients)
+                existing_clients_dict = {client.client: client for client in existing_clients}
+
+                existing_fpas = Fpas.objects.filter(fpa__in=fpa_values)
+                existing_fpas_dict = {fpa.fpa: fpa for fpa in existing_fpas}
+
+                clients_to_update = []
+                clients_to_create = []
+                fpas_to_create = []
+
                 for data in data_limpia:
+                    client_id = data["id_client"]
+                    fpa_value = data["fpa"]
+
+                    # Convertir fechas fuera del bucle si es posible o usar pandas
                     fecha_registro = convertir_fecha(data["fecha_registro"])
                     fecha_creacion = convertir_fecha(data["fecha_creacion_cuenta"])
                     fecha_verificacion = convertir_fecha(data["verificacion"])
 
-                    # Buscar si el client ya existe
-                    try:
-                        client_obj = Relation_fpa_client.objects.get(client=data["id_client"])
-                        # Si el client existe y el fpa es None o 'none', actualizar el fpa
-                        if client_obj.fpa is None or client_obj.fpa.lower() == 'none':
-                            client_obj.fpa = data["fpa"]
-                            client_obj.save()
-                        # Si el fpa ya tiene otro valor, posiblemente quieras manejar esta situación también
-                    except Relation_fpa_client.DoesNotExist:
-                        # El client no existe, por lo que se crea uno nuevo
-                        Relation_fpa_client.objects.create(
-                            fpa=data["fpa"],
-                            client=data["id_client"],
+                    if client_id in existing_clients_dict:
+                        client_obj = existing_clients_dict[client_id]
+                        # Actualizar el fpa si es None o 'none'
+                        if not client_obj.fpa or client_obj.fpa.lower() == 'none':
+                            client_obj.fpa = fpa_value
+                            clients_to_update.append(client_obj)
+                    else:
+                        # Crear un nuevo objeto Relation_fpa_client
+                        clients_to_create.append(Relation_fpa_client(
+                            fpa=fpa_value,
+                            client=client_id,
                             full_name=data["full_name"],
                             country=data["country"],
                             fecha_registro=fecha_registro,
                             fecha_creacion=fecha_creacion,
                             fecha_verificacion=fecha_verificacion,
                             status=data["status"],
+                        ))
+
+                    # Verificar si el fpa existe
+                    if fpa_value not in existing_fpas_dict:
+                        existing_fpas_dict[fpa_value] = Fpas(
+                            fpa=fpa_value,
+                            fecha_creacion=fecha_creacion
                         )
+                        fpas_to_create.append(existing_fpas_dict[fpa_value])
 
-                        # Crear cuenta si no existe
-                        
+                # Guardar todos los cambios en una transacción atómica
+                with transaction.atomic():
+                    if clients_to_create:
+                        Relation_fpa_client.objects.bulk_create(clients_to_create)
+                    if clients_to_update:
+                        Relation_fpa_client.objects.bulk_update(clients_to_update, ['fpa'])
+                    if fpas_to_create:
+                        Fpas.objects.bulk_create(fpas_to_create)
 
-                    except Exception as e:
-                        print(e)
-
+                return JsonResponse({"message": "Archivo CSV recibido y procesado exitosamente."})
             else:
-                return JsonResponse({"error": "Document is not format"}, status=402)
+                return JsonResponse({"error": "El documento no está en formato CSV."}, status=400)
 
         except Exception as e:
             print(e)
-            return JsonResponse({"Error": "Salto la exception"}, status=403)
-
-        return JsonResponse({"message": "Archivo CSV recibido y procesado exitosamente."})
-
+            return JsonResponse({"Error": "Ocurrió una excepción al procesar el archivo."}, status=500)
     else:
-        return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=405)
-    
-    
+        return JsonResponse({"error": "Se esperaba un archivo CSV en la solicitud POST."}, status=400)
     
     
 @csrf_exempt

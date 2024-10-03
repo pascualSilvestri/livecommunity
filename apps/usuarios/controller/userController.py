@@ -231,6 +231,14 @@ def postNewUser(request):
             try:
                 # Decodificar el cuerpo de la solicitud como JSON
                 user_data = json.loads(request.body)
+                try:
+                    fpa = Fpas.objects.get(fpa=user_data.get("fpa"))
+                except Fpas.DoesNotExist:
+                    return JsonResponse({"message": "FPA no creado"}, status=404)
+                
+                # Si el FPA existe, continúa con el resto del código aquí
+                
+                
 
                 print("Recibido user_data:", user_data)
 

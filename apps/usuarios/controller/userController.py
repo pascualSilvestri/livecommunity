@@ -2,6 +2,7 @@ from collections import defaultdict
 import json
 from django.shortcuts import get_object_or_404
 from apps.api.skilling.models import Fpas, Relation_fpa_client
+from livecommunity import settings
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -18,10 +19,8 @@ from apps.usuarios.models import (
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.hashers import check_password
-
-
 from rest_framework.exceptions import AuthenticationFailed
-
+from django.core.mail import send_mail
 
 @csrf_exempt
 def login(request):
@@ -223,25 +222,90 @@ def postNewUsers(request):
         return JsonResponse({"message": f"Error de conexión: {str(e)}"}, status=500)
     except json.JSONDecodeError:
         return JsonResponse({"message": "Error al decodificar el JSON"}, status=403)
+    
+    
+    
+###############################################
+#
+#Codigo en modificacion
+#
+###############################################
 
 @csrf_exempt
 def postNewUser(request):
     if request.method == 'POST':
         if 'application/json' in request.content_type:
             try:
-                # Decodificar el cuerpo de la solicitud como JSON
                 user_data = json.loads(request.body)
+                # Decodificar el cuerpo de la solicitud como JSON
+                url = f"https://go.skillingpartners.com/api/?command=registrations&fromdate=&todate=&daterange=update&userid=skilling-{user_data.get("idCliente")}&json=1"
+                headers = {
+                    'x-api-key': settings.SKILLING_API_KEY,
+                    'affiliateid': '35881',
+                }
+                
                 try:
-                    fpa = Fpas.objects.get(fpa=user_data.get("fpa"))
-                except Fpas.DoesNotExist:
-                    return JsonResponse({"message": "FPA no creado"}, status=404)
+                    response = requests.get(url, headers=headers)
+                    response.raise_for_status()  # Esto lanzará una excepción para códigos de estado HTTP no exitosos
+                    
+                    # Intentar decodificar la respuesta JSON
+                    
+                    json_response = response.json()
+                    
+                    
+                    
+                     
+                except requests.RequestException as e:
+                    return JsonResponse({'error':'usuario no registrado en skilling'}, status=500)
                 
-                # Si el FPA existe, continúa con el resto del código aquí
+                
+                fpa_up_line = json_response.get('registrations')[0]['Tracking_Code']
                 
                 
+                fpas = Fpas.objects.all()
+                Url.objects.all()
+                
+                url_skilling_base = Url.objects.get(id=2).url
+                url_livecommunity_base = Url.objects.get(id=1).url
+                
+                pk = fpa_up_line.split(',')[0][:2]
+                
+                # Agrupamos los FPAs por su letra final
+                fpas_dict = defaultdict(list)
+                for fpa in fpas:
+                    if fpa.fpa and fpa.fpa.startswith(pk):
+                        fpas_dict[fpa.fpa[-1]].append(fpa.fpa)
+                
+                # Ordenamos cada lista de FPAs
+                for letra in fpas_dict:
+                    fpas_dict[letra].sort()
+                
+                def encontrar_siguiente(fpas_list, sufijo):
+                    if not fpas_list:
+                        return f"{pk}001{sufijo}"
+                    for i in range(len(fpas_list) - 1):
+                        actual = int(fpas_list[i][2:5])
+                        siguiente = int(fpas_list[i+1][2:5])
+                        if siguiente - actual > 1:
+                            return f"{pk}{actual+1:03d}{sufijo}"
+                    ultimo = int(fpas_list[-1][2:5])
+                    return f"{pk}{ultimo+1:03d}{sufijo}"
 
-                print("Recibido user_data:", user_data)
+                siguientes_faltantes = {letra: encontrar_siguiente(fpas, 'S') for letra, fpas in fpas_dict.items()}
+                
+                # Encontrar el menor siguiente faltante
+                siguiente_faltante = min(siguientes_faltantes.values())
 
+                # Combinar todas las listas de FPAs
+                todos_fpas = sorted([fpa for fpas in fpas_dict.values() for fpa in fpas])
+                
+                
+                
+                Fpas.objects.get_or_create(
+                    fpa=siguiente_faltante
+                )
+                
+                
                 # Generar el username a partir del apellido y nombre
                 try:
                     base_username = (user_data.get("last_name") + "_" + user_data.get("first_name")).replace(" ", "_")
@@ -249,111 +313,62 @@ def postNewUser(request):
                     print(f"Error generando el username: {e}")
                     return JsonResponse({"message": "Error al crear el usuario"}, status=400)
 
-                print("Username base:", base_username)
+                try:# Verificar si el usuario con ese username ya existe
+                    existing_user = Usuario.objects.get(fpa=user_data.get("idCliente"),email=user_data.get("email"))
+                    return JsonResponse({"message": "Usuario ya existe"}, status=404)
+                except Usuario.DoesNotExist:
+                    pass
 
-                # Verificar si el usuario con ese username ya existe
-                existing_user = Usuario.objects.filter(username=base_username).first()
-
-                print("Usuario existente:", existing_user)
-
-                if existing_user:
-                    # El usuario ya existe, actualizar datos si fpa o idCliente son None
-                    if not existing_user.fpa and user_data.get("fpa"):
-                        existing_user.fpa = user_data.get("fpa")
-                    if not existing_user.idCliente and user_data.get("idCliente"):
-                        existing_user.idCliente = user_data.get("idCliente")
-                    existing_user.email = user_data.get("email")
-                    existing_user.telephone = user_data.get("telefono")
-                    existing_user.wallet = user_data.get("wallet")
-                    existing_user.up_line = user_data.get("up_line") or existing_user.up_line
-                    existing_user.link = user_data.get("link") or existing_user.link
-                    existing_user.registrado = user_data.get("registrado", False) if user_data.get("registrado") is not None else False
-                    existing_user.aceptado = user_data.get("status", False) if user_data.get("status") is not None else False
-                    existing_user.userTelegram = user_data.get("userTelegram") or existing_user.userTelegram
-                    existing_user.userDiscord = user_data.get("userDiscord") or existing_user.userDiscord
-
-                    # Hashear y actualizar la contraseña si está presente
-                    if user_data.get("password"):
-                        existing_user.set_password(user_data.get("password"))
-
-                    # Guardar cambios del usuario existente
-                    existing_user.save()
-
-                    print("Usuario existente guardado")
-
-                    # Verificar y asignar roles
+                
+                new_user = Usuario(
+                    username=base_username,
+                    fpa=siguiente_faltante,
+                    idCliente=user_data.get("idCliente") or None,
+                    email=user_data.get("email"),
+                    first_name=user_data.get("first_name"),
+                    last_name=user_data.get("last_name"),
+                    telephone=user_data.get("telephone"),
+                    wallet=user_data.get("wallet"),
+                    up_line=fpa_up_line,
+                    link=user_data.get("link") or "https://livecommunity.info/Afiliado/",
+                    registrado=user_data.get("registrado", False) if user_data.get("registrado") is not None else False,
+                    aceptado=user_data.get("status", False) if user_data.get("status") is not None else False,
+                    userTelegram=user_data.get("userTelegram") or None,
+                    userDiscord=user_data.get("userDiscord") or None,
+                )
+                
+                print("Usuario nuevo:", new_user)
+                # Hashear y establecer la contraseña del nuevo usuario
+                if user_data.get("password"):
+                    new_user.set_password(user_data.get("password"))
+                else:
+                    # Opción para manejar una contraseña por defecto si no se proporciona una
+                    new_user.set_password("default_password")
+                try:
+                    # Guardar el nuevo usuario en la base de datos
+                    new_user.save()
+                    # Asignar roles al nuevo usuario
                     roles = user_data.get("roles", [])
                     for rol_id in roles:
                         try:
                             rol = Rol.objects.get(id=rol_id)
-                            if not UsuarioRol.objects.filter(usuario=existing_user, rol=rol).exists():
-                                UsuarioRol.objects.create(usuario=existing_user, rol=rol)
+                            UsuarioRol.objects.create(usuario=new_user, rol=rol)
                         except Rol.DoesNotExist:
                             return JsonResponse({"message": f"Rol con ID {rol_id} no existe"}, status=400)
-
-                    # Verificar y asignar servicios
+                    # Asignar servicios al nuevo usuario
                     servicios = user_data.get("servicios", [])
                     for servicio_id in servicios:
                         try:
                             servicio = Servicio.objects.get(id=servicio_id)
-                            if not UsuarioServicio.objects.filter(usuario=existing_user, servicio=servicio).exists():
-                                UsuarioServicio.objects.create(usuario=existing_user, servicio=servicio)
+                            UsuarioServicio.objects.create(usuario=new_user, servicio=servicio)
                         except Servicio.DoesNotExist:
                             return JsonResponse({"message": f"Servicio con ID {servicio_id} no existe"}, status=400)
-
-                else:
-                    # Crear un nuevo usuario si no existe
-                    new_user = Usuario(
-                        username=base_username,
-                        fpa=user_data.get("fpa") or None,
-                        idCliente=user_data.get("idCliente") or None,
-                        email=user_data.get("email"),
-                        first_name=user_data.get("first_name"),
-                        last_name=user_data.get("last_name"),
-                        telephone=user_data.get("telefono"),
-                        wallet=user_data.get("wallet"),
-                        up_line=user_data.get("up_line") or "",
-                        link=user_data.get("link") or "https://livecommunity.info/Afiliado/",
-                        registrado=user_data.get("registrado", False) if user_data.get("registrado") is not None else False,
-                        aceptado=user_data.get("status", False) if user_data.get("status") is not None else False,
-                        userTelegram=user_data.get("userTelegram") or None,
-                        userDiscord=user_data.get("userDiscord") or None
-                    )
-
-                    print("Usuario nuevo:", new_user)
-
-                    # Hashear y establecer la contraseña del nuevo usuario
-                    if user_data.get("password"):
-                        new_user.set_password(user_data.get("password"))
-                    else:
-                        # Opción para manejar una contraseña por defecto si no se proporciona una
-                        new_user.set_password("default_password")
-
-                    try:
-                        # Guardar el nuevo usuario en la base de datos
-                        new_user.save()
-                        # Asignar roles al nuevo usuario
-                        roles = user_data.get("roles", [])
-                        for rol_id in roles:
-                            try:
-                                rol = Rol.objects.get(id=rol_id)
-                                UsuarioRol.objects.create(usuario=new_user, rol=rol)
-                            except Rol.DoesNotExist:
-                                return JsonResponse({"message": f"Rol con ID {rol_id} no existe"}, status=400)
-
-                        # Asignar servicios al nuevo usuario
-                        servicios = user_data.get("servicios", [])
-                        for servicio_id in servicios:
-                            try:
-                                servicio = Servicio.objects.get(id=servicio_id)
-                                UsuarioServicio.objects.create(usuario=new_user, servicio=servicio)
-                            except Servicio.DoesNotExist:
-                                return JsonResponse({"message": f"Servicio con ID {servicio_id} no existe"}, status=400)
-
-                    except Exception as e:
-                        print(f"Error guardando el usuario {new_user.username}: {e}")
-                        return JsonResponse({"message": f"Error guardando el usuario: {e}"}, status=500)
-
+                    
+                    
+                    enviar_correo(user_data.get("first_name"), user_data.get("telefono"), user_data.get("email"), user_data.get("idCliente"), user_data.get("password"))
+                except Exception as e:
+                    print(f"Error guardando el usuario {new_user.username}: {e}")
+                    return JsonResponse({"message": f"Error guardando el usuario: {e}"}, status=500)
                 return JsonResponse({"message": "Usuario creado o actualizado exitosamente"}, status=200)
 
             except json.JSONDecodeError:
@@ -363,6 +378,48 @@ def postNewUser(request):
     else:
         return JsonResponse({"message": "Método HTTP no válido"}, status=405)
     
+
+def enviar_correo(nombre, telefono, correo, id_cliente, password_temporal):
+    asunto = 'Bienvenido a LiveCommunity - Información de tu cuenta'
+    mensaje = f"""
+    Hola {nombre},
+
+    ¡Bienvenido a LiveCommunity! Tu cuenta ha sido creada exitosamente.
+
+    Aquí están los detalles de tu cuenta:
+    
+    Nombre: {nombre}
+    Teléfono: {telefono}
+    Correo electrónico: {correo}
+    ID de Cliente: {id_cliente}
+    
+    
+    Tu contraseña temporal es: {password_temporal}
+    
+    Por favor, ingresa a nuestra plataforma y cambia tu contraseña lo antes posible.
+    
+    https://www.livecommunity.xyz/
+
+    Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
+
+    ¡Gracias por unirte a LiveCommunity!
+
+    Saludos,
+    El equipo de LiveCommunity
+    """
+    
+    lista_destinatarios = [correo]  # Enviamos el correo al usuario
+    correo_remitente = settings.EMAIL_HOST_USER
+
+    try:
+        send_mail(asunto, mensaje, correo_remitente, lista_destinatarios, fail_silently=False)
+        print(f"Correo enviado exitosamente a {correo}")
+        return True
+    except Exception as e:
+        print(f"Error al enviar el correo: {str(e)}")
+        return False
+
+
 
 
 
@@ -819,9 +876,9 @@ def getFpasForUser(request, pk):
         # Combinar todas las listas de FPAs
         todos_fpas = sorted([fpa for fpas in fpas_dict.values() for fpa in fpas])
         
-        Fpas.objects.get_or_create(
-            fpa=siguiente_faltante
-        )
+        # Fpas.objects.get_or_create(
+        #     fpa=siguiente_faltante
+        # )
 
         return JsonResponse({
             # 'data': todos_fpas,

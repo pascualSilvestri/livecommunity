@@ -79,47 +79,47 @@ def clienteform(request):
         upline = afiliado.up_line if afiliado else None
 
         # Generar una contraseña temporal
-        temp_password = Usuario.objects.make_random_password()
+        # temp_password = Usuario.objects.make_random_password()
         
 
         # Crear o actualizar Usuario
-        usuario, created = Usuario.objects.update_or_create(
-            email=correo,
-            defaults={
-                'username': correo,  # Usando el correo como nombre de usuario
-                'password': make_password(temp_password),
-                'first_name': nombre,
-                'last_name': apellido,
-                'fpa': None,
-                'idCliente': idCliente,
-                'telephone': telefono,
-                'userTelegram': userTelegram,
-                'userDiscord':userDiscord,
-                'up_line': fpa,
-                'link': f"https://livecommunity.info/Afiliado/{fpa}" if fpa else None,
-            }
-        )
-        print(userDiscord)
-        rol = Rol.objects.get(id=3)
-        servicio = Servicio.objects.get(id=1)
-        if created:
-            if not UsuarioRol.objects.filter(usuario=usuario, rol=rol).exists():
-                UsuarioRol.objects.create(usuario=usuario, rol=rol)
+        # usuario, created = Usuario.objects.update_or_create(
+        #     email=correo,
+        #     defaults={
+        #         'username': correo,  # Usando el correo como nombre de usuario
+        #         'password': make_password(temp_password),
+        #         'first_name': nombre,
+        #         'last_name': apellido,
+        #         'fpa': None,
+        #         'idCliente': idCliente,
+        #         'telephone': telefono,
+        #         'userTelegram': userTelegram,
+        #         'userDiscord':userDiscord,
+        #         'up_line': fpa,
+        #         'link': f"https://livecommunity.info/Afiliado/{fpa}" if fpa else None,
+        #     }
+        # )
+        # print(userDiscord)
+        # rol = Rol.objects.get(id=3)
+        # servicio = Servicio.objects.get(id=1)
+        # if created:
+        #     if not UsuarioRol.objects.filter(usuario=usuario, rol=rol).exists():
+        #         UsuarioRol.objects.create(usuario=usuario, rol=rol)
          
         
-            if not UsuarioServicio.objects.filter(usuario=usuario, servicio=servicio).exists():
-                UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)
+        #     if not UsuarioServicio.objects.filter(usuario=usuario, servicio=servicio).exists():
+        #         UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)
                 
-            ########################### Enviar correo si se crea el usuario ###########################
-            # enviar_correo(nombre,telefono,correo,idCliente,temp_password)
+        #     ########################### Enviar correo si se crea el usuario ###########################
+        #     # enviar_correo(nombre,telefono,correo,idCliente,temp_password)
         
-        if not created:
-            if not UsuarioRol.objects.filter(usuario=usuario, rol=rol).exists():
-                UsuarioRol.objects.create(usuario=usuario, rol=rol)
+        # if not created:
+        #     if not UsuarioRol.objects.filter(usuario=usuario, rol=rol).exists():
+        #         UsuarioRol.objects.create(usuario=usuario, rol=rol)
          
         
-            if not UsuarioServicio.objects.filter(usuario=usuario, servicio=servicio).exists():
-                UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)
+        #     if not UsuarioServicio.objects.filter(usuario=usuario, servicio=servicio).exists():
+        #         UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)
                 
                 
                 

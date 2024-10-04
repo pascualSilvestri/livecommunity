@@ -42,6 +42,7 @@ class Usuario(AbstractUser):
     aceptado = models.BooleanField(default=False)
     fondeado = models.BooleanField(default=False)
     eliminado = models.BooleanField(default=False)
+    isSocio = models.BooleanField(default=False)
     url_video = models.URLField(default="https://www.youtube.com/watch?v=HgKjhFEguy")
 
     # Relaciones con otros usuarios (downLeft y downRight) inicializadas como null

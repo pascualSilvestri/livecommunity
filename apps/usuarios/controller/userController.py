@@ -365,7 +365,7 @@ def postNewUser(request):
                             return JsonResponse({"message": f"Servicio con ID {servicio_id} no existe"}, status=400)
                     
                     
-                    enviar_correo(user_data.get("first_name"), user_data.get("telefono"), user_data.get("email"), user_data.get("idCliente"), user_data.get("password"))
+                    enviar_correo(user_data.get("first_name"), user_data.get("telefono"), user_data.get("email"), user_data.get("idCliente"), user_data.get("password"),siguiente_faltante)
                 except Exception as e:
                     print(f"Error guardando el usuario {new_user.username}: {e}")
                     return JsonResponse({"message": f"Error guardando el usuario: {e}"}, status=500)
@@ -378,47 +378,6 @@ def postNewUser(request):
     else:
         return JsonResponse({"message": "Método HTTP no válido"}, status=405)
     
-
-def enviar_correo(nombre, telefono, correo, id_cliente, password_temporal):
-    asunto = 'Bienvenido a LiveCommunity - Información de tu cuenta'
-    mensaje = f"""
-    Hola {nombre},
-
-    ¡Bienvenido a LiveCommunity! Tu cuenta ha sido creada exitosamente.
-
-    Aquí están los detalles de tu cuenta:
-    
-    Nombre: {nombre}
-    Teléfono: {telefono}
-    Correo electrónico: {correo}
-    ID de Cliente: {id_cliente}
-    
-    
-    Tu contraseña temporal es: {password_temporal}
-    
-    Por favor, ingresa a nuestra plataforma y cambia tu contraseña lo antes posible.
-    
-    https://www.livecommunity.xyz/
-
-    Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
-
-    ¡Gracias por unirte a LiveCommunity!
-
-    Saludos,
-    El equipo de LiveCommunity
-    """
-    
-    lista_destinatarios = [correo]  # Enviamos el correo al usuario
-    correo_remitente = settings.EMAIL_HOST_USER
-
-    try:
-        send_mail(asunto, mensaje, correo_remitente, lista_destinatarios, fail_silently=False)
-        print(f"Correo enviado exitosamente a {correo}")
-        return True
-    except Exception as e:
-        print(f"Error al enviar el correo: {str(e)}")
-        return False
-
 
 
 
@@ -565,74 +524,69 @@ def usuarioValido(request,email,password):
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def updateUserById(request, pk):
-
     try:
-        # Verifica si el usuario existe por fpa (ID)
         usuario = Usuario.objects.get(fpa=pk)
+        url_skilling_base = Url.objects.get(id=2).url
+        url_livecommunity_base = Url.objects.get(id=1).url
+        
 
-        if request.method == 'POST' or request.method == 'PUT':
+        if request.method in ['POST', 'PUT']:
             try:
-                body_data = json.loads(request.body)  # Decodifica el cuerpo como JSON
+                body_data = json.loads(request.body)
             except json.JSONDecodeError:
                 return JsonResponse({'message': 'Datos inválidos en el cuerpo (body)'}, status=400)
 
-            # Extrae los campos que se enviarán para la actualización
-            name = body_data.get('first_name')
-            last_name = body_data.get('last_name')
-            email = body_data.get('email')
-            telephone = body_data.get('telephone')
-            wallet = body_data.get('wallet')
-            status = body_data.get('status')
-            roles_data = body_data.get('roles')
-            servicios_data = body_data.get('servicios')
-
             # Actualiza los datos básicos del usuario
-            usuario.first_name = name if name else usuario.first_name
-            usuario.last_name = last_name if last_name else usuario.last_name
-            usuario.email = email if email else usuario.email
-            usuario.telephone = telephone if telephone else usuario.telephone
-            usuario.wallet = wallet if wallet else usuario.wallet
-            usuario.aceptado = status if status is not None else usuario.aceptado
-            usuario.save()
+            for field in ['first_name', 'last_name', 'email', 'telephone', 'wallet']:
+                if field in body_data:
+                    setattr(usuario, field, body_data[field])
+            
+            if 'status' in body_data:
+                usuario.aceptado = body_data['status']
+
+            # Verifica si el usuario tenía el rol de Socio antes de la actualización
+            tenia_rol_socio = usuario.roles.filter(id=2).exists()
 
             # Actualiza los roles si se proporcionaron
-            if roles_data:
-                # Eliminar los roles actuales en la tabla intermedia UsuarioRol
+            if 'roles' in body_data:
                 UsuarioRol.objects.filter(usuario=usuario).delete()
+                tiene_rol_socio_ahora = False
 
-                # Asigna los nuevos roles
-                for rol_data in roles_data:
-                    rol = Rol.objects.get(id=rol_data['id'])  # Encuentra el rol por ID
-                    UsuarioRol.objects.create(usuario=usuario, rol=rol)  # Asigna el rol
+                for rol_data in body_data['roles']:
+                    rol = Rol.objects.get(id=rol_data['id'])
+                    UsuarioRol.objects.create(usuario=usuario, rol=rol)
+                    if rol.id == 2:  # Asumiendo que el ID 2 corresponde al rol de Socio
+                        tiene_rol_socio_ahora = True
+
+                # Si no tenía el rol de Socio antes y ahora sí, envía el correo
+                if not tenia_rol_socio and tiene_rol_socio_ahora:
+                    enviar_correo_socio(nombre=usuario.first_name, telefono=usuario.telephone, correo=usuario.email, id_cliente=usuario.idCliente, fpa=usuario.fpa, url_live=url_livecommunity_base, url_skilling=url_skilling_base)  # Asegúrate de que esta función esté definida e importada
 
             # Actualiza los servicios si se proporcionaron
-            if servicios_data:
-                # Eliminar los servicios actuales en la tabla intermedia UsuarioServicio
+            if 'servicios' in body_data:
                 UsuarioServicio.objects.filter(usuario=usuario).delete()
+                for servicio_data in body_data['servicios']:
+                    servicio = Servicio.objects.get(id=servicio_data['id'])
+                    UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)
 
-                # Asigna los nuevos servicios
-                for servicio_data in servicios_data:
-                    servicio = Servicio.objects.get(id=servicio_data['id'])  # Encuentra el servicio por ID
-                    UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)  # Asigna el servicio
+            usuario.save()
 
-            # Creamos la lista de roles serializable
-            roles = []
-            for rol in usuario.roles.all():
-                roles.append({
+            # Prepara los datos para la respuesta
+            roles = [
+                {
                     'id': rol.rol_id,
                     'rol': rol.rol.name,
                     'fecha_asignacion': rol.fecha_asignacion.isoformat()
-                })
+                } for rol in usuario.roles.all()
+            ]
 
-            # Creamos la lista de servicios serializable
-            servicios = []
-            for servicio in usuario.serviciosUsuario.all():
-                servicios.append({
+            servicios = [
+                {
                     'id': servicio.servicio_id,
                     'servicio': servicio.servicio.name
-                })
+                } for servicio in usuario.serviciosUsuario.all()
+            ]
 
-            # Devolvemos los datos actualizados del usuario
             data = {
                 'fpa': usuario.fpa,
                 'email': usuario.email,
@@ -888,3 +842,96 @@ def getFpasForUser(request, pk):
         }, status=200)
     else:
         return JsonResponse({'Error': 'Método HTTP incorrecto'}, status=405)
+    
+    
+    
+    
+
+
+
+
+def enviar_correo(nombre, telefono, correo, id_cliente, password_temporal, fpa):
+    asunto = 'Bienvenido a LiveCommunity - Información de tu cuenta'
+    mensaje = f"""
+    Hola {nombre},
+
+    ¡Bienvenido a LiveCommunity! Tu cuenta ha sido creada exitosamente.
+
+    Aquí están los detalles de tu cuenta:
+    
+    Nombre: {nombre}
+    Teléfono: {telefono}
+    Correo electrónico: {correo}
+    ID de Cliente: {id_cliente}
+    Fpa: {fpa}
+    
+    
+    Tu contraseña temporal es: {password_temporal}
+    
+    Por favor, ingresa a nuestra plataforma y cambia tu contraseña lo antes posible.
+    
+    https://www.livecommunity.xyz/
+
+    Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
+
+    ¡Gracias por unirte a LiveCommunity!
+
+    Saludos,
+    El equipo de LiveCommunity
+    """
+    
+    lista_destinatarios = [correo]  # Enviamos el correo al usuario
+    correo_remitente = settings.EMAIL_HOST_USER
+
+    try:
+        send_mail(asunto, mensaje, correo_remitente, lista_destinatarios, fail_silently=False)
+        print(f"Correo enviado exitosamente a {correo}")
+        return True
+    except Exception as e:
+        print(f"Error al enviar el correo: {str(e)}")
+        return False
+
+
+
+def enviar_correo_socio(nombre, telefono, correo, id_cliente, fpa, url_live, url_skilling):
+    asunto = 'Bienvenido a liveAcademy - Información de tu cuenta'
+    mensaje = f"""
+    Hola {nombre},
+
+    ¡Bienvenido a liveAcademy! 
+    
+    Ahora como nuevo socio de liveAcademy, puedes acceder a la dashboard de tu cuenta.
+    
+    https://www.livecommunity.xyz/
+    
+    Aquí están los detalles de tu cuenta:
+    
+    Nombre: {nombre}
+    Teléfono: {telefono}
+    Correo electrónico: {correo}
+    ID de Cliente: {id_cliente}
+    Fpa: {fpa}
+    
+    Tu url de liveAcademy es: {url_live}{fpa}
+    Tu url de skilling es: {url_skilling}{fpa}
+
+    Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
+
+    ¡Gracias por unirte a LiveCommunity!
+
+    Saludos,
+    El equipo de liveAcademy
+    """
+    
+    lista_destinatarios = [correo]  # Enviamos el correo al usuario
+    correo_remitente = settings.EMAIL_HOST_USER
+
+    try:
+        send_mail(asunto, mensaje, correo_remitente, lista_destinatarios, fail_silently=False)
+        print(f"Correo enviado exitosamente a {correo}")
+        return True
+    except Exception as e:
+        print(f"Error al enviar el correo: {str(e)}")
+        return False
+
+

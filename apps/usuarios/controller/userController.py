@@ -1,5 +1,6 @@
 from collections import defaultdict
 import json
+from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from apps.api.skilling.models import Fpas, Relation_fpa_client
 from livecommunity import settings
@@ -21,6 +22,14 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.hashers import check_password
 from rest_framework.exceptions import AuthenticationFailed
 from django.core.mail import send_mail
+from django.db import transaction
+import telegram
+from livecommunity.settings import TELEGRAM_BOT_TOKEN,CHAT_ID_BOT
+
+chat_id = CHAT_ID_BOT
+token = TELEGRAM_BOT_TOKEN
+
+
 
 @csrf_exempt
 def login(request):
@@ -933,5 +942,148 @@ def enviar_correo_socio(nombre, telefono, correo, id_cliente, fpa, url_live, url
     except Exception as e:
         print(f"Error al enviar el correo: {str(e)}")
         return False
+
+
+
+
+# MessageString = 'hola'
+# print(MessageString)
+# asyncio.run(enviar_mensaje(MessageString, chat_id, token))
+    
+#Verifica si el id ingresado no se encuentra en base de datos
+def existe(clientes,idCliente):
+    for client in clientes:
+        if client.idCliente == idCliente:
+            return True
+        
+#Envio de mensaje a hacia telegram
+def enviar_mensaje_sync(msj, id, token):
+    bot = telegram.Bot(token=token)
+    bot.send_message(chat_id=id, text=msj)
+
+
+
+@transaction.atomic
+def clienteform(request,pk):
+    if request.method == 'POST':
+        # Obtener los datos del formulario
+        nombre = request.POST.get('first_name').strip()
+        apellido = request.POST.get('last_name').strip()
+        correo = request.POST.get('email').strip()
+        telefono = request.POST.get('telephone').strip()
+        fpa = request.POST.get('fpa').strip()
+        userTelegram = request.POST.get('userTelegram').strip()
+        userDiscord = request.POST.get('userDiscord').strip()
+        idCliente = request.POST.get('idcliente').strip()
+        documento = request.FILES.get('documento')
+        wallet = request.POST.get('wallet').strip()
+        nacionalidad = request.POST.get('nacionalidad').strip()
+        print(pk)
+        print(nombre, apellido, correo, telefono, fpa, userTelegram, userDiscord, idCliente, wallet, nacionalidad)
+        print(documento)
+        
+        
+        # Buscar el FPA correspondiente
+        # registro = Relation_fpa_client.objects.filter(client=idCliente).first()
+        # fpa = registro.fpa if registro else ''
+        
+        # # Buscar el upline
+        # afiliado = Usuario.objects.filter(fpa=fpa).first()
+        # upline = afiliado.up_line if afiliado else None
+
+        # Generar una contraseña temporal
+        # temp_password = Usuario.objects.make_random_password()
+        
+
+        # Crear o actualizar Usuario
+        # usuario, created = Usuario.objects.update_or_create(
+        #     email=correo,
+        #     defaults={
+        #         'username': correo,  # Usando el correo como nombre de usuario
+        #         'password': make_password(temp_password),
+        #         'first_name': nombre,
+        #         'last_name': apellido,
+        #         'fpa': None,
+        #         'idCliente': idCliente,
+        #         'telephone': telefono,
+        #         'userTelegram': userTelegram,
+        #         'userDiscord':userDiscord,
+        #         'up_line': fpa,
+        #         'link': f"https://livecommunity.info/Afiliado/{fpa}" if fpa else None,
+        #     }
+        # )
+        # print(userDiscord)
+        # rol = Rol.objects.get(id=3)
+        # servicio = Servicio.objects.get(id=1)
+        # if created:
+        #     if not UsuarioRol.objects.filter(usuario=usuario, rol=rol).exists():
+        #         UsuarioRol.objects.create(usuario=usuario, rol=rol)
+         
+        
+        #     if not UsuarioServicio.objects.filter(usuario=usuario, servicio=servicio).exists():
+        #         UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)
+                
+        #     ########################### Enviar correo si se crea el usuario ###########################
+        #     # enviar_correo(nombre,telefono,correo,idCliente,temp_password)
+        
+        # if not created:
+        #     if not UsuarioRol.objects.filter(usuario=usuario, rol=rol).exists():
+        #         UsuarioRol.objects.create(usuario=usuario, rol=rol)
+         
+        
+        #     if not UsuarioServicio.objects.filter(usuario=usuario, servicio=servicio).exists():
+        #         UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)
+                
+                
+                
+        # Mensaje formateado para telegram
+        # mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Socio1: {fpa}\nID Socio2: {upline}\nID Cliente: {idCliente} \nUser Discord: {userDiscord}"
+        
+        # try:
+        #     enviar_mensaje_sync(mensaje, chat_id, token)
+            
+        # except Exception as e:
+        #     print(e.__str__())
+
+    return render(request, 'linkGrupos.html')
+
+# Función para enviar correo con contraseña temporal (implementar según tus necesidades)
+def enviar_correo(nombre, telefono, correo, id_cliente, password_temporal):
+    asunto = 'Bienvenido a LiveCommunity - Información de tu cuenta'
+    mensaje = f"""
+    Hola {nombre},
+
+    ¡Bienvenido a LiveCommunity! Tu cuenta ha sido creada exitosamente.
+
+    Aquí están los detalles de tu cuenta:
+    
+    Nombre: {nombre}
+    Teléfono: {telefono}
+    Correo electrónico: {correo}
+    ID de Cliente: {id_cliente}
+    
+    Tu contraseña temporal es: {password_temporal}
+    
+    Por favor, ingresa a nuestra plataforma y cambia tu contraseña lo antes posible.
+
+    Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
+
+    ¡Gracias por unirte a LiveCommunity!
+
+    Saludos,
+    El equipo de LiveCommunity
+    """
+    
+    lista_destinatarios = [correo]  # Enviamos el correo al usuario
+    correo_remitente = settings.EMAIL_HOST_USER
+
+    try:
+        send_mail(asunto, mensaje, correo_remitente, lista_destinatarios, fail_silently=False)
+        print(f"Correo enviado exitosamente a {correo}")
+        return True
+    except Exception as e:
+        print(f"Error al enviar el correo: {str(e)}")
+        return False
+
 
 

@@ -12,7 +12,7 @@ from .controller.ganancias import (
     
 )
 # from .controller.cuenta import montosGet
-from .controller.files import upload_fpa, upload_ganancias
+from .controller.files import upload_ganancias
 from .controller.bonos import (
     get_bono_cpa,
     put_bono_cpa,
@@ -29,8 +29,6 @@ app_name = "skilling"
 
 urlpatterns = [
 
-    ################## Procesar archivos fpa ############################################################################################
-    path("archivofpa/", upload_fpa, name="archivoFpa"),
     ################## Procesar archivos ganancias ######################################################################################
     path("archivoganancias/", upload_ganancias, name="archivoGanancias"),
     ################## Resetear bonos ###################################################################################################

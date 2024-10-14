@@ -1,0 +1,154 @@
+{% extends 'baseafiliado.html' %}
+{% load static %}
+
+{% block title %}Registro - Live Community{% endblock %}
+
+{% block content %}
+<section class="form-section text-center" id="formulario">
+    <div class="section-form-container">
+        <div class="logo-gif-container">
+            <h2 class="title-form text-center">Ingresa tus datos para<br /> <span>acceder a los servicios</span></h2>
+        </div>
+        <div class="form-container">
+            <h2>REGISTRATE</h2>
+            <form method="post" enctype="multipart/form-data" action="/user/clienteForm/{{afiliado.fpa}}/" class="form-send">
+                {% csrf_token %}
+
+                <div class="inputbox">
+                    <input type="text" name="first_name" id="id_nombre" required="required" data-nombre class="input-default">
+                    <span>Nombre</span>
+                </div>
+
+                <div class="inputbox">
+                    <input type="text" name="last_name" id="id_apellido" required="required" data-apellido class="input-default">
+                    <span>Apellido</span>
+                </div>
+                
+                <div class="inputbox">
+                    <input placeholder="usuario@correo.com" type="email" name="email" id="id_email" required="required" data-correo class="input-default">
+                    <span>Correo</span>
+                </div>
+
+                <div class="inputbox">
+                    <input type="tel" name="telephone" id="id_telefono" required="required" data-telefono class="input-default">
+                    <span>Teléfono</span>
+                </div>
+
+                <!-- Nuevo campo de nacionalidad -->
+                <div class="inputbox">
+                    <select name="nacionalidad" id="id_nacionalidad" required="required" class="input-default">
+                        <option value="">Seleccione su nacionalidad</option>
+                        <option value="argentina">Argentina</option>
+                        <option value="brasil">Brasil</option>
+                        <option value="chile">Chile</option>
+                        <!-- Agrega más opciones según sea necesario -->
+                    </select>
+                    <span>Nacionalidad</span>
+                </div>
+
+                <!-- Nuevo campo de wallet -->
+                <div class="inputbox">
+                    <input type="text" name="wallet" id="id_wallet" required="required" data-wallet class="input-default">
+                    <span>Dirección de Wallet</span>
+                </div>
+
+                <div class="inputbox">
+                    <input type="text" name="idcliente" id="id_cliente" required="required" data-cliente class="input-default" required='required'>
+                    <span>Ingresar código de 6 dígitos (verificación)</span>
+                </div>
+
+                <div class="inputbox telegram-form">
+                    <input placeholder="@usuario" type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
+                    <span>Usuario Telegram</span>
+                </div>
+
+                <div class="inputbox telegram-form">
+                    <input placeholder="@usuario" type="text" name="userDiscord" id="id_userDiscord" required="required" data-userDiscord class="input-default">
+                    <span>Usuario Discord</span>
+                </div>
+
+                <div class="inputbox file-upload">
+                    <label for="id_documento" class="file-label">
+                        <span class="file-text">DNI / Pasaporte (PDF o imagen)</span>
+                        <span class="file-button">Seleccionar archivo</span>
+                    </label>
+                    <input type="file" name="documento" id="id_documento" accept=".pdf,.jpg,.jpeg,.png" class="input-default file-input" required>
+                </div>
+
+                <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo
+                    <a id='link-telegram' class="link-video-telegram">Click Aqui</a>
+                </p>
+
+                <input type="hidden" name="fpa" id="id_idAfiliado" value="{{afiliado.fpa}}">
+                <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado" value="{{afiliado.telefono}}">
+
+                <div class="input-button">
+                    <input type="submit" value="Enviar" id='btn-send' data-btnSend class="button-32 input-default">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% comment %} Modal para video de usuario de telegram {% endcomment %}
+<div class="modal-telegram" hidden>
+    <span class="btn-salir">X</span>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/J95zGEuzYGQ" title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen class='modal-video'></iframe>
+</div>
+
+<a href="https://api.whatsapp.com/send?phone=54{{afiliado.telefono}}&text=Hola, quiero comunicarme con el soporte de Live Community."
+    id="wsp" class="btn-wsp" target="_blank">
+    <i class="fa fa-whatsapp icono"></i>
+</a>
+
+<style>
+    .file-upload {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+
+    .file-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .file-text {
+        color: #666;
+    }
+
+    .file-button {
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+    }
+
+    .file-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    document.getElementById('id_documento').addEventListener('change', function(e) {
+        var fileName = e.target.files[0].name;
+        document.querySelector('.file-text').textContent = fileName;
+    });
+</script>
+
+{% endblock content %}

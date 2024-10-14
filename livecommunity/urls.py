@@ -37,4 +37,6 @@ urlpatterns = [
     path('servicios/<pk>',views.servicios_pk, name = 'servicios_pk'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('registro/', views.registro, name='registro'),
+    path('registro/<str:pk>/', views.registro_form, name='registro_form'),
 ]

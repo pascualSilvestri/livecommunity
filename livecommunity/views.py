@@ -11,18 +11,18 @@ from apps.usuarios.models import Url, Usuario
 def home(request):
 
     url_video_insercion =convertir_url_youtube ("https://www.youtube.com/embed/k88AjonUhMw")
-    url_register = "https://livecommunity.info/Afiliado/LM500S"
+    url_register = f'/registro/LA500S'
     context = {
         "afiliado": None,
         "url_video": url_video_insercion,
-        "url_register": url_register
+        "url_register": url_register,
     }
     return render(request, "index.html",context)
 
 
 # PRIMER SPRIG
 def broker_skilling(request):
-    url_register = "https://livecommunity.info/Afiliado/LM500S"
+    url_register = "/registro/LM500S"
     context ={
         "afiliado": None,
         "url_register": url_register
@@ -31,7 +31,7 @@ def broker_skilling(request):
 
 
 def presenciales(request):
-    url_register = "https://livecommunity.info/Afiliado/LM500S"
+    url_register = "/registro/LM500S"
     context ={
         "afiliado": None,
         "url_register": url_register
@@ -40,7 +40,7 @@ def presenciales(request):
 
 
 def servicios(request):
-    url_register = "https://livecommunity.info/Afiliado/LM500S"
+    url_register = "/registro/LM500S"
     context ={
         "afiliado": None,
         "url_register": url_register
@@ -51,26 +51,27 @@ def servicios(request):
 def home_pk(request, pk):
     try:
         afiliado = Usuario.objects.get(fpa=pk)
-        urls = Url.objects.all()
-        url = f'{urls[0].url}{pk}'
+        url = f'/registro/'
         if afiliado:
         # url_video_insercion = "https://www.youtube.com/watch?v=HgKjhFEguyU" if afiliado.url_video==0 or afiliado.url_video==''  else  convertir_url_youtube(afiliado.url_video) 
             url_video_insercion =convertir_url_youtube ("https://www.youtube.com/embed/k88AjonUhMw")
-            url_register = url
+            url_register = f'{url}{pk}'
             context = {
             "afiliado": afiliado,
             "id":afiliado.fpa,
             "url_video": url_video_insercion,
-            "url_register": url_register
+            "url_register": url_register,
+            
             }
         else:
             url_video_insercion = "https://www.youtube.com/embed/k88AjonUhMw"
-            url_register = "https://livecommunity.info/Afiliado/LM500S"
+            url_register = f'{url}{"LA500S"}'
             context = {
             "afiliado": None,
             "id":afiliado.fpa,
             "url_video": url_video_insercion,
-            "url_register": url_register
+            "url_register": url_register,
+            
             }
 
         return render(request, 'index.html', context)
@@ -82,8 +83,7 @@ def home_pk(request, pk):
 def broker_pk(request,pk):
     try:
         afiliado = Usuario.objects.get(fpa=pk)
-        urls = Url.objects.all()
-        url = f'{urls[0].url}{pk}'
+        url = f'/registro/{pk}'
         context = {
         "afiliado": afiliado,
         "id":afiliado.fpa,
@@ -100,8 +100,7 @@ def broker_pk(request,pk):
 def presenciales_pk(request,pk):
     try:
         afiliado = Usuario.objects.get(fpa=pk)
-        urls = Url.objects.all()
-        url = f'{urls[0].url}{pk}'
+        url = f'/registro/{pk}'
         context = {
         "afiliado": afiliado,
         "id":afiliado.fpa,
@@ -115,8 +114,7 @@ def presenciales_pk(request,pk):
 def servicios_pk(request,pk):
     try:
         afiliado = Usuario.objects.get(fpa=pk)
-        urls = Url.objects.all()
-        url = f'{urls[0].url}{pk}'
+        url = f'/registro/{pk}'
         context = {
         "afiliado": afiliado,
         "id":afiliado.fpa,
@@ -177,3 +175,20 @@ def convertir_url_youtube(url_original):
     url_insercion = f'https://www.youtube.com/embed/{video_id}'
     return url_insercion
 
+
+def registro(request):
+    return render(request, 'index.html')
+
+
+def registro_form(request, pk):
+    
+    if pk is None:
+        return redirect('home')
+    
+    afiliado = Usuario.objects.get(fpa=pk)
+    context = {
+        'afiliado': afiliado,
+        'pk': pk
+    }
+    
+    return render(request, 'registro.html', context)

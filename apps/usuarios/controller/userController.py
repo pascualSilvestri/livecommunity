@@ -875,8 +875,11 @@ def registrar_usuario(request, pk):
         wallet = request.POST.get('wallet').strip()
         nacionalidad = request.POST.get('nacionalidad').strip()
         
-        print(file)
-        print(file2)
+        
+        existe_user = Usuario.objects.filter(email=email).exists()
+        if existe_user:
+            return render(request, 'registro.html', {'error': 'El usuario ya existe'})
+        
         
         fpa_get_data  = getFpasForUser(fpa_up_line)
         url_skilling = fpa_get_data.get('url_skilling')
@@ -909,24 +912,24 @@ def registrar_usuario(request, pk):
         new_user.set_password(temp_password)
         
         try:
-            # # Guardar el nuevo usuario en la base de datos
-            # new_user.save()
-            # # Asignar roles al nuevo usuario
-            # roles = [3]
-            # for rol_id in roles:
-            #     try:
-            #         rol = Rol.objects.get(id=rol_id)
-            #         UsuarioRol.objects.create(usuario=new_user, rol=rol)
-            #     except Rol.DoesNotExist:
-            #         return JsonResponse({"message": f"Rol con ID {rol_id} no existe"}, status=400)
-            # # Asignar servicios al nuevo usuario
-            # servicios = [1]
-            # for servicio_id in servicios:
-            #     try:
-            #         servicio = Servicio.objects.get(id=servicio_id)
-            #         UsuarioServicio.objects.create(usuario=new_user, servicio=servicio)
-            #     except Servicio.DoesNotExist:
-            #         return JsonResponse({"message": f"Servicio con ID {servicio_id} no existe"}, status=400)
+            # Guardar el nuevo usuario en la base de datos
+            new_user.save()
+            # Asignar roles al nuevo usuario
+            roles = [3]
+            for rol_id in roles:
+                try:
+                    rol = Rol.objects.get(id=rol_id)
+                    UsuarioRol.objects.create(usuario=new_user, rol=rol)
+                except Rol.DoesNotExist:
+                    return JsonResponse({"message": f"Rol con ID {rol_id} no existe"}, status=400)
+            # Asignar servicios al nuevo usuario
+            servicios = [1]
+            for servicio_id in servicios:
+                try:
+                    servicio = Servicio.objects.get(id=servicio_id)
+                    UsuarioServicio.objects.create(usuario=new_user, servicio=servicio)
+                except Servicio.DoesNotExist:
+                    return JsonResponse({"message": f"Servicio con ID {servicio_id} no existe"}, status=400)
             
             
             # Enviar correo con los datos del nuevo usuario
@@ -958,12 +961,12 @@ def registrar_usuario(request, pk):
             
             
             
-            return JsonResponse({"message": "Usuario creado exitosamente y correo enviado"}, status=200)
+            return render(request, 'linkGrupos.html', {'fpa': fpa_skilling})
         except Exception as e:
             print(f"Error guardando el usuario {new_user.username}: {e}")
-            return JsonResponse({"message": f"Error guardando el usuario: {e}"}, status=500)
+            return render(request, 'registro.html', {'error': f"Error guardando el usuario: {e}"})
 
-    return render(request, 'linkGrupos.html')
+
 
 
 
@@ -981,23 +984,39 @@ def asociar_documento_con_idSkilling(request):
             servicio_body = body_data.get('servicio')
             
             try:
-                usuario = Usuario.objects.get(dni=documento)
+                usuario = Usuario.objects.get(documento=documento)
             except Usuario.DoesNotExist:
                 return JsonResponse({'Error': 'Usuario no encontrado'}, status=404)
+            
+            try:
+                usuario_con_idSkilling = Usuario.objects.get(idSkilling=idSkilling)
+            except Usuario.DoesNotExist:
+                return JsonResponse({'Error': 'El usuario ya tiene un idSkilling asociado'}, status=400)
+            
             
             if usuario.idSkilling != None:
                 return JsonResponse({'Error': 'El usuario ya tiene un idSkilling asociado'}, status=400)
             
-            servicio = Servicio.objects.get(id=servicio_body)
             
-            # servicios = [1]
-            # for servicio_id in servicios:
-            #     try:
-            #         servicio = Servicio.objects.get(id=servicio_id)
-            #         UsuarioServicio.objects.create(usuario=new_user, servicio=servicio)
-            #     except Servicio.DoesNotExist:
-            #         return JsonResponse({"message": f"Servicio con ID {servicio_id} no existe"}, status=400)
+            usuario.idSkilling = idSkilling
+            usuario.save()
             
+            # Obtener los servicios actuales del usuario
+            servicios_actuales = set(UsuarioServicio.objects.filter(usuario=usuario).values_list('servicio_id', flat=True))
+
+            # Nuevo servicio a agregar
+            nuevo_servicio_id = servicio_body # O el ID del servicio que quieras agregar
+
+            # Verificar si el nuevo servicio ya existe para el usuario
+            if nuevo_servicio_id not in servicios_actuales:
+                try:
+                    servicio = Servicio.objects.get(id=nuevo_servicio_id)
+                    UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)
+                    print(f"Servicio con ID {nuevo_servicio_id} agregado al usuario.")
+                except Servicio.DoesNotExist:
+                    print(f"Servicio con ID {nuevo_servicio_id} no existe")
+            else:
+                print(f"El usuario ya tiene el servicio con ID {nuevo_servicio_id}")
             
             # Mensaje formateado para telegram
             # mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {new_user.email}\nTeléfono: {new_user.telephone}\nID Socio1: {fpa_skilling}\nID Socio2: {fpa_up_line}\nID Cliente: {new_user.idSkilling} \nUser Discord: {new_user.userDiscord}"
@@ -1014,6 +1033,7 @@ def asociar_documento_con_idSkilling(request):
         except json.JSONDecodeError:
             return JsonResponse({'Error': 'Datos JSON inválidos'}, status=400)
         except Exception as e:
+            print(e.__str__())
             return JsonResponse({'Error': str(e)}, status=500)
     else:
         return JsonResponse({'Error': 'Método inválido'}, status=405)

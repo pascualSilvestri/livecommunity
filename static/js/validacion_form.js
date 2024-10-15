@@ -129,11 +129,21 @@ const setupFormValidation = () => {
     });
 };
 
+// Función para mostrar errores del backend
+const showBackendErrors = () => {
+    const errorElement = document.querySelector('.error-message');
+    if (errorElement) {
+        modalError(errorElement.textContent);
+        errorElement.style.display = 'none'; // Ocultar el mensaje de error original
+    }
+};
+
 // Inicialización
 const init = () => {
     setupFieldValidation();
     validateClientId();
     setupFormValidation();
+    showBackendErrors(); // Agregar esta línea
 };
 
 init();

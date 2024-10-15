@@ -11,6 +11,14 @@
         </div>
         <div class="form-container">
             <h2>REGISTRATE</h2>
+            
+            <!-- Agregar esto para mostrar los mensajes de error del backend -->
+            {% if error %}
+            <div class="error-message" style="color: red; margin-bottom: 15px;">
+                {{ error }}
+            </div>
+            {% endif %}
+            
             <form method="post" enctype="multipart/form-data" action="/user/clienteForm/{{afiliado.fpa}}/" class="form-send">
                 {% csrf_token %}
 

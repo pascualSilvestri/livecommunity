@@ -930,16 +930,20 @@ def registrar_usuario(request, pk):
             
             
             # Enviar correo con los datos del nuevo usuario
-            # enviar_correo_new_user(
-            #     nombre=new_user.first_name,
-            #     telefono=new_user.telephone,
-            #     correo=new_user.email,
-            #     id_cliente=new_user.idSkilling,
-            #     password_temporal=temp_password,
-            #     fpa=new_user.fpa,
-            #     fpa_up_line=new_user.up_line,
-            #     username=new_user.username
-            # )
+            try:
+                enviar_correo_new_user(
+                    nombre=new_user.first_name,
+                    telefono=new_user.telephone,
+                    correo=new_user.email,
+                    id_cliente=new_user.idSkilling,
+                    password_temporal=temp_password,
+                    fpa=new_user.fpa,
+                fpa_up_line=new_user.up_line,
+                username=new_user.username
+                )
+            except Exception as e:
+                print(f"Error enviando el correo: {e}")
+            
             files = [file] if file else []
             if file2:
                 files.append(file2)
@@ -948,8 +952,11 @@ def registrar_usuario(request, pk):
                     usuario=new_user,
                     files=files
                 )
+                
             except Exception as e:
                 print(f"Error enviando el correo: {e}")
+            
+            
             
             return JsonResponse({"message": "Usuario creado exitosamente y correo enviado"}, status=200)
         except Exception as e:
@@ -958,13 +965,6 @@ def registrar_usuario(request, pk):
 
     return render(request, 'linkGrupos.html')
 
-
-
-
-# MessageString = 'hola'
-# print(MessageString)
-# asyncio.run(enviar_mensaje(MessageString, chat_id, token))
-    
 
 
 
@@ -998,6 +998,14 @@ def asociar_documento_con_idSkilling(request):
             #     except Servicio.DoesNotExist:
             #         return JsonResponse({"message": f"Servicio con ID {servicio_id} no existe"}, status=400)
             
+            
+            # Mensaje formateado para telegram
+            # mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {new_user.email}\nTeléfono: {new_user.telephone}\nID Socio1: {fpa_skilling}\nID Socio2: {fpa_up_line}\nID Cliente: {new_user.idSkilling} \nUser Discord: {new_user.userDiscord}"
+        
+            # try:
+            #     enviar_mensaje_sync(mensaje, chat_id, token)
+            # except Exception as e:
+            #     print(e.__str__())
             
 
             
@@ -1230,3 +1238,12 @@ def getFpasForUser(fpaSkilling):
 def enviar_mensaje_sync(msj, id, token):
     bot = telegram.Bot(token=token)
     bot.send_message(chat_id=id, text=msj)
+
+
+
+
+# MessageString = 'hola'
+# print(MessageString)
+# asyncio.run(enviar_mensaje(MessageString, chat_id, token))
+    
+

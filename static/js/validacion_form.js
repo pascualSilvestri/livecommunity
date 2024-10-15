@@ -8,9 +8,9 @@ const formElements = {
     userDiscord: document.getElementById("id_userDiscord"),
     email: document.getElementById("id_email"),
     telefono: document.getElementById("id_telefono"),
-    idCliente: document.getElementById('id_cliente'),
     nacionalidad: document.getElementById('id_nacionalidad'),
     wallet: document.getElementById('id_wallet'),
+    documento: document.getElementById('documento'),
     form: document.querySelector('.form-send'),
     mensajeVerificado: document.querySelector('.mensaje-verificar-cliente'),
     sectionValidacion: document.getElementById('nuevo_id_cliente')
@@ -23,10 +23,10 @@ const errorState = {
     email: false,
     userTelegram: false,
     telefono: false,
-    idCliente: false,
     userDiscord: false,
     nacionalidad: false,
-    wallet: false
+    wallet: false,
+    documento: false
 };
 
 // Expresiones regulares
@@ -38,6 +38,7 @@ const regex = {
     // wallet: /^0x[a-fA-F0-9]{40}$/ // Ejemplo para direcciones Ethereum. Ajusta según tus necesidades.
     wallet: /[a-fA-F0-9]/,
     nacionalidad: /[a-zA-Z]/,
+    documento: /^[0-9]{7,10}$/, // Asumiendo que el documento tiene entre 7 y 10 dígitos
 };
 
 // Mensajes de error
@@ -46,11 +47,11 @@ const errorMessages = {
     email: `El formato correcto es ejemplo@correo.com`,
     usuario: `Debe comenzar con un @ ejemplo @usuarioTelegram`,
     btnError: "Por favor complete los campos correctamente.",
-    idCliente: 'Su cuenta no está verificada correctamente, por favor verifique el ID ingresado',
     telefono: 'Acepta solo números',
     noDeposito: 'Para terminar el proceso de registro debe fondear la cuenta de Skilling.',
     nacionalidad: 'Por favor seleccione una nacionalidad',
-    wallet: 'Ingrese una dirección de wallet válida'
+    wallet: 'Ingrese una dirección de wallet válida',
+    documento: 'El documento debe contener entre 7 y 10 dígitos numéricos.'
 };
 
 // Funciones auxiliares
@@ -76,7 +77,7 @@ const validateField = (field, value, regexKey) => {
 // Validación de campos
 const setupFieldValidation = () => {
     Object.entries(formElements).forEach(([key, element]) => {
-        if (element && (element.tagName === 'INPUT' || element.tagName === 'SELECT') && key !== 'idCliente') {
+        if (element && (element.tagName === 'INPUT' || element.tagName === 'SELECT')) {
             element.addEventListener("blur", (e) => {
                 let regexKey;
                 switch(key) {
@@ -96,6 +97,9 @@ const setupFieldValidation = () => {
                     case 'wallet':
                         regexKey = 'wallet';
                         break;
+                    case 'documento':
+                        regexKey = 'documento';
+                        break;
                     default:
                         regexKey = 'usuario';
                 }
@@ -106,73 +110,9 @@ const setupFieldValidation = () => {
 };
 
 // Validación de ID de cliente
-const validateClientId = async () => {
-    if (!formElements.idCliente) return;
 
-    formElements.idCliente.addEventListener('blur', async () => {
-        const value = formElements.idCliente.value;
-        if (value && regex.telefono.test(value)) {
-            try {
-                const { esValido, haDepositado } = await validarIdYDeposito();
-                if (esValido && haDepositado) {
-                    setValidState(formElements.idCliente, true);
-                    if (formElements.mensajeVerificado) {
-                        formElements.mensajeVerificado.style.display = 'block';
-                        setTimeout(() => {
-                            if (formElements.mensajeVerificado) {
-                                formElements.mensajeVerificado.style.display = 'none';
-                            }
-                        }, 3000);
-                    }
-                    if (formElements.sectionValidacion) {
-                        formElements.sectionValidacion.style.display = 'none';
-                    }
-                    errorState.idCliente = true;
-                } else {
-                    setValidState(formElements.idCliente, false);
-                    modalError(esValido ? errorMessages.noDeposito : errorMessages.idCliente);
-                    if (esValido && formElements.sectionValidacion) {
-                        formElements.sectionValidacion.style.display = 'flex';
-                    }
-                    errorState.idCliente = false;
-                }
-            } catch (error) {
-                console.error("Error en la validación:", error);
-                modalError("Error al validar el ID. Por favor, inténtelo de nuevo.");
-                setValidState(formElements.idCliente, false);
-                errorState.idCliente = false;
-            }
-        } else {
-            modalError(errorMessages.idCliente);
-            setValidState(formElements.idCliente, false);
-            errorState.idCliente = false;
-        }
-    });
-};
 
-// Obtener datos del cliente
-const obtenerDatos = async () => {
-    try {
-        const response = await fetch(`http://127.0.0.1:8000/api/skilling/proxy/${formElements.idCliente.value}/`);
-        if (!response.ok) throw new Error("Error en la respuesta del servidor");
-        return await response.json();
-    } catch (error) {
-        console.error("Error al obtener datos:", error);
-        return null;
-    }
-};
 
-// Validar ID y depósito
-const validarIdYDeposito = async () => {
-    const datos = await obtenerDatos();
-    if (!datos || !datos.registrations || datos.registrations.length === 0) {
-        return { esValido: false, haDepositado: false };
-    }
-    const cliente = datos.registrations[0];
-    return { esValido: true, haDepositado: cliente.First_Deposit > 170 };
-};
-
-// Validación del formulario
 const setupFormValidation = () => {
     if (!formElements.form) return;
     formElements.form.addEventListener('submit', (e) => {

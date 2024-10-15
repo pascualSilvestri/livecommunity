@@ -1,4 +1,5 @@
 from collections import defaultdict
+from email.message import EmailMessage
 import json
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
@@ -24,6 +25,11 @@ from rest_framework.exceptions import AuthenticationFailed
 from django.core.mail import send_mail
 from django.db import transaction
 import telegram
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from django.core.mail import EmailMessage, get_connection
+from django.conf import settings
 from livecommunity.settings import TELEGRAM_BOT_TOKEN,CHAT_ID_BOT
 
 chat_id = CHAT_ID_BOT
@@ -82,7 +88,7 @@ def login(request):
                     'servicios': servicios,
                     'registrado': usuario.registrado,
                     'status': usuario.aceptado,
-                    'idCliente': usuario.idCliente,
+                    'idSkilling': usuario.idSkilling,
                     'aceptado': usuario.aceptado,
                     'fondeado': usuario.fondeado,
                     'eliminado': usuario.eliminado,
@@ -129,11 +135,11 @@ def postNewUsers(request):
                 existing_user = Usuario.objects.filter(username=base_username).first()
 
                 if existing_user:
-                    # El usuario ya existe, actualizar datos si fpa o idCliente son None
+                    # El usuario ya existe, actualizar datos si fpa o idSkilling son None
                     if not existing_user.fpa and user_data.get("fpa"):
                         existing_user.fpa = user_data.get("fpa")
-                    if not existing_user.idCliente and user_data.get("idCliente"):
-                        existing_user.idCliente = user_data.get("idCliente")
+                    if not existing_user.idSkilling and user_data.get("idSkilling"):
+                        existing_user.idSkilling = user_data.get("idSkilling")
                     existing_user.email = user_data.get("email")  # Actualiza el correo también
                     existing_user.telephone = user_data.get("telefono")
                     existing_user.wallet = user_data.get("wallet")
@@ -175,7 +181,7 @@ def postNewUsers(request):
                     new_user = Usuario(
                         username=base_username,
                         fpa=user_data.get("fpa") or None,
-                        idCliente=user_data.get("idCliente") or None,
+                        idSkilling=user_data.get("idSkilling") or None,
                         email=user_data.get("email"),
                         first_name=user_data.get("nombre"),
                         last_name=user_data.get("apellido"),
@@ -247,7 +253,7 @@ def postNewUser(request):
             try:
                 user_data = json.loads(request.body)
                 # Decodificar el cuerpo de la solicitud como JSON
-                url = f"https://go.skillingpartners.com/api/?command=registrations&fromdate=&todate=&daterange=update&userid=skilling-{user_data.get("idCliente")}&json=1"
+                url = f"https://go.skillingpartners.com/api/?command=registrations&fromdate=&todate=&daterange=update&userid=skilling-{user_data.get("idSkilling")}&json=1"
                 headers = {
                     'x-api-key': settings.SKILLING_API_KEY,
                     'affiliateid': '35881',
@@ -260,7 +266,6 @@ def postNewUser(request):
                     # Intentar decodificar la respuesta JSON
                     
                     json_response = response.json()
-                    
                     
                     
                      
@@ -323,7 +328,7 @@ def postNewUser(request):
                     return JsonResponse({"message": "Error al crear el usuario"}, status=400)
 
                 try:# Verificar si el usuario con ese username ya existe
-                    existing_user = Usuario.objects.get(fpa=user_data.get("idCliente"),email=user_data.get("email"))
+                    existing_user = Usuario.objects.get(fpa=user_data.get("idSkilling"),email=user_data.get("email"))
                     return JsonResponse({"message": "Usuario ya existe"}, status=404)
                 except Usuario.DoesNotExist:
                     pass
@@ -332,7 +337,7 @@ def postNewUser(request):
                 new_user = Usuario(
                     username=base_username,
                     fpa=siguiente_faltante,
-                    idCliente=user_data.get("idCliente") or None,
+                    idSkilling=user_data.get("idSkilling") or None,
                     email=user_data.get("email"),
                     first_name=user_data.get("first_name"),
                     last_name=user_data.get("last_name"),
@@ -374,7 +379,7 @@ def postNewUser(request):
                             return JsonResponse({"message": f"Servicio con ID {servicio_id} no existe"}, status=400)
                     
                     
-                    enviar_correo(user_data.get("first_name"), user_data.get("telefono"), user_data.get("email"), user_data.get("idCliente"), user_data.get("password"),siguiente_faltante)
+                    enviar_correo(user_data.get("first_name"), user_data.get("telefono"), user_data.get("email"), user_data.get("idSkilling"), user_data.get("password"),siguiente_faltante)
                 except Exception as e:
                     print(f"Error guardando el usuario {new_user.username}: {e}")
                     return JsonResponse({"message": f"Error guardando el usuario: {e}"}, status=500)
@@ -444,7 +449,7 @@ def getUserById(request, pk):
                 'servicios': servicios,
                 'registrado': usuario.registrado,
                 'status': usuario.aceptado,
-                'idCliente': usuario.idCliente,
+                'idSkilling': usuario.idSkilling,
                 'aceptado': usuario.aceptado,
                 'fondeado': usuario.fondeado,
                 'eliminado': usuario.eliminado,
@@ -489,7 +494,7 @@ def users(request):
                     'servicios': [{'id': servicio.servicio_id, 'servicio': servicio.servicio.name} for servicio in usuario.serviciosUsuario.all()],
                     'registrado': usuario.registrado,
                     'status': usuario.aceptado,
-                    'idCliente': usuario.idCliente,
+                    'idSkilling': usuario.idSkilling,
                     'aceptado': usuario.aceptado,
                     'fondeado': usuario.fondeado,
                     'eliminado': usuario.eliminado,
@@ -569,7 +574,7 @@ def updateUserById(request, pk):
 
                 # Si no tenía el rol de Socio antes y ahora sí, envía el correo
                 if not tenia_rol_socio and tiene_rol_socio_ahora:
-                    enviar_correo_socio(nombre=usuario.first_name, telefono=usuario.telephone, correo=usuario.email, id_cliente=usuario.idCliente, fpa=usuario.fpa, url_live=url_livecommunity_base, url_skilling=url_skilling_base)  # Asegúrate de que esta función esté definida e importada
+                    enviar_correo_socio(nombre=usuario.first_name, telefono=usuario.telephone, correo=usuario.email, id_cliente=usuario.idSkilling, fpa=usuario.fpa, url_live=url_livecommunity_base, url_skilling=url_skilling_base)  # Asegúrate de que esta función esté definida e importada
 
             # Actualiza los servicios si se proporcionaron
             if 'servicios' in body_data:
@@ -608,7 +613,7 @@ def updateUserById(request, pk):
                 'servicios': servicios,
                 'registrado': usuario.registrado,
                 'status': usuario.aceptado,
-                'idCliente': usuario.idCliente,
+                'idSkilling': usuario.idSkilling,
                 'aceptado': usuario.aceptado,
                 'fondeado': usuario.fondeado,
                 'eliminado': usuario.eliminado,
@@ -852,14 +857,166 @@ def getFpasForUser(request, pk):
     else:
         return JsonResponse({'Error': 'Método HTTP incorrecto'}, status=405)
     
+
+@transaction.atomic
+def registrar_usuario(request, pk):
+    if request.method == 'POST':
+        # Obtener los datos del formulario
+        nombre = request.POST.get('first_name').strip()
+        apellido = request.POST.get('last_name').strip()
+        email = request.POST.get('email').strip()
+        telefono = request.POST.get('telephone').strip()
+        fpa_up_line = request.POST.get('fpa').strip()
+        userTelegram = request.POST.get('userTelegram').strip()
+        userDiscord = request.POST.get('userDiscord').strip()
+        documento = request.POST.get('documento').strip()
+        file = request.FILES.get('file')
+        file2 = request.FILES.get('file2')
+        wallet = request.POST.get('wallet').strip()
+        nacionalidad = request.POST.get('nacionalidad').strip()
+        
+        print(file)
+        print(file2)
+        
+        fpa_get_data  = getFpasForUser(fpa_up_line)
+        url_skilling = fpa_get_data.get('url_skilling')
+        url_livecommunity = fpa_get_data.get('url_livecommunity')
+        
+        fpa_skilling = fpa_get_data.get('fpa_siguiente')
+        print(fpa_skilling)
+        
+        # Generar una contraseña temporal
+        temp_password = Usuario.objects.make_random_password()
+
+        new_user = Usuario(
+            username=email,
+            fpa=fpa_skilling,
+            idSkilling=None,
+            email=email,
+            first_name=nombre,
+            last_name=apellido,
+            documento=documento,
+            telephone=telefono,
+            wallet=wallet,
+            up_line=fpa_up_line,
+            link=None,
+            registrado=False,
+            aceptado=False,
+            userTelegram=userTelegram,
+            userDiscord=userDiscord,
+            nacionalidad=nacionalidad,
+        )
+        new_user.set_password(temp_password)
+        
+        try:
+            # # Guardar el nuevo usuario en la base de datos
+            # new_user.save()
+            # # Asignar roles al nuevo usuario
+            # roles = [3]
+            # for rol_id in roles:
+            #     try:
+            #         rol = Rol.objects.get(id=rol_id)
+            #         UsuarioRol.objects.create(usuario=new_user, rol=rol)
+            #     except Rol.DoesNotExist:
+            #         return JsonResponse({"message": f"Rol con ID {rol_id} no existe"}, status=400)
+            # # Asignar servicios al nuevo usuario
+            # servicios = [1]
+            # for servicio_id in servicios:
+            #     try:
+            #         servicio = Servicio.objects.get(id=servicio_id)
+            #         UsuarioServicio.objects.create(usuario=new_user, servicio=servicio)
+            #     except Servicio.DoesNotExist:
+            #         return JsonResponse({"message": f"Servicio con ID {servicio_id} no existe"}, status=400)
+            
+            
+            # Enviar correo con los datos del nuevo usuario
+            # enviar_correo_new_user(
+            #     nombre=new_user.first_name,
+            #     telefono=new_user.telephone,
+            #     correo=new_user.email,
+            #     id_cliente=new_user.idSkilling,
+            #     password_temporal=temp_password,
+            #     fpa=new_user.fpa,
+            #     fpa_up_line=new_user.up_line,
+            #     username=new_user.username
+            # )
+            files = [file] if file else []
+            if file2:
+                files.append(file2)
+            try:
+                enviar_correo_email_admin(
+                    usuario=new_user,
+                    files=files
+                )
+            except Exception as e:
+                print(f"Error enviando el correo: {e}")
+            
+            return JsonResponse({"message": "Usuario creado exitosamente y correo enviado"}, status=200)
+        except Exception as e:
+            print(f"Error guardando el usuario {new_user.username}: {e}")
+            return JsonResponse({"message": f"Error guardando el usuario: {e}"}, status=500)
+
+    return render(request, 'linkGrupos.html')
+
+
+
+
+# MessageString = 'hola'
+# print(MessageString)
+# asyncio.run(enviar_mensaje(MessageString, chat_id, token))
+    
+
+
+
+@csrf_exempt
+def asociar_documento_con_idSkilling(request):
+    if request.method == 'POST':
+        try:
+            # Decodificar el cuerpo de la solicitud y analizarlo como JSON
+            body_unicode = request.body.decode('utf-8')
+            body_data = json.loads(body_unicode)
+            
+            idSkilling = body_data.get('idSkilling')
+            documento = body_data.get('documento')
+            servicio_body = body_data.get('servicio')
+            
+            try:
+                usuario = Usuario.objects.get(dni=documento)
+            except Usuario.DoesNotExist:
+                return JsonResponse({'Error': 'Usuario no encontrado'}, status=404)
+            
+            if usuario.idSkilling != None:
+                return JsonResponse({'Error': 'El usuario ya tiene un idSkilling asociado'}, status=400)
+            
+            servicio = Servicio.objects.get(id=servicio_body)
+            
+            # servicios = [1]
+            # for servicio_id in servicios:
+            #     try:
+            #         servicio = Servicio.objects.get(id=servicio_id)
+            #         UsuarioServicio.objects.create(usuario=new_user, servicio=servicio)
+            #     except Servicio.DoesNotExist:
+            #         return JsonResponse({"message": f"Servicio con ID {servicio_id} no existe"}, status=400)
+            
+            
+
+            
+            print(idSkilling, documento)
+            return JsonResponse({'data': f'{idSkilling} - {documento}'})
+        except json.JSONDecodeError:
+            return JsonResponse({'Error': 'Datos JSON inválidos'}, status=400)
+        except Exception as e:
+            return JsonResponse({'Error': str(e)}, status=500)
+    else:
+        return JsonResponse({'Error': 'Método inválido'}, status=405)
     
     
-    
+############################################################################################
+########################### METODOS ########################################################
+############################################################################################
 
-
-
-
-def enviar_correo(nombre, telefono, correo, id_cliente, password_temporal, fpa):
+# Función para enviar correo con contraseña temporal (implementar según tus necesidades)
+def enviar_correo_new_user(nombre, telefono, correo, id_cliente, password_temporal, fpa, fpa_up_line, username):
     asunto = 'Bienvenido a LiveCommunity - Información de tu cuenta'
     mensaje = f"""
     Hola {nombre},
@@ -871,19 +1028,23 @@ def enviar_correo(nombre, telefono, correo, id_cliente, password_temporal, fpa):
     Nombre: {nombre}
     Teléfono: {telefono}
     Correo electrónico: {correo}
+    Nombre de usuario: {username}
     ID de Cliente: {id_cliente}
-    Fpa: {fpa}
-    
+    FPA: {fpa}
+    FPA de tu upline: {fpa_up_line}
     
     Tu contraseña temporal es: {password_temporal}
     
-    Por favor, ingresa a nuestra plataforma y cambia tu contraseña lo antes posible.
-    
-    https://www.livecommunity.xyz/
+    Por favor, ingresa a nuestra plataforma (https://www.livecommunity.xyz/) y cambia tu contraseña lo antes posible.
+
+    Pasos para cambiar tu contraseña:
+    1. Accede a la plataforma con tu nombre de usuario y contraseña temporal.
+    2. Ve a la sección de "Perfil" o "Configuración de cuenta".
+    3. Busca la opción "Cambiar contraseña" y sigue las instrucciones.
 
     Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
 
-    ¡Gracias por unirte a LiveCommunity!
+    ¡Gracias por unirte a LiveCommunity! Estamos emocionados de tenerte con nosotros.
 
     Saludos,
     El equipo de LiveCommunity
@@ -902,6 +1063,78 @@ def enviar_correo(nombre, telefono, correo, id_cliente, password_temporal, fpa):
 
 
 
+
+
+
+def enviar_correo_email_admin(usuario, files=None):
+    asunto = 'Bienvenido a LiveCommunity - Información de tu cuenta'
+    mensaje = f"""
+    Hola {usuario.first_name},
+
+    ¡Bienvenido a LiveCommunity! Tu cuenta ha sido creada exitosamente.
+
+    Aquí están los detalles de tu cuenta:
+
+    Nombre completo: {usuario.first_name} {usuario.last_name}
+    Teléfono: {usuario.telephone}
+    Correo electrónico: {usuario.email}
+    Nombre de usuario: {usuario.username}
+    ID de Cliente: {usuario.idSkilling}
+    FPA: {usuario.fpa}
+    FPA de tu upline: {usuario.up_line}
+    Documento: {usuario.documento}
+    Nacionalidad: {usuario.nacionalidad}
+    Wallet: {usuario.wallet}
+    Usuario de Telegram: {usuario.userTelegram}
+    Usuario de Discord: {usuario.userDiscord}
+
+    Por favor, ingresa a nuestra plataforma (https://www.livecommunity.xyz/) y cambia tu contraseña lo antes posible.
+
+    Pasos para cambiar tu contraseña:
+    1. Accede a la plataforma con tu nombre de usuario y contraseña temporal.
+    2. Ve a la sección de "Perfil" o "Configuración de cuenta".
+    3. Busca la opción "Cambiar contraseña" y sigue las instrucciones.
+
+    Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
+
+    ¡Gracias por unirte a LiveCommunity! Estamos emocionados de tenerte con nosotros.
+
+    Saludos,
+    El equipo de LiveCommunity
+    """
+
+    # Lista de destinatarios
+    lista_destinatarios = ['pascualsilvestri14@gmail.com']
+    
+    try:
+        # Crear el mensaje
+        email = EmailMessage(
+            subject=asunto,
+            body=mensaje,
+            from_email=settings.EMAIL_HOST_USER,
+            to=lista_destinatarios
+        )
+        
+        # Adjuntar archivos si existen
+        if files:
+            if not isinstance(files, list):
+                files = [files]
+            for file in files:
+                email.attach(file.name, file.read(), file.content_type)
+
+        # Enviar el correo
+        email.send()
+
+        print(f"Correo enviado exitosamente a {usuario.email}")
+        return True
+    except Exception as e:
+        print(f"Error al enviar el correo: {str(e)}")
+        return False
+    
+    
+    
+    
+    
 def enviar_correo_socio(nombre, telefono, correo, id_cliente, fpa, url_live, url_skilling):
     asunto = 'Bienvenido a liveAcademy - Información de tu cuenta'
     mensaje = f"""
@@ -945,145 +1178,55 @@ def enviar_correo_socio(nombre, telefono, correo, id_cliente, fpa, url_live, url
 
 
 
-
-# MessageString = 'hola'
-# print(MessageString)
-# asyncio.run(enviar_mensaje(MessageString, chat_id, token))
+def getFpasForUser(fpaSkilling):
+    fpas = Fpas.objects.all()
+    Url.objects.all()
     
-#Verifica si el id ingresado no se encuentra en base de datos
-def existe(clientes,idCliente):
-    for client in clientes:
-        if client.idCliente == idCliente:
-            return True
+    url_skilling_base = Url.objects.get(id=2).url
+    url_livecommunity_base = Url.objects.get(id=1).url
+    
+    pk = fpaSkilling.split(',')[0][:2]
+    
+    # Agrupamos los FPAs por su letra final
+    fpas_dict = defaultdict(list)
+    for fpa in fpas:
+        if fpa.fpa and fpa.fpa.startswith(pk):
+            fpas_dict[fpa.fpa[-1]].append(fpa.fpa)
+    
+    # Ordenamos cada lista de FPAs
+    for letra in fpas_dict:
+        fpas_dict[letra].sort()
+    
+    def encontrar_siguiente(fpas_list, sufijo):
+        if not fpas_list:
+            return f"{pk}001{sufijo}"
+        for i in range(len(fpas_list) - 1):
+            actual = int(fpas_list[i][2:5])
+            siguiente = int(fpas_list[i+1][2:5])
+            if siguiente - actual > 1:
+                return f"{pk}{actual+1:03d}{sufijo}"
+        ultimo = int(fpas_list[-1][2:5])
+        return f"{pk}{ultimo+1:03d}{sufijo}"
+    siguientes_faltantes = {letra: encontrar_siguiente(fpas, letra) for letra, fpas in fpas_dict.items()}
+    
+    # Encontrar el menor siguiente faltante
+    siguiente_faltante = min(siguientes_faltantes.values())
+    # Combinar todas las listas de FPAs
+    todos_fpas = sorted([fpa for fpas in fpas_dict.values() for fpa in fpas])
+    
+    # Fpas.objects.get_or_create(
+    #     fpa=siguiente_faltante
+    # )
+    return {
+        'data': todos_fpas,
+        'fpa_siguiente': siguiente_faltante,
+        'url_skilling': f'{url_skilling_base}{siguiente_faltante}',
+        'url_livecommunity': f'{url_livecommunity_base}{siguiente_faltante}'
+    }
+
+
         
 #Envio de mensaje a hacia telegram
 def enviar_mensaje_sync(msj, id, token):
     bot = telegram.Bot(token=token)
     bot.send_message(chat_id=id, text=msj)
-
-
-
-@transaction.atomic
-def clienteform(request,pk):
-    if request.method == 'POST':
-        # Obtener los datos del formulario
-        nombre = request.POST.get('first_name').strip()
-        apellido = request.POST.get('last_name').strip()
-        correo = request.POST.get('email').strip()
-        telefono = request.POST.get('telephone').strip()
-        fpa = request.POST.get('fpa').strip()
-        userTelegram = request.POST.get('userTelegram').strip()
-        userDiscord = request.POST.get('userDiscord').strip()
-        idCliente = request.POST.get('idcliente').strip()
-        documento = request.FILES.get('documento')
-        wallet = request.POST.get('wallet').strip()
-        nacionalidad = request.POST.get('nacionalidad').strip()
-        print(pk)
-        print(nombre, apellido, correo, telefono, fpa, userTelegram, userDiscord, idCliente, wallet, nacionalidad)
-        print(documento)
-        
-        
-        # Buscar el FPA correspondiente
-        # registro = Relation_fpa_client.objects.filter(client=idCliente).first()
-        # fpa = registro.fpa if registro else ''
-        
-        # # Buscar el upline
-        # afiliado = Usuario.objects.filter(fpa=fpa).first()
-        # upline = afiliado.up_line if afiliado else None
-
-        # Generar una contraseña temporal
-        # temp_password = Usuario.objects.make_random_password()
-        
-
-        # Crear o actualizar Usuario
-        # usuario, created = Usuario.objects.update_or_create(
-        #     email=correo,
-        #     defaults={
-        #         'username': correo,  # Usando el correo como nombre de usuario
-        #         'password': make_password(temp_password),
-        #         'first_name': nombre,
-        #         'last_name': apellido,
-        #         'fpa': None,
-        #         'idCliente': idCliente,
-        #         'telephone': telefono,
-        #         'userTelegram': userTelegram,
-        #         'userDiscord':userDiscord,
-        #         'up_line': fpa,
-        #         'link': f"https://livecommunity.info/Afiliado/{fpa}" if fpa else None,
-        #     }
-        # )
-        # print(userDiscord)
-        # rol = Rol.objects.get(id=3)
-        # servicio = Servicio.objects.get(id=1)
-        # if created:
-        #     if not UsuarioRol.objects.filter(usuario=usuario, rol=rol).exists():
-        #         UsuarioRol.objects.create(usuario=usuario, rol=rol)
-         
-        
-        #     if not UsuarioServicio.objects.filter(usuario=usuario, servicio=servicio).exists():
-        #         UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)
-                
-        #     ########################### Enviar correo si se crea el usuario ###########################
-        #     # enviar_correo(nombre,telefono,correo,idCliente,temp_password)
-        
-        # if not created:
-        #     if not UsuarioRol.objects.filter(usuario=usuario, rol=rol).exists():
-        #         UsuarioRol.objects.create(usuario=usuario, rol=rol)
-         
-        
-        #     if not UsuarioServicio.objects.filter(usuario=usuario, servicio=servicio).exists():
-        #         UsuarioServicio.objects.create(usuario=usuario, servicio=servicio)
-                
-                
-                
-        # Mensaje formateado para telegram
-        # mensaje = f"Nombre: {nombre}\nApellido: {apellido}\nUser Telegram: {userTelegram}\nEmail: {correo}\nTeléfono: {telefono}\nID Socio1: {fpa}\nID Socio2: {upline}\nID Cliente: {idCliente} \nUser Discord: {userDiscord}"
-        
-        # try:
-        #     enviar_mensaje_sync(mensaje, chat_id, token)
-            
-        # except Exception as e:
-        #     print(e.__str__())
-
-    return render(request, 'linkGrupos.html')
-
-# Función para enviar correo con contraseña temporal (implementar según tus necesidades)
-def enviar_correo(nombre, telefono, correo, id_cliente, password_temporal):
-    asunto = 'Bienvenido a LiveCommunity - Información de tu cuenta'
-    mensaje = f"""
-    Hola {nombre},
-
-    ¡Bienvenido a LiveCommunity! Tu cuenta ha sido creada exitosamente.
-
-    Aquí están los detalles de tu cuenta:
-    
-    Nombre: {nombre}
-    Teléfono: {telefono}
-    Correo electrónico: {correo}
-    ID de Cliente: {id_cliente}
-    
-    Tu contraseña temporal es: {password_temporal}
-    
-    Por favor, ingresa a nuestra plataforma y cambia tu contraseña lo antes posible.
-
-    Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
-
-    ¡Gracias por unirte a LiveCommunity!
-
-    Saludos,
-    El equipo de LiveCommunity
-    """
-    
-    lista_destinatarios = [correo]  # Enviamos el correo al usuario
-    correo_remitente = settings.EMAIL_HOST_USER
-
-    try:
-        send_mail(asunto, mensaje, correo_remitente, lista_destinatarios, fail_silently=False)
-        print(f"Correo enviado exitosamente a {correo}")
-        return True
-    except Exception as e:
-        print(f"Error al enviar el correo: {str(e)}")
-        return False
-
-
-

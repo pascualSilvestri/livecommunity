@@ -1,7 +1,7 @@
 from django.urls import path
 from apps.usuarios.controller.passwordController import enviar_token_recuperacion
 from apps.usuarios.controller.userController import (
-    clienteform,
+    asociar_documento_con_idSkilling,
     deleteUser,
     eliminarUser,
     eliminarUserForever,
@@ -17,13 +17,14 @@ from apps.usuarios.controller.userController import (
     users,
     usuarioValido,
     getFpasForUser,
+    registrar_usuario,
 )
 from .controller import passwordController
 
 app_name = "users"
 
 urlpatterns = [
-    path("clienteForm/<pk>/", clienteform, name="clienteform"),
+    path("clienteForm/<pk>/", registrar_usuario, name="clienteform"),
     path("register/", postNewUser, name="user"),
     path("registers/", postNewUsers, name="users"),
     path("login/", login, name="userEmail"),
@@ -52,4 +53,5 @@ urlpatterns = [
         name="verificar_password_actual",
     ),
     path("get-fpas/<pk>/", getFpasForUser, name="getFpasForUser"),
+    path("asociar-documento-idskilling/", asociar_documento_con_idSkilling, name="asociar_documento_con_idSkilling"),
 ]

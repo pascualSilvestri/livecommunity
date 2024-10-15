@@ -23,6 +23,11 @@
                     <input type="text" name="last_name" id="id_apellido" required="required" data-apellido class="input-default">
                     <span>Apellido</span>
                 </div>
+
+                <div class="inputbox">
+                    <input type="text" name="documento" id="documento" required="required" data-documento class="input-default">
+                    <span>Numero de documento</span>
+                </div>
                 
                 <div class="inputbox">
                     <input placeholder="usuario@correo.com" type="email" name="email" id="id_email" required="required" data-correo class="input-default">
@@ -52,11 +57,6 @@
                     <span>Dirección de Wallet</span>
                 </div>
 
-                <div class="inputbox">
-                    <input type="text" name="idcliente" id="id_cliente" required="required" data-cliente class="input-default" required='required'>
-                    <span>Ingresar código de 6 dígitos (verificación)</span>
-                </div>
-
                 <div class="inputbox telegram-form">
                     <input placeholder="@usuario" type="text" name="userTelegram" id="id_userTelegram" required="required" data-userTelegram class="input-default">
                     <span>Usuario Telegram</span>
@@ -68,12 +68,21 @@
                 </div>
 
                 <div class="inputbox file-upload">
-                    <label for="id_documento" class="file-label">
-                        <span class="file-text">DNI / Pasaporte (PDF o imagen)</span>
+                    <label for="file" class="file-label">
+                        <span class="file-text">DNI Frente / Pasaporte (imagen)</span>
                         <span class="file-button">Seleccionar archivo</span>
                     </label>
-                    <input type="file" name="documento" id="id_documento" accept=".pdf,.jpg,.jpeg,.png" class="input-default file-input" required>
+                    <input type="file" name="file" id="id_file" accept=".jpg,.jpeg,.png" class="input-default file-input" required>
                 </div>
+
+                <div class="inputbox file-upload">
+                    <label for="file" class="file-label">
+                        <span class="file-text">DNI Dorso (imagen)</span>
+                        <span class="file-button">Seleccionar archivo</span>
+                    </label>
+                    <input type="file" name="file2" id="id_file2" accept=".jpg,.jpeg,.png" class="input-default file-input">
+                </div>
+
 
                 <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo
                     <a id='link-telegram' class="link-video-telegram">Click Aqui</a>
@@ -145,10 +154,17 @@
 </style>
 
 <script>
-    document.getElementById('id_documento').addEventListener('change', function(e) {
+    document.getElementById('id_file').addEventListener('change', function(e) {
         var fileName = e.target.files[0].name;
-        document.querySelector('.file-text').textContent = fileName;
+        document.getElementById('id_file').parentElement.querySelector('.file-text').textContent = fileName;
     });
+
+    document.getElementById('id_file2').addEventListener('change', function(e) {
+        var fileName = e.target.files[0].name;
+        document.getElementById('id_file2').parentElement.querySelector('.file-text').textContent = fileName;
+    });
+
+
 </script>
 
 {% endblock content %}

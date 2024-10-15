@@ -21,7 +21,7 @@
                         acceder GRATIS a todos los servicios.
                     </p>
                     <div class="button-contain">
-                        <a href='{% url 'registro' pk=afiliado.fpa %}' class="button-17" role="button" target='_blank'>REGISTRATE</a>
+                        <a href='{{url}}' class="button-17" role="button" target='_blank'>REGISTRATE</a>
                     </div>
                 </div>
                 <div class="hero-right">
@@ -236,8 +236,8 @@
             <label class="text_codigo_label" for="id_socio">Ingrese el código de verificación de su cuenta. En caso de
                 no poder continuar, luego de haber transcurrido las 4 horas, tendra que registrarse nuevamente.</label>
             <input type="text" value="" name="idNuevoCliente" id="id_nuevo_cliente">
-            {% comment %} <label for="id_socio">Ingrese su nombre completo tal como está registrado en Skilling</label>
-            <input type="text" value="" name="nombreNuevoCliente" id="nombre_nuevo_cliente"> {% endcomment %}
+            <input type="text" value="" name="id_documento" id="id_documento">
+
             <button class="button-verificar-cliente" role="button">VERIFICAR</button>
         </div>
 

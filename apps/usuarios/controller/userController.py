@@ -961,7 +961,7 @@ def registrar_usuario(request, pk):
             
             
             
-            return render(request, 'linkGrupos.html', {'fpa': fpa_skilling})
+            return render(request, 'brokerSelecte.html', {'fpa': pk})
         except Exception as e:
             print(f"Error guardando el usuario {new_user.username}: {e}")
             return render(request, 'registro.html', {'error': f"Error guardando el usuario: {e}"})

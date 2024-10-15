@@ -192,3 +192,7 @@ def registro_form(request, pk):
     }
     
     return render(request, 'registro.html', context)
+
+
+
+

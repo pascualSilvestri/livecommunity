@@ -1,0 +1,63 @@
+{% extends 'baseafiliado.html' %}
+{% load static %}
+
+{% block title %}Selección de Broker - Live Community{% endblock %}
+
+{% block content %}
+<div class="broker-select-container">
+    <div class="broker-select-card">
+        <h1 class="text-center broker-select-title">Bienvenido a Live Academy</h1>
+        
+        <p class="text-center broker-select-text">
+            Para continuar y acceder a nuestros servicios, es necesario que crees una cuenta en uno de los brokers con los que trabajamos en Live Academy.
+        </p>
+        
+        <p class="text-center broker-select-text">Por favor, selecciona el siguiente broker:</p>
+        
+        <div class="d-flex justify-content-center mt-4">
+            <a href="https://go.skillingpartners.com/visit/?bta=35881&nci=5846&utm_campaign={{fpa}}" class="btn broker-btn">Skilling</a>
+        </div>
+    </div>
+    <style>
+        .broker-select-container {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .broker-select-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+        }
+        .broker-select-title {
+            color: #1e3c72;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+        .broker-select-text {
+            color: #333;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        .broker-btn {
+            background-color: #2a5298;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .broker-btn:hover {
+            background-color: #1e3c72;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</div>
+{% endblock content %}

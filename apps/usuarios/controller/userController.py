@@ -912,7 +912,7 @@ def registrar_usuario(request, pk):
         new_user.set_password(temp_password)
         
         try:
-            # Guardar el nuevo usuario en la base de datos
+            # Guardar el nuevo usuario en la base de datos  
             new_user.save()
             # Asignar roles al nuevo usuario
             roles = [3]

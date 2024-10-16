@@ -1,22 +1,15 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q
 import requests
-
+from apps.usuarios.models import Usuario
 from livecommunity import settings
-from ....utils.formulas import calcula_porcentaje_directo, calcular_porcentaje_indirecto
-from ....utils.funciones import formatera_retiro
 from apps.api.skilling.models import (
     Spread,
-    BonoAPagar,
     BonoCpa,
     BonoCpaIndirecto,
     CPA
-)
-from ...skilling.models import Registros_ganancias, Registros_cpa, Relation_fpa_client
-import re
+)   
 import json
-from decimal import Decimal
 import xml.etree.ElementTree as ET
 
 
@@ -256,7 +249,7 @@ def obtener_comisiones_by_date_by_id(request, pk, desde, hasta):
                 'nombre': ''
             })
 
-        nombres = dict(Relation_fpa_client.objects.filter(client__in=client_numbers).values_list('client', 'full_name'))
+        nombres = dict(Usuario.objects.filter(idSkilling__in=client_numbers).values_list('idSkilling', 'first_name','last_name'))
 
         for item in data:
             item['nombre'] = nombres.get(item['id_usuario'], 'None')

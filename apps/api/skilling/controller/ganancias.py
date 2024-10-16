@@ -682,6 +682,7 @@ def parse_fecha(fecha_str):
             continue
     raise ValueError(f"Formato de fecha inválido: {fecha_str}")
 
+
 @csrf_exempt
 def post_registros_ganancias_pagadas(request):
     try:
@@ -881,3 +882,98 @@ def post_registros_ganancias_pagadas(request):
             return JsonResponse({"Error": "Método inválido"}, status=405)
     except Exception as e:
         return JsonResponse({"Error": str(e)}, status=500)
+
+
+
+@csrf_exempt
+def get_historial_pagos_all(request):
+    try:
+        if request.method == 'GET':
+            registros_ganancia_pagadas = Registros_ganancia_pagadas.objects.all()
+            data = []
+            for registro in registros_ganancia_pagadas:
+                data.append({
+                    'id': registro.id,
+                    'fpa': registro.fpa,
+                    'fecha_desde': registro.fecha_desde,
+                    'fecha_hasta': registro.fecha_hasta,
+                    'monto_total': registro.monto_total,
+                    'monto_spread_directo': registro.monto_spread_directo,
+                    'monto_spread_indirecto': registro.monto_spread_indirecto,
+                    'monto_cpa_directo': registro.monto_cpa_directo,
+                    'monto_cpa_indirecto': registro.monto_cpa_indirecto,
+                    'monto_bono_directo': registro.monto_bono_directo,      
+                    'monto_bono_indirecto': registro.monto_bono_indirecto,
+                    'nivel_bono_directo': registro.nivel_bono_directo,
+                    'nivel_bono_indirecto': registro.nivel_bono_indirecto
+                })
+            return JsonResponse({"data": data})
+        else:
+            return JsonResponse({"Error": "Método inválido"}, status=405)
+    except Exception as e:
+        return JsonResponse({"Error": str(e)}, status=500)
+
+
+@csrf_exempt
+def get_historial_pagos_all_by_month(request,mes):
+    try:
+        if request.method == 'GET':
+            if not mes:
+                return JsonResponse({"Error": "Faltan datos 'mes'"}, status=400)
+
+            registros_ganancia_pagadas = Registros_ganancia_pagadas.objects.filter(fecha_desde__month=mes, fecha_hasta__month=mes)
+            data = []
+            for registro in registros_ganancia_pagadas:
+                data.append({
+                    'id': registro.id,
+                    'fpa': registro.fpa,
+                    'fecha_desde': registro.fecha_desde,
+                    'fecha_hasta': registro.fecha_hasta,
+                    'monto_total': registro.monto_total,    
+                    'monto_spread_directo': registro.monto_spread_directo,
+                    'monto_spread_indirecto': registro.monto_spread_indirecto,
+                    'monto_cpa_directo': registro.monto_cpa_directo,
+                    'monto_cpa_indirecto': registro.monto_cpa_indirecto,
+                    'monto_bono_directo': registro.monto_bono_directo,
+                    'monto_bono_indirecto': registro.monto_bono_indirecto,
+                    'nivel_bono_directo': registro.nivel_bono_directo,
+                    'nivel_bono_indirecto': registro.nivel_bono_indirecto
+                })
+            return JsonResponse({"data": data})
+        else:
+            return JsonResponse({"Error": "Método inválido"}, status=405)
+    except Exception as e:
+        return JsonResponse({"Error": str(e)}, status=500)
+
+
+@csrf_exempt
+def get_historial_pagos_by_fpa(request,fpa):
+    try:
+        if request.method == 'GET':
+            if not fpa:
+                return JsonResponse({"Error": "Faltan datos 'fpa'"}, status=400)
+
+            registros_ganancia_pagadas = Registros_ganancia_pagadas.objects.filter(fpa=fpa)
+            data = []
+            for registro in registros_ganancia_pagadas:
+                data.append({
+                    'id': registro.id,
+                    'fpa': registro.fpa,
+                    'fecha_desde': registro.fecha_desde,
+                    'fecha_hasta': registro.fecha_hasta,
+                    'monto_total': registro.monto_total,
+                    'monto_spread_directo': registro.monto_spread_directo,
+                    'monto_spread_indirecto': registro.monto_spread_indirecto,
+                    'monto_cpa_directo': registro.monto_cpa_directo,
+                    'monto_cpa_indirecto': registro.monto_cpa_indirecto,
+                    'monto_bono_directo': registro.monto_bono_directo,
+                    'monto_bono_indirecto': registro.monto_bono_indirecto,
+                    'nivel_bono_directo': registro.nivel_bono_directo,
+                    'nivel_bono_indirecto': registro.nivel_bono_indirecto
+                })
+            return JsonResponse({"data": data})
+        else:   
+            return JsonResponse({"Error": "Método inválido"}, status=405)
+    except Exception as e:
+        return JsonResponse({"Error": str(e)}, status=500)
+

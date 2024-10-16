@@ -235,9 +235,11 @@
         <div class="form-verificar-cliente">
             <label class="text_codigo_label" for="id_socio">Ingrese el código de verificación de su cuenta. En caso de
                 no poder continuar, luego de haber transcurrido las 4 horas, tendra que registrarse nuevamente.</label>
+                <h2 class="codigo_verificacion">Ingresa tu codigo skilling</h2>
             <input type="text" value="" name="idNuevoCliente" id="id_nuevo_cliente">
-            {% comment %} <label for="id_socio">Ingrese su nombre completo tal como está registrado en Skilling</label>
-            <input type="text" value="" name="nombreNuevoCliente" id="nombre_nuevo_cliente"> {% endcomment %}
+            <h2 class="codigo_verificacion">Ingresa tu documento</h2>
+            <input type="text" value="" name="id_documento" id="id_documento">
+
             <button class="button-verificar-cliente" role="button">VERIFICAR</button>
         </div>
 
@@ -337,82 +339,7 @@
             </a>
         </section>
 
-        <section class="form-section text-center" id="formulario">
-
-            <div class="section-form-container">
-
-
-                <div class="logo-gif-container">
-                    <!-- <img class="logo-gif"  src="{% static 'img/logogif.gif' %}" alt="logo gif"> -->
-                    <h2 class="title-form text-center">Ingresa tus datos para<br /> <span>acceder a los servicios</span>
-                    </h2>
-                </div>
-                <div class="form-container">
-                    <h2>REGISTRATE</h2>
-                    <form method="post" enctype="multipart/form-data" action="clienteForm/" class="form-send">
-                        {% csrf_token %}
-
-                        <div class="inputbox">
-                            <input type="text" name="first_name" id="id_nombre" required="required" data-nombre
-                                class="input-default">
-                            <span>Nombre</span>
-                        </div>
-
-                        <div class="inputbox">
-                            <input type="text" name="last_name" id="id_apellido" required="required" data-apellido
-                                class="input-default">
-                            <span>Apellido</span>
-                        </div>
-
-                        <div class="inputbox">
-                            <input placeholder="usuario@correo.com" type="email" name="email" id="id_correo"
-                                required="required" data-correo class="input-default">
-                            <span>Correo</span>
-                        </div>
-
-                        <div class="inputbox">
-                            <input type="tel" name="telephone" id="id_telefono" required="required" data-telefono
-                                class="input-default">
-                            <span>Teléfono</span>
-                        </div>
-
-                        <div class="inputbox">
-                            <input type="text" name="idcliente" id="id_cliente" required="required" data-cliente
-                                class="input-default" required='required'>
-                            <span>Ingresar código de 6 dígitos (verificación)</span>
-                        </div>
-
-                        <div class="inputbox telegram-form">
-                            <input placeholder="@usuario" type="text" name="userTelegram" id="id_userTelegram"
-                                required="required" data-userTelegram class="input-default">
-                            <span>Usuario Telegram</span>
-                        </div>
-
-                        <div class="inputbox telegram-form">
-                            <input placeholder="@usuario" type="text" name="userDiscord" id="id_userDiscord"
-                                required="required" data-userDiscord class="input-default">
-                            <span>Usuario Discord</span>
-                        </div>
-                        <p class="text-video-telegram">Si no sabes tu usuario de Telegram ver video explicativo haciendo
-                            <a id='link-telegram' class="link-video-telegram">Click Aqui</a>
-                        </p>
-
-
-                        <input type="hidden" name="fpa" id="id_idAfiliado" value="{{afiliado.fpa}}">
-                        <input type="hidden" name="id_telefonoAfiliado" id="id_telefonoAfiliado"
-                            value="{{afiliado.telefono}}">
-
-                        <div class="input-button">
-                            <input type="submit" value="Enviar" id='btn-send' data-btnSend
-                                class="button-32 input-default">
-                        </div>
-                        {% comment %} <button onclick="send_handle()">send</button> {% endcomment %}
-                    </form>
-
-                </div>
-            </div>
-
-        </section>
+  
     </section>
 
 </main>

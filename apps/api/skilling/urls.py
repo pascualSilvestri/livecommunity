@@ -5,6 +5,9 @@ from .controller.registros import (
     filter_registros_fecha_by_id,
 )
 from .controller.ganancias import (
+    get_historial_pagos_all,
+    get_historial_pagos_all_by_month,
+    get_historial_pagos_by_fpa,
     obtener_ganancias_cpa_spread_bonos,
     obtener_ganancias_cpa_spread_bonos_todos,
     obtener_ganancias_cpa_spread_bonos_to_payment,
@@ -12,7 +15,7 @@ from .controller.ganancias import (
     
 )
 # from .controller.cuenta import montosGet
-from .controller.files import upload_fpa, upload_ganancias
+from .controller.files import upload_ganancias
 from .controller.bonos import (
     get_bono_cpa,
     put_bono_cpa,
@@ -29,8 +32,6 @@ app_name = "skilling"
 
 urlpatterns = [
 
-    ################## Procesar archivos fpa ############################################################################################
-    path("archivofpa/", upload_fpa, name="archivoFpa"),
     ################## Procesar archivos ganancias ######################################################################################
     path("archivoganancias/", upload_ganancias, name="archivoGanancias"),
     ################## Resetear bonos ###################################################################################################
@@ -64,7 +65,9 @@ urlpatterns = [
     path("ganancias-cpa-bonos-all-users/<desde>/<hasta>/", obtener_ganancias_cpa_spread_bonos_todos, name="gananciasCpaBonosAllUsers"),
     path("ganancia-cpa-bonos-all-to-payment/<desde>/<hasta>/", obtener_ganancias_cpa_spread_bonos_to_payment, name="gananciaCpaBonosByAllToPayment"),
     path("post-registros-ganancia-pagadas/", post_registros_ganancias_pagadas, name="postRegistrosGanancia"),
-    
+    path("get-historial-pagos-all/", get_historial_pagos_all, name="getHistorialPagosAll"),
+    path("get-historial-pagos-all-by-month/<mes>/", get_historial_pagos_all_by_month, name="getHistorialPagosAllByMonth"),
+    path("get-historial-pagos-by-fpa/<fpa>/", get_historial_pagos_by_fpa, name="getHistorialPagosByFpa"),
 
     
 ]

@@ -1,361 +1,149 @@
-//Importamos la funcion send:handle de whatsappCOntroller.js
 import { modalError } from "./modal.js"
 
-//Referencias a objetos del DOM
-const nombre = document.getElementById('id_nombre')
-const apellido = document.getElementById("id_apellido")
-const userTelegram = document.getElementById("id_userTelegram")
-const userDiscord = document.getElementById("id_userDiscord"); // Agregado
-const email = document.getElementById("id_correo")
-const telefono = document.getElementById("id_telefono")
-const idAfiliado = document.getElementById("id_idAfiliado")
-const contenedores = document.querySelectorAll('.inputbox')
-const form = document.querySelector('.form-send')
-const btn = document.querySelector('#btn-send')
-const section_de_validacion = document.getElementById('nuevo_id_cliente')
-const mensaje_verificado = document.querySelector('.mensaje-verificar-cliente')
-
-const input_idCliente = document.querySelector('#id_cliente')
-const input_validar = document.querySelector('#id_nuevo_cliente')
-
-const input = document.querySelector('#id_nuevo_cliente')
-const inputNombre = document.querySelector('#nombre_nuevo_cliente')
-
-var miParrafo = document.getElementById("mensaje");
-
-const idClientes = []
-
-//verificadores de que los inputs estan correctamente ingresados
-let errorN = false
-let errorA = false
-let errorE = false
-let errorU = false
-let errorT = false
-let errorC = false
-let errorD = false
-
-//Expreciones regulares para validar cada tipo de input
-const redex = {
-    'nombre': /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/,
-    'correo': /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-    'usuario': /^@[a-zA-Z0-9_]+$/,
-    'telefono': /^[0-9]*$/
+// Elementos del DOM
+const formElements = {
+    nombre: document.getElementById('id_nombre'),
+    apellido: document.getElementById("id_apellido"),
+    userTelegram: document.getElementById("id_userTelegram"),
+    userDiscord: document.getElementById("id_userDiscord"),
+    email: document.getElementById("id_email"),
+    telefono: document.getElementById("id_telefono"),
+    nacionalidad: document.getElementById('id_nacionalidad'),
+    wallet: document.getElementById('id_wallet'),
+    documento: document.getElementById('documento'),
+    form: document.querySelector('.form-send'),
+    mensajeVerificado: document.querySelector('.mensaje-verificar-cliente'),
+    sectionValidacion: document.getElementById('nuevo_id_cliente')
 };
 
-//Mensaje de error para cada tipo de input 
-const errorMensaje = {
-    'nombre': `No puede estar vacio, min-2 letras no se aceptan numeros.`,
-    'email': `El formato correcto es ejemplo@correo.com`,
-    'usuario': `Debe comenzar con un @ ejemplo @usuarioTelegram`,
-    'btnError': "Por favor complete los campo correctamente.",
-    'idCliente': 'Su cuenta no esta verificada correctamente, por favor verifique el ID ingresado',
-    'telefono': 'Acepta solo numeros',
-    'noDeposito': 'Para terminar el proceso de registro debe fondear la cuenta de Skilling.'
+// Estado de errores
+const errorState = {
+    nombre: false,
+    apellido: false,
+    email: false,
+    userTelegram: false,
+    telefono: false,
+    userDiscord: false,
+    nacionalidad: false,
+    wallet: false,
+    documento: false
 };
 
+// Expresiones regulares
+const regex = {
+    nombre: /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/,
+    email: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+    usuario: /^@[a-zA-Z0-9_]+$/,
+    telefono: /^[0-9]*$/,
+    // wallet: /^0x[a-fA-F0-9]{40}$/ // Ejemplo para direcciones Ethereum. Ajusta según tus necesidades.
+    wallet: /[a-fA-F0-9]/,
+    nacionalidad: /[a-zA-Z]/,
+    documento: /^[0-9]{7,10}$/, // Asumiendo que el documento tiene entre 7 y 10 dígitos
+};
 
-//ingreso un input y una expresion regular para saber si esta bien Parametros (input, string)
-// const validarCampo = (nombre, redexNombre) => {
-//     return redex[redexNombre].test(nombre.value)
-// }
+// Mensajes de error
+const errorMessages = {
+    nombre: `No puede estar vacío, mínimo 2 letras, no se aceptan números.`,
+    email: `El formato correcto es ejemplo@correo.com`,
+    usuario: `Debe comenzar con un @ ejemplo @usuarioTelegram`,
+    btnError: "Por favor complete los campos correctamente.",
+    telefono: 'Acepta solo números',
+    noDeposito: 'Para terminar el proceso de registro debe fondear la cuenta de Skilling.',
+    nacionalidad: 'Por favor seleccione una nacionalidad',
+    wallet: 'Ingrese una dirección de wallet válida',
+    documento: 'El documento debe contener entre 7 y 10 dígitos numéricos.'
+};
 
-//Cambia el border del input para avisar que hay un error en los datos introducidos
-function error(cont) {
-    cont.classList.add("sin-validar");
-    cont.classList.remove("valida");
-}
-//Cambia el color del borde para avisar que los datos introducidos son correctos
-function valido(cont) {
-    cont.classList.remove("sin-validar")
-    cont.classList.add("valida");
-}
+// Funciones auxiliares
+const setValidState = (element, isValid) => {
+    element.classList.toggle("sin-validar", !isValid);
+    element.classList.toggle("valida", isValid);
+};
 
-
-
-//Verifica que no hay error en los datos ingresado
-//return un Boolean
-
-const enviarDatos = () => {
-    if (errorN && errorA && errorE && errorT && errorU && errorC && errorD) { // errorD agregado
-        return true
+const validateField = (field, value, regexKey) => {
+    let isValid;
+    if (regexKey === 'nacionalidad') {
+        isValid = value !== "";
+    } else {
+        isValid = value !== "" && (regexKey ? regex[regexKey].test(value) : true);
     }
-}
+    setValidState(field, isValid);
+    const fieldName = field.id.replace('id_', '');
+    errorState[fieldName] = isValid;
+    console.log(`Campo ${fieldName}: ${isValid ? 'válido' : 'inválido'}`);
+    if (!isValid) modalError(errorMessages[regexKey] || errorMessages[fieldName] || errorMessages.nombre);
+};
 
-async function obtenerDatos() {
-    try {
-      const response = await fetch(
-        `http://127.0.0.1:8000/api/skilling/proxy/${input.value}/`
-      ); // cambiar a localhost para local
-      if (!response.ok) {
-        throw new Error("Error en la respuesta del servidor");
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      return error;
-    }
-  }
-
-
-const deposito = async (array) => {
-
-    const datos = await obtenerDatos(); 
-    const cliente = datos.registrations[0];
-    console.log(cliente)
-    
-    if(cliente){
-        if (cliente.Net_Deposits > 170 ) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-}
-
-
-//Logica para validar los inputs 
-//toma un valor input 
-
-async function validar(input) {
-    //verificamos que no es null
-    if (input != null) {
-        //asociamos un event del tipo keyup para verificar cada ves que se suelta una tecla
-        input.addEventListener("blur", e => {
-            console.log(e.target.id)
-            //verificamos el input que estamos presionado o enfocando
-            if (e.target.id == "id_nombre") {
-                //verificamos que el input no este vacio y cumpla con la validacion de la exprecion regular
-                if (input.value != "" && redex["nombre"].test(input.value)) {
-                    //si es valido le colocamos un border color verde
-                    valido(input)
-                    //errorN la cambiamos a true para avisar de que el dato ingresado es correcto
-                    errorN = true
-                    //si no 
-                } else {
-                    //verificamos que el input este vacio
-                    modalError(errorMensaje.nombre)
-                    if (input.value == "") {
-                        //errorN la igualamos a false para avisar de que hay un error
-                        errorN = false
-                    }
-                    // verificamos de que errorN es true y el input esta vacio le cambiamos a false y le colocamos border color rojo
-                    if (!errorN) {
-                        error(input)
-                        errorN = false
-                    }
+// Validación de campos
+const setupFieldValidation = () => {
+    Object.entries(formElements).forEach(([key, element]) => {
+        if (element && (element.tagName === 'INPUT' || element.tagName === 'SELECT')) {
+            element.addEventListener("blur", (e) => {
+                let regexKey;
+                switch(key) {
+                    case 'nombre':
+                    case 'apellido':
+                        regexKey = 'nombre';
+                        break;
+                    case 'email':
+                        regexKey = 'email';
+                        break;
+                    case 'telefono':
+                        regexKey = 'telefono';
+                        break;
+                    case 'nacionalidad':
+                        regexKey = 'nacionalidad';
+                        break;
+                    case 'wallet':
+                        regexKey = 'wallet';
+                        break;
+                    case 'documento':
+                        regexKey = 'documento';
+                        break;
+                    default:
+                        regexKey = 'usuario';
                 }
-
-            }
-            // misma logica que arriba para otro input 
-            if (e.target.id == "id_apellido") {
-
-                if (input.value != "" && redex["nombre"].test(input.value)) {
-                    valido(input)
-                    errorA = true
-                    if (input.value == "") {
-                        errorA = false
-                    }
-
-                } else {
-                    modalError(errorMensaje.nombre)
-                    if (input.value == "") {
-                        errorA = false
-                    }
-                    if (!errorA) {
-                        error(input)
-                        errorA = false
-
-                    }
-                }
-
-            }
-
-            if (e.target.id == "id_correo") {
-
-                if (input.value != "" && redex["correo"].test(input.value)) {
-                    valido(input)
-                    errorE = true
-                    if (input.value == "") {
-                        errorE = false
-                    }
-
-                } else {
-                    modalError(errorMensaje.email)
-                    if (input.value == "") {
-                        errorE = false
-                    }
-                    if (!errorE) {
-                        error(input)
-                        errorE = false
-
-                    }
-                }
-            }
-
-            if (e.target.id == "id_telefono") {
-
-                if (input.value != "" && redex["telefono"].test(input.value)) {
-                    valido(input)
-                    errorT = true
-                } else {
-                    modalError(errorMensaje.telefono)
-                    if (input.value == "" || !redex["telefono"].test(input.value)) {
-                        errorT = false
-                    }
-                    if (!errorT) {
-                        error(input)
-                        errorT = false
-
-                    }
-                }
-
-            }
-
-            if (e.target.id == "id_userTelegram") {
-
-                if (input.value != "" && redex["usuario"].test(input.value)) {
-                    valido(input)
-                    errorU = true
-                    if (input.value == "") {
-                        errorU = false
-                    }
-
-                } else {
-                    modalError(errorMensaje.usuario)
-                    if (input.value == "") {
-                        errorU = false
-                    }
-                    if (!errorU) {
-                        error(input)
-                        errorU = false
-
-                    }
-
-                }
-
-            }
-
-            if (e.target.id == "id_userDiscord") {
-                if (input.value != "" && redex["usuario"].test(input.value)) {
-                    valido(input)
-                    errorD = true
-                    if (input.value == "") {
-                        errorD = false
-                    }
-                } else {
-                    modalError(errorMensaje.usuario)
-                    if (input.value == "") {
-                        errorD = false
-                    }
-                    if (!errorD) {
-                        error(input)
-                        errorD = false
-                    }
-                }
-            }
-
-        })
-    }
-}
-
-// Cambiamos la función que llama a deposito para que sea async
-const validarId = async () => {
-    if (input_idCliente.value == input_validar.value) {
-        console.log(input_idCliente.value)
-        console.log(input_validar.value)
-        return true;
-    }
-    console.log(input_idCliente.value)
-    console.log(input_validar.value)
-    return false;
-}
-
-if (input_idCliente != null){
-    input_idCliente.addEventListener('blur', async e => { // Cambiado a async
-
-        if (input_idCliente.value != "" && redex["telefono"].test(input_idCliente.value) && await validarId() && await deposito(idClientes)) { // Agregado await
-            valido(input_idCliente)
-    
-            mensaje_verificado.style.display = 'block'
-            setTimeout(() => {
-    
-                if (mensaje_verificado != null) {
-                    mensaje_verificado.style.display = 'none'
-                }
-    
-            }, 3000);
-            section_de_validacion.style.display = 'none'
-            errorC = true
-            if (input_idCliente.value == "") {
-                errorC = false
-            }
-        } else if (await deposito(idClientes) == false) { // Agregado await
-            modalError(errorMensaje.noDeposito)
-            if (input_idCliente.value == "" || !await validar()) { // Agregado await
-                errorC = false
-            }
-            if (!errorC) {
-                error(input_idCliente)
-                errorC = false
-    
-            }
-        } else {
-            modalError(errorMensaje.idCliente)
-            section_de_validacion.style.display = 'flex'
-            section_de_validacion.scrollIntoView()
-            window.scrollTo({
-                top: 1200,
-                behavior: "smooth"
+                validateField(e.target, e.target.value, regexKey);
             });
-            if (input_idCliente.value == "" || !await validar()) { // Agregado await
-                errorC = false
-            }
-            if (!errorC) {
-                error(input_idCliente)
-                errorC = false
-    
-            }
-    
         }
-    })
-} 
+    });
+};
+
+// Validación de ID de cliente
 
 
-//validamos que los datos esten correcto
-//i lo estan se envia en form
-//si no lo estan, prevenimos que no se envien
 
-
-// verificamos que no es null el form
-if (form != null) {
-    //asociamos un evento tipo submit al form
-    form.addEventListener('submit', e => {
-        // verificamos que los datos estan ingresado correctamtente
-        if (enviarDatos()) {
-            //mostramos al usuario un modal para confirmar que ingreso los datos correctos
-            const confirmar = confirm("Confirma que los datos estan ingresados correctamente")
-            if (!confirmar) {
-                //prevenimos el envio de datos si el usuario cancela el modal
+const setupFormValidation = () => {
+    if (!formElements.form) return;
+    formElements.form.addEventListener('submit', (e) => {
+        console.log("Estado de errores antes de enviar:", errorState);
+        if (Object.values(errorState).every(Boolean)) {
+            if (!confirm("Confirma que los datos están ingresados correctamente")) {
                 e.preventDefault();
             }
-
         } else {
-            //prevenimos el envio de datos si los datos no estan correctametne ingresados
-            modalError(errorMensaje.btnError)
+            console.log("Campos con error:", Object.entries(errorState).filter(([key, value]) => !value));
+            modalError(errorMessages.btnError);
             e.preventDefault();
         }
-       
-    })
-}
+    });
+};
 
+// Función para mostrar errores del backend
+const showBackendErrors = () => {
+    const errorElement = document.querySelector('.error-message');
+    if (errorElement) {
+        modalError(errorElement.textContent);
+        errorElement.style.display = 'none'; // Ocultar el mensaje de error original
+    }
+};
 
+// Inicialización
+const init = () => {
+    setupFieldValidation();
+    validateClientId();
+    setupFormValidation();
+    showBackendErrors(); // Agregar esta línea
+};
 
-
-//Validamos cada input
-validar(nombre)
-validar(apellido)
-validar(email)
-validar(telefono)
-validar(userTelegram)
-validar(userDiscord) // Agregado
+init();

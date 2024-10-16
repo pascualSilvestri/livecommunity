@@ -1,9 +1,10 @@
 from datetime import datetime
+from apps.usuarios.models import Usuario
 from livecommunity import settings
-from ..api.skilling.models import Registros_ganancias, Relation_fpa_client
+from ..api.skilling.models import Registros_ganancias
 from django.db.models import Q, QuerySet
-import requests  # Añadir esta línea para importar requests
-import xml.etree.ElementTree as ET  # Añadir esta línea
+import requests  
+import xml.etree.ElementTree as ET  
 
 def existe(client,fecha_registro,fpa,status,fecha_calif,country,posicion_cuenta,fecha_primer_deposito,neto_deposito,numeros_depositos,registros):
     
@@ -71,7 +72,7 @@ def obtener_comisiones_api_skilling_by_id(pk, desde, hasta):
                 'nombre': ''
             })
 
-        nombres = dict(Relation_fpa_client.objects.filter(client__in=client_numbers).values_list('client', 'full_name'))
+        nombres = dict(Usuario.objects.filter(idSkilling__in=client_numbers).values_list('idSkilling', 'first_name','last_name'))
 
         for item in data:
             item['nombre'] = nombres.get(item['id_usuario'], 'None')
@@ -125,7 +126,7 @@ def obtener_comisiones_api_skilling(desde, hasta):
                 'nombre': ''
             })
 
-        nombres = dict(Relation_fpa_client.objects.filter(client__in=client_numbers).values_list('client', 'full_name'))
+        nombres = dict(Usuario.objects.filter(idSkilling__in=client_numbers).values_list('idSkilling', 'first_name','last_name'))
 
         for item in data:
             item['nombre'] = nombres.get(item['id_usuario'], 'None')

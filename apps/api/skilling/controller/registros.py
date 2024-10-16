@@ -1,15 +1,7 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.hashers import make_password
-import json 
-from datetime import datetime
-from django.db.models import Q, FloatField, IntegerField
-
+from apps.usuarios.models import Usuario
 from livecommunity import settings
-from ...skilling.models import Registro_archivo,Registros_ganancias,Relation_fpa_client
-from django.db.models import F, Value, OuterRef, Subquery
-from django.db.models.functions import Coalesce
-from django.views.decorators.http import require_GET
 import requests
 
 """
@@ -46,10 +38,10 @@ def filter_registros_fecha_by_id(request, pk, desde, hasta):
             for reg in registrations
         ]
 
-        # Obtener todos los nombres de una sola consulta
+        # Modificar la consulta para obtener los nombres
         nombres = {
-            rc.client: rc.full_name
-            for rc in Relation_fpa_client.objects.filter(client__in=client_numbers)
+            str(rc.idSkilling): f'{rc.first_name} {rc.last_name}'
+            for rc in Usuario.objects.filter(idSkilling__in=client_numbers)
         }
 
         # Procesar los datos
@@ -60,11 +52,11 @@ def filter_registros_fecha_by_id(request, pk, desde, hasta):
                 'codigo': reg.get('Tracking_Code', ''),
                 'pais': reg.get('Country', ''),
                 'primer_deposito': reg.get('First_Deposit', 0),
-                'status':reg.get('Status',''),
+                'status': reg.get('Status', ''),
                 'deposito_neto': reg.get('Net_Deposits', 0),
                 'cantidad_deposito': reg.get('Deposit_Count', 0),
                 'id_broker': client_number,
-                'nombre': nombres.get(client_number, 'None')
+                'nombre': nombres.get(str(client_number), None)
             }
             for reg, client_number in zip(registrations, client_numbers)
         ]

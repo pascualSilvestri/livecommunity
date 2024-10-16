@@ -31,9 +31,10 @@ class Url(models.Model):
 class Usuario(AbstractUser):
     # Campos adicionales personalizados
     fpa = models.CharField(max_length=50, null=True)
-    idCliente = models.CharField(max_length=50, null=True)
+    idSkilling = models.CharField(max_length=50, null=True)
     up_line = models.CharField(max_length=50, null=True, blank=True)
     telephone = models.CharField(max_length=15, null=True, blank=True)
+    documento = models.CharField(max_length=10, null=True, blank=True)
     wallet = models.CharField(max_length=100, null=True, blank=True)
     userTelegram = models.CharField(max_length=200, default="none", null=True, blank=True)
     userDiscord = models.CharField(max_length=200, default="none", null=True, blank=True)
@@ -42,7 +43,9 @@ class Usuario(AbstractUser):
     aceptado = models.BooleanField(default=False)
     fondeado = models.BooleanField(default=False)
     eliminado = models.BooleanField(default=False)
+    isSocio = models.BooleanField(default=False)
     url_video = models.URLField(default="https://www.youtube.com/watch?v=HgKjhFEguy")
+    nacionalidad = models.CharField(max_length=20, null=True, blank=True)
 
     # Relaciones con otros usuarios (downLeft y downRight) inicializadas como null
     downLeft = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL, related_name='down_left_user')

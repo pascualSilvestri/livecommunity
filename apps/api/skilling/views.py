@@ -4,7 +4,6 @@ from livecommunity import settings
 import telegram
 
 from apps.api.skilling.forms import ClienteForm
-from apps.api.skilling.models import  Relation_fpa_client
 from ...usuarios.models import Rol, Servicio, Url, Usuario, UsuarioRol, UsuarioServicio
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password

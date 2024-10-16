@@ -139,7 +139,7 @@
   width: 15ch;
   background: repeating-linear-gradient(90deg, dimgrey 0, dimgrey 1.3ch, transparent 0, transparent 2ch) 0 100%/15.5ch 2px no-repeat;
   font: 8ch droid sans mono, consolas, monospace;
-  letter-spacing: 1.5ch;
+  letter-spacing: 1ch;
 }
 
 #id_documento:focus {

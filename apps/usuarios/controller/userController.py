@@ -3,7 +3,7 @@ from email.message import EmailMessage
 import json
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from apps.api.skilling.models import Fpas, Relation_fpa_client
+from apps.api.skilling.models import Fpas
 from livecommunity import settings
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.decorators import api_view, permission_classes
@@ -978,7 +978,6 @@ def asociar_documento_con_idSkilling(request):
             # Decodificar el cuerpo de la solicitud y analizarlo como JSON
             body_unicode = request.body.decode('utf-8')
             body_data = json.loads(body_unicode)
-            
             idSkilling = body_data.get('idSkilling')
             documento = body_data.get('documento')
             servicio_body = body_data.get('servicio')

@@ -280,16 +280,16 @@ class Registros_ganancia_pagadas(models.Model):
 
 ################################### Modelo a eliminar ###################################
 
-class Relation_fpa_client(models.Model):
-    id = models.AutoField(primary_key=True)
-    fpa = models.CharField(max_length=50)
-    client = models.CharField(max_length=100,null=True)
-    full_name= models.CharField(max_length=200,null=True)
-    country= models.CharField(max_length=50,null=True)    
-    fecha_registro=models.DateField(null=True,auto_now_add=True)
-    fecha_creacion=models.DateField(null=True)
-    fecha_verificacion= models.DateField(null=True)
-    status = models.CharField(max_length=100,null=True)
+# class Relation_fpa_client(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     fpa = models.CharField(max_length=50)
+#     client = models.CharField(max_length=100,null=True)
+#     full_name= models.CharField(max_length=200,null=True)
+#     country= models.CharField(max_length=50,null=True)    
+#     fecha_registro=models.DateField(null=True,auto_now_add=True)
+#     fecha_creacion=models.DateField(null=True)
+#     fecha_verificacion= models.DateField(null=True)
+#     status = models.CharField(max_length=100,null=True)
     
-    def __str__(self):
-        return self.client
+#     def __str__(self):
+#         return self.client

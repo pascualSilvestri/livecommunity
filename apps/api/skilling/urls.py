@@ -5,6 +5,9 @@ from .controller.registros import (
     filter_registros_fecha_by_id,
 )
 from .controller.ganancias import (
+    get_historial_pagos_all,
+    get_historial_pagos_all_by_month,
+    get_historial_pagos_by_fpa,
     obtener_ganancias_cpa_spread_bonos,
     obtener_ganancias_cpa_spread_bonos_todos,
     obtener_ganancias_cpa_spread_bonos_to_payment,
@@ -62,7 +65,9 @@ urlpatterns = [
     path("ganancias-cpa-bonos-all-users/<desde>/<hasta>/", obtener_ganancias_cpa_spread_bonos_todos, name="gananciasCpaBonosAllUsers"),
     path("ganancia-cpa-bonos-all-to-payment/<desde>/<hasta>/", obtener_ganancias_cpa_spread_bonos_to_payment, name="gananciaCpaBonosByAllToPayment"),
     path("post-registros-ganancia-pagadas/", post_registros_ganancias_pagadas, name="postRegistrosGanancia"),
-    
+    path("get-historial-pagos-all/", get_historial_pagos_all, name="getHistorialPagosAll"),
+    path("get-historial-pagos-all-by-month/<mes>/", get_historial_pagos_all_by_month, name="getHistorialPagosAllByMonth"),
+    path("get-historial-pagos-by-fpa/<fpa>/", get_historial_pagos_by_fpa, name="getHistorialPagosByFpa"),
 
     
 ]

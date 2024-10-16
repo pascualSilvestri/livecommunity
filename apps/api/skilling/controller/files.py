@@ -4,7 +4,7 @@ from ....utils.limpiarTablas import limpiar_datos_fpa, limpiar_registros,limpiar
 from ....utils.funciones import existe,existe_cpa,existe_ganancia, parse_date
 from ....utils.formulas import calcula_porcentaje_directo,calcular_porcentaje_indirecto
 from ....utils.bonos import bonoDirecto,bonoIndirecto
-from ..models import Fpas, Relation_fpa_client,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
+from ..models import Fpas,Registro_archivo,Registros_cpa,Registros_ganancias,SpreadIndirecto
 from apps.api.skilling.models import Spread,BonoCpa,BonoCpaIndirecto,CPA
 from apps.usuarios.models import Usuario
 from datetime import datetime
@@ -26,7 +26,7 @@ def upload_ganancias(request):
     if request.method == "POST" and request.FILES.get("csvFileGanancias"):
         try:
             # Cargar datos para búsqueda rápida
-            fpas = {int(fpa['client']): fpa for fpa in Relation_fpa_client.objects.all().values('client', 'fpa', 'full_name')}
+            fpas = {int(fpa['idSkilling']): fpa for fpa in Usuario.objects.all().values('idSkilling', 'fpa', 'full_name')}
             spred = list(Spread.objects.all())
             usuarios = {usuario.fpa: usuario for usuario in Usuario.objects.all()}
 

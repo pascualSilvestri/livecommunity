@@ -24,11 +24,6 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.exceptions import AuthenticationFailed
 from django.core.mail import send_mail
 from django.db import transaction
-import telegram
-from email.mime.application import MIMEApplication
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from django.core.mail import EmailMessage, get_connection
 from django.conf import settings
 from livecommunity.settings import TELEGRAM_BOT_TOKEN,CHAT_ID_BOT
 

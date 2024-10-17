@@ -66,7 +66,6 @@ urlpatterns = [
     path("ganancia-cpa-bonos-all-to-payment/<desde>/<hasta>/", obtener_ganancias_cpa_spread_bonos_to_payment, name="gananciaCpaBonosByAllToPayment"),
     path("post-registros-ganancia-pagadas/", post_registros_ganancias_pagadas, name="postRegistrosGanancia"),
     path("get-historial-pagos-all/", get_historial_pagos_all, name="getHistorialPagosAll"),
-    path("get-historial-pagos-all-by-month/<mes>/", get_historial_pagos_all_by_month, name="getHistorialPagosAllByMonth"),
     path("get-historial-pagos-by-fpa/<fpa>/", get_historial_pagos_by_fpa, name="getHistorialPagosByFpa"),
 
     

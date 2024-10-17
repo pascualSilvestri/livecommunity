@@ -6,7 +6,6 @@ from .controller.registros import (
 )
 from .controller.ganancias import (
     get_historial_pagos_all,
-    get_historial_pagos_all_by_month,
     get_historial_pagos_by_fpa,
     obtener_ganancias_cpa_spread_bonos,
     obtener_ganancias_cpa_spread_bonos_todos,

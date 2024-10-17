@@ -33,6 +33,7 @@ AUTH_USER_MODEL = "usuarios.Usuario"
 # Application definition
 
 INSTALLED_APPS = [
+    "apps.usuarios",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -41,7 +42,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-    "apps.usuarios",
     "apps.registroPage",
     "apps.api.skilling",
 ]
@@ -336,7 +336,7 @@ CSRF_TRUSTED_ORIGINS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'livecommunity_devs',
+        'NAME': 'liveacademy',
         'USER': 'root2',
         'PASSWORD': 'livecommunity01',
         'HOST': '31.220.21.60',

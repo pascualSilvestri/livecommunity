@@ -1,6 +1,7 @@
 from django.urls import path
 from apps.usuarios.controller.passwordController import enviar_token_recuperacion
 from apps.usuarios.controller.userController import (
+    addfpas,
     asociar_documento_con_idSkilling,
     deleteUser,
     eliminarUser,
@@ -8,6 +9,7 @@ from apps.usuarios.controller.userController import (
     getRoles,
     getServicios,
     getUserById,
+    post_roles_servicios_user,
     postNewUser,
     login,
     postNewUsers,
@@ -54,4 +56,6 @@ urlpatterns = [
     ),
     path("get-fpas/<pk>/", getFpasForUser, name="getFpasForUser"),
     path("asociar-documento-idskilling/", asociar_documento_con_idSkilling, name="asociar_documento_con_idSkilling"),
+    path("post-roles-servicios-user/", post_roles_servicios_user, name="post_roles_servicios_user"),
+    path("addfpas/", addfpas, name="addfpas"),
 ]

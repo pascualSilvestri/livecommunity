@@ -92,7 +92,6 @@ def obtener_comisiones_api_skilling_by_id(pk, desde, hasta):
         return {'Error': str(e)}
     
     
-    
 def obtener_comisiones_api_skilling(desde, hasta):
     try:
         url = f"https://go.skillingpartners.com/api/?command=commissions&fromdate={desde}&todate={hasta}"
@@ -126,12 +125,13 @@ def obtener_comisiones_api_skilling(desde, hasta):
                 'nombre': ''
             })
 
-        nombres = dict(Usuario.objects.filter(idSkilling__in=client_numbers).values_list('idSkilling', 'first_name','last_name'))
+        # Crear diccionario con idSkilling como clave y nombre completo (first_name y last_name) como valor
+        nombres = {id_skilling: f"{first_name} {last_name}" for id_skilling, first_name, last_name in Usuario.objects.filter(idSkilling__in=client_numbers).values_list('idSkilling', 'first_name', 'last_name')}
 
         for item in data:
             item['nombre'] = nombres.get(item['id_usuario'], 'None')
 
-        return data  # Retorna un diccionario en lugar de JsonResponse
+        return data if data else []
 
     except requests.RequestException as e:
         return {
@@ -144,7 +144,7 @@ def obtener_comisiones_api_skilling(desde, hasta):
         return {'Error': 'Error al analizar el XML recibido'}
     except Exception as e:
         return {'Error': str(e)}
-    
+
 def parse_date(date_string):
     if date_string == "nan":
         return None

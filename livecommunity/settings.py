@@ -336,7 +336,8 @@ CSRF_TRUSTED_ORIGINS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'liveacademy',
+        # 'NAME': 'liveacademy',
+        'NAME': 'livecommunity_devs',
         'USER': 'root2',
         'PASSWORD': 'livecommunity01',
         'HOST': '31.220.21.60',

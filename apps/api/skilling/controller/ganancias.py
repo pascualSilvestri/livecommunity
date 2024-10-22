@@ -129,25 +129,7 @@ from django.db import transaction
 
 @csrf_exempt
 def obtener_ganancias_cpa_spread_bonos(request, pk, desde, hasta):
-    """
-    Obtiene las ganancias, comisiones y bonos de un usuario específico en un rango de fechas determinado.
 
-    Esta función filtra las comisiones directas y de la línea descendente, y calcula los montos
-    de los bonos directos e indirectos.
-
-    Args:
-        request (HttpRequest): Objeto de la solicitud HTTP.
-        pk (int): ID del usuario para el cual se obtienen las ganancias.
-        desde (str): Fecha de inicio del rango en formato 'YYYY-MM-DD'.
-        hasta (str): Fecha de fin del rango en formato 'YYYY-MM-DD'.
-
-    Returns:
-        JsonResponse: Un objeto que contiene los montos de spread directo, spread indirecto,
-                      bonos y comisiones.
-
-    Raises:
-        Exception: Si ocurre algún error durante el proceso.
-    """
     try:
         # Obtener el usuario y su fpa
         usuario = Usuario.objects.get(fpa=pk)
@@ -160,9 +142,17 @@ def obtener_ganancias_cpa_spread_bonos(request, pk, desde, hasta):
         cpa_obj = CPA.objects.first()
         cpa_value = int(cpa_obj.cpa) if cpa_obj else 0
 
+        try:
         # Obtener comisiones una sola vez
-        comisiones_totales = obtener_comisiones_api_skilling(desde, hasta)
+            comisiones_totales = obtener_comisiones_api_skilling(desde, hasta)
+            
+        except Exception as e:
+            print(f"Error en obtener_comisiones_api_skilling: {e}")
+            return JsonResponse({"Error": str(e)})
+        
+        print(f"comisiones_totales: {comisiones_totales}")
 
+    
         # Crear un diccionario para acceder rápidamente a comisiones por código
         comisiones_por_codigo = defaultdict(list)
         for com in comisiones_totales:
@@ -224,9 +214,11 @@ def obtener_ganancias_cpa_spread_bonos(request, pk, desde, hasta):
                 "comisiones_directas": comisiones_directas,
                 "comisiones_downline": comisiones_downline,
                 "usuarios_downline": list(usuarios_downline),
+
             }
         )
     except Exception as e:
+        print(f"Error en obtener_ganancias_cpa_spread_bonos: {e}")
         return JsonResponse({"Error": str(e)})
 
 #########################################################################################################################
@@ -915,6 +907,7 @@ def get_historial_pagos_all(request):
         else:
             return JsonResponse({"Error": "Método inválido"}, status=405)
     except Exception as e:
+        print(f"Error en get_historial_pagos_all: {e}")
         return JsonResponse({"Error": str(e)}, status=500)
 
 

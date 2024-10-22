@@ -49,3 +49,4 @@ livecommunity/__pycache__/wsgi.cpython-311.pyc
 livecommunity/db.sqlite3
 livecommunity/settings/__pycache__/base.cpython-311.pyc
 livecommunity/settings/__pycache__/local.cpython-311.pyc
+apps/api/skilling/migrations/0018_delete_relation_fpa_client.py

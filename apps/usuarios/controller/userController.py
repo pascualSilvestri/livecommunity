@@ -10,6 +10,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from django.http import JsonResponse
 import requests
+import telegram
 from apps.usuarios.models import (
     Rol,
     Servicio,
@@ -24,13 +25,11 @@ from django.contrib.auth.hashers import check_password
 from rest_framework.exceptions import AuthenticationFailed
 from django.core.mail import send_mail
 from django.db import transaction
-import telegram
-from email.mime.application import MIMEApplication
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from django.core.mail import EmailMessage, get_connection
 from django.conf import settings
 from livecommunity.settings import TELEGRAM_BOT_TOKEN,CHAT_ID_BOT
+from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
+
 
 chat_id = CHAT_ID_BOT
 token = TELEGRAM_BOT_TOKEN
@@ -111,135 +110,167 @@ def login(request):
         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
 
 
+def addfpas(request):
+    try:
+        response = requests.get("https://livecommunity.info/api/userNewFormat/")
+        if response.status_code != 200:
+            return JsonResponse({"message": "Error en la petición a la URL externa"}, status=response.status_code)
+
+        external_data = response.json()
+        usuarios_data = external_data.get("data", [])
+        
+        # Obtener todos los FPAs existentes de los usuarios externos
+        fpas_existentes = set()
+        for user_data in usuarios_data:
+            fpa = user_data.get('fpa')
+            if fpa:
+                fpas_existentes.add(fpa)
+        # Actualizar la tabla Fpas con los FPAs existentes
+        for fpa in fpas_existentes:
+            Fpas.objects.get_or_create(fpa=fpa)
+
+        return JsonResponse({"message": "FPAs actualizados correctamente"}, status=200)
+    except Exception as e:
+        return JsonResponse({"message": f"Error al actualizar los FPAs: {str(e)}"}, status=500)
+
 
 
 @csrf_exempt
+@transaction.atomic
 def postNewUsers(request):
     try:
-        # Hacer la petición a la URL externa para obtener los datos
+        # Obtener datos externos
         response = requests.get("https://livecommunity.info/api/userNewFormat/")
+        if response.status_code != 200:
+            return JsonResponse({"message": "Error en la petición a la URL externa"}, status=response.status_code)
 
-        # Verificar si la petición fue exitosa (status code 200)
-        if response.status_code == 200:
-            # Decodificar la respuesta JSON
-            external_data = response.json()
+        external_data = response.json()
+        usuarios_data = external_data.get("data", [])
 
-            # Obtener la lista de usuarios desde la respuesta externa
-            usuarios = external_data.get("data", [])
+        # Separar usuarios en socios y clientes
+        socios_list = []
+        clientes_list = []
 
-            for user_data in usuarios:
-                # Generar el username a partir del apellido y nombre
-                base_username = (user_data.get("apellido") + "_" + user_data.get("nombre")).replace(" ", "_")
+        for user_data in usuarios_data:
+            if user_data.get('fpa'):
+                socios_list.append(user_data)
+            elif user_data.get('idCliente'):
+                clientes_list.append(user_data)
+            else:
+                # Opcional: manejar usuarios sin fpa y sin idCliente
+                continue
 
-                # Verificar si el usuario con ese username ya existe
-                existing_user = Usuario.objects.filter(username=base_username).first()
+        # Crear un diccionario de socios por email
+        socios_by_email = {}
+        for socio in socios_list:
+            email = socio.get('email')
+            if email:
+                socios_by_email[email.lower()] = socio
+            else:
+                # Opcional: manejar socios sin email
+                continue
 
-                if existing_user:
-                    # El usuario ya existe, actualizar datos si fpa o idSkilling son None
-                    if not existing_user.fpa and user_data.get("fpa"):
-                        existing_user.fpa = user_data.get("fpa")
-                    if not existing_user.idSkilling and user_data.get("idSkilling"):
-                        existing_user.idSkilling = user_data.get("idSkilling")
-                    existing_user.email = user_data.get("email")  # Actualiza el correo también
-                    existing_user.telephone = user_data.get("telefono")
-                    existing_user.wallet = user_data.get("wallet")
-                    existing_user.up_line = user_data.get("up_line") or existing_user.up_line
-                    existing_user.link = user_data.get("link") or existing_user.link
-                    existing_user.registrado = user_data.get("registrado", False) if user_data.get("registrado") is not None else False
-                    existing_user.aceptado = user_data.get("status", False) if user_data.get("status") is not None else False
-                    existing_user.userTelegram = user_data.get("userTelegram") or existing_user.userTelegram
+        # Unificar datos de clientes que tienen el mismo email que un socio
+        for cliente in clientes_list[:]:  # Copia para poder modificar la lista
+            email = cliente.get('email')
+            if email and email.lower() in socios_by_email:
+                socio = socios_by_email[email.lower()]
+                # Unificar datos, priorizando los del socio
+                for key, value in cliente.items():
+                    if value and not socio.get(key):
+                        socio[key] = value
+                # Remover cliente de la lista de clientes
+                clientes_list.remove(cliente)
 
-                    # Guardar cambios del usuario existente
-                    existing_user.save()
+        # Preparar roles y servicios
+        roles_dict = {rol.id: rol for rol in Rol.objects.filter(id__in=[2, 3])}
+        servicios_dict = {servicio.id: servicio for servicio in Servicio.objects.filter(id__in=[1, 3])}
 
-                    # Verificar si los roles que trae el dato ya están asignados
-                    roles = user_data.get("roles", [])  # Lista de IDs de roles
-                    for rol_id in roles:
-                        try:
-                            rol = Rol.objects.get(id=rol_id)
-                            if not UsuarioRol.objects.filter(usuario=existing_user, rol=rol).exists():
-                                UsuarioRol.objects.create(usuario=existing_user, rol=rol)
-                        except Rol.DoesNotExist:
-                            return JsonResponse(
-                                {"message": f"Rol con ID {rol_id} no existe"}, status=400
-                            )
+        nuevos_usuarios_creados = 0
 
-                    # Verificar si los servicios ya están asignados
-                    servicios = user_data.get("servicios", [1])  # Lista de IDs de servicios
-                    for servicio_id in servicios:
-                        try:
-                            servicio = Servicio.objects.get(id=servicio_id)
-                            if not UsuarioServicio.objects.filter(usuario=existing_user, servicio=servicio).exists():
-                                UsuarioServicio.objects.create(usuario=existing_user, servicio=servicio)
-                        except Servicio.DoesNotExist:
-                            return JsonResponse(
-                                {"message": f"Servicio con ID {servicio_id} no existe"}, status=400
-                            )
+        # Función para crear usuarios
+        def crear_usuario(user_data, is_socio):
+            email = user_data.get('email')
+            if Usuario.objects.filter(email=email).exists():
+                return  # Usuario ya existe
 
-                else:
-                    # Crear nuevo usuario si no existe
-                    new_user = Usuario(
-                        username=base_username,
-                        fpa=user_data.get("fpa") or None,
-                        idSkilling=user_data.get("idSkilling") or None,
-                        email=user_data.get("email"),
-                        first_name=user_data.get("nombre"),
-                        last_name=user_data.get("apellido"),
-                        telephone=user_data.get("telefono"),
-                        wallet=user_data.get("wallet"),
-                        up_line=user_data.get("up_line") or "",
-                        link=user_data.get("link") or "https://livecommunity.info/Afiliado/",
-                        registrado=user_data.get("registrado", False) if user_data.get("registrado") is not None else False,
-                        aceptado=user_data.get("status", False) if user_data.get("status") is not None else False,
-                        userTelegram=user_data.get("userTelegram") or None,
-                        password=user_data.get("password", "default_password"),
-                    )
+            base_username = user_data.get("email")
+            registrado = user_data.get("registrado") or False
+            aceptado = user_data.get("status") or False
 
-                    try:
-                        # Guardar el nuevo usuario en la base de datos
-                        new_user.save()
+            # Para clientes, generar fpa
+            if not is_socio:
+                up_line_value = user_data.get("uplink") or 'LA500S'
+                fpa_data = getFpasForUser2(up_line_value)
+                if fpa_data:
+                    user_data['fpa'] = fpa_data.get('fpa_siguiente')
+                    # Guardar el nuevo FPA en la tabla Fpas
+                    Fpas.objects.create(fpa=user_data['fpa'])
 
-                        # Asignar roles al nuevo usuario
-                        roles = user_data.get("roles", [])  # Lista de IDs de roles
-                        for rol_id in roles:
-                            try:
-                                rol = Rol.objects.get(id=rol_id)
-                                UsuarioRol.objects.create(usuario=new_user, rol=rol)
-                            except Rol.DoesNotExist:
-                                return JsonResponse(
-                                    {"message": f"Rol con ID {rol_id} no existe"}, status=400
-                                )
-
-                        # Asignar servicios al nuevo usuario (si existen en los datos)
-                        servicios = user_data.get("servicios", [])  # Lista de IDs de servicios
-                        for servicio_id in servicios:
-                            try:
-                                servicio = Servicio.objects.get(id=servicio_id)
-                                UsuarioServicio.objects.create(usuario=new_user, servicio=servicio)
-                            except Servicio.DoesNotExist:
-                                return JsonResponse(
-                                    {"message": f"Servicio con ID {servicio_id} no existe"}, status=400
-                                )
-
-                    except Exception as e:
-                        print(f"Error guardando el usuario {new_user.username}: {e}")
-                        continue  # Saltamos el usuario que genera el error
-
-            return JsonResponse({"message": "Usuarios creados o actualizados exitosamente"}, status=200)
-
-        else:
-            return JsonResponse(
-                {"message": "Error en la petición a la URL externa"},
-                status=response.status_code,
+            new_user = Usuario(
+                username=base_username,
+                fpa=user_data.get("fpa"),
+                idSkilling=user_data.get("idCliente"),
+                email=user_data.get("email"),
+                first_name=user_data.get("nombre") or "",
+                last_name=user_data.get("apellido") or "",
+                telephone=user_data.get("telefono") or "",
+                wallet=user_data.get("wallet") or "",
+                up_line=user_data.get("uplink") or "",
+                link=user_data.get("link") or "https://livecommunity.info/Afiliado/",
+                registrado=registrado,
+                aceptado=aceptado,
+                userTelegram=user_data.get("userTelegram") or "",
+                nacionalidad=user_data.get("nacionalidad") or "",
             )
+
+            # Establecer la contraseña "123456"
+            new_user.set_password("123456")
+
+            # Guardar el usuario
+            new_user.save()
+            nonlocal nuevos_usuarios_creados
+            nuevos_usuarios_creados += 1
+
+            # Asignar roles y servicios
+            if is_socio:
+                # Socio: rol [2], servicios [1, 3]
+                if 2 in roles_dict:
+                    UsuarioRol.objects.create(usuario=new_user, rol=roles_dict[2])
+            else:
+                # Cliente: rol [3], servicios [1, 3]
+                if 3 in roles_dict:
+                    UsuarioRol.objects.create(usuario=new_user, rol=roles_dict[3])
+
+            # Asignar servicios [1, 3]
+            for servicio_id in [1, 3]:
+                if servicio_id in servicios_dict:
+                    UsuarioServicio.objects.create(usuario=new_user, servicio=servicios_dict[servicio_id])
+
+            # Actualizar FPA si es necesario
+            if new_user.fpa:
+                Fpas.objects.get_or_create(fpa=new_user.fpa)
+
+        # Crear usuarios socios
+        for socio_data in socios_list:
+            crear_usuario(socio_data, is_socio=True)
+
+        # Crear usuarios clientes
+        for cliente_data in clientes_list:
+            crear_usuario(cliente_data, is_socio=False)
+
+        return JsonResponse({"message": f"Se crearon {nuevos_usuarios_creados} usuarios nuevos"}, status=200)
 
     except requests.exceptions.RequestException as e:
         return JsonResponse({"message": f"Error de conexión: {str(e)}"}, status=500)
     except json.JSONDecodeError:
         return JsonResponse({"message": "Error al decodificar el JSON"}, status=403)
-    
-    
-    
+    except Exception as e:
+        import traceback
+        traceback_str = ''.join(traceback.format_tb(e.__traceback__))
+        return JsonResponse({"message": f"Error inesperado: {str(e)}", "traceback": traceback_str}, status=500)
+
+
 ###############################################
 #
 #Codigo en modificacion
@@ -467,7 +498,7 @@ def getUserById(request, pk):
         return JsonResponse({'message': 'Método HTTP no válido'}, status=405)
 
 
-
+@csrf_exempt  
 def users(request):
     if request.method == 'GET':
         try:
@@ -716,8 +747,8 @@ def eliminarUserForever(request, pk):
 
 
 @csrf_exempt  
-@api_view(['PUT'])
-@permission_classes([IsAuthenticated])
+# @api_view(['PUT'])
+# @permission_classes([IsAuthenticated])
 def updatePassword(request, pk):
     if request.method == 'PUT':
         try:
@@ -804,58 +835,58 @@ def getServicios(request):
 
 
 
-def getFpasForUser(request, pk):
-    if request.method == 'GET':
-        # Obtenemos todos los fpas
-        fpas = Fpas.objects.all()
-        Url.objects.all()
+# def getFpasForUser(request, pk):
+#     if request.method == 'GET':
+#         # Obtenemos todos los fpas
+#         fpas = Fpas.objects.all()
+#         Url.objects.all()
         
-        url_skilling_base = Url.objects.get(id=2).url
-        url_livecommunity_base = Url.objects.get(id=1).url
+#         url_skilling_base = Url.objects.get(id=2).url
+#         url_livecommunity_base = Url.objects.get(id=1).url
         
-        pk = pk.split(',')[0][:2]
+#         pk = pk.split(',')[0][:2]
         
-        # Agrupamos los FPAs por su letra final
-        fpas_dict = defaultdict(list)
-        for fpa in fpas:
-            if fpa.fpa and fpa.fpa.startswith(pk):
-                fpas_dict[fpa.fpa[-1]].append(fpa.fpa)
+#         # Agrupamos los FPAs por su letra final
+#         fpas_dict = defaultdict(list)
+#         for fpa in fpas:
+#             if fpa.fpa and fpa.fpa.startswith(pk):
+#                 fpas_dict[fpa.fpa[-1]].append(fpa.fpa)
         
-        # Ordenamos cada lista de FPAs
-        for letra in fpas_dict:
-            fpas_dict[letra].sort()
+#         # Ordenamos cada lista de FPAs
+#         for letra in fpas_dict:
+#             fpas_dict[letra].sort()
         
-        def encontrar_siguiente(fpas_list, sufijo):
-            if not fpas_list:
-                return f"{pk}001{sufijo}"
-            for i in range(len(fpas_list) - 1):
-                actual = int(fpas_list[i][2:5])
-                siguiente = int(fpas_list[i+1][2:5])
-                if siguiente - actual > 1:
-                    return f"{pk}{actual+1:03d}{sufijo}"
-            ultimo = int(fpas_list[-1][2:5])
-            return f"{pk}{ultimo+1:03d}{sufijo}"
+#         def encontrar_siguiente(fpas_list, sufijo):
+#             if not fpas_list:
+#                 return f"{pk}001{sufijo}"
+#             for i in range(len(fpas_list) - 1):
+#                 actual = int(fpas_list[i][2:5])
+#                 siguiente = int(fpas_list[i+1][2:5])
+#                 if siguiente - actual > 1:
+#                     return f"{pk}{actual+1:03d}{sufijo}"
+#             ultimo = int(fpas_list[-1][2:5])
+#             return f"{pk}{ultimo+1:03d}{sufijo}"
 
-        siguientes_faltantes = {letra: encontrar_siguiente(fpas, letra) for letra, fpas in fpas_dict.items()}
+#         siguientes_faltantes = {letra: encontrar_siguiente(fpas, letra) for letra, fpas in fpas_dict.items()}
         
-        # Encontrar el menor siguiente faltante
-        siguiente_faltante = min(siguientes_faltantes.values())
+#         # Encontrar el menor siguiente faltante
+#         siguiente_faltante = min(siguientes_faltantes.values())
 
-        # Combinar todas las listas de FPAs
-        todos_fpas = sorted([fpa for fpas in fpas_dict.values() for fpa in fpas])
+#         # Combinar todas las listas de FPAs
+#         todos_fpas = sorted([fpa for fpas in fpas_dict.values() for fpa in fpas])
         
-        # Fpas.objects.get_or_create(
-        #     fpa=siguiente_faltante
-        # )
+#         # Fpas.objects.get_or_create(
+#         #     fpa=siguiente_faltante
+#         # )
 
-        return JsonResponse({
-            # 'data': todos_fpas,
-            'fpa_siguiente': siguiente_faltante,
-            'url_skilling': f'{url_skilling_base}{siguiente_faltante}',
-            'url_livecommunity': f'{url_livecommunity_base}{siguiente_faltante}'
-        }, status=200)
-    else:
-        return JsonResponse({'Error': 'Método HTTP incorrecto'}, status=405)
+#         return JsonResponse({
+#             # 'data': todos_fpas,
+#             'fpa_siguiente': siguiente_faltante,
+#             'url_skilling': f'{url_skilling_base}{siguiente_faltante}',
+#             'url_livecommunity': f'{url_livecommunity_base}{siguiente_faltante}'
+#         }, status=200)
+#     else:
+#         return JsonResponse({'Error': 'Método HTTP incorrecto'}, status=405)
     
 
 @transaction.atomic
@@ -886,6 +917,7 @@ def registrar_usuario(request, pk):
         url_livecommunity = fpa_get_data.get('url_livecommunity')
         
         fpa_skilling = fpa_get_data.get('fpa_siguiente')
+        Fpas.objects.get_or_create(fpa=fpa_skilling)
         print(fpa_skilling)
         
         # Generar una contraseña temporal
@@ -989,11 +1021,14 @@ def asociar_documento_con_idSkilling(request):
             
             try:
                 usuario_con_idSkilling = Usuario.objects.get(idSkilling=idSkilling)
+                if usuario_con_idSkilling:
+                    return JsonResponse({'Error': 'El usuario ya tiene un idSkilling asociado'}, status=400)
             except Usuario.DoesNotExist:
-                return JsonResponse({'Error': 'El usuario ya tiene un idSkilling asociado'}, status=400)
+                pass
             
             
             if usuario.idSkilling != None:
+                print('El usuario ya tiene un idSkilling asociado')
                 return JsonResponse({'Error': 'El usuario ya tiene un idSkilling asociado'}, status=400)
             
             
@@ -1025,7 +1060,6 @@ def asociar_documento_con_idSkilling(request):
             # except Exception as e:
             #     print(e.__str__())
             
-
             
             print(idSkilling, documento)
             return JsonResponse({'data': f'{idSkilling} - {documento}'})
@@ -1203,6 +1237,60 @@ def enviar_correo_socio(nombre, telefono, correo, id_cliente, fpa, url_live, url
         print(f"Error al enviar el correo: {str(e)}")
         return False
 
+def getFpasForUser2(fpaSkilling):
+    fpas = Fpas.objects.all()
+    
+    url_skilling_base = Url.objects.get(id=2).url
+    url_livecommunity_base = Url.objects.get(id=1).url
+    
+    # Intentar obtener el prefijo del up_line_value
+    pk = fpaSkilling.split(',')[0][:2]
+    
+    # Filtrar FPAs que empiezan con 'pk'
+    fpas_con_pk = [fpa.fpa for fpa in fpas if fpa.fpa and fpa.fpa.startswith(pk)]
+    
+    if not fpas_con_pk:
+        # Si no hay FPAs con el prefijo 'pk', usar 'LA' como prefijo
+        pk = 'LA'
+        fpas_con_pk = [fpa.fpa for fpa in fpas if fpa.fpa and fpa.fpa.startswith(pk)]
+    
+    # Ahora, agrupar los FPAs existentes por su letra final
+    fpas_dict = defaultdict(list)
+    for fpa in fpas_con_pk:
+        fpas_dict[fpa[-1]].append(fpa)
+    
+    # Ordenamos cada lista de FPAs
+    for letra in fpas_dict:
+        fpas_dict[letra].sort()
+    
+    def encontrar_siguiente(fpas_list, sufijo):
+        if not fpas_list:
+            return f"{pk}001{sufijo}"
+        for i in range(len(fpas_list) - 1):
+            actual = int(fpas_list[i][2:5])
+            siguiente = int(fpas_list[i+1][2:5])
+            if siguiente - actual > 1:
+                return f"{pk}{actual+1:03d}{sufijo}"
+        ultimo = int(fpas_list[-1][2:5])
+        return f"{pk}{ultimo+1:03d}{sufijo}"
+    
+    siguientes_faltantes = {letra: encontrar_siguiente(fpas_list, letra) for letra, fpas_list in fpas_dict.items()}
+    
+    if siguientes_faltantes:
+        siguiente_faltante = min(siguientes_faltantes.values())
+    else:
+        # Si aún no hay FPAs, creamos el primero con sufijo 'S'
+        siguiente_faltante = f"{pk}001S"
+    
+    # Combinar todas las listas de FPAs
+    todos_fpas = sorted([fpa for fpas_list in fpas_dict.values() for fpa in fpas_list])
+    
+    return {
+        'data': todos_fpas,
+        'fpa_siguiente': siguiente_faltante,
+        'url_skilling': f'{url_skilling_base}{siguiente_faltante}',
+        'url_livecommunity': f'{url_livecommunity_base}{siguiente_faltante}'
+    }
 
 
 def getFpasForUser(fpaSkilling):
@@ -1265,4 +1353,23 @@ def enviar_mensaje_sync(msj, id, token):
 # print(MessageString)
 # asyncio.run(enviar_mensaje(MessageString, chat_id, token))
     
-
+@csrf_exempt
+def post_roles_servicios_user(request):
+    if request.method == 'POST':
+        try:
+            roles = ['admin', 'socio', 'cliente', 'moderador']
+            servicios = ['free', 'pro', 'skilling']
+            
+            for rol in roles:
+                rol, created = Rol.objects.get_or_create(name=rol)
+                
+            for servicio in servicios:
+                servicio, created = Servicio.objects.get_or_create(name=servicio)   
+                
+            return JsonResponse({"message": "Roles y servicios creados exitosamente"}, status=200)
+        except Exception as e:
+            return JsonResponse({"message": str(e)}, status=500)
+    else:
+        return JsonResponse({"message": "Método no permitido"}, status=405)
+                
+                

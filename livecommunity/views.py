@@ -185,7 +185,11 @@ def registro_form(request, pk):
     if pk is None:
         return redirect('home')
     
-    afiliado = Usuario.objects.get(fpa=pk)
+    try:    
+        afiliado = Usuario.objects.get(fpa=pk)
+    except Usuario.DoesNotExist:
+        return redirect('home')
+    
     context = {
         'afiliado': afiliado,
         'pk': pk

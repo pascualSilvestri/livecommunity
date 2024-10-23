@@ -26,9 +26,9 @@ def upload_ganancias(request):
     if request.method == "POST" and request.FILES.get("csvFileGanancias"):
         try:
             # Cargar datos para búsqueda rápida
-            fpas = {int(fpa['idSkilling']): fpa for fpa in Usuario.objects.all().values('idSkilling', 'fpa', 'full_name')}
+            # fpas = {int(fpa['idSkilling']): fpa for fpa in Usuario.objects.all().values('idSkilling', 'fpa', 'first_name', 'last_name')}
             spred = list(Spread.objects.all())
-            usuarios = {usuario.fpa: usuario for usuario in Usuario.objects.all()}
+            usuarios = Usuario.objects.all().values('idSkilling','fpa','first_name','last_name')
 
             excel_file = request.FILES["csvFileGanancias"]
             file_name = excel_file.name
@@ -56,13 +56,22 @@ def upload_ganancias(request):
                     continue
 
                 # Convertir 'client' a entero antes de buscar en `fpas`
-                client_id = int(g['client'])
-                fpa_info = fpas.get(client_id, None)
-                print(fpa_info)  # Depuración
+                try:
+                    client_id = int(g['client']) if g['client'] is not None else None
+                    if client_id is not None:
+                        fpa_info = usuarios.filter(idSkilling=client_id).first()
+                        print(fpa_info)  # Depuración
+                    else:
+                        print(f"Advertencia: client_id es None para el registro: {g}")
+                        fpa_info = None
+                except ValueError:
+                    print(f"Error: No se pudo convertir 'client' a entero. Valor: {g['client']}")
+                    client_id = None
+                    fpa_info = None
 
                 fpa = fpa_info['fpa'] if fpa_info else None
-                full_name = fpa_info['full_name'] if fpa_info else ''
-                usuario = usuarios.get(fpa)
+                full_name = fpa_info['first_name'] + ' ' + fpa_info['last_name']
+
 
                 fecha_first_trade = parse_date(str(g["fecha_operacion"]))
                 monto_a_pagar = round(calcula_porcentaje_directo(float(g['partner_earning']), spred[0].porcentaje, spred[1].porcentaje), 2)
@@ -83,13 +92,13 @@ def upload_ganancias(request):
                 )
                 ganancias_a_crear.append(ganancia)
 
-                if usuario and usuario.up_line:
+                if fpa_info and fpa_info.up_line:
                     monto_indirecto = round(calcular_porcentaje_indirecto(monto_a_pagar, spred[2].porcentaje), 2)
                     if monto_indirecto > 0:
                         spread_indirecto = SpreadIndirecto(
                             monto=Decimal(monto_indirecto),
                             fpa_child=fpa,
-                            fpa=usuario.up_line,
+                            fpa=fpa_info.up_line,
                             fecha_creacion=fecha_first_trade
                         )
                         spread_indirectos_a_crear.append(spread_indirecto)
@@ -399,6 +408,8 @@ def upload_ganancias(request):
 #         return JsonResponse(
 #             {"error": "Se esperaba un archivo xlsx en la solicitud POST."}, status=400
 #         )
+
+
 
 
 
